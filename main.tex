@@ -1,0 +1,357 @@
+\documentclass[9pt,dvipsnames]{beamer}
+
+\usetheme[progressbar=frametitle]{metropolis}
+% \useoutertheme{progress1}
+\usepackage{pgfpages}
+\setbeameroption{show notes} % after pgfpages to works properly
+\setbeameroption{show notes on second screen=right}
+
+% \useoutertheme{miniframes}      % add header navigation bar
+% \usecolortheme[dark]{solarized}
+
+% Change block size
+% https://github.com/matze/mtheme/issues/307#issuecomment-502212780
+% map default block to old-block
+\let\oldblock\block
+\let\endoldblock\endblock
+% change block by adding smallskip
+\renewenvironment{block}[1]{\begin{oldblock}{#1}\smallskip}{\end{oldblock}}
+
+% Fonts
+\usepackage{amsmath}
+\usepackage[mathrm=sym]{unicode-math}
+\setmathfont{Fira Math}
+
+% my packages
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{multicol}
+
+
+\title{\textsc{Echo-aware} signal processing \\for audio scene analysis}
+\date{\today}
+\author{Diego \textsc{Di Carlo}}
+\institute{
+suprevisors:
+\hspace{1em} Antione \textsc{DELEFORGE}, Nancy \textsc{BERTIN}
+\\collaborators:
+\hspace{1em}
+Cl\'ement \textsc{Elvira}, Robin \textsc{Scheibler}, Ivan \textsc{Dokmani\`c}, Sharon \textsc{Gannot}, Pini \textsc{A}
+
+\vspace{\baselineskip}
+INRIA IRISA
+}
+
+% \vspace{\baselineskip}
+% \textbf{Rapporteurs avant soutenance :}
+% \newline
+% \begin{tabular}{@{}lll}
+% Laurent GIRIN & Professeur & GIPSA-Lab, Grenoble-INP \\
+% Simon DOCLO & Full professor & Carl von Ossietzky Universität, Oldenburg
+% \end{tabular}
+
+% \vspace{\baselineskip}
+% \textbf{Composition du Jury :}
+% \newline
+% \begin{tabular}{@{}llll}
+%     Pr\'{e}sident :     & Laurent GIRIN & Professeur & GIPSA-Lab, Grenoble-INP \\
+%     Examinateurs :      & Simon DOCLO & Full professor & Carl von Ossietzky Universität, Oldenburg \\
+%                         & Renaud SEGUIER &    Professeur & CentraleSupélec, Cesson-Sévigné \\
+%                         & Fabio ANTONACCI & Assistant professor & Politecnico di Milano \\
+%     Dir. de th\`{e}se :     & Nancy BERTIN & Chargée de recherche &  IRISA, Rennes\\
+%     Co-dir. de th\`{e}se :  & Antoine DELEFORGE & Charge de recherche & Inria Grand Est, Nancy\\
+% \end{tabular}
+
+% \vspace{\baselineskip}
+% {\normalsize \textbf{Invit\'{e}(s) :}}\\
+% \footnotesize
+% \begin{tabular}{@{}ll}
+% Pr\'{e}nom Nom & Fonction et \'{e}tablissement d'exercice \\
+% \end{tabular}
+
+\makeatletter
+\setlength{\metropolis@titleseparator@linewidth}{.89pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{.89pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{.89pt}
+\makeatother
+
+\begin{document}
+
+  \maketitle
+
+\section{Introduction}
+  
+\subsection{Motivation}
+
+    \begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+    
+    Image animation here
+        
+        \note{
+            \footnotesize
+            Let us consider our current pandemic scenario:
+            \\We are all at home, inter-facing each others with a computer which is recording us.
+            \\Currently the microphones of your computer are hopefully capturing my sound.
+            \\We need to ignore the post-processing of the video-conference tools
+            \\In particular, they are recording
+            \begin{itemize}
+                \item the sound of my voice,
+                \item some source of noise, such as the computer fan, transmission noise, the traffic outside, someone of my family in the other rooms, music that my brother is playing, the mobile phone, etc.
+            \end{itemize}
+            These are sound \textbf{sources}.
+            \\However, if you think about it, there is much more.
+            \\From the only audio, you may understand that:
+            \begin{itemize}
+                \item I am speaking close to the microphones, somehow in foreground with respect to the rest.
+                \item The interfering sound source is far away and probably moving.
+                \item We can understand if we are in a indoor or outdoor environment.
+            \end{itemize}
+            The microphones recording keep tracks of the environment where the sound are being recorded.
+            
+            In natural environment, the sound propagates and interact with the environment.
+            \\The overall effect is well known and it called \textit{reverberation}.
+            \\All these makes the audio scene we are immersed into.
+        }
+        
+    \end{frame}
+    
+    \begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+        
+        \begin{block}{Sound recorded by microphones carries}
+            \begin{description}
+                \item[Semantic] information about source nature and content
+                \item[Temporal] information
+                \item[Spatial] information about due to \textit{sound propagation}
+            \end{description}
+        \end{block}
+        
+        \note{
+            Therefore we can note that sound carries information.
+            \\The so-called semantic information about sound sources, such as their nature and their content.
+            \\In addition, \textit{spatial} and \textit{temporal} information
+        }
+        
+        \begin{block}{Audio Scene Analysis}
+            \begin{itemize}
+                \item extraction and organization of all the information in the sound
+                \item typical \textit{problems}
+                \begin{multicols}{2}
+                \begin{itemize}
+                    \item \alert{\textit{Sound Source Separation}}
+                    \item \alert{\textit{Speech Enhancement}}
+                    \item \alert{\textit{Sound Source Localization}}
+                    \item \alert{\textit{Room Geometry Estimation}}
+                    \item \textit{Acoustic Measurements}
+                    \item \textit{Speaker Diarization}
+                    \item \textit{Automatic Speech Recognition}
+                    \item \textit{etc}.
+                \end{itemize}
+                \end{multicols}
+            \end{itemize}
+        \end{block}
+        \note{
+            All of these is the so-called audio scene
+            
+            Related to typical human interrogations
+        }
+        
+    \end{frame}
+
+    
+    \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
+        
+        \begin{block}{Signal Processing}
+            Microphone recordings $x_i$ and sound sources $s_j$ are (digital) signals
+            
+            \begin{equation*}
+                x_i(t) = (h_{ij} \ast s_j)(t)
+            \end{equation*}
+            
+            It is the role of mathematics and computer science
+            
+        \end{block}
+    
+        \begin{block}{General Pipeline}
+            \begin{itemize}
+                \item Models
+                \item Representation
+                \item Estimation
+                \item Adaptive Processing
+            \end{itemize}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
+        
+        \begin{block}{Acoustic Echoes}
+            \begin{itemize}
+                \item Product of the sound propagation
+                \item Sound repetition
+                \begin{itemize}
+                    \item ``same'' content: can be integrated
+                    \item ``differnet'' sounds: carry info about the reflection
+                    \item different direction of arrival : spatial information
+                \end{itemize}
+            \end{itemize}
+        \end{block}
+        
+        \begin{block}{Compromise}
+        Between the full simplification and the full model
+        \end{block}
+        
+        \begin{block}{Thesis objective}
+            \begin{enumerate}
+                \item provide new methodologies and data to process and estimate acoustic echoes
+                \item extend previous classical methods for audio scene analysis
+            \end{enumerate}
+        \end{block}
+    \end{frame}
+    
+    
+\subsection{Outline}
+
+\begin{frame}{1D Outline}
+    \begin{columns}
+        \begin{column}{0.3\textwidth}
+            Echo-aware signal processing
+            \\for audio scene analysis
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \color{white}
+            \tableofcontents
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Outline}
+    Projects
+\end{frame}
+
+\section{Modeling}
+\subsection{From Physics to Digital Signal Processing}
+    
+\begin{frame}{Physics $\longrightarrow$ Signal Processing}
+
+    \begin{block}{Sound propagates and Green equation}
+        aoeu
+    \end{block}
+
+    \begin{block}{Acoustic Reflection}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Room Impulse Response}
+        aoeu
+    \end{block}
+
+\end{frame}
+
+\begin{frame}{Signal Processing $\longrightarrow$ \alert{Digital} Signal Processing}
+    \begin{block}{Signal model in time domain}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Signal model in the discrete time domain}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Signal model in the frequency domain}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Approximations}
+        
+    \end{block}
+
+\end{frame}
+
+\subsection{The Echo Model}
+\begin{frame}{The Echo Model}
+    \begin{block}{Time Domain}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Frequency Domain}
+        aoeu
+    \end{block}
+    
+    \begin{block}{Approximations}
+        aou    
+    \end{block}
+    
+\end{frame}
+
+\subsection*{interim conclusion}
+\begin{frame}{Interim Conclusion I}
+    \begin{alertblock}{Approximations}
+        Echoes are off-grid by nature
+        Sampling and quantization make them hard
+    \end{alertblock}
+\end{frame}
+
+\section{Acoustic Echo Estimation}
+
+\subsection{literature}
+
+\begin{frame}{Acoustic Echo Retrieval (BCE)}
+    Image of taxonomy
+
+    \begin{block}{Existing Approaches}
+        
+    \end{block}
+    
+\end{frame}
+
+\subsection{blaster}
+
+\begin{frame}{AER as Discrete SIMO BCE}
+    
+    \note{Some slides from ICASSP2020 (5/21)}
+\end{frame}
+
+\begin{frame}{Limitation and Bottleneck}
+
+   \note{Some slides from ICASSP2020 (6/21)}
+\end{frame}
+
+\begin{frame}{Proposed Approach}
+
+\end{frame}
+
+\begin{frame}{Results}
+
+\end{frame}
+
+
+\subsection{lantern}
+\subsection{interim conclusion}
+
+\section{Echo-aware Application}
+\subsection{separake}
+\subsection{mirage}
+
+\subsection{interim conclusion}
+
+\section{Echo Dataset --- dEchorate}
+\section{Conclusion}
+
+% \section{Acoustic Echo Retrieval}
+%     \begin{frame}{First Frame}
+%       Hello, world!
+%     \end{frame}
+
+% \section{Echo-aware Application}
+%     \begin{frame}{First Frame}
+%       Hello, world!
+%     \end{frame}
+
+% \section{Conclusion}
+%     \begin{frame}{First Frame}
+%       Hello, world!
+%     \end{frame}
+%     \begin{frame}{Second Frame}
+%       Hello, world!
+%     \end{frame}
+
+\end{document}
