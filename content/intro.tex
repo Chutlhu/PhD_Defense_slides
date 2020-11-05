@@ -1,0 +1,109 @@
+\subsection{Motivation}
+
+\begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+
+    Image animation here
+
+\end{frame}
+
+\begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+
+    \begin{block}{Sound recorded by microphones carries}
+        \begin{description}
+            \item[Semantic] information about source nature and content
+            \item[Temporal] information
+            \item[Spatial] information about due to \textit{sound propagation}
+        \end{description}
+    \end{block}
+
+    \begin{block}{Audio Scene Analysis}
+        \begin{itemize}
+            \item extraction and organization of all the information in the sound
+            \item typical \textit{problems}
+            \begin{multicols}{2}
+            \begin{itemize}
+                \item \alert{\textit{Sound Source Separation}}
+                \item \alert{\textit{Speech Enhancement}}
+                \item \alert{\textit{Sound Source Localization}}
+                \item \alert{\textit{Room Geometry Estimation}}
+                % ---------------------------------------------
+                \item \textit{Acoustic Measurements}
+                \item \textit{Speaker Diarization}
+                \item \textit{Automatic Speech Recognition}
+                \item \textit{etc}.
+            \end{itemize}
+            \end{multicols}
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+
+\begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
+
+    \begin{block}{Signal Processing}
+        Microphone recordings $x_i$ and sound sources $s_j$ are (digital) signals
+
+        \begin{equation*}
+            x_i(t) = (h_{ij} \ast s_j)(t)
+        \end{equation*}
+
+        It is the role of mathematics and computer science
+
+    \end{block}
+
+    \begin{block}{General Pipeline}
+        \begin{itemize}
+            \item Models
+            \item Representation
+            \item Estimation
+            \item Adaptive Processing
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
+
+    \begin{block}{Acoustic Echoes}
+        \begin{itemize}
+            \item Product of the sound propagation
+            \item Sound repetition
+            \begin{itemize}
+                \item ``same'' content: can be integrated
+                \item ``different'' sounds: carry info about the reflection
+                \item different direction of arrival: spatial information
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Compromise}
+    Between the full simplification and the full model
+    \end{block}
+
+    \begin{block}{Thesis objective}
+        \begin{enumerate}
+            \item provide new methodologies and data to process and estimate acoustic echoes
+            \item extend previous classical methods for audio scene analysis
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+
+\subsection{Outline}
+
+\begin{frame}{1D Outline}
+    \begin{columns}
+        \begin{column}{0.3\textwidth}
+            Echo-aware signal processing
+            \\for audio scene analysis
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \color{white}
+            \tableofcontents
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Outline}
+    Projects
+\end{frame}
