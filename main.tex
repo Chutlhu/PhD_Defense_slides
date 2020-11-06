@@ -17,11 +17,15 @@
 % change block by adding smallskip
 \renewenvironment{block}[1]{\begin{oldblock}{#1}\smallskip}{\end{oldblock}}
 
-% Fonts
+% Font configuration
+\usepackage{fontspec}
+\usepackage{unicode-math}
+% Math Fonts
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[mathrm=sym]{unicode-math}
-\setmathfont{Fira Math}
+% \usepackage[mathrm=sym]{unicode-math}
+% \setmathfont{Fira Math}
+% \setmathfont{Latin modern Math}
 
 % my packages
 \usepackage{bookmark}
