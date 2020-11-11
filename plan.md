@@ -4,12 +4,12 @@
 
 ### Scenario
 
-Let us consider our current pandemic scenario:
+Let us consider our current pandemic **scenario**:
 
-We are all at home, inter-facing each others with a computer which is recording us.
-Currently the microphones of your computer are hopefully capturing my sound.
+We are all in one room, inter-facing a computer which is recording us.
+Currently the **microphones** of this device are hopefully capturing my speech.
 
-We need to ignore the post-processing of the video-conference tools
+Let us ignore the processing that the software is performing.
 In particular, they are recording
 
 - the sound of my voice,
@@ -43,6 +43,7 @@ Depending on the kind of information we are interested to we can then define som
 - acoustic measurements and blind channel identification
 
 We can see that this problems corresponds to typical question that we ask ourself:
+
 - What, Where, When, How
 - link to ASA/CASA
 
@@ -52,9 +53,9 @@ The resolution of one of the above problem may be better if prior information is
 - Problems can be Blind or Informed
 - Problems can be Forward or Inverse
 
-
 ### Signal Processing
 
+It is the role of mathematics and computer science
 Signal processing offer us mathematical models, frameworks and models for this.
 Typically the signal processing techniques can be grouped in the following blocks.
 Let me explain it with a typical example

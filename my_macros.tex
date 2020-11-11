@@ -1,0 +1,16 @@
+% my definition blocks
+
+% Clement Elvira's colors
+% \newenvironment{mydefblock}[1]{
+%     \setbeamercolor{block title}{fg=white,bg=darkblue}
+%     \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
+%     \begin{block}{#1}}{\end{block}}
+
+% Toogle filled blocks
+% \newenvironment{filledalertblock}[1]{
+%     \metroset{block=fill}
+%     \begin{alertblock}{#1}}{\end{alertblock}}
+
+\newenvironment{mydefblock}[1]{
+    \metroset{block=fill}
+    \begin{alertblock}{#1}}{\end{alertblock}}

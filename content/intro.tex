@@ -2,9 +2,18 @@
 
 \begin{frame}{Scenario}
 
-    Image animation here
+    \begin{figure}
+        \includegraphics[width=\textwidth]{example-image}
+        \caption{Image animation here}
+    \end{figure}
 
-    \begin{block}{Scenario}
+
+    \begin{block}{Scenario:}
+        \begin{itemize}
+            \item Sound sources producing sounds
+            \item Microphone recording sounds
+            \item An environment where sounds propagate
+        \end{itemize}
 
     \end{block}
 
@@ -12,32 +21,84 @@
 
 \begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
 
-    \begin{block}{Sound recorded by microphones carries}
-        \begin{description}
-            \item[Semantic] information about source nature and content
-            \item[Temporal] information
-            \item[Spatial] information about due to \textit{sound propagation}
-        \end{description}
+    \begin{block}{Sound recorded by microphones carries information:}
+        \vspace{-0.5em}
+        \begin{itemize}
+            \item \alert{Semantic} information about source nature and semantic content
+            \item \alert{Spatial} information about due to \textit{sound propagation}
+            \item \alert{Temporal} information about event
+        \end{itemize}
     \end{block}
 
-    \begin{block}{Audio Scene Analysis}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.2\textwidth]{example-image-a}
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image-b}
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image-c}
+    \end{figure}
+
+
+    % \setbeamercolor{block title}{fg=white,bg=darkblue}
+    % \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
+    \begin{mydefblock}{Audio Scene Analysis}
+        \vspace{0.3em}
+        is the extraction and organization of all the information in the sound
+    \end{mydefblock}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.2\textwidth]{example-image-a}
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image-b}
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image-c}
+        \hfill
+        $\rightarrow$
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+
+    \begin{block}{Typical problems}
+        \vspace{-0.5em}
         \begin{itemize}
-            \item extraction and organization of all the information in the sound
-            \item typical \textit{problems}
-            \begin{multicols}{2}
+            \item What?
             \begin{itemize}
                 \item \alert{\textit{Sound Source Separation}}
                 \item \alert{\textit{Speech Enhancement}}
+                \item \textit{Automatic Speech Recognition}
+                \item ...
+            \end{itemize}
+            \item Where?
+            \begin{itemize}
                 \item \alert{\textit{Sound Source Localization}}
                 \item \alert{\textit{Room Geometry Estimation}}
-                % ---------------------------------------------
-                \item \textit{Acoustic Measurements}
-                \item \textit{Speaker Diarization}
-                \item \textit{Automatic Speech Recognition}
-                \item \textit{etc}.
             \end{itemize}
-            \end{multicols}
+            \item When?
+            \begin{itemize}
+                \item \textit{Speaker Diarization}
+                \item \textit{Text/Lyrics alignment}
+            \end{itemize}
+            \item How?
+            \begin{itemize}
+                \item \textit{Acoustic Channel Estimation}
+                \item \textit{Acoustic Measurements}
+            \end{itemize}
         \end{itemize}
+    \end{block}
+
+
+    Also known as auditory scene analysis or computer auditory scene analysis.
+    \\Inverse and Forward problems
+    \\Blind and Informed problems
+
+    \begin{block}{Everything is connected}
+        WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
     \end{block}
 
 \end{frame}
@@ -45,17 +106,19 @@
 
 \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
 
-    \begin{block}{Signal Processing}
-        Microphone recordings $x_i$ and sound sources $s_j$ are (digital) signals
+    \begin{mydefblock}{Signal Processing}
+        Offer mathematical models, frameworks and tools to tackle such ASA problems
+    \end{mydefblock}
 
-        \begin{equation*}
-            x_i(t) = (h_{ij} \ast s_j)(t)
-        \end{equation*}
+    % \begin{block}{Signal Processing}
 
-        It is the role of mathematics and computer science
+    %     Microphone recordings $x_i$ and sound sources $s_j$ are (digital) signals
 
-    \end{block}
+    %     \begin{equation*}
+    %         x_i(t) = (h_{ij} \ast s_j)(t)
+    %     \end{equation*}
 
+    % \end{block}
     \begin{block}{General Pipeline}
         \begin{itemize}
             \item Models
@@ -68,7 +131,7 @@
 
 \begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
 
-    \begin{block}{Acoustic Echoes}
+    \begin{mydefblock}{Acoustic Echoes}
         \begin{itemize}
             \item Product of the sound propagation
             \item Sound repetition
@@ -78,18 +141,18 @@
                 \item different direction of arrival: spatial information
             \end{itemize}
         \end{itemize}
+    \end{mydefblock}
+
+    \begin{block}{Turning echoes into friends}
+        Typically reverberation is considered as ''foe'' for the processing.
     \end{block}
 
-    \begin{block}{Compromise}
-    Between the full simplification and the full model
-    \end{block}
-
-    \begin{block}{Thesis objective}
+    \begin{mydefblock}{Thesis objective}
         \begin{enumerate}
-            \item provide new methodologies and data to process and estimate acoustic echoes
+        \item provide new methodologies and data to process and estimate acoustic echoes
             \item extend previous classical methods for audio scene analysis
         \end{enumerate}
-    \end{block}
+    \end{mydefblock}
 \end{frame}
 
 
