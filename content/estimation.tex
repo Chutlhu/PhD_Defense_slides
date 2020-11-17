@@ -1,46 +1,485 @@
+\subsection{Introduction}
 
-\subsection{Literature Review}
+\begin{frame}{Acoustic Echo Retrieval}
 
-\begin{frame}{Taxonomy and Approaches}
-    Image of taxonomy
+    Given the echo model
+    \begin{equation*}
+        H_{ij}(f) = \sum_{r=0}^{R} \alpha e^{2\pi},
+    \end{equation*}
 
-    \begin{block}{Toxonomy}
-        aoeu
-    \end{block}
+    \vfill
 
-    \begin{block}{Existing Approaches}
-        aoeu
-    \end{block}
+    \begin{columns}[T,onlytextwidth]
 
-    \note{
+        \column{0.65\textwidth}
+        \begin{alertblock}{The acoustic echoes retrieval (AER) problem}
+
+        \vspace{.2em}
+
+        Estimating early (strong) acoustic reflections:
         \begin{itemize}
-            \item RIR estimation and Peak Picking
-            \item Peak disambiguation
+            \item their time of arrivals $\rightarrow$ TOAs Estimation
+            \item their amplitude
+            \\\hspace{1em}$\hookrightarrow$ closed-from knowing $\tau$~\cite{Condat}
         \end{itemize}
-    }
+
+        \end{alertblock}
+
+        \column{0.4\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.9\linewidth]{example-image-a}
+        \end{figure}{}
+
+    \end{columns}
+
+    \vfill
+
+    Note that an order of $r$
+
 
 \end{frame}
 
-\subsection{blaster}
+\begin{frame}{Taxonomy of Acoustic Echo Estimation}
 
-\begin{frame}{AER as Discrete SIMO BCE}
+    \begin{block}{\mytriag based on the emitted signal knowledge:}
+    \vspace{1em}
+    \small
+    \begin{columns}[T,onlytextwidth] % align columns
+        \begin{column}{.48\textwidth}
+            \textcolor{orange}{Active approaches}
+            \begin{itemize}
+                \item Signal is emitted and known
+                \item Intrusive
+                \item Single channel
+                \item Methods:
+                Least-Square estimation, Inverse Filtering (Equalization)
+                \item Application:
+                \\measurements, calibration, sonars, slam
+            \end{itemize}
+        \end{column}%
+        \hfill%
+        \begin{column}{.48\textwidth}
+            \textcolor{gray}{Passive approaches}
+            \begin{itemize}
+                \item Emitted signal is \alert{not} known
+                \item \alert{Not} intrusive (for passive listening)
+                \item Multichannel
+                \item Methods:
+                \\\alert{blind} deconvolution problem
+                \textit{ill}-posed and \textit{ill}-conditioned
+                \\$\hookrightarrow$ statistics, \textit{sparsity} etc
+                \item Application:
+                \\Robot hearing (Table Top Scenario), Pre-processing step
+            \end{itemize}
+        \end{column}%
+        \end{columns}
+    \end{block}
 
-    \note{Some slides from ICASSP2020 (5/21)}
+    % \vspace{0.84em}
+    % \begin{columns}[T,onlytextwidth] % align columns
+    %     \begin{column}{.48\textwidth}
+    %         {\hfill\color{orange}\rule{.4\linewidth}{1pt}}
+    %     \end{column}%
+    %     \hfill%
+    %     \begin{column}{.48\textwidth}
+    %         {\hfill\color{gray}\rule{.4\linewidth}{1pt}}
+    %     \end{column}%
+    % \end{columns}
+
+    % \vfill
+
+
+        %     \medskip
+
+        % Based on the filter
+        % \hspace*{.1\linewidth}\begin{minipage}{.8\linewidth}
+        %     \begin{block}{RIR-based}
+        %         content
+        %     \end{block}
+        %     \begin{block}{RIR-agnostic}
+        %         content
+        %     \end{block}
+        %     \end{minipage}
+        %     \medskip
+
+        % \item[Active vs. Passive] The emitted signal is (not) known. Deconvolution vs. blind Deconvolution
+        % \\Pro and Cons
+        % \item[RIR-based vs. RIR-agnostic] The RIR is estimated fully.
+        % \\Pro and Cons
+
+    % \begin{block}{Pick-peaking and Echo-labeling}
+    %     Associating
+    % \end{block}
 \end{frame}
 
-\begin{frame}{Limitation and Bottleneck}
+\begin{frame}{Taxonomy of Acoustic Echo Estimation}
 
-   \note{Some slides from ICASSP2020 (6/21)}
+    \begin{block}{\mytriag based on the estimated filter:}
+        \vspace{1em}
+        \small
+        \begin{columns}[T,onlytextwidth] % align columns
+            \begin{column}{.48\textwidth}
+                \textcolor{orange}{RIR-based approaches}
+                \begin{enumerate}
+                    \item RIRs are first estimated as SIMO BCE problem
+                    \item Echoes extracted from first part of the RIRs with peak picking and disambiguation
+                \end{enumerate}
+                Pros
+                \begin{itemize}
+                    \item SIMO BCE is well studied (elegant framework)
+                    \item It works well is some scenarios and in practice
+                    \\$\hookrightarrow$ if not limitation
+                \end{itemize}
+                Cons
+                \begin{itemize}
+                    \item Full RIR
+                    \item dependent of manually tuned peak picking
+                    \item Pathological issue (sampling and body-guard
+                    \item Complexity
+                    \item Non-negativity and sparsity not true
+                \end{itemize}
+            \end{column}%
+            \hfill%
+            \begin{column}{.48\textwidth}
+                \textcolor{gray}{RIRs-agnostic approaches}
+                \begin{enumerate}
+                    \item Estimation directly in the echoes parameters space $\{\tau,\alpha\}$
+                    \\and direction of arrivals can be used instead
+                \end{enumerate}
+                Performed with
+                \begin{itemize}
+                    \item Cross-correlation
+                    \\on-grid, eg. EM, Acoustic Cameras
+                    \item Cross-relation with super-resolution
+                    \\off-grid,~\cite{mulan,blaster}
+                \end{itemize}
+                Pro
+                \begin{itemize}
+                    \item No need for full RIRs
+                    \item Sub-sampling accuracy
+                    \item Low complexity
+                    \item Sparsity and Non-negativity are respected
+                \end{itemize}
+                Cons
+                \begin{itemize}
+                    \item Exploratory
+                \end{itemize}
+            \end{column}%
+        \end{columns}
+
+    \end{block}
+
+    % \vspace{0.84em}
+    % \begin{columns}[T,onlytextwidth] % align columns
+    %     \begin{column}{.48\textwidth}
+    %         {\hfill\color{orange}\rule{.4\linewidth}{1pt}}
+    %     \end{column}%
+    %     \hfill%
+    %     \begin{column}{.48\textwidth}
+    %         {\hfill\color{gray}\rule{.4\linewidth}{1pt}}
+    %     \end{column}%
+    % \end{columns}
+
+    % \vfill
+
 \end{frame}
 
-\begin{frame}{Proposed Approach}
+\begin{frame}{AER as discrete SIMO BCE}
+
+
+    \begin{block}{Key ingredient -- \textit{Cross relation identity}}
+    \[
+        x_i = h_i \ast s
+    \]
+    \[
+        h_2 \ast x_1 = \textcolor{gray}{h_2 \ast h_1 \ast s  = h_1 \ast h_2 \ast s} = h_1 \ast x_2
+    \]
+    \end{block}
+
+    \vspace*{-1em}
+
+   \begin{block}{Ideas}
+   \begin{enumerate}
+       \item Sampled version of $x_1,x_2$ are available ($\mathbf{x}_1, \mathbf{x_2}$)
+       \item Assume echoes belong to multiples of the sampling frequency
+       \item Identify echoes $\rightarrow$ find sparse vectors $\mathbf{h}_1, \mathbf{h}_2$
+       \item Lasso-like problem
+
+       \vspace*{.25em}
+
+        \definecolor{darkblue}{HTML}{154360}
+        \definecolor{bluegreen}{HTML}{228BE6}
+
+        \setbeamercolor{postit}{fg=black,bg=bluegreen!10}
+        \begin{beamercolorbox}[sep=.5em, wd=10cm]{postit}
+            \begin{equation*}
+                \widehat{\mathbf{h}}_1, \widehat{\mathbf{h}}_2 \in
+                \underset{\mathbf{h}_1, \mathbf{h}_2\in\kR^n}{\arg\min}\;
+                \Vert \mathbf{x}_1 \ast \mathbf{h}_2 - \mathbf{x}_2 \ast \mathbf{h}_1 \Vert_2^2
+                + \lambda \texttt{Reg}(\mathbf{h}_1, \mathbf{h}_2)
+            \end{equation*}
+            \hfill {\footnotesize $\texttt{Reg}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer}
+        \end{beamercolorbox}
+   \item Pick picking
+   \end{enumerate}
+
+   \begin{center}
+       \definecolor{mygreen}{RGB}{30,132,73}
+       \textcolor{mygreen}{$\checkmark$}  \cite{Lin2007} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Aissa-El-Bey2008} \\
+       \textcolor{mygreen}{$\checkmark$} \cite{Kowalczyk2013} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Crocco2015}
+   \end{center}
+   \end{block}
+ \end{frame}
+
+\begin{frame}{Limitations / bottleneck}
+
+    \begin{block}{Limitations}
+        \begin{itemize}
+        \item Echoes are not necessarily ``on grid''
+
+        \item \emph{Body guard} effect \cite{duval2013}
+
+        % Just wrote it for you...
+        % I remember that was a point for decrete vs continous
+        \begin{itemize}
+            \item[$\longrightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
+            \item[$\longrightarrow$] slow convergence % bouncing between 2 echoes
+        \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \vfill
+
+    \begin{block}{Increase the sampling frequency, $F_s$}
+        \begin{itemize}
+            \item[$\longrightarrow$] Increase Precision
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Computational bottleneck}
+    \begin{itemize}
+
+        \item Bigger vectors and matrices
+        \begin{itemize}
+            \item[$\longrightarrow$] memory usage
+        \end{itemize}
+
+        \vspace*{.5em}
+
+        \item Computational complexity: at best $\mathcal{O}(F_s^2)$ per iteration
+
+        \item the higher the sampling frequency, the more ill-conditioned \\
+        \begin{itemize}
+            \item[$\longrightarrow$] slow convergence
+        \end{itemize}
+        \end{itemize}
+
+    \end{block}
+
+
+    % You a Latex master hehe,  (in fact I am not sure about the name of this command)
+    % It is beautifull to watch you a live coding
+    % come on
+    % you will see after a thesis + thesis defense
+    \begin{textblock}{5}(10, 3)
+        \includegraphics[width=\columnwidth]{example-image-a}
+    \end{textblock}
 
 \end{frame}
 
-\begin{frame}{Results}
+\subsection{\blaster}
+
+\begin{frame}{\blaster - Off-grid BCE}
+    \begin{block}{\textbf{Observation 1:} the cross relation remains true in the frequency domain}
+        \begin{equation*}
+            \mathcal{F}x_1 \cdot \mathcal{F}h_2 (\sfrac{n}{F_s}) = \mathcal{F}x_2 \cdot \mathcal{F}h_1(\sfrac{n}{F_s}) \qquad n=0\dots N-1
+        \end{equation*}
+        \end{block}
+
+        \vspace{.5em}
+
+        \begin{block}{\textbf{Observation 2:} $\mathcal{F}\delta_{\mathrm{echo}}$ is known in closed-form}
+        \end{block}
+
+        \vspace{1.em}
+
+        \begin{block}{\textbf{Observation 3:} $\mathcal{F}{\mathrm{x_i}}$ can be (well) approximated by DFT}
+        \begin{equation*}
+            \mathbf{X}_i = \texttt{DFT}(\mathbf{x}_i) \simeq  \mathcal{F}{\mathbf{x}_i}(nF_s) \qquad n=0\dots N-1
+        \end{equation*}
+        \end{block}
+
+
+    %    \vspace{1.5em}
+        \definecolor{darkblue}{HTML}{154360}
+        \definecolor{bluegreen}{HTML}{228BE6}
+        \setbeamercolor{block title}{fg=white,bg=darkblue}
+        \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
+
+        \begin{block}{\textbf{Idea:} Recover echoes by matching a finite number of frequencies}
+        \begin{equation*}
+            \underset{h_1,h_2 \in \substack{\text{measure} \\ \text{space}}}{\arg\min} \;
+            \tfrac{1}{2} \kvvbar{
+                \mathbf{X}_1 \cdot \mathcal{F}h_2 (f) - \mathbf{X}_2 \cdot \mathcal{F}h_1(f)
+            }_2^2
+            + \lambda \kvvbar{h_1 + h_2}_{\mathrm{TV}}
+            \quad
+            \text{s.t.}\;
+            \begin{cases}
+                h_1(\{0\})=1 \\
+                h_l \geq 0
+                \end{cases}
+        \end{equation*}
+        \end{block}
+
+        \begin{center}
+            Instance of a \textbf{BLasso} problem \cite{Bredies2013} (Sliding Frank-Wolfe algorithm)
+        \end{center}
+
+        \begin{center}
+
+            \textcolor{mygreen}{\checkmark{no Toeplitz matrix} \qquad \checkmark \, \parbox{8.5em}{Solutions is \\ a train of Dirac} \qquad \checkmark \, \parbox{8em}{anchor prevents \\ trivial solution}}
+        \end{center}
+\end{frame}
+
+\begin{frame}{\blaster - Experiments}
+    \begin{block}{Experiments}
+        \begin{itemize}
+            \item simulation data with ISM with Pyroomacoustics
+            \item 1 source, 2 microphones, random room geometry
+            \item Full RIRs
+            \item 2 sources: broadband and speech
+            \item 2 datasets: different SNR, different RT60
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Methods}
+        \begin{itemize}
+            \item BSN: Blind Sparse and Nonnegative SIMO BCE~\cite{Lin2007}
+            \item IL1C: Iteratively-weighted $\ell_1$ Constraint SIME BCE~\cite{Crocco2015}
+            \item \blaster: Proposed off-grid approach
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Metrics}
+        \begin{itemize}
+            \item RMSE
+            \item Precision
+        \end{itemize}
+    \end{block}
 
 \end{frame}
 
+\begin{frame}{\blaster - Results}
 
-\subsection{lantern}
-\subsection{interim conclusion}
+\end{frame}
+
+\subsection{\lantern}
+
+\begin{frame}{\lantern - data-driven AER}
+
+    \begin{block}{\textbf{Observation 1:} Mapping from observation to echo is extremely difficult}
+        Later echoes are not considered, may help
+    \end{block}
+
+    \begin{block}{\textbf{Observation 2:} We have acoustic simulators}
+        Acoustic simulators based on ISM
+        \\source position, room $\leftarrow$ reverberation elements $\leftarrow$
+        \\annotation for free
+    \end{block}
+
+    \begin{block}{\textbf{Observation 3:} (Deep) Learning-based methods successful for localization}
+        Echoes are strongly related to the source position
+    \end{block}
+
+    \begin{alertblock}{\textbf{Idea:} Use Deep Learning for AER}
+        \begin{itemize}
+            \item Extend previous work on source localization for Echo Estimation
+            \item Estimate the first echo TOA
+            \\$\hookrightarrow$ simple case, but with important application in SSL
+        \end{itemize}
+    \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{\lantern - Data \& Models}
+    \begin{block}{Data}
+        \begin{itemize}
+            \item train:
+            \\$\hookrightarrow$ artificially generated RIR
+            \\$\hookrightarrow$ white noise + noise
+            \\$\hookrightarrow$ instantaneous RTF
+            \item test:
+            \\$\hookrightarrow$ artificially generated RIR
+            \\$\hookrightarrow$ white noise, speech + noise
+            \\$\hookrightarrow$ instantaneous RTF
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Architecture}
+        \begin{itemize}
+            \item models: MLP, CNN
+            \item loss: Multi-class regression problem
+            \\$\hookrightarrow$ RMSE
+            \\$\hookrightarrow$ Gaussian regression + uncertainty
+            \\$\hookrightarrow$ Student Regression + uncertainty
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+\begin{frame}{\lantern - Experiments \& Resuls}
+    \begin{block}{Experiments}
+        \begin{enumerate}
+            \item MLP
+            \item CNN
+            \item CNN + Noise
+            \item CNN + Gaussian
+            \item CNN + Student
+        \end{enumerate}
+    \end{block}
+
+    \begin{block}{Results}
+        \begin{enumerate}
+            \item MLP
+            \item CNN
+            \item CNN + Noise
+            \item CNN + Gaussian
+            \item CNN + Student
+        \end{enumerate}
+    \end{block}
+
+\end{frame}
+
+\subsection{Interim conclusion (2/4)}
+
+\begin{frame}{Interim conclusion (2/4)}
+    \begin{block}{on Acoustic Echo Retrieval:}
+        \begin{itemize}
+            \item Most of the literature is on Passive and RIR-based, with on-grid approaches
+            \item On-grid approaches suffers by the off-grid nature of the echoes (complexity, sampling)
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{on \blaster:}
+        \begin{itemize}
+            \item[\cmark] off-grid parameter-free which exploit dirac closed-form model (non negativity and sparsity)
+            \item[\cmark] smaller RMSE due to super-resolution, better for small \# of echoes
+            \item[\xmark] source dependent and on number of echoes
+            \item[\xmark] validate only on synthetic data
+            \item[$\rightarrow$] Multichannel and RTF-based extention
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{on \lantern:}
+        \begin{itemize}
+            \item[\cmark] promising results for first echo estimation
+            \item[\cmark] direct application for table top application
+            \item[\xmark] difficult extention
+            \item[\xmark] need for real data validation
+            \item[$\rightarrow$] physically-constrained neural network
+            \item[$\rightarrow$] missing frequencies in the input
+        \end{itemize}
+    \end{block}
+\end{frame}

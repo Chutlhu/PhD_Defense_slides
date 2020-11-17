@@ -81,7 +81,22 @@ Moreover we can also interpret them:
 - As sound repetition: echoes brings sound information (example of beamforming??)
 - As sound spatialization: they time of arrival (and direction of arrival) depends on the room geometry (example of rooge)
 
-In this thesis we will see how to estimate the echoes and how to estimate them...
+### Challenges and Objective
+
+Current challenges:
+
+- Turning enemies into friends
+  - Anechoic (neglecting echoes) -> echoes are enemy
+  - Reverberation (modeling the full RIRs) -> very challenging task
+- estimating acoustic echoes in noisy environment is a non-trivial task
+- how to use properly the information?
+
+In this thesis we will see how to estimate the echoes and how to estimate them and how to integrate this
+
+- model echoes in signal processing
+- estimate echoes
+- apply echoes
+- data for validation
 
 ### Outline 1D
 
@@ -89,22 +104,45 @@ In particular, at first I am going to present a model for the echoes under the t
 Then how to estimated with 2 methods, one knowledge based and one learning based.
 Then, assuming the echoes are known, we presents a few application.
 
-In this 3D year, some assets were procuded:
-
-- software
-- data
-- framework
-
 During the 3 year my investigation were not linear and personally I jumped between application and estimation through out different projects.
 Therefore, I may be better to present the outline of the presentation in 2D, in order to highly some dependencies.
-
-### Outline 2D
-
-The outline can be rearranged in 2D, in order the better the dependencies between the projects.
 
 ## Modeling
 
 *Transition: How do we model the echoes and a sound effected by echoes?*
+
+### Room Acoustics
+
+Sound propagates in the space and it interact with it.
+In particular, it takes time to travel and reach the microphones while being attenuated.
+It is absorbed with surfaced, difracted around objects, etc.
+
+If we record an impulsive sounds, we will notice the following elements:
+
+- a direct path which accounts for the time the sound takes to travel from the source position to the microphones position
+- a few distinct early reflection which can be modeled with the specular low
+- reverberation due to the continuous bouncing of reflection
+
+### Signal Processing
+
+In light of the signal processing theory, this process can be modeled with the typical source-filter-receiver model, where the relation between input and output is express with the following convolution.
+
+$$ x_{ij} = (h_{ij} \ast s_j)(t) $$
+
+In other words, microphone $i$ listens to the convolution between the signal of source $j$ and a filter which, in case of room acoustics, accounts for the full propagation of the sound in the room.
+
+From the physics, we know that this phenomenon is
+
+- time invariant in static scenario,
+- and linear. Therefore it is easy to generalize to multiple microphones and sources.
+
+Room Impulse Responses are complicated and long filters that  collects all the element of indoor reverberation and sound interaction with the environments.
+
+However, they a common shape can be identified and illustrated as function of time.
+
+- First there is the so-called direct path, with describe the time and amplitude of the sound reaching the receiver.
+- Second, in order of time we have the early echoes, which are repetition of
+
 
 ### Physics to Signal Processing
 

@@ -12,10 +12,11 @@
 % Change block size
 % https://github.com/matze/mtheme/issues/307#issuecomment-502212780
 % map default block to old-block
-\let\oldblock\block
-\let\endoldblock\endblock
-% change block by adding smallskip
-\renewenvironment{block}[1]{\begin{oldblock}{#1}\smallskip}{\end{oldblock}}
+
+% \let\oldblock\block
+% \let\endoldblock\endblock
+% \renewenvironment{block}[1]{\begin{oldblock}{#1}\vspace{0pt}}{\end{oldblock}} % change block by adding smallskip
+
 
 % Font configuration
 \usepackage{fontspec}
@@ -32,10 +33,16 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{multicol}
+\usepackage{kmath}
+\usepackage[absolute,overlay]{textpos} % provide textblock
+\usepackage{xfrac}
+\usepackage{pifont} % provide cmark and xmark
 
 % my colors
 \definecolor{darkblue}{HTML}{154360}
 \definecolor{bluegreen}{HTML}{228BE6}
+\definecolor{mygreen}{RGB}{30,132,73}
+\definecolor{myred}{RGB}{179,30,0}
 
 % % my commands
 \input{my_macros.tex}
@@ -103,8 +110,11 @@ INRIA IRISA
     \section{Echo-aware Application}
     \input{content/application.tex}
 
-    % \section{Echo Dataset --- dEchorate}
-    % \section{Conclusion}
+    \section{Echo-aware Dataset}
+    \input{content/data.tex}
+
+    \section{Conclusion}
+    \input{content/conclusion.tex}
 
     % \section{Acoustic Echo Retrieval}
     %     \begin{frame}{First Frame}

@@ -70,13 +70,13 @@
             \item What?
             \begin{itemize}
                 \item \alert{\textit{Sound Source Separation}}
-                \item \alert{\textit{Speech Enhancement}}
+                \item \alert{\textit{Speech Enhancement}} (denoising, dereverberation)
                 \item \textit{Automatic Speech Recognition}
                 \item ...
             \end{itemize}
             \item Where?
             \begin{itemize}
-                \item \alert{\textit{Sound Source Localization}}
+                \item \alert{\textit{Sound Source Localization}} (DOA estimation, Mic calibration)
                 \item \alert{\textit{Room Geometry Estimation}}
             \end{itemize}
             \item When?
@@ -98,7 +98,7 @@
     \\Blind and Informed problems
 
     \begin{block}{Everything is connected}
-        WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
+        HOW $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
     \end{block}
 
 \end{frame}
@@ -110,21 +110,13 @@
         Offer mathematical models, frameworks and tools to tackle such ASA problems
     \end{mydefblock}
 
-    % \begin{block}{Signal Processing}
-
-    %     Microphone recordings $x_i$ and sound sources $s_j$ are (digital) signals
-
-    %     \begin{equation*}
-    %         x_i(t) = (h_{ij} \ast s_j)(t)
-    %     \end{equation*}
-
-    % \end{block}
     \begin{block}{General Pipeline}
         \begin{itemize}
-            \item Models
-            \item Representation
-            \item Estimation
-            \item Adaptive Processing
+            \item (Mathematical Models)
+            \item Signal representation (STFT, Features)
+            \item Enhancement (denoising, dereverberation)
+            \item Parameter Estimation (DOA, Localization)
+            \item Adaptive Processing (Filtering)
         \end{itemize}
     \end{block}
 \end{frame}
@@ -143,6 +135,15 @@
         \end{itemize}
     \end{mydefblock}
 
+    \begin{block}{Echo-aware processing}
+        between anechoic processing and reverberant processing
+    \end{block}
+
+\end{frame}
+
+\subsection{Outline}
+
+\begin{frame}
     \begin{block}{Turning echoes into friends}
         Typically reverberation is considered as ''foe'' for the processing.
     \end{block}
@@ -153,24 +154,26 @@
             \item extend previous classical methods for audio scene analysis
         \end{enumerate}
     \end{mydefblock}
+
 \end{frame}
 
-
-\subsection{Outline}
-
-\begin{frame}{1D Outline}
+% change color of Beamer subsection
+% https://tex.stackexchange.com/questions/356237/changing-text-color-in-subsection-in-tableofcontents-in-beamer
+\begin{frame}[standout]{1D Outline}
     \begin{columns}
-        \begin{column}{0.3\textwidth}
+        \begin{column}{0.35\textwidth}
             Echo-aware signal processing
             \\for audio scene analysis
         \end{column}
+        \begin{column}{0.05\textwidth}
+        \end{column}
         \begin{column}{0.6\textwidth}
-            \color{white}
-            \tableofcontents
+            {
+                \setbeamercolor{part in toc}{fg=gray}
+                \setbeamercolor{section in toc}{fg=gray}
+                \setbeamercolor{subsection in toc}{fg=white}
+                \tableofcontents
+            }
         \end{column}
     \end{columns}
-\end{frame}
-
-\begin{frame}{2D Outline}
-    Projects
 \end{frame}

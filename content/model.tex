@@ -1,52 +1,98 @@
 \subsection{From Physics to Digital Signal Processing}
 
-\begin{frame}{Physics $\longrightarrow$ Signal Processing}
+\begin{frame}{Echoes and Room Acoustics}
 
-    \begin{block}{Sound propagates and Green equation}
-        aoeu
+    \begin{block}{Sound propagates and interacts with space}
+        \begin{itemize}
+            \item it \alert{travels} with a certain speed and it is \alert{attenuated};
+            \item it is \alert{absorbed} and \alert{reflected} by surfaces;
+            \item and it is scattered, diffracted, etc.
+        \end{itemize}
+    This is describe by the so called RIRs
     \end{block}
 
-    \begin{block}{Acoustic Reflection}
-        aoeu
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.3\textwidth]{example-image-a}
+    \end{figure}
+
+    \begin{block}{Elements of reverberation}
+        \begin{itemize}
+            \item Direct path
+            \item \alert{Early Echoes}
+            \item Reverberation tails
+        \end{itemize}
+
     \end{block}
 
-    \begin{block}{Room Impulse Response}
-        aoeu
-    \end{block}
+
+    \begin{mydefblock}{Early Echoes}
+        Reflection
+        \\(perceptually and physically motivated distinction)
+    \end{mydefblock}
 
 \end{frame}
 
-\begin{frame}{Signal Processing $\longrightarrow$ \alert{Digital} Signal Processing}
-    \begin{block}{Signal model in time domain}
-    \end{block}
-    aoeu
+\begin{frame}{Echoes and Room Impulse Response}
 
-    \begin{block}{Signal model in the discrete time domain}
-        aoeu
+    \begin{block}{RIRs can be modeled with the Image Methods}
+        \begin{itemize}
+            \item specular reflection only
+            \item ``playing billiard in a concert hall''
+            \item for shoebox room it is is the solution for physics
+            \item in frequency domain it writes as
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{RIRs accounts for}
+        the \alert{geometry} of the room
+        \begin{itemize}
+            \item Room shape and size
+            \item Mic and Source position
+            \item presence of objects
+        \end{itemize}
+        the acoustic properties of the audio scene
+        \begin{itemize}
+            \item surface materials
+            \item objects materials
+        \end{itemize}
+    \end{block}
+
+    examples
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.3\textwidth]{example-image-a}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{Echoes in (Digital) Signal Processing}
+
+    \begin{block}{Room Impulse Response}
+        \begin{equation*}
+            \tilde{x}_i = (\tilde{h}_i \ast \tilde{s})(t) \longrightarrow \tilde{X}_i( f) = \tilde{H}_{ij}( f) \tilde{S}( f)
+        \end{equation*}
+        the linear filtering effect due to the propagation of sound from a source to a microphone in a indoor space
+    \end{block}
+
+    \begin{block}{Observation}
+        Our vision is limited both in time (finite and discrete) and in frequency (finite and discrete)
+        \begin{equation}
+            x_i[n] = ...
+        \end{equation}
     \end{block}
 
     \begin{block}{Signal model in the frequency domain}
-        aoeu
+        \begin{equation*}
+            x_i = (h_i \ast s)(t)\;\longrightarrow\;X(f) = H_i(f) S(f)
+        \end{equation*}
     \end{block}
 
     \begin{block}{Approximations}
-
-    \end{block}
-
-\end{frame}
-
-\subsection{The Echo Model}
-\begin{frame}{The Echo Model}
-    \begin{block}{Time Domain}
-        aoeu
-    \end{block}
-
-    \begin{block}{Frequency Domain}
-        aoeu
-    \end{block}
-
-    \begin{block}{Approximations}
-        aou
+        \begin{itemize}
+            \item Narrowband Approximation
+            \item DTFT echo model in the DFT
+        \end{itemize}
     \end{block}
 
 \end{frame}
@@ -54,7 +100,11 @@
 \subsection*{interim conclusion}
 \begin{frame}{Interim Conclusion I}
     \begin{alertblock}{Approximations}
-        Echoes are off-grid by nature
-        Sampling and quantization make them hard
+        \begin{itemize}
+            \item Echoes are well described by specular reflection
+            \item Echoes are off-grid by nature
+            \item Sampling and quantization make them hard
+            \item Processing in the discrete frequency domain, but with continuous time echo model
+        \end{itemize}
     \end{alertblock}
 \end{frame}
