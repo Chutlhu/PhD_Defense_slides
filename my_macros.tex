@@ -31,3 +31,47 @@
 % MATH
 
 \newcommand{\echoModelFreq}{\ensuremath{\sum_{r=0}^{R} \alpha_i^{(r)}(f) \cste^{- \csti 2 \pi \tau_i^{(r)} f_k}}}
+
+
+
+
+
+\usepackage{pgffor}
+% for math stuff
+\foreach \x in {a,...,z}{
+  % mathbf
+  \expandafter\xdef\csname bf\x \endcsname{\noexpand\ensuremath{\noexpand\mathbf{\x}}}
+  % Bold symbol
+  \expandafter\xdef\csname bs\x \endcsname{\noexpand\ensuremath{\noexpand\boldsymbol{\x}}}
+  % Typewriter
+  \expandafter\xdef\csname tt\x \endcsname{\noexpand\ensuremath{\noexpand\mathtt{\x}}}
+  % mathfrak -- curly
+  \expandafter\xdef\csname scr\x \endcsname{\noexpand\ensuremath{\noexpand\mathscr{\x}}}
+  % short for \hat{}
+  \expandafter\xdef\csname hat\x \endcsname{\noexpand\ensuremath{\noexpand\hat{\x}}}
+  % short for \tilde{}
+  \expandafter\xdef\csname tilde\x \endcsname{\noexpand\ensuremath{\noexpand\tilde{\x}}}
+}
+
+\foreach \x in {A,...,Z}{
+%   Bold symbol -- bold
+  \expandafter\xdef\csname bs\x \endcsname{\noexpand\ensuremath{\noexpand\boldsymbol{\x}}}
+%   mathbf -- bold
+  \expandafter\xdef\csname bf\x \endcsname{\noexpand\ensuremath{\noexpand\mathbf{\x}}}
+%   mathbb -- blackboard-bold for uppercase letters and lowercase ( for sets )
+  \expandafter\xdef\csname bb\x \endcsname{\noexpand\ensuremath{\noexpand\mathbb{\x}}}
+%   mathds -- ???
+  \expandafter\xdef\csname ds\x \endcsname{\noexpand\ensuremath{\noexpand\mathds{\x}}}
+  % Typewriter
+  \expandafter\xdef\csname tt\x \endcsname{\noexpand\ensuremath{\noexpand\mathtt{\x}}}
+%   mathfrak -- gothic
+  \expandafter\xdef\csname fk\x \endcsname{\noexpand\ensuremath{\noexpand\mathfrak{\x}}}
+%   mathfrak -- curly
+  \expandafter\xdef\csname scr\x \endcsname{\noexpand\ensuremath{\noexpand\mathscr{\x}}}
+%   mathcal -- calligraphy
+  \expandafter\xdef\csname cal\x \endcsname{\noexpand\ensuremath{\noexpand\mathcal{\x}}}
+%   short for \hat{}
+  \expandafter\xdef\csname hat\x \endcsname{\noexpand\ensuremath{\noexpand\hat{\x}}}
+  % short for \tilde{}
+  \expandafter\xdef\csname tilde\x \endcsname{\noexpand\ensuremath{\noexpand\tilde{\x}}}
+}

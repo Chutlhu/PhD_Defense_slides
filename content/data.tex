@@ -77,6 +77,49 @@
 \end{frame}
 
 \begin{frame}{Echo-aware Speech Enhancement}
+    \begin{block}{Speech Enhancement}
+        Improve the quality of a \textit{target} sound source with respect:
+        \begin{itemize}
+            \item interferences, i.e. form other sources $\rightsquigarrow$ sound source separation
+            \only<1>{
+            \item background noise $\rightsquigarrow$ denoising
+            \item reverberation $\rightsquigarrow$ dereverberation, room equalization
+            }
+            \only<2>{
+            \item \alert{background noise $\rightsquigarrow$ denoising}
+            \item \alert{reverberation $\rightsquigarrow$ dereverberation, room equalization}
+            }
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Spatial filtering via Beamformers}
+        \begin{itemize}
+            \item Is a speech enhancement techniques for multichannel
+            \item vs. Wiener Filtering, the target is distortionless
+            \item in anechoic case, it correspond to delay-and-sum beamformer
+            \item physical interpretation with steering vector based on DOA
+            \item both in time and \only<2>{\alert{frequency}}\only<1>{frequency} domain
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Echo-aware Speech Enhancement}
+
+    \begin{block}{Signal Model}
+        \begin{equation*}
+            \bfx[l,k] =\bfH[k] \bfs[l,k] + \bfn[l,k]
+        \end{equation*}
+    \end{block}
+
+    \begin{mydefblock}{Beamforming: Filter and Sum}
+        \begin{equation*}
+            \begin{aligned}
+                \bfy[l,k] = \khermitian{\bfW} \bfx
+            \end{aligned}
+        \end{equation*}
+    \end{mydefblock}
+
 
 \end{frame}
 

@@ -53,7 +53,7 @@ The resolution of one of the above problem may be better if prior information is
 - Problems can be Blind or Informed
 - Problems can be Forward or Inverse
 
-### Signal Processing
+### Signal Processing Pipeline
 
 It is the role of mathematics and computer science
 Signal processing offer us mathematical models, frameworks and models for this.
@@ -143,7 +143,6 @@ However, they a common shape can be identified and illustrated as function of ti
 - First there is the so-called direct path, with describe the time and amplitude of the sound reaching the receiver.
 - Second, in order of time we have the early echoes, which are repetition of
 
-
 ### Physics to Signal Processing
 
 Sound is emitted by a sound **source**, propagates and interact with the surrounding the **indoor spaces** and is recorded by a **receiver**, such as a microphones.
@@ -201,7 +200,6 @@ Type of noise
 First we need to estimate the echoes properties.
 Early echoes are defined as elements of the room impulse response
 
-
 ### Blaster
 
 ### Lantern
@@ -247,6 +245,7 @@ We can divide them broadly in two groups:
   - $\Rightarrow$ the contains strong echoes, but no multichannel arrays, nor multiple speaker or various RT60
 
 ### Recording & Annotation
+
 A good echo-aware methods needs
 
 - good geometrical annotation as well as good signal annotation.
@@ -327,9 +326,7 @@ TABLE HERE
 
 RESULTS HERE
 
-
 #### Beamforming
-
 
 ### 4 Interim Conclusion
 
@@ -348,4 +345,3 @@ RESULTS HERE
 - Teaching
 - MBSSLocate
 - Pyroomacoustics
-
