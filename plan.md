@@ -220,15 +220,116 @@ Early echoes are defined as elements of the room impulse response
 
 ## Echo-aware dataset
 
-### Motivation
+All the methodologies presented so far where evaluated on synthetic data.
+This is a common procedure in many audio signal processing research.
+
+- collecting and annotating exhaustive data covering many application is tedious task
+- (echo-aware methods) annotation of early echoes require expertise and equipment
+- (learning methods) lot of data and acoustic scenario
+- (acoustic simulators) acoustic simulators can reach a good level of approximation (some applications)
+  - SSL
+  - ASR (\cite{Google})
+
+For all these reasons, many works are validated on simulated data.
+Nevertheless real data are necessary to validate the approaches and many RIRs databases are available online.
+
+We can divide them broadly in two groups:
+
+- Speech Enhancements oriented databases. They require:
+  - different relative DOAs, many sources
+  - different level of SNR, RT60, DRR
+  - array geometry
+  - $\Rightarrow$ the contains strong echoes, but are not annotated, nor the room geometry
+- Room Geometry Estimation oriented databases
+  - geometrical annotation of src, mic, room
+  - different room shapes
+  - the signal annotation is partially available (need to be computed a posteriori by the user)
+  - $\Rightarrow$ the contains strong echoes, but no multichannel arrays, nor multiple speaker or various RT60
 
 ### Recording & Annotation
+A good echo-aware methods needs
+
+- good geometrical annotation as well as good signal annotation.
+  This two should match
+- designed to be used for
+  - echo estimation (need for peak annotation)
+  - echo-aware signal application (source separation, speech enhancement)
+  - echo-aware geometry application (source localization, microphones calibration, room geometry estimation)
+
+The dEchorate database was created to meet this requirements.
+It has the following characteristics:
+Moreover it has
+
+- many acoustic environment (one-hotted and incremental and fornitures)
+- 6 linear array and 4 sources
+- position of source and first order image sources annotated and echo annotated
+- Code to get real RIRs and *matching* simulated RIRs
+
+Further possibility
+
+- Do some learning due to the quantities of RIRs (>)
+- Study the difference between synth and real RIRs
+
+### Annotation
+
+The annotation was done using the following tools:
+
+- The exact knowledge planimetry of the room
+- RIR estimation with ESS (Farinas) and a calibrated acquisition system
+- and Indoor Positioning System for an initial guess
+- Echo annotatation with a GUI visualizing echoes
+  - Skyline
+  - Manual peak peaking
+  - Matched filter (Equalization)
+- Exact multilateration algorithm for refinement the position
+
+Limitation
+
+- the exact annotation of the echoes is challenging due to the non ideal loudspeaker
+- only nULA
+- only first order images (= first k echoes) --- the sometimes the second strongest echoes comes from the ceiling
+
+Learn from my mistakes:
+
+- put a microphone close to the source, always.
+- check the loudspeaker characteristics
+- etc...
 
 ### Validation
 
-- TOA estimation
-- Beamforming
+In order to validate the dataset and show its potential we considered to following application:
+
+- Acoustic Echo Estimation
+  - task: estimate the echoes
+  - test against simulated and real RIRs
 - Room Geometry Estimation
+  - task: estimate the room geometry from knowing echoes
+- Echo-aware Speech Enhancement using beamforming
+  - task: multichannel denoising and dereverberation
+  - test echo-aware vs. echo-agnostic bf
+  - test against simulated and real RIRs
+
+#### Room Geometry Estimation
+
+In a nutshell, Room Geometry Estimation can be done from TOAs annotation (label and value)
+
+1. identifying the position of the image source with multilateration (3D extention of trilateration)
+    Convex and closed-from, but ill-conditioned by noise. Beck can do that
+2. by simply computing the plane that bisects the segments between the source and its image
+  this methods is called Images Source Inversion
+
+Many other methods for Room Geometry Estimation exists, they differs based on the knowledge of the labels and the setup.
+
+We can see here an examples of the estimation
+
+If we run this method for all the microphones of one room configuration we obtain the following results:
+TABLE HERE
+
+RESULTS HERE
+
+
+#### Beamforming
+
 
 ### 4 Interim Conclusion
 

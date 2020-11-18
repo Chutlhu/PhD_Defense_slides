@@ -2,43 +2,77 @@
 
 \begin{frame}{Echo-aware Datasets}
 
-    \begin{block}{Good Echo-aware dataset needs ...}
-        \begin{itemize}
-            \item Good RIRs and protocol to estimate them
-            \item Good geometrical annotation
-            \item Good signal annotation
-            \item Good for echo-related tasks
-            \begin{itemize}
-                \item \textit{Signal} inverse problems (source separation, dereverberation, channel estimation, etc)
-                \item \textit{Geometric} inverse problem (source localization, microphone calibration, RooGE)
-                \item \textit{Echo} estimation
-            \end{itemize}
-        \end{itemize}
+    \begin{block}{\alert{Data} in audio signal processing}
+        \begin{enumerate}
+            \item are necessary for validating (and learning) models
+            \item collecting real data is a not always possible
+            \\\hspace{.3em} annotation and recording require expertise, equipment and \alert{time}
+            % \\\hspace{.3em} even more for echoes
+            \item dataset of real data cannot be easily shared
+            \\\hspace{.3em} they do not generalize to different use-cases and scenarios (array, recording scenario)
+            \item \alert{simulated data} are used instead: quantity, versatility, annotation easiness and ``quality''
+        \end{enumerate}
     \end{block}
 
-    \begin{block}{Data and measurements are really difficult to collect and annotate}
-        \begin{itemize}
-            \item proper measurements
-            \item proper knowledge
-        \end{itemize}
-
+    \begin{block}{\alert{Echo-aware Data} in audio signal processing}
+        \begin{description}
+            \item[For SE]: strong echoes, but not annotated
+            \\\cite{a,b,c}
+            \item[For RooGE]: good geo. annotation, but no variety of acoustic scenarios
+            \\\cite{Crocco,Dokmaninc,Remaggi}
+        \end{description}
     \end{block}
-
-    \vfill
-
-    Typically simulator are used
-    \begin{itemize}
-        \item they offer versatility
-        \item annotation is for free
-    \end{itemize}
-
 
 \end{frame}
 
+\subsection{\dechorate}
 
-\subsection{Dataset validation}
+\begin{frame}[t]{\dechorate realization}
+    \begin{block}{Echo Annotation}
+        \begin{enumerate}
+            \item RIR estimation with ESS~\cite{Farina}
+            \item IPS with beacon
+            \item GUI for echo annotation
+            \\Skyline, Matched Filter, Assisted Peak Picking
+            \item Refined position with Least Square optimization
+            \item iterate including ceiling (perfectly flat)
+        \end{enumerate}
+    \end{block}
 
-\begin{frame}[standout]{Acoustic Echo Estimation}
+    \vfill
+    \only<2>{TABLE RESULTS}
+    \only<3>{IMAGE SKYLINE}
+\end{frame}
+
+\subsection{application}
+
+% \begin{frame}[standout]{Acoustic Echo Estimation}
+
+% \end{frame}
+
+\begin{frame}[t]{Room Geometry Estimation}
+
+    \begin{block}{}
+        Estimating the room geometry: shape, volume or reflector position)
+        \\from signal or form TOAs and labels
+    \end{block}
+    \vfill
+
+    \begin{block}{}
+        If TOAs annotation (label and value) are available, RooGE as \alert{Image Source Inversion}:
+        \\For each wall/label:
+        \begin{enumerate}
+            \item TOA $\kto$ image source position via 3D multilateration
+            \item image source position $\kto$ reflector estimation via geometric reasoning
+        \end{enumerate}
+    \end{block}
+
+    \vfill
+    Other methods differs for prior knowledge and setup~\cite{Crocco,Antonacci,Filos}
+
+    \vfill
+    \only<2>{IMAGE EXAMPLE HERE}
+    \only<3>{TABLES RESULTS HERE}
 
 \end{frame}
 
@@ -46,18 +80,32 @@
 
 \end{frame}
 
-\begin{frame}{Room Geometry Estimation}
-
-\end{frame}
-
-\subsection{Interim conclusion (3/4)}
+\subsection*{Interim conclusion (3/4)}
 
 \begin{frame}{Interim conclusion (3/4)}
-    \begin{block}{Annotation}
-
+    \begin{block}{\dechorate dataset for echo-aware signal processing}
+        \begin{itemize}
+            \item designed for AER, SE and RooGE
+            \item Geometrical annotation $\longleftrightarrow$ image source annotation $\longleftrightarrow$ Signal Annotation
+            \item Measured Real RIRs and equivalent synt RIR
+            \item also speech, noise, babble noise and different room conf (+fornitures)
+            \item GUI, tools and code
+        \end{itemize}
     \end{block}
 
-    \begin{block}{Usage}
-
+    \begin{block}{Application}
+        Echo Estimation
+        \begin{itemize}
+            \item Huge difference between real and simulated data
+        \end{itemize}
+        Room Geometry Reconstruction
+        \begin{itemize}
+            \item some annotation inconsistencies are noticed (but manually corrected)
+        \end{itemize}
+        Echo-aware Speech Enhancement
+        \begin{itemize}
+            \item a
+            \item b
+        \end{itemize}
     \end{block}
 \end{frame}
