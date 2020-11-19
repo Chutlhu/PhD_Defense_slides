@@ -106,20 +106,46 @@
 
 \begin{frame}[t]{Echo-aware Speech Enhancement}
 
-    \begin{block}{Signal Model}
+    \begin{block}{Beamforming: Delay and Sum}
+        \begin{equation*}
+            \begin{aligned}
+                \bfy[l,k] = \khermitian{\bfW} \bfx[l,k]
+            \end{aligned}
+        \end{equation*}
+    \end{block}
+
+    \begin{block}{STFT Signal Model}
         \begin{equation*}
             \bfx[l,k] =\bfH[k] \bfs[l,k] + \bfn[l,k]
         \end{equation*}
     \end{block}
 
-    \begin{mydefblock}{Beamforming: Filter and Sum}
+    \begin{block}{Beamforming: Filter and Sum}
         \begin{equation*}
             \begin{aligned}
-                \bfy[l,k] = \khermitian{\bfW} \bfx
+                \bfy[l,k] = \khermitian{\bfW} \bfx[l,k]
             \end{aligned}
         \end{equation*}
-    \end{mydefblock}
+        Beamforming in the STFT domain: apply filter and sum independently at each frequency bin
+    \end{block}
 
+\end{frame}
+
+\begin{frame}[t]{Echo-aware Speech Enhancement}
+
+    \begin{block}{The PSD of various components}
+        asd
+    \end{block}
+
+    \begin{block}{Different Criteria and Solution}
+        \begin{itemize}
+            \item DS
+            \item MVDR - DP
+            \item MVDR ReTF
+        \end{itemize}
+    \end{block}
+
+    IMAGE RESULTS
 
 \end{frame}
 

@@ -2,113 +2,209 @@
 
 \begin{frame}{Scenario}
 
-    \begin{figure}
-        \includegraphics[width=\textwidth]{example-image}
-        \caption{Image animation here}
-    \end{figure}
-
-
-    \begin{block}{Scenario:}
-        \begin{itemize}
-            \item Sound sources producing sounds
-            \item Microphone recording sounds
-            \item An environment where sounds propagate
-        \end{itemize}
-
-    \end{block}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.69\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{example-image}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.29\textwidth}
+            \textbf{Sound}
+            \begin{itemize}
+                \only<1->{\item produced by \alert{sources}}
+                \only<2->{\item recorded by \alert{microphones}}
+                \only<3->{\item corrupted by \alert{noise}}
+                \only<4>{\item  propagates in the \alert{room}
+                        \\$\hookrightarrow$ \alert{reverberation}}
+            \end{itemize}
+        \end{column}
+    \end{columns}
 
 \end{frame}
 
-\begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
-    \begin{block}{Sound recorded by microphones carries information:}
+    \begin{block}{Microphones recordings carries}
         \vspace{-0.5em}
-        \begin{itemize}
-            \item \alert{Semantic} information about source nature and semantic content
-            \item \alert{Spatial} information about due to \textit{sound propagation}
-            \item \alert{Temporal} information about event
-        \end{itemize}
+        \begin{description}
+            \only<1->{\item[\alert{Semantic}] information about source nature and semantic content}
+            \only<2->{\item[\alert{Spatial}] information about due to \textit{sound propagation}}
+            \only<3->{\item[\alert{Temporal}] information about events}
+        \end{description}
     \end{block}
 
     \begin{figure}
         \centering
-        \includegraphics[width=0.2\textwidth]{example-image-a}
+        \hspace{1em}
+        \visible<1->{\includegraphics[width=0.2\textwidth]{example-image-a}}
         \hfill
-        \includegraphics[width=0.2\textwidth]{example-image-b}
+        \visible<2->{\includegraphics[width=0.2\textwidth]{example-image-b}}
         \hfill
-        \includegraphics[width=0.2\textwidth]{example-image-c}
+        \visible<3->{\includegraphics[width=0.2\textwidth]{example-image-c}}
+        \hspace{1em}
     \end{figure}
 
 
     % \setbeamercolor{block title}{fg=white,bg=darkblue}
     % \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
-    \begin{mydefblock}{Audio Scene Analysis}
-        \vspace{0.3em}
-        is the extraction and organization of all the information in the sound
-    \end{mydefblock}
+    \only<4>{
+        \begin{mydefblock}{Audio Scene Analysis}
+            \vspace{0.3em}
+            is the extraction and organization of all the information in the sound
+        \end{mydefblock}
 
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.2\textwidth]{example-image-a}
-        \hfill
-        \includegraphics[width=0.2\textwidth]{example-image-b}
-        \hfill
-        \includegraphics[width=0.2\textwidth]{example-image-c}
-        \hfill
-        $\rightarrow$
-        \hfill
-        \includegraphics[width=0.2\textwidth]{example-image}
-    \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.2\textwidth]{example-image-a}
+            \hfill
+            $\rightarrow$
+            \hfill
+            \includegraphics[width=0.2\textwidth]{example-image-c}
+            \hfill
+            $\rightarrow$
+            \hfill
+            \includegraphics[width=0.2\textwidth]{example-image}
+        \end{figure}
+    }
 
 \end{frame}
 
-\begin{frame}{Echo-aware signal processing for \alert{audio scene analysis}}
+\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
-    \begin{block}{Typical problems}
-        \vspace{-0.5em}
-        \begin{itemize}
-            \item What?
+    Typical problems
+    \begin{columns}[t,onlytextwidth]
+        \begin{column}[T]{0.2\textwidth}
+            \begin{itemize}
+                \item What?
+            \end{itemize}
+        \end{column}
+        \begin{column}[T]{0.5\textwidth}
             \begin{itemize}
                 \item \alert{\textit{Sound Source Separation}}
-                \item \alert{\textit{Speech Enhancement}} (denoising, dereverberation)
+                \item \alert{\textit{Speech Enhancement}}
+                \\(denoising, dereverberation)
                 \item \textit{Automatic Speech Recognition}
-                \item ...
             \end{itemize}
-            \item Where?
+        \end{column}
+        \begin{column}[T]{0.24\textwidth}
+            \includegraphics[width=.9\textwidth]{example-image-a}
+        \end{column}
+    \end{columns}
+    % \vspace{1em}
+
+    \begin{columns}[t]
+        \begin{column}{0.2\textwidth}
+            Where?
+        \end{column}
+        \begin{column}{0.5\textwidth}
             \begin{itemize}
-                \item \alert{\textit{Sound Source Localization}} (DOA estimation, Mic calibration)
+                \item \alert{\textit{Sound Source Localization}} (DOA estimation)
+                \item Microphone Calibration
                 \item \alert{\textit{Room Geometry Estimation}}
             \end{itemize}
-            \item When?
-            \begin{itemize}
-                \item \textit{Speaker Diarization}
-                \item \textit{Text/Lyrics alignment}
-            \end{itemize}
-            \item How?
-            \begin{itemize}
-                \item \textit{Acoustic Channel Estimation}
-                \item \textit{Acoustic Measurements}
-            \end{itemize}
-        \end{itemize}
-    \end{block}
+        \end{column}
+        \begin{column}{0.24\textwidth}
+            \includegraphics[width=.9\textwidth]{example-image-b}
+        \end{column}
+    \end{columns}
+
+    % \vspace{.5em}
+
+    % \begin{columns}[t]
+    %     \begin{column}{0.2\textwidth}
+    %         Where?
+    %     \end{column}
+    %     \begin{column}{0.5\textwidth}
+    %         \begin{itemize}
+    %             \item \alert{\textit{Sound Source Localization}} (DOA estimation)
+    %             \item Microphone Calibration
+    %             \item \alert{\textit{Room Geometry Estimation}}
+    %         \end{itemize}
+    %     \end{column}
+    %     \begin{column}{0.24\textwidth}
+    %         \includegraphics[width=.9\textwidth]{example-image-b}
+    %     \end{column}
+    % \end{columns}
+
+    % \pause
+    % \begin{columns}[T,onlytextwidth]
+    %     \begin{column}{0.2\textwidth}
+    %         How?
+    %     \end{column}
+    %     \begin{column}{0.5\textwidth}
+    %         \begin{itemize}
+    %             \item \textit{Acoustic Channel Estimation}
+    %             \item \textit{Acoustic Measurements} (speed of sound, impedence estimation)
+    %             \item Acoustic Parameter ($\mathtt{RT}_{60}$, DRR)
+    %         \end{itemize}
+    %     \end{column}
+    %     \begin{column}{0.24\textwidth}
+    %             \includegraphics[width=.9\textwidth]{example-image-a}
+    %         \end{column}
+    % \end{columns}
+    % \vfill
+
+    %     \begin{itemize}
+    %         \item<2-> Where?
+    %         \begin{itemize}
+    %             \item \alert{\textit{Sound Source Localization}} (DOA estimation, Mic calibration)
+    %             \item \alert{\textit{Room Geometry Estimation}}
+    %         \end{itemize}
+    %         \item<3-> When?
+    %         \begin{itemize}
+    %             \item \textit{Speaker Diarization}
+    %             \item \textit{Text/Lyrics alignment}
+    %         \end{itemize}
+    %         \item<4-> How?
+    %         \begin{itemize}
+    %             \item \textit{Acoustic Channel Estimation}
+    %             \item \textit{Acoustic Measurements}
+    %         \end{itemize}
+    %     \end{itemize}
 
 
-    Also known as auditory scene analysis or computer auditory scene analysis.
-    \\Inverse and Forward problems
-    \\Blind and Informed problems
+    % \pause
+    % Also known as auditory scene analysis or computer auditory scene analysis.
+    % \\Inverse and Forward problems
+    % \\Blind and Informed problems
 
-    \begin{block}{Everything is connected}
-        HOW $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
-    \end{block}
+    % \pause
+    % \begin{block}{Everything is connected}
+    %     HOW $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
+    % \end{block}
 
 \end{frame}
 
 
 \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
 
+    Sounds as signals, recording as process
+    \vspace*{0.5em}
+    \begin{columns}
+        \begin{column}{0.69\textwidth}
+            \centering
+            \includegraphics<1>[width=0.3\textwidth]{example-image-a}
+            \includegraphics<2>[width=0.3\textwidth]{example-image-b}
+            \includegraphics<3>[width=0.3\textwidth]{example-image-c}
+            \includegraphics<4>[width=0.3\textwidth]{example-image-c}
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            \begin{itemize}
+                \item<1-> a
+                \item<2-> b
+                \item<3-> c
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \vfill
+    \pause
+
     \begin{mydefblock}{Signal Processing}
         Offer mathematical models, frameworks and tools to tackle such ASA problems
     \end{mydefblock}
+
+    \pause
 
     \begin{block}{General Pipeline}
         \begin{itemize}
@@ -136,7 +232,29 @@
     \end{mydefblock}
 
     \begin{block}{Echo-aware processing}
-        between anechoic processing and reverberant processing
+        is between anechoic processing and reverberant processing
+        \\Anechoic processing
+        \begin{itemize}
+            \item short processing
+            \item[\cmark] sound field tends to be diffuse
+            \item[\xmark] sound reflection as interferences
+            \\neglect most of the sound energy
+            \\ignore the correlation between the direct sound and its reflection and consequently may result in a distorted output
+            \item[\xmark] coherent processing becomes impossible
+        \end{itemize}
+        Echo-processing
+        \begin{itemize}
+            \item Middle processing
+            perceive coming from all directions~\cite{daldegan1988}
+        \end{itemize}
+        Reverberant processing
+        \begin{itemize}
+            \item Long processing
+            \item[\cmark] narrowband approximation is valid
+            \item[\cmark] sound field is described by full RIRs
+            \item[\cmark] all reflection can be \alert{coherently} processed
+            \item[\xmark] long frames impose lantency
+        \end{itemize}
     \end{block}
 
 \end{frame}
