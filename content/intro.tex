@@ -11,96 +11,106 @@
         \begin{column}{0.29\textwidth}
             \textbf{Sound}
             \begin{itemize}
-                \only<1->{\item produced by \alert{sources}}
-                \only<2->{\item recorded by \alert{microphones}}
-                \only<3->{\item corrupted by \alert{noise}}
-                \only<4>{\item  propagates in the \alert{room}
-                        \\$\hookrightarrow$ \alert{reverberation}}
+                \item produced by \alert{sources}
+                \item recorded by \alert{microphones}
+                \item corrupted by \alert{noise}
+                \item  propagates in the \alert{room}
+                    \\$\hookrightarrow$ \alert{reverberation}
             \end{itemize}
         \end{column}
     \end{columns}
 
+    \vfill
+    \textcolor{gray}{Attention: artificial sound vs \textbf{(natural) microphone recordings}}
+
 \end{frame}
 
 \begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
-    \begin{block}{Microphones recordings carries}
-        \vspace{-0.5em}
-        \begin{description}
-            \only<1->{\item[\alert{Semantic}] information about source nature and semantic content}
-            \only<2->{\item[\alert{Spatial}] information about due to \textit{sound propagation}}
-            \only<3->{\item[\alert{Temporal}] information about events}
-        \end{description}
-    \end{block}
+    \begin{columns}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            \alert{Semantic} information
 
+            \vspace*{0.5em}
+            \includegraphics[width=\textwidth]{example-image-a}
+            about source nature and semantic content
+        \end{column}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            \alert{Spatial} information
+
+            \vspace*{0.5em}
+            \includegraphics[width=\textwidth]{example-image-b}
+            about source position and room geometry
+        \end{column}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            \alert{Temporal} information
+
+            \vspace*{0.5em}
+            \includegraphics[width=\textwidth]{example-image-c}
+            about events activity
+        \end{column}
+    \end{columns}
+
+    \vfill
+    \begin{mydefblock}{Audio Scene Analysis}
+        Extraction and organization of all the information in the sound
+    \end{mydefblock}
+
+    \vfill
     \begin{figure}
         \centering
-        \hspace{1em}
-        \visible<1->{\includegraphics[width=0.2\textwidth]{example-image-a}}
+        \includegraphics[width=0.2\textwidth]{example-image-a}
         \hfill
-        \visible<2->{\includegraphics[width=0.2\textwidth]{example-image-b}}
+        $\rightarrow$
         \hfill
-        \visible<3->{\includegraphics[width=0.2\textwidth]{example-image-c}}
-        \hspace{1em}
+        \includegraphics[width=0.2\textwidth]{example-image-c}
+        \hfill
+        $\rightarrow$
+        \hfill
+        \includegraphics[width=0.2\textwidth]{example-image}
     \end{figure}
-
-
-    % \setbeamercolor{block title}{fg=white,bg=darkblue}
-    % \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
-    \only<4>{
-        \begin{mydefblock}{Audio Scene Analysis}
-            \vspace{0.3em}
-            is the extraction and organization of all the information in the sound
-        \end{mydefblock}
-
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.2\textwidth]{example-image-a}
-            \hfill
-            $\rightarrow$
-            \hfill
-            \includegraphics[width=0.2\textwidth]{example-image-c}
-            \hfill
-            $\rightarrow$
-            \hfill
-            \includegraphics[width=0.2\textwidth]{example-image}
-        \end{figure}
-    }
 
 \end{frame}
 
 \begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
-    Typical problems
-    \begin{columns}[t,onlytextwidth]
-        \begin{column}[T]{0.2\textwidth}
+    Some typical problems:
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.15\textwidth}
             \begin{itemize}
                 \item What?
             \end{itemize}
         \end{column}
-        \begin{column}[T]{0.5\textwidth}
+        \begin{column}{0.5\textwidth}
             \begin{itemize}
-                \item \alert{\textit{Sound Source Separation}}
-                \item \alert{\textit{Speech Enhancement}}
-                \\(denoising, dereverberation)
-                \item \textit{Automatic Speech Recognition}
+                \item \alert{Sound source separation}
+                \item \alert{Speech enhancement}
+                \\{\small \textit{denoising, dereverberation}}
+                \item Automatic speech recognition
+                \\{\small \textit{speech-to-text}}
             \end{itemize}
         \end{column}
-        \begin{column}[T]{0.24\textwidth}
+        \begin{column}{0.24\textwidth}
             \includegraphics[width=.9\textwidth]{example-image-a}
         \end{column}
     \end{columns}
-    % \vspace{1em}
 
-    \begin{columns}[t]
-        \begin{column}{0.2\textwidth}
-            Where?
+    \vspace{1em}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.15\textwidth}
+            \begin{itemize}
+                \item Where?
+            \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{itemize}
-                \item \alert{\textit{Sound Source Localization}} (DOA estimation)
-                \item Microphone Calibration
-                \item \alert{\textit{Room Geometry Estimation}}
+                \item \alert{Sound source localization}
+                \\{\small DOA estimation}
+                \item Microphone calibration
+                \item \alert{Room geometry estimation}
             \end{itemize}
         \end{column}
         \begin{column}{0.24\textwidth}
@@ -108,104 +118,80 @@
         \end{column}
     \end{columns}
 
-    % \vspace{.5em}
+    \vspace{1em}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.15\textwidth}
+            \begin{itemize}
+                \item How?
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item \alert{Acoustic channel estimation}
+                \item Acoustic Measurements
+                \\{\small Acoustic parameters (RT$_{60}$, DRR)}
+                \\{\small Physics parameters (speed of sounds)}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.24\textwidth}
+                \includegraphics[width=.9\textwidth]{example-image-c}
+        \end{column}
+    \end{columns}
 
-    % \begin{columns}[t]
-    %     \begin{column}{0.2\textwidth}
-    %         Where?
-    %     \end{column}
-    %     \begin{column}{0.5\textwidth}
-    %         \begin{itemize}
-    %             \item \alert{\textit{Sound Source Localization}} (DOA estimation)
-    %             \item Microphone Calibration
-    %             \item \alert{\textit{Room Geometry Estimation}}
-    %         \end{itemize}
-    %     \end{column}
-    %     \begin{column}{0.24\textwidth}
-    %         \includegraphics[width=.9\textwidth]{example-image-b}
-    %     \end{column}
-    % \end{columns}
-
-    % \pause
-    % \begin{columns}[T,onlytextwidth]
-    %     \begin{column}{0.2\textwidth}
-    %         How?
-    %     \end{column}
-    %     \begin{column}{0.5\textwidth}
-    %         \begin{itemize}
-    %             \item \textit{Acoustic Channel Estimation}
-    %             \item \textit{Acoustic Measurements} (speed of sound, impedence estimation)
-    %             \item Acoustic Parameter ($\mathtt{RT}_{60}$, DRR)
-    %         \end{itemize}
-    %     \end{column}
-    %     \begin{column}{0.24\textwidth}
-    %             \includegraphics[width=.9\textwidth]{example-image-a}
-    %         \end{column}
-    % \end{columns}
-    % \vfill
-
-    %     \begin{itemize}
-    %         \item<2-> Where?
-    %         \begin{itemize}
-    %             \item \alert{\textit{Sound Source Localization}} (DOA estimation, Mic calibration)
-    %             \item \alert{\textit{Room Geometry Estimation}}
-    %         \end{itemize}
-    %         \item<3-> When?
-    %         \begin{itemize}
-    %             \item \textit{Speaker Diarization}
-    %             \item \textit{Text/Lyrics alignment}
-    %         \end{itemize}
-    %         \item<4-> How?
-    %         \begin{itemize}
-    %             \item \textit{Acoustic Channel Estimation}
-    %             \item \textit{Acoustic Measurements}
-    %         \end{itemize}
-    %     \end{itemize}
-
+    \vspace{1em}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.15\textwidth}
+            \begin{itemize}
+                \item When?
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Voice activity detection
+                \\{\small Diarization / scheduling}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.24\textwidth}
+                \includegraphics[width=.9\textwidth]{example-image-c}
+            \end{column}
+    \end{columns}
 
     % \pause
     % Also known as auditory scene analysis or computer auditory scene analysis.
     % \\Inverse and Forward problems
     % \\Blind and Informed problems
 
-    % \pause
-    % \begin{block}{Everything is connected}
-    %     HOW $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
-    % \end{block}
+    \begin{block}{Everything is connected}
+        HOW  $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
+    \end{block}
 
+    End Application: smart speakers, teleconferencing systems
 \end{frame}
 
 
 \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
 
-    Sounds as signals, recording as process
-    \vspace*{0.5em}
+    \begin{mydefblock}{Signal Processing}
+        Offer mathematical models, frameworks and tools to tackle such ASA problems
+    \end{mydefblock}
+
+    \vfill
     \begin{columns}
-        \begin{column}{0.69\textwidth}
+        \begin{column}{0.45\textwidth}
             \centering
-            \includegraphics<1>[width=0.3\textwidth]{example-image-a}
-            \includegraphics<2>[width=0.3\textwidth]{example-image-b}
-            \includegraphics<3>[width=0.3\textwidth]{example-image-c}
-            \includegraphics<4>[width=0.3\textwidth]{example-image-c}
+            \includegraphics[width=0.5\textwidth]{example-image-a}
         \end{column}
-        \begin{column}{0.39\textwidth}
+        \begin{column}{0.58\textwidth}
             \begin{itemize}
-                \item<1-> a
-                \item<2-> b
-                \item<3-> c
+                \item<1-> produced by sources
+                \item<2-> propagates in the room
+                \item<3-> corrupted by noise
+                \item<4-> recorded by microphone
             \end{itemize}
         \end{column}
     \end{columns}
 
     \vfill
-    \pause
-
-    \begin{mydefblock}{Signal Processing}
-        Offer mathematical models, frameworks and tools to tackle such ASA problems
-    \end{mydefblock}
-
-    \pause
-
     \begin{block}{General Pipeline}
         \begin{itemize}
             \item (Mathematical Models)
@@ -215,6 +201,15 @@
             \item Adaptive Processing (Filtering)
         \end{itemize}
     \end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Echo-aware \alert{signal processing} for audio scene analysis}
+
+    \begin{block}{General Pipeline Example}
+        FROM ROBIN
+    \end{block}
+
 \end{frame}
 
 \begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
