@@ -2,6 +2,9 @@
 
 \begin{frame}{Scenario}
 
+    Meeting - 2020 edition
+
+    \vspace{1em}
     \begin{columns}[onlytextwidth]
         \begin{column}{0.69\textwidth}
             \begin{figure}
@@ -73,200 +76,232 @@
         \includegraphics[width=0.2\textwidth]{example-image}
     \end{figure}
 
+    Animals do it, Humans do it. Can computer and robots do it?
+
 \end{frame}
 
-\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
+\begin{frame}[t]{Echo-aware \alert{signal processing for audio scene analysis}}
 
-    Some typical problems:
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.15\textwidth}
+    \begin{mydefblock}{Signal Processing}
+        Mathematical models, frameworks and tools to tackle and solve such problems
+    \end{mydefblock}
+
+    \vfill
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{example-image-a}
+            \end{figure}
+        \end{column}\hfill
+        \begin{column}{0.42\textwidth}
+            Some problems\hfill\tikzmark{right}
             \begin{itemize}
-                \item What?
+                \item Speaker Verification\tikzmark{top1}\tikzmark{bot1}
+                \item Sound Source Separation \tikzmark{top2}
+                \item Speech Enhancement
+                \item Automatic Speech Recognition \tikzmark{bot2}
+                \item Sound Source Localization
+                \item Room Geometry Estimation
+                \item Voice Activity Detection
+                \item Diarization
+                \item RT$_{60}$ estimation
+                \item Wall Absorption Estimation
+                \item \textit{and many many other}
             \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{itemize}
-                \item \alert{Sound source separation}
-                \item \alert{Speech enhancement}
-                \\{\small \textit{denoising, dereverberation}}
-                \item Automatic speech recognition
-                \\{\small \textit{speech-to-text}}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.24\textwidth}
-            \includegraphics[width=.9\textwidth]{example-image-a}
-        \end{column}
+
+            \begin{tikzpicture}[overlay, remember picture]
+                \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+                \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+                 (a.north -| {pic cs:right}) -- node[right,inner sep=1em] {Who?} (b.south -| {pic cs:right});
+            \end{tikzpicture}
+            \begin{tikzpicture}[overlay, remember picture]
+                \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+                \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+                 (a.north -| {pic cs:right}) -- node[right,inner sep=1em] {What?} (b.south -| {pic cs:right});
+            \end{tikzpicture}
+        \end{column}\hfill
     \end{columns}
-
-    \vspace{1em}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.15\textwidth}
-            \begin{itemize}
-                \item Where?
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{itemize}
-                \item \alert{Sound source localization}
-                \\{\small DOA estimation}
-                \item Microphone calibration
-                \item \alert{Room geometry estimation}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.24\textwidth}
-            \includegraphics[width=.9\textwidth]{example-image-b}
-        \end{column}
-    \end{columns}
-
-    \vspace{1em}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.15\textwidth}
-            \begin{itemize}
-                \item How?
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{itemize}
-                \item \alert{Acoustic channel estimation}
-                \item Acoustic Measurements
-                \\{\small Acoustic parameters (RT$_{60}$, DRR)}
-                \\{\small Physics parameters (speed of sounds)}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.24\textwidth}
-                \includegraphics[width=.9\textwidth]{example-image-c}
-        \end{column}
-    \end{columns}
-
-    \vspace{1em}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.15\textwidth}
-            \begin{itemize}
-                \item When?
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{itemize}
-                \item Voice activity detection
-                \\{\small Diarization / scheduling}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.24\textwidth}
-                \includegraphics[width=.9\textwidth]{example-image-c}
-            \end{column}
-    \end{columns}
-
     % \pause
     % Also known as auditory scene analysis or computer auditory scene analysis.
     % \\Inverse and Forward problems
     % \\Blind and Informed problems
 
+    \vfill
     \begin{block}{Everything is connected}
         HOW  $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
     \end{block}
 
-    End Application: smart speakers, teleconferencing systems
 \end{frame}
 
 
-\begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
+% \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
 
-    \begin{mydefblock}{Signal Processing}
-        Offer mathematical models, frameworks and tools to tackle such ASA problems
+%     \vfill
+%     \begin{block}{Signal Model}
+%         \begin{columns}
+%             \begin{column}{0.45\textwidth}
+%                 \centering
+%                 \includegraphics[width=0.5\textwidth]{example-image-a}
+%             \end{column}
+%             \begin{column}{0.58\textwidth}
+%                 \begin{itemize}
+%                     \item produced by sources
+%                     \item propagates in the room
+%                     \item corrupted by noise
+%                     \item recorded by microphone
+%                 \end{itemize}
+%             \end{column}
+%         \end{columns}
+%     \end{block}
+
+% \end{frame}
+
+\begin{frame}[t]{\alert{Echo-aware signal processing for audio scene analysis}}
+
+    \begin{mydefblock}{Acoustic Echoes}
+        \begin{itemize}
+            \item Sound reflection standing out for time and strength w.r.t. to the total reverberation
+            \item repetition of the source sound
+            \item but later
+            \item both outdoor and indoor
+        \end{itemize}
     \end{mydefblock}
 
     \vfill
-    \begin{columns}
-        \begin{column}{0.45\textwidth}
-            \centering
-            \includegraphics[width=0.5\textwidth]{example-image-a}
+    \begin{block}{Echo-aware processing}
+    \end{block}
+
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.3\textwidth}
+            \alert{Free-field} processing
+            \\{\small(only direct path)}
+        \end{column}\hfill
+        \begin{column}{0.3\textwidth}
+            \alert{Echo} processing
+            \\{\small(only specular reflection)}
+        \end{column}\hfill
+        \begin{column}{0.3\textwidth}
+            \alert{Reverberant} processing
+            \\{\small(entire sound field)}
         \end{column}
-        \begin{column}{0.58\textwidth}
+    \end{columns}%
+
+    \vfill
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.3\textwidth}
+            \small
             \begin{itemize}
-                \item<1-> produced by sources
-                \item<2-> propagates in the room
-                \item<3-> corrupted by noise
-                \item<4-> recorded by microphone
+                \item[\cmark] \textcolor{mygreen}{``simple'' processing} %closed-from formulas %fully deterministic
+                \item[\cmark] \textcolor{mygreen}{``short'' processing} % STFT, no latency
+                \item[\xmark] \textcolor{myred}{Reflection are interferences}
+                \item[\xmark] \textcolor{myred}{Neglect most of the sound energy}
+                \item[\xmark] \textcolor{myred}{incoherence $\implies$ distortion}
+            \end{itemize}
+        \end{column}\hfill
+        \begin{column}{0.3\textwidth}
+            \small
+            \begin{itemize}
+                \item short processing %  echoes $\rightleftarrows$ positions
+                \item simple processing
+                \item reflection are integrated,
+                \\late reverberation can considered
+                \item reflection are difficult to estimate
+                \item reflection need to be correctly estimated
+            \end{itemize}
+        \end{column}\hfill
+        \begin{column}{0.3\textwidth}
+            \small
+            \begin{itemize}
+                % fully deterministic and stochastic processing
+                \item difficult processing %estimation is extremely difficult, more parameters to estimate
+                \item long precessing
+                \item Reflection perfectly integrated
             \end{itemize}
         \end{column}
     \end{columns}
 
-    \vfill
-    \begin{block}{General Pipeline}
-        \begin{itemize}
-            \item (Mathematical Models)
-            \item Signal representation (STFT, Features)
-            \item Enhancement (denoising, dereverberation)
-            \item Parameter Estimation (DOA, Localization)
-            \item Adaptive Processing (Filtering)
-        \end{itemize}
-    \end{block}
-
-\end{frame}
-
-\begin{frame}[t]{Echo-aware \alert{signal processing} for audio scene analysis}
-
-    \begin{block}{General Pipeline Example}
-        FROM ROBIN
-    \end{block}
-
-\end{frame}
-
-\begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
-
-    \begin{mydefblock}{Acoustic Echoes}
-        \begin{itemize}
-            \item Product of the sound propagation
-            \item Sound repetition
-            \begin{itemize}
-                \item ``same'' content: can be integrated
-                \item ``different'' sounds: carry info about the reflection
-                \item different direction of arrival: spatial information
-            \end{itemize}
-        \end{itemize}
-    \end{mydefblock}
-
-    \begin{block}{Echo-aware processing}
-        is between anechoic processing and reverberant processing
-        \\Anechoic processing
-        \begin{itemize}
-            \item short processing
-            \item[\cmark] sound field tends to be diffuse
-            \item[\xmark] sound reflection as interferences
-            \\neglect most of the sound energy
-            \\ignore the correlation between the direct sound and its reflection and consequently may result in a distorted output
-            \item[\xmark] coherent processing becomes impossible
-        \end{itemize}
-        Echo-processing
-        \begin{itemize}
-            \item Middle processing
-            perceive coming from all directions~\cite{daldegan1988}
-        \end{itemize}
-        Reverberant processing
-        \begin{itemize}
-            \item Long processing
-            \item[\cmark] narrowband approximation is valid
-            \item[\cmark] sound field is described by full RIRs
-            \item[\cmark] all reflection can be \alert{coherently} processed
-            \item[\xmark] long frames impose lantency
-        \end{itemize}
-    \end{block}
+    %     \\Anechoic processing
+    %     \begin{itemize}
+    %         \item short processing
+    %         \item[\cmark] sound field tends to be diffuse
+    %         \item[\xmark] sound reflection as interferences
+    %         \\neglect most of the sound energy
+    %         \\ignore the correlation between the direct sound and its reflection and consequently may result in a distorted output
+    %         \item[\xmark] coherent processing becomes impossible
+    %     \end{itemize}
+    %     Echo-processing
+    %     \begin{itemize}
+    %         \item Middle processing
+    %         perceive coming from all directions~\cite{daldegan1988}
+    %     \end{itemize}
+    %     Reverberant processing
+    %     \begin{itemize}
+    %         \item Long processing
+    %         \item[\cmark] narrowband approximation is valid
+    %         \item[\cmark] sound field is described by full RIRs
+    %         \item[\cmark] all reflection can be \alert{coherently} processed
+    %         \item[\xmark] long frames impose lantency
+    %     \end{itemize}
+    % \end{block}
 
 \end{frame}
 
 \subsection{Outline}
 
-\begin{frame}
-    \begin{block}{Turning echoes into friends}
-        Typically reverberation is considered as ''foe'' for the processing.
-    \end{block}
+\begin{frame}[t]{Thesis goal and contribution}
 
+    \vfill
+    \begin{columns}[onlytextwidth]
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Audio Scene Analysis}
+            \\\downarrow
+            \\context and problems
+        \end{column}\hfill
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Signal Processing}
+            \\\downarrow
+            \\models and frameworks
+        \end{column}\hfill
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Acoustic Echoes}
+            \\\downarrow
+            \\better processing
+        \end{column}\hfill
+    \end{columns}
+
+    \vfill
     \begin{mydefblock}{Thesis objective}
         \begin{enumerate}
         \item provide new methodologies and data to process and estimate acoustic echoes
-            \item extend previous classical methods for audio scene analysis
+        \item Turning echoes into friends \cite{Riberio}
+        \\extend previous classical methods for audio scene analysis
         \end{enumerate}
     \end{mydefblock}
+
+    \vfill
+    \begin{block}{contribution}
+        Estimation
+        \begin{itemize}
+            \item Knowledge-based echo estimation, aka \blaster
+            \item Learning-based echo estimation, aka \lantern
+        \end{itemize}
+        Application
+        \begin{itemize}
+            \item Echo-aware Source Separation, aka \separake
+            \item Echo-aware Source Localization, aka \mirage
+            \item Echo-aware Speech Enhancement
+            \item Echo-aware Room Geometry Estimation
+        \end{itemize}
+        Data
+        \begin{itemize}
+            \item a Echo-aware database, aka \dechorate
+        \end{itemize}
+    \end{block}
 
 \end{frame}
 

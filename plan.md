@@ -2,15 +2,14 @@
 
 ## Introduction
 
+<!-- Hello everyone -->
+Hello everyone and thanks to be here.
+
 ### Scenario
 
-Let us consider our current pandemic **scenario**:
+In order to better introduce the topic of the thesis, let us consider this current **scenario**:
 
-We are all in one room, inter-facing a computer which is recording us.
-Currently the **microphones** of this device are hopefully capturing my speech.
-
-Let us ignore the processing that the software is performing.
-In particular, they are recording
+Currently the **microphones** of my laptop are hopefully recording
 
 - the sound of my voice,
 - some source of noise, such as the computer fan, transmission noise, the traffic outside, someone of my family in the other rooms, music that my brother is playing, the mobile phone, etc.
@@ -29,51 +28,56 @@ In natural environment, the sound propagates and interact with the environment.
 The overall effect is well known and it called *reverberation*.
 All these makes the audio scene we are immersed into and we assumed it is recorded by microphones.
 
+The **audio scene** are all the element that describe.
+
 ### Audio Scene Analysis
 
-The ensemble of techniques and methods, which involves math and computer science, aiming at extracting
-high level information from raw audio recordings is here denoted as *Audio Scene Analysis*.
+We can broadly categorize the information as
 
-Depending on the kind of information we are interested to we can then define some *problems*:
+- semantic information, about the source nature and its content
+- spatial information, about source position and room geometry
+- and temporal information, when someone is speaking
 
-- if we are interested in determining the nature of the sound sources, then we can have audio source classification
-- if we are interested in the signal of the sound source, then we speak about audio source separation
-- SSL
-- diarization
-- acoustic measurements and blind channel identification
+and we can recognize in this division some fundamental questions that we instinctively process and answer:
 
-We can see that this problems corresponds to typical question that we ask ourself:
+- *Who* is speaking, *What* is the content, *What* is the noise
+- *Where* the speakers are located
+- *When* the speaker is speaking and is not
+- and *how* the sound is propagates and produced.
 
-- What, Where, When, How
-- link to ASA/CASA
+We leave the *Why* to other field of studies.
 
-We should here also notice that everything is connected.
+We will refer to the process of extracting and organizing such information for raw microphones recordings as
+Audio Scene Analysis.
+
+Human and animals are known to perform some of these task effortlessly,
+such as be able to understand a conversation in crowdy bar or use acoustic echoes for orientation.
+The role of our studies is to develop system that are able to do it as well.
+You can think about smart speakers, robots, hearing aids and measurements techniques, better teleconferencing system.
+
+### Signal Processing
+
+Signal processing offers us mathematical models, frameworks and tools to address the problems we mentioned earlier.
+
+For instance we can identify the following well-know problems,
+each of ones is dedicated to address a specific natural question.
+
+Most of them are well know open problem which produced large and vast literature.
+
+It is really important to notice that all the problem are naturally interconnected.
 The resolution of one of the above problem may be better if prior information is available.
 
-- Problems can be Blind or Informed
-- Problems can be Forward or Inverse
-
-### Signal Processing Pipeline
-
-It is the role of mathematics and computer science
-Signal processing offer us mathematical models, frameworks and models for this.
-Typically the signal processing techniques can be grouped in the following blocks.
-Let me explain it with a typical example
-
-- representation
-- parameter estimation
-- enhancement
-- adaptive processing
-
-Pipeline picture such as in Robin.
 
 ### Echo aware approach
 
 Audio Scene Analysis give us our problems we want to solve
-Signal processing give us the tools and the models
+Signal processing give us models and tools
+
+You may ask then... what is the role of acoustic echoes?
 Echoes give us useful information that can be used for better processing.
 
-Acoustic echoes are elements of Sound Propagation. therefore they knowledge can be used to better inform inverse problems.
+Acoustic echoes are elements of Sound Propagation.
+Therefore their knowledge can be used to better inform inverse problems.
 Their information gives an idea of the mixing filters.
 
 Moreover we can also interpret them:
