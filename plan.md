@@ -67,7 +67,6 @@ Most of them are well know open problem which produced large and vast literature
 It is really important to notice that all the problem are naturally interconnected.
 The resolution of one of the above problem may be better if prior information is available.
 
-
 ### Echo aware approach
 
 Audio Scene Analysis give us our problems we want to solve
@@ -84,6 +83,14 @@ Moreover we can also interpret them:
 
 - As sound repetition: echoes brings sound information (example of beamforming??)
 - As sound spatialization: they time of arrival (and direction of arrival) depends on the room geometry (example of rooge)
+
+Accoring to the how the sound propagation is modeled in audio signal processing methods, we can device it is
+
+  - on that completely ignore it
+  - free-field models
+  - multipath-models
+  - reverberatan models
+
 
 ### Challenges and Objective
 
@@ -102,32 +109,76 @@ In this thesis we will see how to estimate the echoes and how to estimate them a
 - apply echoes
 - data for validation
 
-### Outline 1D
+### Contribution
 
-In particular, at first I am going to present a model for the echoes under the typical perspective of signal processing.
-Then how to estimated with 2 methods, one knowledge based and one learning based.
-Then, assuming the echoes are known, we presents a few application.
+In the context of echo-aware processing, we can identify the following scheme
 
-During the 3 year my investigation were not linear and personally I jumped between application and estimation through out different projects.
-Therefore, I may be better to present the outline of the presentation in 2D, in order to highly some dependencies.
+OBSERVATION -> ECHO ESTIMATION -> ECHO APPLICATION
 
-## Modeling
+contributions:
 
-*Transition: How do we model the echoes and a sound effected by echoes?*
+- estimation !
+  - knowledge based ?
+  - learning based  ?
+- application !
+  - source separation !  --> not today
+  - speech enhancement !
+  - source localization !
+  - room geomentry estimation !
+- observation / data #
+  - dEchorate #
 
-### Room Acoustics
 
-Sound propagates in the space and it interact with it.
-In particular, it takes time to travel and reach the microphones while being attenuated.
-It is absorbed with surfaced, difracted around objects, etc.
+## Echo-aware Signal Models
 
-If we record an impulsive sounds, we will notice the following elements:
+In the following slides we will see how echoes are modeled in the context of room acoustics and consequently described in audio signal processing.
+
+### Echoes and Signal Processing I
+
+The complete sound propagation include all the interaction of the sound travelling in whole environment.
+This processing including different types of interaction with surrounding surfaces and objects
+
+- specular and diffuse reflections
+- absorption
+- diffraction, interferences and transmission
+
+<!-- These effects occurs in different proportion based on the geometrical and physical properties of the objects in the space. -->
+
+<!-- In particular when a sound reach a big smooth surface, part of it is **reflected specularly** and part of it is absorbed,
+soft surfaces like wood or wool absorb more then hard surface, like concrete walls.
+If the surface is rough then, part of the energy is *scattered* around in random directions.
+Absorption, diffusion and specular reflection always occurs, but in different proportion, depending on the geometrical and physical properties of the surfaces and the frequency excited by the original source.
+Other effects exists, such as diffraction and transmission are here neglected. -->
+
+
+From a signal processing point of view the sound recorded at any microphone can be generalized to any sound source as input-filter-output process:
+
+- the input is the sound source signal
+- the filter accounts for the whole sound propagation and it can be described with the so-called acoustic impulse response (AIR), which is the signal corresponding to the propagation of a perfect impulsive sound.
+- the output is the sound recorded at the microphones
+
+If we record the sound field of a single omnidirectional point source emitting an impulse sound, at
+the microphones we will records something like:
+
+In math, the sound at the microphone can be modeled as the convolution between the source and the filter.
+
+In general AIR and acoustic filters are very complicated.
+However for simple indoor environments, such as office, meeting room and classroom, some key elements can be recognized:
 
 - a direct path which accounts for the time the sound takes to travel from the source position to the microphones position
 - a few distinct early reflection which can be modeled with the specular low
 - reverberation due to the continuous bouncing of reflection
 
-### Signal Processing
+For this peculiar shapes, there referred to as room impulse response, aka RIR.
+
+According to how the sound propagation is modeled, we can define different audio signal processing approaches:
+
+The early reflection are what we consider as echoes, since they can characterized by a particular prominence and time sparsity.
+
+### Echoes and Signal Processing II
+
+
+<!-- ### Echoes and Signal Processing II
 
 In light of the signal processing theory, this process can be modeled with the typical source-filter-receiver model, where the relation between input and output is express with the following convolution.
 
@@ -181,7 +232,7 @@ Through the use of microphones, our window into the continuous physical world of
 
 In particular what we **observe** is the sampling version of $x(t)$, namely $x[n]$ where $n$ is a integer multiple of the sampling frequency
 
-Here, we decide to model this as the linear convolution between the digital version of the filter $h[n]$ and the digital version of the source signal $s[n]$. Not that this is general is not true and some approximation are made.
+Here, we decide to model this as the linear convolution between the digital version of the filter $h[n]$ and the digital version of the source signal $s[n]$. Not that this is general is not true and some approximation are made. -->
 
 ### Echo Model
 
@@ -195,14 +246,30 @@ Type of noise
 
 ### 1 Interim Conclusion
 
-- TODO
+- RIRs are the signal processing of the sound propagation
+- Mic recordings = Convolution between RIRs and Source
+- Echoes are repetition of sounds
+- Echoes can be seen in the RIR
+- RIR as ISM
+- Echoes are off grid -> echo model in the frequency domain
 
 ## Echo Estimation / Retrieval
 
 ### Intro on acoustic echo estimation
 
-First we need to estimate the echoes properties.
-Early echoes are defined as elements of the room impulse response
+First we need to estimate the echoes properties, we identify as the time of arrival and the strength of a sound reflection.
+We will refer to is as **Acoustic Echo Retrieval**.
+
+The problem of identifying only the arrival time is typically known as Time of Arrival, aka TOA estimation.
+
+
+In the literature we can identify many way to address this problems.
+
+At first, we can can broadly classify existing method based on the availability of the **transmitted signals**.
+If the reference signal is know then it is the case of **active**
+
+#### Based on emitted signal?
+
 
 ### Blaster
 

@@ -2,128 +2,89 @@
 
 \begin{frame}{Acoustic Echo Retrieval}
 
-    Given the echo model
-    \begin{equation*}
-        H_{ij}(f) = \sum_{r=0}^{R} \alpha e^{2\pi},
-    \end{equation*}
-
-    \vfill
+    % Given the echo model
+    % \begin{equation*}
+    %     H_{ij}(f) = \sum_{r=0}^{R} \alpha e^{2\pi},
+    % \end{equation*}
+    % \vfill
 
     \begin{columns}[T,onlytextwidth]
 
-        \column{0.65\textwidth}
+        \column{0.55\textwidth}
         \begin{alertblock}{The acoustic echoes retrieval (AER) problem}
 
-        \vspace{.2em}
-
-        Estimating early (strong) acoustic reflections:
-        \begin{itemize}
-            \item their time of arrivals $\rightarrow$ TOAs Estimation
-            \item their amplitude
-            \\\hspace{1em}$\hookrightarrow$ closed-from knowing $\tau$~\cite{Condat}
-        \end{itemize}
-
+            \vspace{.1em}
+            Estimating early (strong) acoustic reflections:
+            \begin{itemize}
+                \item their time of arrivals $\rightarrow$ TOAs Estimation
+                \\$\hookrightarrow$ sufficient sometimes
+                \item their amplitude
+                \\$\hookrightarrow$ closed-form form TOA
+            \end{itemize}
         \end{alertblock}
 
         \column{0.4\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.9\linewidth]{example-image-a}
-        \end{figure}{}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{./figures/arrivals.png}
+            \end{figure}
 
     \end{columns}
 
     \vfill
+    Approaches
+    \begin{columns}[T,onlytextwidth]
+        \column{0.48\textwidth}
+        \centering
+        Source signal is
+        \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
+        \hfill
 
-    Note that an order of $r$
+        \only<1>{
+            \column{0.48\textwidth}
+            \begin{block}{Active approaches}
+                \begin{itemize}
+                    \item solve and easier problem
+                    \item Intrusive or specific setup
+                    \item Single microphones
+                \end{itemize}
+                \textcolor{gray}{\textbf{Application} Sonar, Calibration, Measurements}
+            \end{block}
+            \begin{block}{Passive approaches}
+                \begin{itemize}
+                    \item more difficult problem --- blind inverse problem
+                    \item Non Intrusive, passive hearing
+                    \item Need multi-microphones
+                \end{itemize}
+                \textcolor{gray}{\textbf{Application} Smart speakers, robot}
+            \end{block}
+        }
+        \only<2>{
+            \column{0.48\textwidth}
+            \centering
+            Estimation is
+            \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
+        }
+    \end{columns}
 
+    \vfill
+    \textcolor{myred}{\textbf{Scenario:} signal source, only TOAs and passive system}
 
 \end{frame}
 
-\begin{frame}{Taxonomy of Acoustic Echo Estimation}
+\begin{frame}{Passive Acoustic Echo Estimation}
 
-    \begin{block}{\mytriag based on the emitted signal knowledge:}
-    \vspace{1em}
-    \small
-    \begin{columns}[T,onlytextwidth] % align columns
-        \begin{column}{.48\textwidth}
-            \textcolor{orange}{Active approaches}
-            \begin{itemize}
-                \item Signal is emitted and known
-                \item Intrusive
-                \item Single channel
-                \item Methods:
-                Least-Square estimation, Inverse Filtering (Equalization)
-                \item Application:
-                \\measurements, calibration, sonars, slam
-            \end{itemize}
-        \end{column}%
-        \hfill%
-        \begin{column}{.48\textwidth}
-            \textcolor{gray}{Passive approaches}
-            \begin{itemize}
-                \item Emitted signal is \alert{not} known
-                \item \alert{Not} intrusive (for passive listening)
-                \item Multichannel
-                \item Methods:
-                \\\alert{blind} deconvolution problem
-                \textit{ill}-posed and \textit{ill}-conditioned
-                \\$\hookrightarrow$ statistics, \textit{sparsity} etc
-                \item Application:
-                \\Robot hearing (Table Top Scenario), Pre-processing step
-            \end{itemize}
-        \end{column}%
-        \end{columns}
-    \end{block}
+    \begin{block}{\alert{Passive} Acoustic Echo Estimation:}
 
-    % \vspace{0.84em}
-    % \begin{columns}[T,onlytextwidth] % align columns
-    %     \begin{column}{.48\textwidth}
-    %         {\hfill\color{orange}\rule{.4\linewidth}{1pt}}
-    %     \end{column}%
-    %     \hfill%
-    %     \begin{column}{.48\textwidth}
-    %         {\hfill\color{gray}\rule{.4\linewidth}{1pt}}
-    %     \end{column}%
-    % \end{columns}
-
-    % \vfill
-
-
-        %     \medskip
-
-        % Based on the filter
-        % \hspace*{.1\linewidth}\begin{minipage}{.8\linewidth}
-        %     \begin{block}{RIR-based}
-        %         content
-        %     \end{block}
-        %     \begin{block}{RIR-agnostic}
-        %         content
-        %     \end{block}
-        %     \end{minipage}
-        %     \medskip
-
-        % \item[Active vs. Passive] The emitted signal is (not) known. Deconvolution vs. blind Deconvolution
-        % \\Pro and Cons
-        % \item[RIR-based vs. RIR-agnostic] The RIR is estimated fully.
-        % \\Pro and Cons
-
-    % \begin{block}{Pick-peaking and Echo-labeling}
-    %     Associating
-    % \end{block}
-\end{frame}
-
-\begin{frame}{Taxonomy of Acoustic Echo Estimation}
-
-    \begin{block}{\mytriag based on the estimated filter:}
         \vspace{1em}
         \small
         \begin{columns}[T,onlytextwidth] % align columns
             \begin{column}{.48\textwidth}
-                \textcolor{orange}{RIR-based approaches}
+                \textbf{RIR-\alert{based} approaches}
+                \includegraphics[trim={0 31em 0 7em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
                 \begin{enumerate}
-                    \item RIRs are first estimated as SIMO BCE problem
-                    \item Echoes extracted from first part of the RIRs with peak picking and disambiguation
+                    \item SIMO BCE problem $\implies$ RIRs
+                    \item Peak picking and \textit{disambiguation} $\implies$ Echoes
                 \end{enumerate}
                 Pros
                 \begin{itemize}
@@ -142,7 +103,8 @@
             \end{column}%
             \hfill%
             \begin{column}{.48\textwidth}
-                \textcolor{gray}{RIRs-agnostic approaches}
+                \textbf{RIR-\alert{agnostic} approaches}
+                \includegraphics[trim={0 0 0 47em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
                 \begin{enumerate}
                     \item Estimation directly in the echoes parameters space $\{\tau,\alpha\}$
                     \\and direction of arrivals can be used instead
@@ -170,82 +132,96 @@
 
     \end{block}
 
-    % \vspace{0.84em}
-    % \begin{columns}[T,onlytextwidth] % align columns
-    %     \begin{column}{.48\textwidth}
-    %         {\hfill\color{orange}\rule{.4\linewidth}{1pt}}
-    %     \end{column}%
-    %     \hfill%
-    %     \begin{column}{.48\textwidth}
-    %         {\hfill\color{gray}\rule{.4\linewidth}{1pt}}
-    %     \end{column}%
-    % \end{columns}
-
-    % \vfill
-
 \end{frame}
 
 \begin{frame}{AER as discrete SIMO BCE}
 
-
     \begin{block}{Key ingredient -- \textit{Cross relation identity}}
-    \[
-        x_i = h_i \ast s
-    \]
-    \[
-        h_2 \ast x_1 = \textcolor{gray}{h_2 \ast h_1 \ast s  = h_1 \ast h_2 \ast s} = h_1 \ast x_2
-    \]
+        \begin{columns}[onlytextwidth]
+        \column{0.6\textwidth}
+            \[
+                x_i = h_i \ast s
+            \]
+            \[
+                h_2 \ast x_1 = \textcolor{gray}{h_2 \ast h_1 \ast s  = h_1 \ast h_2 \ast s} = h_1 \ast x_2
+            \]
+
+            \column{0.3\textwidth}
+            \only<1>{\includegraphics[width=0.9\textwidth]{figures/xrelation1.png}}
+            \only<2>{\includegraphics[width=0.9\textwidth]{figures/xrelation2.png}}
+        \end{columns}
     \end{block}
 
     \vspace*{-1em}
 
-   \begin{block}{Ideas}
-   \begin{enumerate}
-       \item Sampled version of $x_1,x_2$ are available ($\mathbf{x}_1, \mathbf{x_2}$)
-       \item Assume echoes belong to multiples of the sampling frequency
-       \item Identify echoes $\rightarrow$ find sparse vectors $\mathbf{h}_1, \mathbf{h}_2$
-       \item Lasso-like problem
+    \begin{block}{Ideas:}
+    \begin{enumerate}
+        \item Sampled version of $x_1,x_2$ are available ($\mathbf{x}_1, \mathbf{x_2}$)
+        \item echoes' TOAs $\propto$ sampling frequency
+        \item Find echoes $\rightarrow$ \textbf{find sparse vectors} $\mathbf{h}_1, \mathbf{h}_2$ of length $L$
+        \item Modeled as \textbf{Lasso}-like problem
 
-       \vspace*{.25em}
+        \vspace*{.25em}
 
         \definecolor{darkblue}{HTML}{154360}
         \definecolor{bluegreen}{HTML}{228BE6}
-
         \setbeamercolor{postit}{fg=black,bg=bluegreen!10}
-        \begin{beamercolorbox}[sep=.5em, wd=10cm]{postit}
+        \begin{beamercolorbox}[sep=.5em]{postit}
             \begin{equation*}
                 \widehat{\mathbf{h}}_1, \widehat{\mathbf{h}}_2 \in
                 \underset{\mathbf{h}_1, \mathbf{h}_2\in\kR^n}{\arg\min}\;
-                \Vert \mathbf{x}_1 \ast \mathbf{h}_2 - \mathbf{x}_2 \ast \mathbf{h}_1 \Vert_2^2
-                + \lambda \texttt{Reg}(\mathbf{h}_1, \mathbf{h}_2)
+                \Vert \mathbf{x}_1 \tikzmark{a}\ast \mathbf{h}_2 - \mathbf{x}_2 \ast \mathbf{h}_1 \Vert_2^2
+                + \lambda \mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)
+                \quad\text{s.t.}\quad\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)
             \end{equation*}
-            \hfill {\footnotesize $\texttt{Reg}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer}
+            \vspace{0.5em}
+            \hfill {\footnotesize $\mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer}
+            \hfill {\footnotesize $\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ non-negativity constraints}
         \end{beamercolorbox}
-   \item Pick picking
-   \end{enumerate}
 
-   \begin{center}
-       \definecolor{mygreen}{RGB}{30,132,73}
-       \textcolor{mygreen}{$\checkmark$}  \cite{Lin2007} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Aissa-El-Bey2008} \\
-       \textcolor{mygreen}{$\checkmark$} \cite{Kowalczyk2013} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Crocco2015}
-   \end{center}
-   \end{block}
+            % \column{0.3\textwidth}
+            % \centering
+            % \resizebox{\linewidth}{!}{
+            %     \input{figures/toeplitz.tikz}
+            % }
+    \end{enumerate}
+    \textcolor{gray}{\small $\mathbf{x_i} \ast \mathbf{h}_j$ computed as $\mathcal{T}(\mathbf{x}_i) \mathbf{h_j} \in \mathcal{O}(L^2)$}
+
+    \vfill
+    \begin{center}
+        \definecolor{mygreen}{RGB}{30,132,73}
+        \textcolor{mygreen}{$\checkmark$}  \cite{Lin2007} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Aissa-El-Bey2008} \\
+        \textcolor{mygreen}{$\checkmark$} \cite{Kowalczyk2013} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Crocco2015}
+    \end{center}
+
+    \end{block}
+
+    % \begin{tikzpicture}[overlay,remember picture,x=1mm,y=-1mm,shift={(current page.north west)}]
+    %     \node  (mypic) at (100,80) {\resizebox{35mm}{!}{\input{figures/toeplitz.tikz}}}
+    % \end{tikzpicture}
+
  \end{frame}
 
-\begin{frame}{Limitations / bottleneck}
+\begin{frame}{Limitations \& bottleneck}
 
-    \begin{block}{Limitations}
+    \begin{block}{On-grid estimation}
         \begin{itemize}
-        \item Echoes are not necessarily ``on grid''
+        \item Sparsity and non-negativity Echoes are not necessarily ``on grid''
 
         \item \emph{Body guard} effect \cite{duval2013}
 
         % Just wrote it for you...
         % I remember that was a point for decrete vs continous
         \begin{itemize}
-            \item[$\longrightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
-            \item[$\longrightarrow$] slow convergence % bouncing between 2 echoes
+            \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
+            \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
         \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{... and Pick Picking}
+        \begin{itemize}
+            \item[$\rightarrow$] Manually tuned peaking or peak disambiguation
         \end{itemize}
     \end{block}
 
@@ -253,7 +229,7 @@
 
     \begin{block}{Increase the sampling frequency, $F_s$}
         \begin{itemize}
-            \item[$\longrightarrow$] Increase Precision
+            \item[$\rightarrow$] Increase Precision
         \end{itemize}
     \end{block}
 
@@ -277,13 +253,8 @@
 
     \end{block}
 
-
-    % You a Latex master hehe,  (in fact I am not sure about the name of this command)
-    % It is beautifull to watch you a live coding
-    % come on
-    % you will see after a thesis + thesis defense
     \begin{textblock}{5}(10, 3)
-        \includegraphics[width=\columnwidth]{example-image-a}
+        \includegraphics[width=\columnwidth]{figures/bodyguard.png}
     \end{textblock}
 
 \end{frame}

@@ -1,36 +1,84 @@
 \subsection{From Physics to Digital Signal Processing}
 
-\begin{frame}{Echoes and Room Acoustics}
+\begin{frame}[t]{Acoustic Impulse Response}
 
-    \begin{block}{Sound propagates and interacts with space}
-        \begin{itemize}
-            \item it \alert{travels} with a certain speed and it is \alert{attenuated};
-            \item it is \alert{absorbed} and \alert{reflected} by surfaces;
-            \item and it is scattered, diffracted, etc.
-        \end{itemize}
-    This is describe by the so called RIRs
-    \end{block}
-
-    \begin{figure}
+    \begin{block}{Sound propagates}
         \centering
-        \includegraphics[width=0.3\textwidth]{example-image-a}
-    \end{figure}
+        Sound source
+        \hspace{2em}
+        $\kto$
+        \hspace{2em}
+        \only<1>{?} \only<2>{environment} \only<3>{room}
+        \hspace{2em}
+        $\kto$
+        \hspace{2em}
+        microphone
+    \end{block}
 
-    \begin{block}{Elements of reverberation}
-        \cite{Shroeder, Allen, Polack, Kuttruff}
-        \begin{itemize}
-            \item Direct path
-            \item \alert{Early Echoes}
-            \item Reverberation tails
-        \end{itemize}
-
+    \begin{block}{Sound propagates}
+        \centering
+        $s$
+        \hspace{2em}
+        $\kto$
+        \hspace{2em}
+        $h$
+        \hspace{2em}
+        $\kto$
+        \hspace{2em}
+        $x$
     \end{block}
 
 
-    \begin{mydefblock}{Early Echoes}
-        Reflection
-        \\(perceptually and physically motivated distinction)
-    \end{mydefblock}
+    \only<2->{
+    \begin{block}{Sound interacts with environment}
+        \begin{itemize}
+            \item it is reflected (specularly and diffusely)
+            \item it is diffracted
+            \item it is absorbers and transmitted
+        \end{itemize}
+    \end{block}
+    }
+
+    \only<2>{
+    \begin{block}{Acoustic Impulse Response (AIR)}
+        the linear filtering effect due to the propagation of sound from a source to a microphone.
+        \begin{equation*}
+            x_i(t) = (a \ast s)(t)
+        \end{equation*}
+    \end{block}
+    }
+
+    % \only<3>{
+    % \begin{block}{Room Impulse Response (RIR)}
+    %     the linear filtering effect due to the propagation of sound from a source to a microphone
+    %     in a enclosed space
+    %     \begin{equation*}
+    %         x_i(t) = ({h \ast s)(t)
+    %     \end{equation*}
+    % \end{block}
+    % }
+
+    % \only<2>{
+    % \begin{columns}[onlytextwidth]
+    %     \begin{column}{0.48\textwidth}
+    %         \includegraphics[width=0.7\textwidth]{example-image-a}
+    %     \end{column}\hfill
+    %     \begin{column}{0.48\textwidth}
+    %         \includegraphics[width=0.7\textwidth]{example-image-a}
+    %     \end{column}
+    % \end{columns}
+    % }
+
+    % \only<3>{
+    % \begin{columns}[onlytextwidth]
+    %     \begin{column}{0.48\textwidth}
+    %         \includegraphics[width=0.7\textwidth]{example-image-b}
+    %     \end{column}\hfill
+    %     \begin{column}{0.48\textwidth}
+    %         \includegraphics[width=0.7\textwidth]{example-image-b}
+    %     \end{column}
+    % \end{columns}
+    % }
 
 \end{frame}
 
