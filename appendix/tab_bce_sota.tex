@@ -1,0 +1,44 @@
+
+\begin{tabular}{l|c|c|l}
+    \toprule
+    Reference & $ \scrP(h_1,h_2)$ & $ \scrC(h_1,h_2)$ & Note \\
+    \midrule
+    \citeonly{tong1994blind}
+    & \xmark
+    & $\norm{\bfh}_2^2 = 1$
+    & Equivalent to a smallest-eigenvalue problem.\\
+
+    \citeonly{kowalczyk2013blind}
+    & $ \lambda \norm{\bfh}_1$
+    & $\norm{\bfh}_2^2 = 1$
+    & Non-convex due to the quadratic constraint.\\
+
+    \citeonly{lin2008blind}
+    & $ \lambda \norm{\bfh}_1$
+    & $ \abs{h_1[0]} = 1$
+    & With Bayesian learning for optimal $\lambda$.\\
+
+    \citeonly{lin2007blind}
+    & $ \lambda \norm{\bfh}_1$
+    & $ h_1[0] = 1, \bfh \geq 0$
+    & Non-negativity and anchor constraints.\\
+
+    \citeonly{aissa2008blind}
+    & $ \lambda \norm{\bfh}_p^p$
+    & $ \norm{\bfh}_2 = 1$
+    & Sparsity enforced by $\ell_p$-norm\\
+
+    \citeonly{crocco2015room}
+    & $ \lambda \norm{\bfp^{(z)}\odot \bfh}_1$
+    & $ \kvvbar{\bfh}_1 = 1, \bfh \geq 0$
+    & Iterative weighted $\ell_1$-norm
+    \\
+
+    \citeonly{crocco2015room}
+    & $ \lambda \norm{\bfh}_1$
+    & $ \ktranspose{\bfp^{(z)}} \bfh = 1, \bfh \geq 0$
+    & Iterative weighted $\ell_1$ constraint.
+    \\
+
+    \bottomrule
+    \end{tabular}

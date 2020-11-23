@@ -1,110 +1,271 @@
 \subsection{introduction}
 
 \begin{frame}{Audio signal processing and sound propagation}
-    \begin{block}{Sound propagation is \cite{chen}}
-        \begin{equation*}
-            \begin{aligned}
-                x_i(t) &= (h \ast s)(t)
-                \\ h( t) &= h^d(t) + h^e(t) + h^r(t)
-                \\ H( f) &= \echoModelFreq
-            \end{aligned}
-        \end{equation*}
-        \begin{itemize}
-            \item completely ignored
-            \\\hspace{0.5em}$\hookrightarrow  h( t) = 1$
-            \item assumed direct path (\textit{anechoic} case)
-            \\\hspace{0.5em}$\hookrightarrow  h( t) = h^d(t) + \varepsilon(t)$
-            \item fully modeled (\textit{reverberant} case)
-            \\\hspace{0.5em}$\hookrightarrow  h( t) = h^d(t) + h^e(t) + h^l(t)+ \varepsilon(t)$
-            \item early echoes (\textit{multipath} case)
-            \\\hspace{0.5em}$\hookrightarrow  h( t) = h^d(t) + h^e(t) + \varepsilon(t)$
-        \end{itemize}
+    \begin{block}{Sound propagation is}
+
+        \begin{columns}[onlytextwidth]
+
+            \begin{column}{.48\textwidth}
+                \begin{itemize}
+                \item completely ignored
+                \item assumed free-field case (\textit{anechoic})
+                \item model it full (\textit{reverberant})
+                \item \textit{learned} it full (\textit{reverberant})
+                \item model few early echoes (\textit{multipath})
+            \end{itemize}
+            \end{column}
+
+            \begin{column}{.48\textwidth}
+                \centering
+                \only<1>{\includegraphics[trim={0 0 680em 0},clip,width=.8\textwidth]{figures/prop_it.png}}
+                \only<2>{\includegraphics[trim={670em 0 5em 0},clip,width=.8\textwidth]{figures/prop_it.png}}
+
+                \vspace{-2.3em}
+                \begin{equation*}
+                    \begin{aligned}
+                        x_i(t) &= (h_i \ast s)(t)\\
+                        h_i( t) &= \textcolor{myred}{h_i^d(t)} + \textcolor{myblue}{h_i^e(t)} + \textcolor{mygreen}{h_i^r(t)}
+                    \end{aligned}
+                \end{equation*}
+            \end{column}
+
+        \end{columns}
     \end{block}
 
-    \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
-        \begin{itemize}
-            \item detrimentally affect typical Audio Scene Analysis algorithm
-            \item undesired interfering source
-            \item undesired position of the true sources (TDOA disambiguation)
-        \end{itemize}
+    % \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
+    %     \begin{itemize}
+    %         \item detrimentally affect typical Audio Scene Analysis algorithm
+    %         \item undesired interfering source
+    %         \item undesired position of the true sources (TDOA disambiguation)
+    %     \end{itemize}
 
-    \end{alertblock}
+    % \end{alertblock}
+    \begin{block}{Recall}
+        \begin{itemize}
+            \item anechoic case: easy mapping, but incoherence or wrong processing
+            \item reverberant case: difficult mapping and estimation, but coherent processing
+        \end{itemize}
+        \hfill \textcolor{myred}{\textbf{What can we do with echoes?}}
+    \end{block}
 \end{frame}
 
 \begin{frame}{Echo-aware Application}
-    \begin{block}{\textbf{What:} echoes as sound repetition}
-        \begin{itemize}
-            \item
-            \only<1>{Sound Source Separation}
-            \only<2>{\alert{Sound Source Separation}}
-            \item Speech Enhancement
-            \\$\hookrightarrow$ Dereverberation, Denoising, Room Equalization
-            \item Speaker Verification
-        \end{itemize}
+
+    \begin{block}{Echoes = same content, different time/direction}
+        \centering
+        \adjincludegraphics[Clip={0\width} {0\height} {.66\width} {0\height},width=0.6\textwidth]{figures/echo_aware.png}
     \end{block}
-    \begin{block}{\textbf{Where:} echoes as new sound direction}
-        \begin{itemize}
-            \item Sound Source Localization
-            \item Microphone Calibration
-            \item Room Geometry Reconstruction
-        \end{itemize}
-    \end{block}
-    \begin{block}{\textbf{How:} echoes as element of sound propagation}
-        \begin{itemize}
-            \item Blind Acoustic Channel Estimation
-            \\as initialization for other methods
-            \item Acoustic Measurements
-        \end{itemize}
-    \end{block}
+
+
+    Echoes helps indoor processing:
+    \begin{columns}[T,onlytextwidth]
+        \column{.32\textwidth}
+        \begin{block}{\textbf{What?}}
+            \small
+            Echoes = repetitions
+            \begin{itemize}
+                \item
+                \only<1>{Sound Source Separation}
+                \only<2>{\alert{Sound Source Separation}}
+                \item Speech Enhancement
+                \\\textcolor{gray}{\small(Dereverberation, Denoising, Room Equalization)}
+            \end{itemize}
+        \end{block}
+
+        \column{.32\textwidth}
+        \begin{block}{\textbf{Where?}}
+            \small
+            Echoes $\in$ indoor propagation
+            \begin{itemize}
+                \item Sound Source Localization
+                \item Microphone Calibration
+                \item Room Geometry Reconstruction
+            \end{itemize}
+        \end{block}
+
+        \column{.32\textwidth}
+        \begin{block}{\textbf{How?}}
+            \small
+            Echoes $\in$ sound propagation
+            \begin{itemize}
+                \item Blind Channel Estimation
+                \item Acoustic Measurements
+            \end{itemize}
+        \end{block}
+    \end{columns}
 \end{frame}
 
 \subsection{mirage}
 
 \begin{frame}{\mirage - Sound Source Locatization with Echoes}
-    \begin{block}{The \alert{Picnic} Scenario:}
-        \begin{itemize}
-            \item Microphone close to a surface (table-top scenario)
-            \item Clear definition of the echo
-            \item One source
-        \end{itemize}
-    \end{block}
 
-    \begin{block}{Mirage Array}
-        How to access the \textit{image} microphone
-    \end{block}
+    \vspace*{5mm}
+    \begin{columns}
 
-    Each pair is augmented with echoes
+        \begin{column}{0.5\textwidth}
+            \begin{block}{The \alert{Picnic} Scenario:}
+                \begin{itemize}
+                    \small
+                    \item One source
+                    \item Two microphones
+                    \begin{itemize}
+                        \item[$\rightarrow$] passive scenario
+                        \item[$\rightarrow$] generalizable later
+                    \end{itemize}
+                    \item Close to a very reflective surface
+                    \begin{itemize}
+                        \item[$\rightarrow$] First echo = Strongest echo
+                        \item[$\rightarrow$] $\alpha_\text{picnic}$ const. $\forall f$
+                        \item[$\rightarrow$] table-top device
+                    \end{itemize}
+                \end{itemize}
+            \end{block}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \centering
+            \only<1>{\adjincludegraphics[Clip={0\width} {0\height} {.5\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}
+            \only<2>{\adjincludegraphics[Clip={0.5\width} {0\height} {0\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}
+        \end{column}
+    \end{columns}
+
+    \vfill
+
+    \begin{columns}
+
+        \begin{column}{0.5\textwidth}
+            \begin{block}{How to access the \textit{image} microphones?}
+                \\$\implies$ each pair is augmented with echoes
+            \end{block}
+            \begin{center}
+                \textcolor{myred}{\textbf{Mirage Array}}
+            \end{center}
+
+            idea: use SSL algorithm on this augmented array
+            \\recall: echoes are known
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/rirs1.pdf}
+        \end{column}
+    \end{columns}
+
 
 \end{frame}
 
 \begin{frame}{\mirage - Sound Source Locatization with Echoes}
 
-    \begin{block}{1D SSL}
-        \begin{itemize}
-            \item Estimate the TDOA between two microphones signals with GCC
-            \item Map the TDOA to angles knowing the array geometry
-        \end{itemize}
-    \end{block}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{block}{SSL with 2 microphones}
+            \begin{itemize}
+                \item[1.] only Angle of Arrival (AOA) w.r.t. the frame of the pair
+                \item e.g. GCC-PHAT for TDOA estimation
+                \\\textcolor{gray}{(known limitation, but good in practice)}
+                \item TDOA to AoA known frame distance
+            \end{itemize}
+        \end{block}
+        \column{0.38\textwidth}
+        \adjincludegraphics[Clip={0\width} {0.5\height} {0\width} {0\height},width=0.9\textwidth]{figures/ssl.png}
+    \end{columns}
 
-    \begin{block}{2D SSL}
-        \begin{itemize}
-            \item For each pair:
-            \\\hspace{1em} 1D-SSL
-            \item Compute a global angular spectrum by ``fusing'' together the estimation of each pairs
-        \end{itemize}
-    \end{block}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{block}{SSL with more microphones}
+            \begin{itemize}
+                \item[1.] For each pair $m$:
+                \\\hspace{1em} AOA$_m \gets$ TDOA-based 2-mic-SSL
+                \item[2.] ``Aggregate''  together all the observation
+                \\(Angular spectra, Probability distributions)
+                \item[eg.] SRP-PHAT
+            \end{itemize}
+        \end{block}
+        \column{0.38\textwidth}
+        \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
+    \end{columns}
 
     \begin{block}{\textbf{Baseline:}}
         GCC-PHAT on true microphones
     \end{block}
 
     \begin{block}{\textbf{Proposed Approach:}}
-        Using DNN-based TDOA estimation
-        \\problem: real value not estimation
+        Using \lantern (DNN-based TDOA estimation)
+        \\problem: real value not estimation $\to$ Generative Model given the TDOA axis
     \end{block}
 \end{frame}
 
 \begin{frame}{\mirage - Results}
+
+    \begin{block}{Data}
+        Virtually generated dataset as for \lantern
+    \end{block}
+
+    \begin{columns}[T,onlytextwidth]
+
+        \begin{column}{.25\textwidth}
+        \begin{block}{AOA estimation}
+            normalized nRMSE
+            \\Angular Error --- mean and accuracy
+        \end{block}
+        \end{column}
+
+        \begin{column}{.74\textwidth}
+
+            \centering
+            \small
+            \begin{tabular}{cl|ccc|cc}
+            \toprule
+            &                  &         & nRMSE                         &              &\multicolumn{2}{c}{ACCURACY}  \\
+            & Input            &    \scriptsize{TDOA}    &   \scriptsize{iTDOA} 		 &     \scriptsize{TDOE} 		 & $\theta<\ang{10}$ &  $\theta<\ang{20}$ \\
+            \midrule
+            MIRAGE     &   wn          &    0.18 & 0.28          &    0.25 	         & 4.10 (77)    &  5.97 (97) \\
+            MIRAGE     &   wn+n        &    0.68 & 0.69          &    0.89 			 & 5.00 (26)    &  9.89 (54) \\
+            MIRAGE     &   sp          &    0.31 & 0.34          &    0.56           & 4.83 (63)    &  7.26 (82) \\
+            MIRAGE     &   sp+n        &    0.99 & 0.98   	     &    1.48 			 & 4.60 (16)    &  9.88 (35) \\
+            GCC-PHAT   &   wn          &    0.21 &     -  		 &       -			 & 4.22 (81)    &   6.19 (97) \\
+            GCC-PHAT   &   wn+n        &    0.68 &     -  		 &       -			 & 4.03 (65)    &   5.34 (83) \\
+            GCC-PHAT   &   sp 		   &    0.32 &     -  		 &       -			 & 4.08 (82)    &   5.34 (97) \\
+            GCC-PHAT   &   sp+n        &    1.38 &     -  		 &       -			 & 4.70 (19)    &   8.38 (32) \\
+            \bottomrule
+        \end{tabular}
+
+        \end{column}
+    \end{columns}
+
+    \vfill
+
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{.25\textwidth}
+            \begin{block}{Azimuth Elevation Estimation}
+                Angular Error --- mean and accuracy
+            \end{block}
+        \end{column}
+
+        \begin{column}{.74\textwidth}
+            \centering
+            \small
+            \begin{tabular}{cl|cc|cc}
+            \toprule
+            \textbf{DoA}      &               &  \multicolumn{2}{c|}{ACCURACY} &   \multicolumn{2}{c}{ACCURACY} \\
+                            &               &  \multicolumn{2}{c|}{$<\ang{10}$} &   \multicolumn{2}{c}{$<\ang{20}$} \\
+                            &    Input    &  $\theta$ &  $\phi$ &  $\theta$ &  $\phi$ \\
+            \midrule
+            MIRAGE &  wn           &   4.5 (59) &  3.9 (71) &   6.8 (79) &   5.9 (88) \\
+            MIRAGE &  wn+n     &   4.4 (18) &  5.5 (26) &   9.4 (35) &  11.1 (66) \\
+            MIRAGE &  sp       &   4.6 (45) &  4.8 (59) &   8.1 (71) &   7.2 (83) \\
+            MIRAGE &  sp+n &   5.2 (17) &  5.9 (12) &  10.7 (38) &  12.3 (43) \\
+            \bottomrule
+        \end{tabular}
+
+        \end{column}
+
+    \end{columns}
+
+    \begin{center}
+        \textcolor{mygreen}{\cmark \: \parbox{12em}{Solved ``impossible''\\localization}}
+        \quad \textcolor{myred}{\xmark \: \parbox{12em}{Performance depending on\\echo estimation}}
+    \end{center}
 
 \end{frame}
 
@@ -116,34 +277,34 @@
 
 % \end{frame}
 
-\subsection{Interim conclusion (3/4)}
+% \subsection{Interim conclusion (3/4)}
 
-\begin{frame}{Interim conclusion (3/4)}
-    \begin{block}{Echo-aware Audio Scene Analysis}
-        \begin{itemize}
-            \item[\cmark] vast gamma of problems
-            \\$\hookrightarrow$ not limited to audio (e.g., seismology, medical imaging, astrophysics, etc.)
-            \item[\cmark] between anechoic and reverberant propagation
-            \item[\cmark] physical-interpretation (with virtual microphones)
-            \item[\xmark] performance depending on the quality of the echo-estimation
-            \\still very challenging task
-            \item[\xmark] ....
-        \end{itemize}
-    \end{block}
+% \begin{frame}{Interim conclusion (3/4)}
+%     \begin{block}{Echo-aware Audio Scene Analysis}
+%         \begin{itemize}
+%             \item[\cmark] vast gamma of problems
+%             \\$\hookrightarrow$ not limited to audio (e.g., seismology, medical imaging, astrophysics, etc.)
+%             \item[\cmark] between anechoic and reverberant propagation
+%             \item[\cmark] physical-interpretation (with virtual microphones)
+%             \item[\xmark] performance depending on the quality of the echo-estimation
+%             \\still very challenging task
+%             \item[\xmark] ....
+%         \end{itemize}
+%     \end{block}
 
-    \vfill
+%     \vfill
 
-    \begin{block}{\mirage \& echo-aware SSL}
-        \begin{itemize}
-            \item[\cmark] impossible 2D localization with only 2 microphones
-        \end{itemize}
-    \end{block}
+%     \begin{block}{\mirage \& echo-aware SSL}
+%         \begin{itemize}
+%             \item[\cmark] impossible 2D localization with only 2 microphones
+%         \end{itemize}
+%     \end{block}
 
-    \vfill
+%     \vfill
 
-    \begin{block}{\separake \& echo-aware SSS}
-        \begin{itemize}
-            \item nice
-        \end{itemize}
-    \end{block}
-\end{frame}
+%     \begin{block}{\separake \& echo-aware SSS}
+%         \begin{itemize}
+%             \item nice
+%         \end{itemize}
+%     \end{block}
+% \end{frame}

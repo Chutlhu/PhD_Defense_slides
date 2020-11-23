@@ -147,6 +147,7 @@
             \]
 
             \column{0.3\textwidth}
+            \centering
             \only<1>{\includegraphics[width=0.9\textwidth]{figures/xrelation1.png}}
             \only<2>{\includegraphics[width=0.9\textwidth]{figures/xrelation2.png}}
         \end{columns}
@@ -174,9 +175,12 @@
                 + \lambda \mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)
                 \quad\text{s.t.}\quad\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)
             \end{equation*}
-            \vspace{0.5em}
-            \hfill {\footnotesize $\mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer}
-            \hfill {\footnotesize $\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ non-negativity constraints}
+
+            \vspace*{0.3em}
+            \begin{center}
+                \footnotesize $\mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer
+                \hfill \footnotesize $\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ \parbox{8em}{\centering non-negativity\\anchor}constraints
+            \end{center}
         \end{beamercolorbox}
 
             % \column{0.3\textwidth}
@@ -189,9 +193,9 @@
 
     \vfill
     \begin{center}
-        \definecolor{mygreen}{RGB}{30,132,73}
-        \textcolor{mygreen}{$\checkmark$}  \cite{Lin2007} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Aissa-El-Bey2008} \\
-        \textcolor{mygreen}{$\checkmark$} \cite{Kowalczyk2013} \qquad \textcolor{mygreen}{$\checkmark$} \cite{Crocco2015}
+        \footnotesize
+        \textcolor{mygreen}{$\checkmark$}  \cite{tong1994blind} \qquad \textcolor{mygreen}{$\checkmark$}  \cite{lin2007blind,lin2008blind} \qquad \textcolor{mygreen}{$\checkmark$} \cite{aissa2008blind} \\
+        \textcolor{mygreen}{$\checkmark$} \cite{kowalczyk2013blind} \qquad \textcolor{mygreen}{$\checkmark$} \cite{crocco2015room,crocco2016estimation}
     \end{center}
 
     \end{block}
@@ -202,16 +206,14 @@
 
  \end{frame}
 
-\begin{frame}{Limitations \& bottleneck}
+\begin{frame}{AER as SIMO BCE: Limitations \& bottleneck}
 
-    \begin{block}{On-grid estimation}
+    \begin{block}{1. Estimation is on-grid}
         \begin{itemize}
         \item Sparsity and non-negativity Echoes are not necessarily ``on grid''
+        We measure filters, not diracs
 
-        \item \emph{Body guard} effect \cite{duval2013}
-
-        % Just wrote it for you...
-        % I remember that was a point for decrete vs continous
+        \item \emph{Body guard} effect \cite{duval2017sparse}
         \begin{itemize}
             \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
             \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
@@ -221,7 +223,7 @@
 
     \begin{block}{... and Pick Picking}
         \begin{itemize}
-            \item[$\rightarrow$] Manually tuned peaking or peak disambiguation
+            \item[$\rightarrow$] Manually tuned peaking or peak disambiguation (using peak labeling with is NP-hard and need other prior knowledge)
         \end{itemize}
     \end{block}
 
@@ -257,11 +259,85 @@
         \includegraphics[width=\columnwidth]{figures/bodyguard.png}
     \end{textblock}
 
+    \begin{textblock}{20mm}(80mm,-80mm)
+        \textbf{How to solve this?}
+    \end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[t]{AER: Challenges and Contribution}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.45\textwidth}
+    \begin{block}{State Of The Art}
+    \begin{enumerate}
+        \item discrete (sparse) SIMO BCE
+        \\based on time-domain XREL
+        \item Peak-picking
+    \end{enumerate}
+    \end{block}
+
+    \column{0.45\textwidth}
+    \only<2,3>{
+        \begin{block}{$\implies$ however}
+            \begin{itemize}
+                \item Estimation in the RIR space
+                \\memory issue
+                \item Echoes are ``off-grid''
+                \\accuracy issues and mismatch
+                \item Peak picking and labeling
+                \\tuned and NP-hard
+            \end{itemize}
+        \end{block}
+    }
+
+    \end{columns}
+
+    \vspace{1em}
+
+    \only<3>{
+        \begin{alertblock}{$\implies$ we propose}
+
+        \vspace*{.5em}
+        \begin{columns}[T, onlytextwidth]
+            \column{0.45\textwidth}
+            \blaster
+            \begin{enumerate}
+                \item Knowledge-based approach
+                \item BCE + Continuous Dictionary
+                \\based on XREL
+                \item Iterative-like approach
+                \item Inputs:
+                \begin{itemize}
+                    \item stereo mic recordings
+                    \item \# echoes
+                \end{itemize}
+                \item Output: $\set{\tau_i^{(r)}, \alpha_i^{(r)}}_{i,r}$
+            \end{enumerate}
+            \cite{di2020blaster}
+            Collaboration with Clement Elvira
+
+            \column{0.45\textwidth}
+            \lantern
+            \begin{enumerate}
+                \item Learning-based regression
+                \item Deep Learning used for SSL
+                \item Inputs: stereo audio feature
+                \item Output in the TDOA space
+                \\($\neq$ Echo space)
+            \end{enumerate}
+            \cite{di2019mirage}
+        \end{columns}
+    \end{alertblock}
+    }
+
 \end{frame}
 
 \subsection{\blaster}
 
-\begin{frame}{\blaster - Off-grid BCE}
+\begin{frame}{\blaster - Knowledge-based Off-grid AER}
     \begin{block}{\textbf{Observation 1:} the cross relation remains true in the frequency domain}
         \begin{equation*}
             \mathcal{F}x_1 \cdot \mathcal{F}h_2 (\sfrac{n}{F_s}) = \mathcal{F}x_2 \cdot \mathcal{F}h_1(\sfrac{n}{F_s}) \qquad n=0\dots N-1
@@ -274,7 +350,6 @@
         \end{block}
 
         \vspace{1.em}
-
         \begin{block}{\textbf{Observation 3:} $\mathcal{F}{\mathrm{x_i}}$ can be (well) approximated by DFT}
         \begin{equation*}
             \mathbf{X}_i = \texttt{DFT}(\mathbf{x}_i) \simeq  \mathcal{F}{\mathbf{x}_i}(nF_s) \qquad n=0\dots N-1
@@ -282,12 +357,9 @@
         \end{block}
 
 
-    %    \vspace{1.5em}
-        \definecolor{darkblue}{HTML}{154360}
-        \definecolor{bluegreen}{HTML}{228BE6}
+        \vfill
         \setbeamercolor{block title}{fg=white,bg=darkblue}
         \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
-
         \begin{block}{\textbf{Idea:} Recover echoes by matching a finite number of frequencies}
         \begin{equation*}
             \underset{h_1,h_2 \in \substack{\text{measure} \\ \text{space}}}{\arg\min} \;
@@ -305,50 +377,87 @@
         \end{block}
 
         \begin{center}
-            Instance of a \textbf{BLasso} problem \cite{Bredies2013} (Sliding Frank-Wolfe algorithm)
+            Looks like a \textbf{Lasso} problem, but $\mathcal{F}h_2 (f)$ is a continuous function.
+            \\Instance of a \textbf{BLasso} problem\cite{bredies2020sparsity}
+            \\Solved with Sliding Frank-Wolfe algorithm \cite{denoyelle2019sliding}
         \end{center}
 
         \begin{center}
-
-            \textcolor{mygreen}{\checkmark{no Toeplitz matrix} \qquad \checkmark \, \parbox{8.5em}{Solutions is \\ a train of Dirac} \qquad \checkmark \, \parbox{8em}{anchor prevents \\ trivial solution}}
+            \textcolor{mygreen}{\cmark{no Toeplitz matrix} \qquad
+            \cmark \, \parbox{8.5em}{Solutions is \\ a train of Dirac} \qquad
+            \cmark \, \parbox{8em}{anchor prevents \\ trivial solution}}
         \end{center}
+
+        In the manuscript:
+        \begin{itemize}
+            \item From Lasso to BLasso
+            \item Pseudocode of the Algorithm
+            \item How to manually tuned lambda
+        \end{itemize}
 \end{frame}
 
-\begin{frame}{\blaster - Experiments}
-    \begin{block}{Experiments}
-        \begin{itemize}
-            \item simulation data with ISM with Pyroomacoustics
-            \item 1 source, 2 microphones, random room geometry
-            \item Full RIRs
-            \item 2 sources: broadband and speech
-            \item 2 datasets: different SNR, different RT60
-        \end{itemize}
-    \end{block}
+\begin{frame}[t]{\blaster - Experimental Results}
+    % \begin{block}{Scenario}
+    %     \begin{itemize}
+    %         \item simulation data with ISM with Pyroomacoustics
+    %         \item 1 source, 2 microphones, random room geometry
+    %         \item Full RIRs
+    %         \item 2 sources: broadband and speech
+    %         \item 2 datasets: different SNR, different RT60
+    %     \end{itemize}
+    % \end{block}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            \begin{block}{Methods}
+                \begin{itemize}
+                    \item BSN: Blind Sparse and Nonnegative SIMO BCE
+                    \\\cite{lin2007blind}
+                    \item IL1C: Iteratively-weighted $\ell_1$ Constraint SIME BCE
+                    \\\cite{crocco2015room}
+                    \item \blaster: Proposed off-grid approach
+                \end{itemize}
+            Baseline method are xvalidated on other dataset
+            \end{block}
+        \end{column}
 
-    \begin{block}{Methods}
-        \begin{itemize}
-            \item BSN: Blind Sparse and Nonnegative SIMO BCE~\cite{Lin2007}
-            \item IL1C: Iteratively-weighted $\ell_1$ Constraint SIME BCE~\cite{Crocco2015}
-            \item \blaster: Proposed off-grid approach
-        \end{itemize}
-    \end{block}
+        \begin{column}{0.45\textwidth}
+            \only<1>{\includegraphics[width=0.9\textwidth]{figures/aer_scenario1.png}}
+            \only<2>{\includegraphics[width=0.9\textwidth]{figures/aer_scenario2.png}}
+            \only<3>{\includegraphics[width=0.9\textwidth]{figures/aer_scenario3.png}}
+            \only<4>{\includegraphics[width=0.9\textwidth]{figures/aer_scenario4.png}}
+        \end{column}
+    \end{columns}
+
 
     \begin{block}{Metrics}
         \begin{itemize}
-            \item RMSE
-            \item Precision
+            \item Precision (how many estimated echoes are correct)
+            \item RMSE (error on the correct guess)
         \end{itemize}
     \end{block}
 
 \end{frame}
 
-\begin{frame}{\blaster - Results}
+\begin{frame}{\blaster - Observation}
+
+    Observation
+    \begin{itemize}
+        \item[\cmark] Smaller RMSE
+        \item[\xmark] Sensitive to source signal
+    \end{itemize}
+
+    Future work:
+    \begin{itemize}
+        \item Real data
+        \item Extention to Multichannel
+        \item Relative Transfer Function
+    \end{itemize}
 
 \end{frame}
 
 \subsection{\lantern}
 
-\begin{frame}{\lantern - data-driven AER}
+\begin{frame}{\lantern - Data-driven off-grid AER}
 
     \begin{block}{\textbf{Observation 1:} Mapping from observation to echo is extremely difficult}
         Later echoes are not considered, may help
@@ -375,82 +484,169 @@
 \end{frame}
 
 \begin{frame}{\lantern - Data \& Models}
-    \begin{block}{Data}
-        \begin{itemize}
-            \item train:
-            \\$\hookrightarrow$ artificially generated RIR
-            \\$\hookrightarrow$ white noise + noise
-            \\$\hookrightarrow$ instantaneous RTF
-            \item test:
-            \\$\hookrightarrow$ artificially generated RIR
-            \\$\hookrightarrow$ white noise, speech + noise
-            \\$\hookrightarrow$ instantaneous RTF
-        \end{itemize}
+
+    \begin{block}{Which mapping?}
+        \begin{columns}[onlytextwidth]
+            \column{0.48\textwidth}
+            \centering
+            \textbf{Input:} features
+
+            \column{0.02\textwidth}
+
+            \column{0.48\textwidth}
+            \centering
+            \textbf{Output:} target
+        \end{columns}
+
+        \begin{columns}[onlytextwidth]
+            \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/lantern.png}
+
+            \column{0.02\textwidth}
+            $\longrightarrow$
+
+            \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=40mm]{figures/rirs1.pdf}
+        \end{columns}
+
+        \begin{columns}[T,onlytextwidth]
+            \column{0.48\textwidth}
+            \centering
+            Relative Transfer Function
+            \begin{equation*}
+                    \mathtt{ReTF}[f] = \frac{H_2[f]}{H_1[f]} \approx \timeavg \kparen{\frac{X_2[f,t]}{X_1[f,t]}}
+            \end{equation*}
+            \textcolor{gray}{\small This is the \textbf{instantaneous} $\mathtt{ReTF}$}
+
+            \column{0.02\textwidth}
+
+            \column{0.48\textwidth}
+            \centering
+            TDOAs inter and intra reflection
+            \begin{equation*}
+                \mathcal{V} = \kbrace{\mathtt{TDOA}, \mathtt{iTDOA}, \mathtt{TDOE}_1}
+        \end{equation*}
+        \textcolor{myred}{First strongest echo $\Leftrightarrow$ close surface}
+        \\\textcolor{gray}{\small $\mathtt{TDOE}_2$ is a combination of $\mathcal{V}$}
+        \end{columns}
     \end{block}
 
-    \begin{block}{Architecture}
+    Virtually Supervised Learning (= data from acoustic simulator)
+
+    \begin{block}{Which Model?}
         \begin{itemize}
-            \item models: MLP, CNN
-            \item loss: Multi-class regression problem
-            \\$\hookrightarrow$ RMSE
-            \\$\hookrightarrow$ Gaussian regression + uncertainty
-            \\$\hookrightarrow$ Student Regression + uncertainty
-        \end{itemize}
-    \end{block}
-
-\end{frame}
-
-\begin{frame}{\lantern - Experiments \& Resuls}
-    \begin{block}{Experiments}
-        \begin{enumerate}
-            \item MLP
-            \item CNN
-            \item CNN + Noise
-            \item CNN + Gaussian
-            \item CNN + Student
+            \item Architecture: \textbf{CNN}~{\small\cite{chakrabarty2017broadband,nguyen2018autonomous}}
+            \item Loss Function:
+            \begin{enumerate}
+                \item RMSE (Multi-label regression) on $\mathcal{V}$
+                \item Gaussian log-likelihood $\to \kbrace{\mu, \sigma^2}$\hspace{.8em}\tikzmark{right}\tikzmark{T2}
+                \item Student log-likelihood $\to \kbrace{\mu, \lambda, \nu}$\tikzmark{B2}
         \end{enumerate}
+        \end{itemize}
+
     \end{block}
 
-    \begin{block}{Results}
-        \begin{enumerate}
-            \item MLP
-            \item CNN
-            \item CNN + Noise
-            \item CNN + Gaussian
-            \item CNN + Student
-        \end{enumerate}
-    \end{block}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:T2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:B2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.35em},decorate,thick,gray]
+         (a.north -| {pic cs:right}) -- node[right,inner sep=1em] {
+             \small Generative models $\gets$ \parbox{12em}{for data fusion
+                                                           \\similar to \textbf{MDN}~{\footnotesize\cite{bishop1994mixture}}}
+          } (b.south -| {pic cs:right});
+    \end{tikzpicture}
 
 \end{frame}
 
-\subsection{Interim conclusion (2/4)}
 
-\begin{frame}{Interim conclusion (2/4)}
-    \begin{block}{on Acoustic Echo Retrieval:}
-        \begin{itemize}
-            \item Most of the literature is on Passive and RIR-based, with on-grid approaches
-            \item On-grid approaches suffers by the off-grid nature of the echoes (complexity, sampling)
-        \end{itemize}
+\begin{frame}[t]{\lantern - Experiments \& Resuls}
+
+    \vspace*{-0.5em}
+    \begin{columns}[T]
+            \begin{column}{0.60\textwidth}
+
+                \begin{description}
+                    \item[Baseline:] $\mathtt{GCCPHAT}$ (only TDOA),
+                                    \\$\mathtt{MLP}_{\calV}$~\cite{di2019mirage}
+                    \item[Proposed:] $\mathtt{CNN}_{\calV}$, $\mathtt{CNN}_{\calV_{\calN}}$, $\mathtt{CNN}_{\calV_{\calT}}$
+                    \item[Metric:] normalized RMSE
+                                    \\(0 = best fit, 1 = random)
+                \end{description}
+
+            \end{column}
+
+            \begin{column}{0.35\textwidth}
+            Train:
+            \begin{itemize}
+                \item RT60, SNR
+                \item white noise
+                \item instantaneous RTF
+            \end{itemize}
+            Test: similar to train
+
+        \end{column}
+
+    \end{columns}
+
+    \only<1>{
+    \begin{block}{}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/lantern_snr10.pdf}
     \end{block}
 
-    \begin{block}{on \blaster:}
-        \begin{itemize}
-            \item[\cmark] off-grid parameter-free which exploit dirac closed-form model (non negativity and sparsity)
-            \item[\cmark] smaller RMSE due to super-resolution, better for small \# of echoes
-            \item[\xmark] source dependent and on number of echoes
-            \item[\xmark] validate only on synthetic data
-            \item[$\rightarrow$] Multichannel and RTF-based extention
-        \end{itemize}
+    \begin{center}
+        \textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs outperform\\GCC-PHAT and MLP}}
+        \hfill
+        \textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs more robust\\to noise}} % see the variance
+        \hfill
+        \textcolor{myred}{\xmark \: \parbox{8em}{Gaussian\\$\sim$ Student-T}}
+    \end{center}
+    }
+
+    \only<2>{
+    \begin{block}{}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/lantern_snr.pdf}
     \end{block}
 
-    \begin{block}{on \lantern:}
-        \begin{itemize}
-            \item[\cmark] promising results for first echo estimation
-            \item[\cmark] direct application for table top application
-            \item[\xmark] difficult extention
-            \item[\xmark] need for real data validation
-            \item[$\rightarrow$] physically-constrained neural network
-            \item[$\rightarrow$] missing frequencies in the input
-        \end{itemize}
-    \end{block}
+    \begin{center}
+        \textcolor{mygreen}{\cmark \: \parbox{8em}{Generative\\better than\\Normal}}
+        \textcolor{mygreen}{\xmark \: \parbox{8em}{Gaussian $\sim$ Student-T}}
+    \end{center}
+    }
+
 \end{frame}
+
+% \subsection{Interim conclusion (2/4)}
+
+% \begin{frame}{Interim conclusion (2/4)}
+%     \begin{block}{on Acoustic Echo Retrieval:}
+%         \begin{itemize}
+%             \item Most of the literature is on Passive and RIR-based, with on-grid approaches
+%             \item On-grid approaches suffers by the off-grid nature of the echoes (complexity, sampling)
+%         \end{itemize}
+%     \end{block}
+
+%     \begin{block}{on \blaster:}
+%         \begin{itemize}
+%             \item[\cmark] off-grid parameter-free which exploit dirac closed-form model (non negativity and sparsity)
+%             \item[\cmark] smaller RMSE due to super-resolution, better for small \# of echoes
+%             \item[\xmark] source dependent and on number of echoes
+%             \item[\xmark] validate only on synthetic data
+%             \item[$\rightarrow$] Multichannel and RTF-based extention
+%         \end{itemize}
+%     \end{block}
+
+%     \begin{block}{on \lantern:}
+%         \begin{itemize}
+%             \item[\cmark] promising results for first echo estimation
+%             \item[\cmark] direct application for table top application
+%             \item[\xmark] difficult extention
+%             \item[\xmark] need for real data validation
+%             \item[$\rightarrow$] physically-constrained neural network
+%             \item[$\rightarrow$] missing frequencies in the input
+%         \end{itemize}
+%     \end{block}
+% \end{frame}

@@ -2,23 +2,26 @@
 
 \begin{frame}{Scenario}
 
-    Meeting - 2020 edition
-
     \vspace{1em}
     \begin{columns}[onlytextwidth]
-        \begin{column}{0.69\textwidth}
+        \begin{column}{0.65\textwidth}
             \begin{figure}
-                \includegraphics[width=\textwidth]{example-image}
+                \includegraphics<1>[width=\textwidth]{figures/scene1.png}
+                \includegraphics<2>[width=\textwidth]{figures/scene2.png}
+                \includegraphics<3>[width=\textwidth]{figures/scene3.png}
+                \includegraphics<4>[width=\textwidth]{figures/scene4.png}
+                \includegraphics<5>[width=\textwidth]{figures/scene5.png}
             \end{figure}
         \end{column}
-        \begin{column}{0.29\textwidth}
+        \begin{column}{0.34\textwidth}
             \textbf{Sound}
             \begin{itemize}
-                \item produced by \alert{sources}
-                \item recorded by \alert{microphones}
-                \item corrupted by \alert{noise}
-                \item  propagates in the \alert{room}
-                    \\$\hookrightarrow$ \alert{reverberation}
+                \item<1-> produced by \alert{sources}
+                \item<2-> recorded by \alert{microphones}
+                \item<3-> corrupted by \alert{noise}
+                \only<4>{\item propagates in the \alert{space}}
+                \only<5->{\item propagates in the \alert{room}
+                          \\$\hookrightarrow$ \alert{reverberation}}
             \end{itemize}
         \end{column}
     \end{columns}
@@ -36,7 +39,7 @@
             \alert{Semantic} information
 
             \vspace*{0.5em}
-            \includegraphics[width=\textwidth]{example-image-a}
+            \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/semantic.png}
             about source nature and semantic content
         \end{column}
         \begin{column}[t]{0.3\textwidth}
@@ -44,7 +47,7 @@
             \alert{Spatial} information
 
             \vspace*{0.5em}
-            \includegraphics[width=\textwidth]{example-image-b}
+            \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/spatial.png}
             about source position and room geometry
         \end{column}
         \begin{column}[t]{0.3\textwidth}
@@ -52,7 +55,7 @@
             \alert{Temporal} information
 
             \vspace*{0.5em}
-            \includegraphics[width=\textwidth]{example-image-c}
+            \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/temporal.png}
             about events activity
         \end{column}
     \end{columns}
@@ -63,20 +66,12 @@
     \end{mydefblock}
 
     \vfill
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.2\textwidth]{example-image-a}
-        \hfill
-        $\rightarrow$
-        \hfill
-        \includegraphics[width=0.2\textwidth]{example-image-c}
-        \hfill
-        $\rightarrow$
-        \hfill
-        \includegraphics[width=0.2\textwidth]{example-image}
-    \end{figure}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{figures/scene_analysis.png}
+    \end{center}
 
-    Animals do it, Humans do it. Can computer and robots do it?
+    Animals do it, humans do it,
+    \\\hfill\textcolor{myred}{\textbf{can computer do it?}}
 
 \end{frame}
 

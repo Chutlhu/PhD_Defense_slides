@@ -38,6 +38,8 @@
 \usepackage[absolute,overlay]{textpos} % provide textblock \begin{textblock}{WIDTH}(XCOORDINATE,YCOORDINATE)
 \usepackage{xfrac}
 \usepackage{pifont} % provide cmark and xmark
+\usepackage{adjustbox} % provide includegraphics with percentage
+\usepackage{booktabs} % toprule
 
 % \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
 
@@ -46,6 +48,10 @@
 \definecolor{bluegreen}{HTML}{228BE6}
 \definecolor{mygreen}{RGB}{30,132,73}
 \definecolor{myred}{RGB}{179,30,0}
+\definecolor{myblue}{HTML}{228BE6}
+
+% bibliography
+
 
 % % my commands
 \input{my_macros.tex}
@@ -137,4 +143,25 @@ INRIA IRISA
     %       Hello, world!
     %     \end{frame}
 
+    \appendix
+
+    \begin{frame}[fragile]{Backup slides}
+      Sometimes, it is useful to add slides at the end of your presentation to
+      refer to during audience questions.
+
+      The best way to do this is to include the \verb|appendixnumberbeamer|
+      package in your preamble and call \verb|\appendix| before your backup slides.
+
+      \themename will automatically turn off slide numbering and progress bars for
+      slides in the appendix.
+    \end{frame}
+
+
+
+    \begin{frame}[allowframebreaks]{References}
+
+        \bibliography{references}
+        \bibliographystyle{apalike}
+
+      \end{frame}
 \end{document}

@@ -7,7 +7,6 @@
             \item are necessary for validating (and learning) models
             \item collecting real data is a not always possible
             \\\hspace{.3em} annotation and recording require expertise, equipment and \alert{time}
-            % \\\hspace{.3em} even more for echoes
             \item dataset of real data cannot be easily shared
             \\\hspace{.3em} they do not generalize to different use-cases and scenarios (array, recording scenario)
             \item \alert{simulated data} are used instead: quantity, versatility, annotation easiness and ``quality''
@@ -16,21 +15,45 @@
 
     \begin{block}{\alert{Echo-aware Data} in audio signal processing}
         \begin{description}
-            \item[For SE]: strong echoes, but not annotated
-            \\\cite{a,b,c}
-            \item[For RooGE]: good geo. annotation, but no variety of acoustic scenarios
-            \\\cite{Crocco,Dokmaninc,Remaggi}
+            \item[For SE:] strong echoes, but not annotated
+            \\{\small\cite{szoke2019building,bertin2019voicehome,remaggi2016acoustic}}
+            \item[For RooGE:] good geo. annotation, but no variety of acoustic scenarios
+            \\{\small\cite{dokmanic2013acoustic,crocco2017uncalibrated,remaggi2019modeling}}
         \end{description}
     \end{block}
+
+    \begin{center}
+        \textcolor{myred}{A good echo-aware dataset should allow \textbf{SE}, \textbf{RooGE} and \textbf{AER}
+        \\HOW?
+        \\signal annotation \quad $\Longleftrightarrow$ \quad geometric annotation}
+    \end{center}
 
 \end{frame}
 
 \subsection{\dechorate}
 
 \begin{frame}[t]{\dechorate realization}
+
+    \begin{block}{\dechorate: echo-aware dataset}
+        Recorded Acoustic lab of Bar'Ilan (Shoebox)
+        \\Annotated during confinement COVID-2020
+        \\Collaboration with prof. Sharon Gannot and ing. Pinchas Tandeitnik
+    \end{block}
+
+    \begin{block}{Key features:}
+        \begin{itemize}
+            \item many acoustic environments (revolving panels)
+            \item 6 nULA with 5 mics and 4 sound sources
+            \item geometry annotated
+            \item echo annotated
+            \item measured RIRs and *matching* simulated RIRs
+        \end{itemize}
+    \end{block}
+
+
     \begin{block}{Echo Annotation}
         \begin{enumerate}
-            \item RIR estimation with ESS~\cite{Farina}
+            \item RIR estimation with ESS~\cite{farina2007advancements}
             \item IPS with beacon
             \item GUI for echo annotation
             \\Skyline, Matched Filter, Assisted Peak Picking
@@ -45,10 +68,6 @@
 \end{frame}
 
 \subsection{application}
-
-% \begin{frame}[standout]{Acoustic Echo Estimation}
-
-% \end{frame}
 
 \begin{frame}[t]{Room Geometry Estimation}
 
