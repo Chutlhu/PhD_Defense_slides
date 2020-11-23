@@ -89,18 +89,19 @@
             \end{figure}
         \end{column}\hfill
         \begin{column}{0.42\textwidth}
-            Some problems\hfill\tikzmark{right}
+            \small
+            Some problems
             \begin{itemize}
                 \item Speaker Verification\tikzmark{top1}\tikzmark{bot1}
                 \item Sound Source Separation \tikzmark{top2}
                 \item Speech Enhancement
-                \item Automatic Speech Recognition \tikzmark{bot2}
-                \item Sound Source Localization
-                \item Room Geometry Estimation
-                \item Voice Activity Detection
-                \item Diarization
-                \item RT$_{60}$ estimation
-                \item Wall Absorption Estimation
+                \item Automatic Speech Recognition\hspace{0.5em}\tikzmark{right1}\tikzmark{bot2}
+                \item Sound Source Localization  \tikzmark{top3}
+                \item Room Geometry Estimation   \tikzmark{bot3}
+                \item Voice Activity Detection   \tikzmark{top4}
+                \item Diarization                \tikzmark{bot4}
+                \item RT$_{60}$ estimation       \tikzmark{top5}
+                \item Wall Absorption Estimation \tikzmark{bot5}
                 \item \textit{and many many other}
             \end{itemize}
 
@@ -108,15 +109,33 @@
                 \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
                 \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
                 \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right}) -- node[right,inner sep=1em] {Who?} (b.south -| {pic cs:right});
+                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {Who?} (b.south -| {pic cs:right1});
             \end{tikzpicture}
             \begin{tikzpicture}[overlay, remember picture]
                 \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
                 \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
                 \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right}) -- node[right,inner sep=1em] {What?} (b.south -| {pic cs:right});
+                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {What?} (b.south -| {pic cs:right1});
             \end{tikzpicture}
-        \end{column}\hfill
+            \begin{tikzpicture}[overlay, remember picture]
+                \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+                \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {Where?} (b.south -| {pic cs:right1});
+            \end{tikzpicture}
+            \begin{tikzpicture}[overlay, remember picture]
+                \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+                \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {When?} (b.south -| {pic cs:right1});
+            \end{tikzpicture}
+            \begin{tikzpicture}[overlay, remember picture]
+                \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+                \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {How?} (b.south -| {pic cs:right1});
+            \end{tikzpicture}
+        \end{column}
     \end{columns}
     % \pause
     % Also known as auditory scene analysis or computer auditory scene analysis.
