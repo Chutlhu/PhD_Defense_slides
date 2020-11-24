@@ -40,58 +40,146 @@
         \\Collaboration with prof. Sharon Gannot and ing. Pinchas Tandeitnik
     \end{block}
 
+    \only<2>{
     \begin{block}{Key features:}
         \begin{itemize}
             \item many acoustic environments (revolving panels)
             \item 6 nULA with 5 mics and 4 sound sources
-            \item geometry annotated
-            \item echo annotated
-            \item measured RIRs and *matching* simulated RIRs
+            \item geometry annotated \& echo annotated
+            \item measured RIRs $\overset{\text{matching}}{\longrightarrow}$ simulated RIRs
         \end{itemize}
     \end{block}
-
-
-    \begin{block}{Echo Annotation}
-        \begin{enumerate}
-            \item RIR estimation with ESS~\cite{farina2007advancements}
-            \item IPS with beacon
-            \item GUI for echo annotation
-            \\Skyline, Matched Filter, Assisted Peak Picking
-            \item Refined position with Least Square optimization
-            \item iterate including ceiling (perfectly flat)
-        \end{enumerate}
-    \end{block}
+    }
 
     \vfill
-    \only<2>{TABLE RESULTS}
-    \only<3>{IMAGE SKYLINE}
+    \only<1>{
+        \begin{center}
+            \includegraphics[trim={0 0 0 10em},clip,width=\textwidth]{figures/dechorate/fornitures.jpg}
+        \end{center}
+    }
+    \only<2>{
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/recording_setup}
+            \end{column}\hfill
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/mic}
+            \end{column}\hfill
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/panels}
+            \end{column}
+        \end{columns}
+    }
+
 \end{frame}
 
-\subsection{application}
 
-\begin{frame}[t]{Room Geometry Estimation}
+\begin{frame}[t]{\dechorate --- Annotation}
+
+    \begin{enumerate}
+        \item RIR estimation with chirps signal~\cite{farina2007advancements,szoke2019building}
+        \item IPS with beacon $\longrightarrow$ mic and src positioning ($\pm 2$ cm)
+        \item GUI for echo annotation
+        \\Skyline, Matched Filter, Assisted Peak Picking
+        \item Refined position with Least Square optimization
+        \item iterate including ceiling (perfectly flat)
+    \end{enumerate}
+
+    \vfill
+    \only<2>{
+        \begin{adjustbox}{minipage=.8\textwidth,margin=0pt \smallskipamount,center}
+            \centering
+            \small
+            \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lllll@{}}
+                \toprule
+                & Metrics      & $\mathtt{bIPS}$  & $\mathtt{dMDS}$ & $\mathtt{dcMDS}$          \\
+                \midrule
+                \multicolumn{1}{c}{\multirow{2}{*}{\rotatebox{90}{\footnotesize Geom.}}}
+                &   Max.             & 0            & $6.1$          & $1.07$        \\
+                &   Avg.$\pm$Std.    & 0            & $1.8\pm1.4$    & $0.39\pm0.2$  \\
+                % \rule{0pt}{0.1em}\\
+                \midrule
+                \multicolumn{1}{c}{\multirow{2}{*}{\rotatebox{90}{\footnotesize Signal}}}
+                &   Max.          & $5.86$         & $1.20$         & $1.86$       \\
+                &   Avg.$\pm$Std. & $1.85\pm 1.5$  & $0.16\pm0.2$   & $0.41\pm0.3$ \\
+                % \rule{0pt}{0.1em}\\
+                \midrule
+                \multicolumn{1}{c}{\multirow{3}{*}{\rotatebox{90}{\footnotesize Mismatch}}}
+                &  GoM (1.0 ms)   & $97.9 \%$      & $93.4 \%$      & $98.1 \%$ \\
+                &  GoM (0.1 ms)   & $26.6 \%$      & $44.8 \%$      & $53.1 \%$ \\
+                &  GoM (0.05 ms)  & $12.5 \%$      & $14.4 \%$      & $30.2 \%$ \\
+                \bottomrule
+            \end{tabular*}
+
+            \vspace{3mm}
+            \textcolor{gray}{GoM = Goodness of Match ($\neq$ error, because no groundtruth)}
+        \end{adjustbox}
+    }
+
+    \only<3>{
+        \begin{center}
+            \includegraphics[width=.8\textwidth]{figures/dechorate/labeling_tool.pdf}
+        \end{center}
+    }
+\end{frame}
+
+\begin{frame}{\dechorate --- Annotation}
+    \begin{center}
+        \includegraphics[trim={10em 0 0 0},clip,width=\linewidth]{figures/dechorate/rir_skyline_final_mod4paper.pdf}
+    \end{center}
+\end{frame}
+
+\subsection{Application of \dechorate}
+
+\begin{frame}[t]{Room Geometry Estimation (RooGE) with \dechorate}
 
     \begin{block}{}
-        Estimating the room geometry: shape, volume or reflector position)
+        Estimating the room geometry: shape, volume or reflector position
         \\from signal or form TOAs and labels
     \end{block}
-    \vfill
 
-    \begin{block}{}
-        If TOAs annotation (label and value) are available, RooGE as \alert{Image Source Inversion}:
+    \begin{block}{RooGE as \alert{Image Source Inversion}}
+        If TOAs annotation (label and value) are available:
         \\For each wall/label:
         \begin{enumerate}
             \item TOA $\kto$ image source position via 3D multilateration
             \item image source position $\kto$ reflector estimation via geometric reasoning
         \end{enumerate}
+    {\small \textcolor{gray}{other methods differ for priors and setup~\cite{filos2011robust,antonacci2012inference,crocco2017uncalibrated}}}
     \end{block}
 
-    \vfill
-    Other methods differs for prior knowledge and setup~\cite{Crocco,Antonacci,Filos}
+    \only<2>{
+        \begin{columns}
+            \begin{column}{.48\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/estimated_image}
+            \end{column}\hfill
+            \begin{column}{.48\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/estimated_reflector}
+            \end{column}
+        \end{columns}
+    }
 
-    \vfill
-    \only<2>{IMAGE EXAMPLE HERE}
-    \only<3>{TABLES RESULTS HERE}
+    \only<3>{
+        \begin{adjustbox}{minipage=.9\textwidth,margin=0pt \smallskipamount,center}
+            \centering
+            \small
+            \begin{tabular*}{\linewidth}{c|cc|cc|cc|cc}
+                \toprule
+                source id &	1	& &	2	& &	3	& &	4 &	\\
+                wall &	DE&	AE&	DE&	AE&	DE&	AE&	DE&	AE\\
+                \hline
+                west &	0.74	& $\ang{8.99}$      & 4.59	& $\ang{8.32}$  & 5.89	& $\ang{5.75}$	& $\mathbf{0.05}$    & $\mathbf{\ang{2.40}}$\\
+                east &	$\mathbf{0.81}$	& $\mathbf{\ang{0.08}}$      & 0.9	& $\ang{0.50}$	&$\mathit{69.51}$	& $\mathit{55.70}^\circ$	& 0.31    & $\ang{0.21}$\\
+                south&	3.94	&$\mathit{16.08}^\circ$      & $\mathbf{0.18}$	& $\ang{1.77}$	&$\mathit{14.37}$ & $\mathit{18.55}^\circ$	& 0.82    & $\mathbf{\ang{1.65}}$\\
+                north&	1.34	& $\ang{0.76}$	    & 1.40	& $\ang{8.94}$	& $\mathbf{0.63}$	& $\mathbf{\ang{0.17}}$	& 2.08    & $\ang{1.38}$\\
+                floor&	$\mathbf{5.19}$	& $\mathbf{\ang{1.76}}$	    & 7.27	& $\ang{2.66}$	& 7.11	& $\ang{2.02}$	& 5.22    & $\ang{1.90}$\\
+                ceiling&1.16	& $\ang{0.28}$	    & 0.67	& $\ang{0.76}$	& $\mathbf{0.24}$	& $\ang{1.16}$	& $0.48$    & $\mathbf{\ang{0.26}}$\\
+                \bottomrule
+                \end{tabular*}
+        \end{adjustbox}
+        {\small \textcolor{gray}{Distance Error (DE) [cm] and Angular Error (AE)}}
+
+    }
 
 \end{frame}
 
@@ -121,32 +209,12 @@
         \end{itemize}
     \end{block}
 
-\end{frame}
-
-\begin{frame}[t]{Echo-aware Speech Enhancement}
-
-    \begin{block}{Beamforming: Delay and Sum}
+    \begin{mydefblock}{Beamformer: closed-form solution}
         \begin{equation*}
-            \begin{aligned}
-                \bfy[l,k] = \khermitian{\bfW} \bfx[l,k]
-            \end{aligned}
+            \bfw = \kinv{\boldsymbol{\Sigma}_n} \bfC (\khermitian{\bfC} \kinv{\boldsymbol{\Sigma}_n} \bfC) \bfg
         \end{equation*}
-    \end{block}
+    \end{mydefblock}
 
-    \begin{block}{STFT Signal Model}
-        \begin{equation*}
-            \bfx[l,k] =\bfH[k] \bfs[l,k] + \bfn[l,k]
-        \end{equation*}
-    \end{block}
-
-    \begin{block}{Beamforming: Filter and Sum}
-        \begin{equation*}
-            \begin{aligned}
-                \bfy[l,k] = \khermitian{\bfW} \bfx[l,k]
-            \end{aligned}
-        \end{equation*}
-        Beamforming in the STFT domain: apply filter and sum independently at each frequency bin
-    \end{block}
 
 \end{frame}
 
@@ -164,36 +232,38 @@
         \end{itemize}
     \end{block}
 
-    IMAGE RESULTS
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/dechorate/kowalkzy_results_boxplot_alpha.png}
+    \end{center}
 
 \end{frame}
 
-\subsection*{Interim conclusion (3/4)}
+% \subsection*{Interim conclusion (3/4)}
 
-\begin{frame}{Interim conclusion (3/4)}
-    \begin{block}{\dechorate dataset for echo-aware signal processing}
-        \begin{itemize}
-            \item designed for AER, SE and RooGE
-            \item Geometrical annotation $\longleftrightarrow$ image source annotation $\longleftrightarrow$ Signal Annotation
-            \item Measured Real RIRs and equivalent synt RIR
-            \item also speech, noise, babble noise and different room conf (+fornitures)
-            \item GUI, tools and code
-        \end{itemize}
-    \end{block}
+% \begin{frame}{Interim conclusion (3/4)}
+%     \begin{block}{\dechorate dataset for echo-aware signal processing}
+%         \begin{itemize}
+%             \item designed for AER, SE and RooGE
+%             \item Geometrical annotation $\longleftrightarrow$ image source annotation $\longleftrightarrow$ Signal Annotation
+%             \item Measured Real RIRs and equivalent synt RIR
+%             \item also speech, noise, babble noise and different room conf (+fornitures)
+%             \item GUI, tools and code
+%         \end{itemize}
+%     \end{block}
 
-    \begin{block}{Application}
-        Echo Estimation
-        \begin{itemize}
-            \item Huge difference between real and simulated data
-        \end{itemize}
-        Room Geometry Reconstruction
-        \begin{itemize}
-            \item some annotation inconsistencies are noticed (but manually corrected)
-        \end{itemize}
-        Echo-aware Speech Enhancement
-        \begin{itemize}
-            \item a
-            \item b
-        \end{itemize}
-    \end{block}
-\end{frame}
+%     \begin{block}{Application}
+%         Echo Estimation
+%         \begin{itemize}
+%             \item Huge difference between real and simulated data
+%         \end{itemize}
+%         Room Geometry Reconstruction
+%         \begin{itemize}
+%             \item some annotation inconsistencies are noticed (but manually corrected)
+%         \end{itemize}
+%         Echo-aware Speech Enhancement
+%         \begin{itemize}
+%             \item a
+%             \item b
+%         \end{itemize}
+%     \end{block}
+% \end{frame}

@@ -1,3 +1,128 @@
-\begin{frame}{2D Outline}
-    Thesis outline with projects
+\begin{frame}{Summary of contributions}
+
+    \begin{columns}[onlytextwidth]
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Audio Scene Analysis}
+            \\\downarrow
+            \\context and problems
+        \end{column}\hfill
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Signal Processing}
+            \\\downarrow
+            \\models and frameworks
+        \end{column}\hfill
+        \begin{column}[T]{0.3\linewidth}
+            \centering
+            \textbf{Acoustic Echoes}
+            \\\downarrow
+            \\better processing
+        \end{column}\hfill
+    \end{columns}
+
+    \vfill
+    \begin{mydefblock}{Channelges and Objctive}
+        \begin{enumerate}
+            \item How to \textbf{estimate} acoustic echoes?
+            \item How to \textbf{extend methods} for echo-aware audio scene analysis
+        \end{enumerate}
+    \end{mydefblock}
+
+    \vfill
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            \textbf{1. Estimation}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            \textbf{2. Application}
+        \end{column}
+    \end{columns}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \item Knowledge-based echo estimation
+                \\$\hookrightarrow$ \blaster
+                \item Learning-based echo estimation
+                \\$\hookrightarrow$ \lantern
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \item Echo-aware Source Separation
+                \\$\hookrightarrow$ \separake
+                \item Echo-aware Source Localization
+                \\$\hookrightarrow$ \mirage
+                \item Echo-aware Speech Enhancement
+                \item Echo-aware Room Geometry Estimation
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \begin{center}
+        \textbf{3. Data:}
+        \\Echo-aware database $\rightarrow$ \dechorate
+    \end{center}
+\end{frame}
+
+\begin{frame}{Echo-aware perspective}
+
+    Directions for future work:
+    \begin{itemize}
+        \item Estimation
+        \begin{itemize}
+            \item RTF and Multichannel \blaster
+            \item Physic-based Learning
+        \end{itemize}
+        \item Application
+        \begin{itemize}
+            \item Real data
+            \item Other field of echoes (Sismology, Surveliance)
+        \end{itemize}
+        \item dEchorate
+        \begin{itemize}
+            \item Synthetic vs. Real RIRs
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{List of publications and artifacts}
+    Publications
+    \begin{itemize}
+        \small
+        \item Estimation
+        \begin{itemize}
+            \item \lantern \cite{di2019mirage}
+            \item \dechorate \cite{di2020blaster}
+        \end{itemize}
+        \item Application
+        \begin{itemize}
+            \item \mirage \cite{di2019mirage}
+            \item \separake \cite{scheibler2018separake}
+        \end{itemize}
+        \item Data
+        \begin{itemize}
+            \item \dechorate (Unpublished)
+        \end{itemize}
+        \item Other
+        \begin{itemize}
+            \item Signal Processing CUP 2019 \cite{deleforge2019audio}
+            \item LOCATA Challenge 2019 \cite{lebarbenchon2018evaluation}
+            \item Collaboration with Honda \cite{di2019honda}
+        \end{itemize}
+    \end{itemize}
+
+    \begin{block}{Code}
+        \small
+        \begin{description}
+            \item[$\mathtt{dEchorate}$:] GUI and code for \dechorate (and RooGE)
+            \item[$\mathtt{Risotto}$:] library for Relative Transfer Function
+            \item[$\mathtt{Brioche}$:] library for echo-aware Spatial filtering
+            \item[$\mathtt{pyMBSSLocate}$:] MBSSLocate in Python
+            \item[$\mathtt{Separake}$:] Multichannel NMF in Python
+        \end{description}
+    \end{block}
 \end{frame}

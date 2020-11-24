@@ -2,8 +2,8 @@
 
 \begin{frame}{Scenario}
 
-    \vspace{1em}
-    \begin{columns}[onlytextwidth]
+    \vfill
+    \begin{columns}[T,onlytextwidth]
         \begin{column}{0.65\textwidth}
             \begin{figure}
                 \includegraphics<1>[width=\textwidth]{figures/scene1.png}
@@ -40,7 +40,6 @@
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/semantic.png}
-            about source nature and semantic content
         \end{column}
         \begin{column}[t]{0.3\textwidth}
             \centering
@@ -48,7 +47,6 @@
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/spatial.png}
-            about source position and room geometry
         \end{column}
         \begin{column}[t]{0.3\textwidth}
             \centering
@@ -56,96 +54,117 @@
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/temporal.png}
-            about events activity
         \end{column}
     \end{columns}
+
+    \begin{columns}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            on nature and content
+        \end{column}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            on position and geometry
+        \end{column}
+        \begin{column}[t]{0.3\textwidth}
+            \centering
+            on events activity
+        \end{column}
+    \end{columns}
+
 
     \vfill
     \begin{mydefblock}{Audio Scene Analysis}
         Extraction and organization of all the information in the sound
     \end{mydefblock}
 
-    \vfill
     \begin{center}
-        \includegraphics[width=0.8\textwidth]{figures/scene_analysis.png}
+        \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
     \end{center}
 
-    Animals do it, humans do it,
-    \\\hfill\textcolor{myred}{\textbf{can computer do it?}}
+    \begin{textblock*}{40mm}(80mm,90mm)
+        \textcolor{myred}{\textbf{Can computer do it?}}
+    \end{textblock*}
 
 \end{frame}
 
 \begin{frame}[t]{Echo-aware \alert{signal processing for audio scene analysis}}
 
+    \begin{center}
+        \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
+    \end{center}
+
     \begin{mydefblock}{Signal Processing}
         Mathematical models, frameworks and tools to tackle and solve such problems
     \end{mydefblock}
 
-    \vfill
-    \begin{columns}[onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            \begin{figure}
-                \includegraphics[width=\textwidth]{example-image-a}
-            \end{figure}
-        \end{column}\hfill
-        \begin{column}{0.42\textwidth}
+    {\small Some (inverse) problems}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.48\textwidth}
             \small
-            Some problems
             \begin{itemize}
-                \item Speaker Verification\tikzmark{top1}\tikzmark{bot1}
-                \item Sound Source Separation \tikzmark{top2}
-                \item Speech Enhancement
-                \item Automatic Speech Recognition\hspace{0.5em}\tikzmark{right1}\tikzmark{bot2}
-                \item Sound Source Localization  \tikzmark{top3}
-                \item Room Geometry Estimation   \tikzmark{bot3}
-                \item Voice Activity Detection   \tikzmark{top4}
+                \item Speaker Identification\tikzmark{top1}\tikzmark{bot1}
+                \item Sound Source Separation (SSS) \tikzmark{top2}
+                \item Speech Enhancement (SE)
+                \item Automatic Speech Recognition (ASR)\hspace{0.5em}\tikzmark{right1}\tikzmark{bot2}
+                \item Sound Source Localization (SSL) \tikzmark{top3}
+                \item Room Geometry Estimation (RooGE)  \tikzmark{bot3}
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{0.48\textwidth}
+            \small
+            \begin{itemize}
+                \item Voice Activity Detection\tikzmark{top4}
                 \item Diarization                \tikzmark{bot4}
                 \item RT$_{60}$ estimation       \tikzmark{top5}
-                \item Wall Absorption Estimation \tikzmark{bot5}
+                \item Acoustic Channel Estimation\hspace{0.5em}\tikzmark{right2}
+                \item Wall Absorption Estimation\tikzmark{bot5}
                 \item \textit{and many many other}
             \end{itemize}
 
-            \begin{tikzpicture}[overlay, remember picture]
-                \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-                \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {Who?} (b.south -| {pic cs:right1});
-            \end{tikzpicture}
-            \begin{tikzpicture}[overlay, remember picture]
-                \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-                \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {What?} (b.south -| {pic cs:right1});
-            \end{tikzpicture}
-            \begin{tikzpicture}[overlay, remember picture]
-                \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-                \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {Where?} (b.south -| {pic cs:right1});
-            \end{tikzpicture}
-            \begin{tikzpicture}[overlay, remember picture]
-                \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-                \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {When?} (b.south -| {pic cs:right1});
-            \end{tikzpicture}
-            \begin{tikzpicture}[overlay, remember picture]
-                \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-                \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-                \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-                 (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {How?} (b.south -| {pic cs:right1});
-            \end{tikzpicture}
         \end{column}
     \end{columns}
-    % \pause
-    % Also known as auditory scene analysis or computer auditory scene analysis.
-    % \\Inverse and Forward problems
-    % \\Blind and Informed problems
 
-    \vfill
-    \begin{block}{Everything is connected}
-        HOW  $\rightarrow$ WHERE $\rightarrow$ WHEN $\rightarrow$ WHAT
-    \end{block}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Who?} (b.south -| {pic cs:right1});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small What?} (b.south -| {pic cs:right1});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Where?} (b.south -| {pic cs:right1});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small When?} (b.south -| {pic cs:right2});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
+    \end{tikzpicture}
+
+    \vspace{-2mm}
+    \begin{center}
+        HOW  $\overset{\text{helps}}{\longrightarrow}$ WHERE
+             $\overset{\text{helps}}{\longrightarrow}$ WHEN
+             $\overset{\text{helps}}{\longrightarrow}$ WHAT
+             $\overset{\text{helps}}{\longrightarrow}$ HOW
+             $\overset{\text{helps}}{\longrightarrow}$ ...
+    \end{center}
 
 \end{frame}
 
@@ -175,25 +194,65 @@
 \begin{frame}[t]{\alert{Echo-aware signal processing for audio scene analysis}}
 
     \begin{mydefblock}{Acoustic Echoes}
-        \begin{itemize}
-            \item Elements of the sound propagation
-            \item Sound reflection standing out for time and strength w.r.t. to the total reverberation
-            \item repetition of the source sound but later
-            \item both outdoor and indoor
-        \end{itemize}
+
+        \vspace{-3mm}
+        \begin{columns}[onlytextwidth]
+            \begin{column}{0.60\textwidth}
+                \begin{itemize}
+                    \item Elements of the sound propagation
+                    \item Standing out for time and strength
+                    \item Repetition of the source sound but later
+                    \item Both outdoor and indoor
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.38\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/echoes}
+            \end{column}
+
+        \end{columns}
     \end{mydefblock}
 
     \vfill
-    \begin{block}{}
-        Audio signal processing w.r.t. sound propagation~\cite{chen1993time}
-        \begin{itemize}
-            \item ignore it
-            \item assume it free-field
-            \item model it entirely
-            \item model as few reflection $\rightarrow$ echo-aware processing
-        \end{itemize}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.60\textwidth}
+            \begin{block}{Audio signal processing methods}
+                    \begin{itemize}
+                        \item<1-> \alert{ignore} it
+                        \item<2-> assume it \alert{free-field}
+                        \item<3-> model it \alert{entirely}
+                        \item<4-> model as \alert{few reflection}\tikzmark{top6}
+                        \item<5-> model it as \alert{early and late} parts\hspace{1em}\tikzmark{right6}\tikzmark{bot6}
+                    \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.38\textwidth}
+            \only<1>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+            \only<2>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+            \only<3>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+            \only<4>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+            \only<5->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+        \end{column}
+        \end{columns}
 
-    \end{block}
+    \only<6->{
+        \begin{tikzpicture}[overlay, remember picture]
+            \node[anchor=base] (a) at (pic cs:top6) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+            \node[anchor=base] (b) at (pic cs:bot6) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+            \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+            (a.north -| {pic cs:right6}) -- node[right,inner sep=1em] {
+                \textcolor{myred}{\textbf{Echo-aware methods}}} (b.south -| {pic cs:right6});
+        \end{tikzpicture}
+    }
+
+    \visible<7>{
+        \begin{block}{Model sound field}
+            \begin{itemize}
+                \item as free field, then reverberation is noise
+                \item entirely, is a too challenging
+            \end{itemize}
+        \end{block}
+    }
 
     % \vfill
     % \begin{block}{Echo-aware processing}
@@ -276,9 +335,8 @@
 
 \subsection{Outline}
 
-\begin{frame}[t]{Thesis goal and contribution}
+\begin{frame}{Goals and contributions}
 
-    \vfill
     \begin{columns}[onlytextwidth]
         \begin{column}[T]{0.3\linewidth}
             \centering
@@ -301,53 +359,67 @@
     \end{columns}
 
     \vfill
-    \begin{mydefblock}{Thesis objective}
+    \begin{mydefblock}{Goals}
         \begin{enumerate}
-        \item provide new methodologies and data to process and estimate acoustic echoes
-        \item Turning echoes into friends \cite{Riberio}
-        \\extend previous classical methods for audio scene analysis
+            \item How to \textbf{estimate} acoustic echoes?
+            \item How to \textbf{extend methods} for echo-aware audio scene analysis
         \end{enumerate}
     \end{mydefblock}
 
     \vfill
-    \begin{block}{contribution}
-        Estimation
-        \begin{itemize}
-            \item Knowledge-based echo estimation, aka \blaster
-            \item Learning-based echo estimation, aka \lantern
-        \end{itemize}
-        Application
-        \begin{itemize}
-            \item Echo-aware Source Separation, aka \separake
-            \item Echo-aware Source Localization, aka \mirage
-            \item Echo-aware Speech Enhancement
-            \item Echo-aware Room Geometry Estimation
-        \end{itemize}
-        Data
-        \begin{itemize}
-            \item a Echo-aware database, aka \dechorate
-        \end{itemize}
-    \end{block}
-
-\end{frame}
-
-% change color of Beamer subsection
-% https://tex.stackexchange.com/questions/356237/changing-text-color-in-subsection-in-tableofcontents-in-beamer
-\begin{frame}[standout]{1D Outline}
-    \begin{columns}
-        \begin{column}{0.35\textwidth}
-            Echo-aware signal processing
-            \\for audio scene analysis
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            \textbf{1. Estimation}
         \end{column}
-        \begin{column}{0.05\textwidth}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            {
-                \setbeamercolor{part in toc}{fg=gray}
-                \setbeamercolor{section in toc}{fg=gray}
-                \setbeamercolor{subsection in toc}{fg=white}
-                \tableofcontents
-            }
+        \begin{column}{0.48\textwidth}
+            \centering
+            \textbf{2. Application}
         \end{column}
     \end{columns}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \item Knowledge-based echo estimation
+                \\$\hookrightarrow$ \blaster
+                \item Learning-based echo estimation
+                \\$\hookrightarrow$ \lantern
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \item Echo-aware Source Separation
+                \\$\hookrightarrow$ \separake
+                \item Echo-aware Source Localization
+                \\$\hookrightarrow$ \mirage
+                \item Echo-aware Speech Enhancement
+                \item Echo-aware Room Geometry Estimation
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \begin{center}
+        \textbf{3. Data:}
+        \\Echo-aware database $\rightarrow$ \dechorate
+    \end{center}
 \end{frame}
+
+% % change color of Beamer subsection
+% % https://tex.stackexchange.com/questions/356237/changing-text-color-in-subsection-in-tableofcontents-in-beamer
+% \begin{frame}[standout]{1D Outline}
+%     \begin{columns}
+%         \begin{column}{0.35\textwidth}
+%             Echo-aware signal processing
+%             \\for audio scene analysis
+%         \end{column}
+%         \begin{column}{0.05\textwidth}
+%         \end{column}
+%         \begin{column}{0.6\textwidth}
+%             {
+%                 \setbeamercolor{part in toc}{fg=gray}
+%                 \setbeamercolor{section in toc}{fg=gray}
+%                 \setbeamercolor{subsection in toc}{fg=white}
+%                 \tableofcontents
+%             }
+%         \end{column}
+%     \end{columns}
+% \end{frame}
