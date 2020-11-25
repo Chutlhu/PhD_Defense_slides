@@ -1,96 +1,110 @@
 \subsection{introduction}
 
-\begin{frame}{Audio signal processing and sound propagation}
+% \begin{frame}{Audio signal processing and sound propagation}
 
-    \begin{columns}[T,onlytextwidth]
+%     \begin{columns}[T,onlytextwidth]
 
-        \begin{column}{.48\textwidth}
-            \begin{block}{Sound propagation is}
-                \begin{itemize}
-                \item completely ignored
-                \item assumed free-field case (\textit{anechoic})
-                \item model it full (\textit{reverberant})
-                \item \textit{learned} it full (\textit{reverberant})
-                \item model few early echoes (\textit{multipath})
-            \end{itemize}
-            All methods can be grouped accordingly
-            \end{block}
-        \end{column}
+%         \begin{column}{.48\textwidth}
+%             \begin{block}{Sound propagation is}
+%                 \begin{itemize}
+%                 \item<1-> completely ignored
+%                 \item<2-> assumed free-field case (\textit{anechoic})
+%                 \item<3-> model it full (\textit{reverberant})
+%                 \item<4-> \textit{learned} it full (\textit{reverberant})
+%                 \item<5-> model few early echoes (\textit{multipath})
+%             \end{itemize}
+%             All methods can be grouped accordingly
+%             \end{block}
+%         \end{column}
 
-        \begin{column}{.48\textwidth}
-            \centering
-            \only<1>{\includegraphics[trim={0 0 680em 0},clip,width=.8\textwidth]{figures/prop_it.png}}
-            \only<2>{\includegraphics[trim={670em 0 5em 0},clip,width=.8\textwidth]{figures/prop_it.png}}
+%         \begin{column}{.48\textwidth}
+%             \centering
+%             \only<1>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<2>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<3>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<4>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<5->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
 
-            \vspace{-2.3em}
-            \begin{equation*}
-                \begin{aligned}
-                    x_i(t) &= (h_i \ast s)(t)\\
-                    h_i( t) &= \textcolor{myred}{h_i^d(t)} + \textcolor{myblue}{h_i^e(t)} + \textcolor{mygreen}{h_i^r(t)}
-                \end{aligned}
-            \end{equation*}
-        \end{column}
+%             \vspace{-2.3em}
+%             \begin{equation*}
+%                 \begin{aligned}
+%                     x_i(t) &= (h_i \ast s)(t)\\
+%                     h_i( t) &= \textcolor{myred}{h_i^d(t)} + \textcolor{myblue}{h_i^e(t)} + \textcolor{mygreen}{h_i^r(t)}
+%                 \end{aligned}
+%             \end{equation*}
+%         \end{column}
 
-    \end{columns}
+%     \end{columns}
 
-    % \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
-    %     \begin{itemize}
-    %         \item detrimentally affect typical Audio Scene Analysis algorithm
-    %         \item undesired interfering source
-    %         \item undesired position of the true sources (TDOA disambiguation)
-    %     \end{itemize}
+%     % \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
+%     %     \begin{itemize}
+%     %         \item detrimentally affect typical Audio Scene Analysis algorithm
+%     %         \item undesired interfering source
+%     %         \item undesired position of the true sources (TDOA disambiguation)
+%     %     \end{itemize}
 
-    % \end{alertblock}
-    \begin{block}{Recall}
-        \begin{itemize}
-            \item anechoic case $\implies$ simple mapping, but incoherence processing
-            \item reverberant case $\implies$ hard mapping and estimation, but coherent processing
-        \end{itemize}
-        \hfill \textcolor{myred}{\textbf{What can we do with echoes?}}
-    \end{block}
-\end{frame}
+%     % \end{alertblock}
+%     \begin{block}{Recall}
+%         \begin{itemize}
+%             \item anechoic case $\implies$ simple mapping, but incoherence processing
+%             \item reverberant case $\implies$ hard mapping and estimation, but coherent processing
+%         \end{itemize}
+%         \hfill \textcolor{myred}{\textbf{What can we do with echoes?}}
+%     \end{block}
+% \end{frame}
 
 \begin{frame}{Echo-aware Application}
 
     \begin{block}{Echoes = same content, different time/direction}
         \centering
-        \only<1>{\adjincludegraphics[Clip={0\width} {0\height} {.66\width} {0\height},width=0.6\textwidth]{figures/echo_aware.png}}
-        \only<2>{\adjincludegraphics[Clip={.33\width} {0\height} {.33\width} {0\height},width=0.6\textwidth]{figures/echo_aware.png}}
-        \only<3>{\adjincludegraphics[Clip={.66\width} {0\height} {.00\width} {0\height},width=0.6\textwidth]{figures/echo_aware.png}}
+        \only<1>{\adjincludegraphics[Clip={0\width} {0\height} {.66\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
+        \only<2>{\adjincludegraphics[Clip={.33\width} {0\height} {.33\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
+        \only<3->{\adjincludegraphics[Clip={.66\width} {0\height} {.00\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
     \end{block}
 
-
+    \pause[4]
     Recent literature on echo-aware processing:
+    \pause[5]
     \begin{columns}[T,onlytextwidth]
         \column{.32\textwidth}
         \begin{block}{\textbf{What?}}
             \small
             Echoes = repetitions
             \begin{itemize}
-                \item Sound Source Separation
-                \item Speech Enhancement
-                \\\textcolor{gray}{\footnotesize(Dereverberation, Denoising, Room Equalization)}
+                \item \only<-7>{Sound Source Separation}\only<8->{\alert{Sound Source Separation}}
+                \\{\footnotesize\cite{leglaive2016multichannel}}
+                \item \only<-7>{Speech Enhancement}\only<8->{\alert{Speech Enhancement}}
+                \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2020raking}}
             \end{itemize}
         \end{block}
 
+        \pause[6]
         \column{.32\textwidth}
         \begin{block}{\textbf{Where?}}
             \small
             Echoes $\in$ indoor propagation
             \begin{itemize}
-                \item Sound Source Localization
+                \item \only<-7>{Sound Source Localization}\only<8->{\alert{Sound Source Localization}}
+                \\{\footnotesize\cite{ribeiro2010turning,jensen2019method}}
                 \item Microphone Calibration
-                \item Room Geometry Reconstruction
+                \\{\footnotesize\cite{dokmanic2015raking,salvati2016sound}}
+                \item \only<-7>{Room Geometry Estimation}\only<8->{\alert{Room Geometry Estimation}}
+                \\{\footnotesize\cite{antonacci2012inferences,crocco2017uncalibrated}}
+                \item Acoustic SLAM
+                \\{\footnotesize\cite{evers2018acoustic,krekovic2016echoslam}}
             \end{itemize}
         \end{block}
 
+        \pause[7]
         \column{.32\textwidth}
         \begin{block}{\textbf{How?}}
             \small
             Echoes $\in$ sound propagation
             \begin{itemize}
                 \item Blind Channel Estimation
+                \\{\footnotesize\cite{lin2007blind,crocco2017uncalibrated}}
                 \item Acoustic Measurements
+                \\{\footnotesize\cite{eaton2015ace,kuttruff2016room}}
             \end{itemize}
         \end{block}
     \end{columns}
@@ -102,7 +116,7 @@
 
 \subsection{mirage}
 
-\begin{frame}{\mirage - Sound Source Locatization with Echoes}
+\begin{frame}[t]{\mirage - Sound Source Locatization with Echoes}
 
     \vspace*{5mm}
     \begin{columns}
@@ -111,17 +125,17 @@
             \begin{block}{The \alert{Picnic} Scenario:}
                 \begin{itemize}
                     \small
-                    \item One source
-                    \item Two microphones
+                    \item<1-> One source
+                    \item<1-> Two microphones
                     \begin{itemize}
-                        \item[$\rightarrow$] passive scenario
-                        \item[$\rightarrow$] generalizable to more pairs
+                        \item<1->[$\rightarrow$] passive scenario
+                        \item<1->[$\rightarrow$] generalizable to more pairs
                     \end{itemize}
-                    \item Close to a very reflective surface
+                    \item<2-> Close to a very reflective surface
                     \begin{itemize}
-                        \item[$\rightarrow$] First echo = Strongest echo
-                        \item[$\rightarrow$] $\alpha_\text{picnic}$ const. $\forall f$
-                        \item[$\rightarrow$] table-top device
+                        \item<2->[$\rightarrow$] First echo = Strongest echo
+                        \item<2->[$\rightarrow$] $\alpha_\text{picnic}$ const. $\forall f$
+                        \item<2->[$\rightarrow$] table-top device
                     \end{itemize}
                 \end{itemize}
             \end{block}
@@ -129,32 +143,33 @@
 
         \begin{column}{0.5\textwidth}
             \centering
-            \only<1>{\adjincludegraphics[Clip={0\width} {0\height} {.5\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}
-            \only<2>{\adjincludegraphics[Clip={0.5\width} {0\height} {0\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}
+            \only<-2>{\adjincludegraphics[Clip={0\width} {0\height} {.5\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}%
+            \only<3->{\adjincludegraphics[Clip={0.5\width} {0\height} {0\width} {0\height},width=0.9\textwidth]{figures/mirage.png}}
         \end{column}
     \end{columns}
 
+    \pause[3]
     \vfill
-
     \begin{columns}[T,onlytextwidth]
 
         \begin{column}{0.5\textwidth}
-            \begin{block}{How to access the \textit{image} microphones?}
-                \\$\implies$ each pair is augmented with echoes
+            \begin{block}{Each pair is augmented with echoes}
+                \begin{center}
+                    \textcolor{myred}{\textbf{Mirage Array}}
+                \end{center}
+            How to access the \textit{image} microphones?
             \end{block}
-            \begin{center}
-                \textcolor{myred}{\textbf{Mirage Array}}
-            \end{center}
+            \visible<8>{
             \textbf{idea:} use SSL algorithm on it
-            \\\textbf{recall:} echoes are known
+            \\\textbf{recall:} echoes are known}
         \end{column}
 
         \begin{column}{0.5\textwidth}
             \centering
-            \includegraphics<2>[width=\textwidth]{figures/rirs1.pdf}
-            \includegraphics<3>[width=\textwidth]{figures/rirs2.pdf}
-            \includegraphics<4>[width=\textwidth]{figures/rirs3.pdf}
-            \includegraphics<5>[width=\textwidth]{figures/rirs4.pdf}
+            \includegraphics<2-4>[width=\textwidth]{figures/rirs1.pdf}%
+            \includegraphics<5>[width=\textwidth]{figures/rirs2.pdf}%
+            \includegraphics<6>[width=\textwidth]{figures/rirs3.pdf}%
+            \includegraphics<7->[width=\textwidth]{figures/rirs4.pdf}%
         \end{column}
     \end{columns}
 
@@ -175,15 +190,16 @@
         \column{0.38\textwidth}
         \adjincludegraphics[Clip={0\width} {0.5\height} {0\width} {0\height},width=0.8\textwidth]{figures/ssl.png}
     \end{columns}
+    \pause
 
     \begin{columns}[T,onlytextwidth]
         \column{0.6\textwidth}
         \begin{block}{SSL with more microphones}
             \begin{itemize}
                 \item 2D SSL: azimuth and elevation
-                \item For each pair $p$:
+                \item[1.] For each pair $p$:
                 \\\hspace{1em} AOA$_p \gets$ TDOA-based 2-mic-SSL
-                \item ``Fuse''  together all the observation
+                \item[2.] ``Fuse''  together all the observation
                 \\(Angular spectra, Probability distributions)
                 \item e.g. SRP-PHAT~\cite{dibiase2001robust}
             \end{itemize}
@@ -192,9 +208,13 @@
         \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
     \end{columns}
 
+    \pause
     \textbf{Baseline:} GCC-PHAT on true microphones
 
+    \pause
     \textbf{Proposed Approach:} using \lantern (DNN-based TDOA estimation)
+
+    \pause
     \begin{description}
         \item[issue:] just punctual estimation cannot be ``fused''
         \item[solution:] use \lantern in generative mode (mic pos assumed known)
@@ -206,6 +226,7 @@
     \textbf{Data:} virtually generated closeddataset as for \lantern
     \\\textbf{Metric:} angular mean error and accuracy (thr=10, 20)
 
+    \pause[1]
     \begin{columns}[T,onlytextwidth]
 
         \begin{column}{.4\textwidth}
@@ -231,10 +252,10 @@
             MIRAGE     &   wn+n        &    5.00 (26)    &  9.89 (54)  \\
             GCC-PHAT   &   wn          &    4.22 (81)    &   6.19 (97) \\
             GCC-PHAT   &   wn+n        &    4.03 (65)    &   5.34 (83) \\
-            \visible<2->{MIRAGE     &   sp          &    4.83 (63)    &  7.26 (82)  }\\
-            \visible<2->{MIRAGE     &   sp+n        &    4.60 (16)    &  9.88 (35)  }\\
-            \visible<2->{GCC-PHAT   &   sp 		   &    4.08 (82)    &   5.34 (97)  }\\
-            \visible<2->{GCC-PHAT   &   sp+n        &    4.70 (19)    &   8.38 (32) }\\
+            \visible<3->{MIRAGE     &   sp          &    4.83 (63)    &  7.26 (82)  }\\
+            \visible<3->{MIRAGE     &   sp+n        &    4.60 (16)    &  9.88 (35)  }\\
+            \visible<3->{GCC-PHAT   &   sp 		   &    4.08 (82)    &   5.34 (97)  }\\
+            \visible<3->{GCC-PHAT   &   sp+n        &    4.70 (19)    &   8.38 (32) }\\
             \bottomrule
         \end{tabular}
         % \begin{column}{.74\textwidth}
@@ -259,6 +280,7 @@
         \end{column}
     \end{columns}
 
+    \pause[4]
     \vspace{5mm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{.25\textwidth}

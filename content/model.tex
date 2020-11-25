@@ -1,4 +1,4 @@
-\subsection{From Physics to Digital Signal Processing}
+%% \subsection{From Physics to Digital Signal Processing}
 
 \begin{frame}[t]{Acoustic Impulse Response}
 
@@ -12,20 +12,20 @@
     \end{block}
 
     \vfill
-    \only<1>{\textbf{Sound propagation} process = \textbf{source $\to$ filter $\to$ receiver} process
+    \only<3>{\textbf{Sound propagation} process = \textbf{source $\to$ filter $\to$ receiver} process
     \begin{equation*}
         x(t) = (a \ast s)(t)
     \end{equation*}
     The filter $a(t)$ is linear and is called \textbf{Acoustic Impulse Response}, (AIR)
     }
-    \only<2->{\textbf{\alert{Indoor} Sound propagation} process = \textbf{source $\to$ filter $\to$ receiver} process
+    \only<4->{\textbf{\alert{Indoor} Sound propagation} process = \textbf{source $\to$ filter $\to$ receiver} process
     \begin{equation*}
         x(t) = (h \ast s)(t)
     \end{equation*}
     The filter $h(t)$ is linear and is called \textbf{\alert{Room} Impulse Response}, (RIR)
     }
 
-    \visible<2->{
+    \visible<3->{
         \vspace{5mm}
         \begin{columns}[T,onlytextwidth]
             \begin{column}{0.48\textwidth}
@@ -40,6 +40,7 @@
         \end{columns}
     }
 
+    \visible<2->{
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:topA) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:botA) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
@@ -48,12 +49,15 @@
                 {$=$ all sound propagation}
             (b.south -| {pic cs:rightA});
     \end{tikzpicture}
+    }
 
+    \only<3->{
     \begin{textblock*}{40mm}(90mm,47mm)
         \small \textcolor{gray}{$\leftarrow$ continuous time domain!}
     \end{textblock*}
+    }
 
-    \only<4>{
+    \only<5>{
         \begin{textblock*}{30mm}(62mm,72mm)
             \Large\textcolor{myred}{$\mathbf{\overset{?}{\approx}$}}
         \end{textblock*}
@@ -73,36 +77,45 @@
             \begin{block}{RIRs can be modeled with the Image Methods}
                 \begin{itemize}
                     \item specular reflection only
-                    \item = sound propagation of cuboid room
-                    \item \textbf{well model the first part}
+                    \item for cuboid room, \textbf{it describes} the sound prop.
+                    \item in general, \textbf{well models the first part}.
                 \end{itemize}
             \end{block}
         \end{column}
         \begin{column}{0.38\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{figures/ism.png}
-            {\small ``playing billiard in a concert hall''}
+            \includegraphics[width=0.8\textwidth]{figures/ism.png}
+            {\small\itshape ``playing billiard in a concert hall''}
         \end{column}
     \end{columns}
 
-    \vfill
+    \vspace{2mm}
+    \pause
     \begin{columns}[onlytextwidth]
-        \begin{column}{0.48\textwidth}
+        \begin{column}{0.45\textwidth}
             \centering
-            \textbf{Time domain}
+            % \textbf{Time domain}
             \begin{equation*}
-                h^e(t) = \sum_r
+                h_i^e(t) = \sum_{r=0}^{R} \alpha_i^{(r)} \delta(t - \tau_i^{(r)})
             \end{equation*}
-        \end{column}
-        \begin{column}{0.48\textwidth}
+            {\small sum of Dirac's delta}
+        \end{column}%
+        \pause
+        \begin{column}{0.05\textwidth}
             \centering
-            \textbf{Frequency domain}
+            $\overset{\text{more realistic}}{\longrightarrow}$
+        \end{column}%
+        \begin{column}{0.45\textwidth}
+            \centering
+            % \textbf{Frequency domain}
             \begin{equation*}
-                H^e(f) = \sum_r
+                H_i^e(f) = \sum_{r=0}^{R} \alpha_i^{(r)}(f) \cste^{-\csti 2 \pi f \tau_i^{(r)}}
             \end{equation*}
+            {\small sum of filters}
         \end{column}
     \end{columns}
 
+    \pause
     \vfill
     \begin{block}{RIRs accounts for}
 
@@ -124,9 +137,11 @@
         \end{columns}
     \end{block}
 
-    \begin{center}
-        \alert{Echoes} strong and distinct specular reflection as well
-    \end{center}
+    \pause
+    \begin{mydefblock}{Echoes}
+        \centering
+        strong and distinct specular reflection
+    \end{mydefblock}
 
 \end{frame}
 
@@ -161,7 +176,7 @@
 
 % \end{frame}
 
-% \subsection*{interim conclusion}
+%% \subsection*{interim conclusion}
 % \begin{frame}{Interim Conclusion I}
 %     \begin{alertblock}{Approximations}
 %         \begin{itemize}

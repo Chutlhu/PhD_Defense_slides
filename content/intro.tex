@@ -1,4 +1,4 @@
-\subsection{Motivation}
+% \subsection{Motivation}
 
 \begin{frame}{Scenario}
 
@@ -6,11 +6,11 @@
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.65\textwidth}
             \begin{figure}
-                \includegraphics<1>[width=\textwidth]{figures/scene1.png}
-                \includegraphics<2>[width=\textwidth]{figures/scene2.png}
-                \includegraphics<3>[width=\textwidth]{figures/scene3.png}
-                \includegraphics<4>[width=\textwidth]{figures/scene4.png}
-                \includegraphics<5>[width=\textwidth]{figures/scene5.png}
+                \includegraphics<1>[width=\textwidth]{figures/scene1.png}%
+                \includegraphics<2>[width=\textwidth]{figures/scene2.png}%
+                \includegraphics<3>[width=\textwidth]{figures/scene3.png}%
+                \includegraphics<4>[width=\textwidth]{figures/scene4.png}%
+                \includegraphics<5->[width=\textwidth]{figures/scene5.png}%
             \end{figure}
         \end{column}
         \begin{column}{0.34\textwidth}
@@ -27,53 +27,64 @@
     \end{columns}
 
     \vfill
+    \visible<6->{
     \textcolor{gray}{Attention: artificial sound vs \textbf{(natural) microphone recordings}}
+    }
 
 \end{frame}
 
 \begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
+
     \begin{columns}
+        \visible<1->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Semantic} information
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/semantic.png}
-        \end{column}
+        \end{column}}
+        \visible<2->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Spatial} information
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/spatial.png}
-        \end{column}
+        \end{column}}
+        \visible<3->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Temporal} information
 
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=\textwidth]{figures/temporal.png}
-        \end{column}
+        \end{column}}
     \end{columns}
 
     \begin{columns}
+        \visible<1->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on nature and content
-        \end{column}
+        \end{column}}
+        \visible<2->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on position and geometry
-        \end{column}
+        \end{column}}
+        \visible<3->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on events activity
         \end{column}
+        }
     \end{columns}
 
 
     \vfill
+    \visible<4->{
     \begin{mydefblock}{Audio Scene Analysis}
         Extraction and organization of all the information in the sound
     \end{mydefblock}
@@ -81,10 +92,13 @@
     \begin{center}
         \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
     \end{center}
+    }
 
+    \only<5->{
     \begin{textblock*}{40mm}(80mm,90mm)
         \textcolor{myred}{\textbf{Can computer do it?}}
     \end{textblock*}
+    }
 
 \end{frame}
 
@@ -94,10 +108,12 @@
         \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
     \end{center}
 
+    \pause
     \begin{mydefblock}{Signal Processing}
         Mathematical models, frameworks and tools to tackle and solve such problems
     \end{mydefblock}
 
+    \pause
     {\small Some (inverse) problems}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
@@ -126,6 +142,7 @@
         \end{column}
     \end{columns}
 
+    \pause
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
@@ -157,6 +174,7 @@
          (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
     \end{tikzpicture}
 
+    \pause
     \vspace{-2mm}
     \begin{center}
         HOW  $\overset{\text{helps}}{\longrightarrow}$ WHERE
@@ -193,6 +211,7 @@
 
 \begin{frame}[t]{\alert{Echo-aware signal processing for audio scene analysis}}
 
+    \visible<1->{
     \begin{mydefblock}{Acoustic Echoes}
 
         \vspace{-3mm}
@@ -201,41 +220,42 @@
                 \begin{itemize}
                     \item Elements of the sound propagation
                     \item Standing out for time and strength
-                    \item Repetition of the source sound but later
+                    \item Repetition of a sound but later
                     \item Both outdoor and indoor
                 \end{itemize}
             \end{column}
             \begin{column}{0.38\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/echoes}
+                \includegraphics[width=.8\textwidth]{figures/echoes}
             \end{column}
 
         \end{columns}
     \end{mydefblock}
+    }
 
     \vfill
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.60\textwidth}
             \begin{block}{Audio signal processing methods}
                     \begin{itemize}
-                        \item<1-> \alert{ignore} it
-                        \item<2-> assume it \alert{free-field}
-                        \item<3-> model it \alert{entirely}
-                        \item<4-> model as \alert{few reflection}\tikzmark{top6}
-                        \item<5-> model it as \alert{early and late} parts\hspace{1em}\tikzmark{right6}\tikzmark{bot6}
+                        \item<3-> \alert{ignore} it
+                        \item<4-> assume it \alert{free-field}
+                        \item<5-> model it \alert{entirely}
+                        \item<6-> model as \alert{few reflection}\tikzmark{top6}
+                        \item<7-> model it as \alert{early and late} parts\hspace{1em}\tikzmark{right6}\tikzmark{bot6}
                     \end{itemize}
             \end{block}
         \end{column}
         \begin{column}{0.38\textwidth}
-            \only<1>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}
-            \only<2>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}
-            \only<3>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}
-            \only<4>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}
-            \only<5->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}
+            \only<3>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+            \only<4>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+            \only<5>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+            \only<6>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+            \only<7->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
         \end{column}
         \end{columns}
 
-    \only<6->{
+    \only<8->{
         \begin{tikzpicture}[overlay, remember picture]
             \node[anchor=base] (a) at (pic cs:top6) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
             \node[anchor=base] (b) at (pic cs:bot6) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
@@ -245,11 +265,11 @@
         \end{tikzpicture}
     }
 
-    \visible<7>{
-        \begin{block}{Model sound field}
+    \visible<9->{
+        \begin{block}{Modelling the sound field}
             \begin{itemize}
-                \item as free field, then reverberation is noise
-                \item entirely, is a too challenging
+                \item as free field $\implies$ reverberation is noise
+                \item entirely $\implies$ it is very challenging
             \end{itemize}
         \end{block}
     }
@@ -333,8 +353,6 @@
 
 \end{frame}
 
-\subsection{Outline}
-
 \begin{frame}{Goals and contributions}
 
     \begin{columns}[onlytextwidth]
@@ -343,13 +361,13 @@
             \textbf{Audio Scene Analysis}
             \\\downarrow
             \\context and problems
-        \end{column}\hfill
+        \end{column}\hfill\pause
         \begin{column}[T]{0.3\linewidth}
             \centering
             \textbf{Signal Processing}
             \\\downarrow
             \\models and frameworks
-        \end{column}\hfill
+        \end{column}\hfill\pause
         \begin{column}[T]{0.3\linewidth}
             \centering
             \textbf{Acoustic Echoes}
@@ -357,6 +375,7 @@
             \\better processing
         \end{column}\hfill
     \end{columns}
+    \pause
 
     \vfill
     \begin{mydefblock}{Goals}
@@ -365,6 +384,7 @@
             \item How to \textbf{extend methods} for echo-aware audio scene analysis
         \end{enumerate}
     \end{mydefblock}
+    \pause
 
     \vfill
     \begin{columns}[T,onlytextwidth]
@@ -377,6 +397,8 @@
             \textbf{2. Application}
         \end{column}
     \end{columns}
+
+    \pause
     \begin{columns}[T]
         \begin{column}{0.48\textwidth}
             \begin{itemize}
@@ -386,6 +408,7 @@
                 \\$\hookrightarrow$ \lantern
             \end{itemize}
         \end{column}
+        \pause
         \begin{column}{0.48\textwidth}
             \begin{itemize}
                 \item Echo-aware Source Separation
@@ -397,6 +420,7 @@
             \end{itemize}
         \end{column}
     \end{columns}
+    \pause
     \begin{center}
         \textbf{3. Data:}
         \\Echo-aware database $\rightarrow$ \dechorate

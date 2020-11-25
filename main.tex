@@ -1,6 +1,6 @@
 \documentclass[8pt,dvipsnames]{beamer}
 
-\usetheme[progressbar=frametitle]{metropolis}
+\usetheme[sectionpage=progressbar,progressbar=frametitle]{metropolis}
 % \useoutertheme{progress1}
 % \usepackage{pgfpages}
 % \setbeameroption{show notes} % after pgfpages to works properly
@@ -42,8 +42,9 @@
 \usepackage{adjustbox} % provide includegraphics with percentage
 \usepackage{booktabs} % provide \toprule
 \usepackage{multirow} % provide \multirow
+\usepackage{soul} % provide \st
 
-\usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
+% \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
 
 % my colors
 \definecolor{darkblue}{HTML}{154360}
@@ -52,7 +53,33 @@
 \definecolor{myred}{RGB}{179,30,0}
 \definecolor{myblue}{HTML}{228BE6}
 
-% bibliography
+
+% NAVIGATION BAR
+% \makeatletter
+% \setbeamertemplate{headline}{%
+%   \begin{beamercolorbox}[colsep=1pt]{upper separation line head}
+%   \end{beamercolorbox}
+%   \begin{beamercolorbox}{section in head/foot}
+%     \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+%   \end{beamercolorbox}
+% }
+% \makeatother
+% \setbeamercolor{section in head/foot}{fg=normal text.bg, bg=structure.fg}
+
+% FOOTER
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt} PhD Defense \hfill\secname\hfill\insertframenumber/\inserttotalframenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+% SECTION BEGINNING
+\AtBeginSection{
+  \frame{
+    \sectionpage
+    \tableofcontents[currentsection]
+  }
+}
 
 
 % % my commands
@@ -65,8 +92,8 @@
   \begin{description}
     \item[PhD Director:] Nancy \textsc{Bertin}
     \item[PhD Supervisor:] Antoine \textsc{Deleforge}
-    \item[Jury members:] Laurent \textsc{Girin}
-                        \\Simon \textsc{Doclo}
+    \item[Jury members:] Laurent \textsc{Girin} (reviewer)
+                        \\Simon \textsc{Doclo} (reviewer)
                         \\Fabio \textsc{Antonacci}
                         \\Renaud \textsc{Seguier}
     \item[Collaborators:] Cl\'ement \textsc{Elvira},
@@ -106,9 +133,9 @@
 % \end{tabular}
 
 \makeatletter
-\setlength{\metropolis@titleseparator@linewidth}{.89pt}
-\setlength{\metropolis@progressonsectionpage@linewidth}{.89pt}
-\setlength{\metropolis@progressinheadfoot@linewidth}{.89pt}
+\setlength{\metropolis@titleseparator@linewidth}{.93pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{.93pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{.93pt}
 \makeatother
 
 \begin{document}
@@ -133,41 +160,23 @@
       \end{adjustbox}
     \end{frame}
 
-    % \section{Introduction}
-    % \input{content/intro.tex}
+    \section{Introduction}
+    \input{content/intro.tex}
 
-    % \section{Modeling}
-    % \input{content/model.tex}
+    \section{Modeling}
+    \input{content/model.tex}
 
-    % \section{Acoustic Echo Estimation}
-    % \input{content/estimation.tex}
+    \section{Acoustic Echo Estimation}
+    \input{content/estimation.tex}
 
     \section{Echo-aware Application}
     \input{content/application.tex}
 
-    % \section{Echo-aware Dataset}
-    % \input{content/data.tex}
+    \section{Echo-aware Dataset}
+    \input{content/data.tex}
 
-    % \section{Conclusion}
-    % \input{content/conclusion.tex}
-
-    % \section{Acoustic Echo Retrieval}
-    %     \begin{frame}{First Frame}
-    %       Hello, world!
-    %     \end{frame}
-
-    % \section{Echo-aware Application}
-    %     \begin{frame}{First Frame}
-    %       Hello, world!
-    %     \end{frame}
-
-    % \section{Conclusion}
-    %     \begin{frame}{First Frame}
-    %       Hello, world!
-    %     \end{frame}
-    %     \begin{frame}{Second Frame}
-    %       Hello, world!
-    %     \end{frame}
+    \section{Conclusion}
+    \input{content/conclusion.tex}
 
     % \appendix
 

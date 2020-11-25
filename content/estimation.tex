@@ -26,11 +26,12 @@
         \column{0.4\textwidth}
             \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{./figures/arrivals.png}
+                \includegraphics<2->[width=\textwidth]{./figures/arrivals.png}
             \end{figure}
 
     \end{columns}
 
+    \pause[3]
     \vfill
     Approaches
     \begin{columns}[T,onlytextwidth]
@@ -38,9 +39,8 @@
         \centering
         Source signal is
         \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
-        \hfill
 
-        \only<1>{
+            \only<4>{
             \column{0.48\textwidth}
             \begin{block}{Active approaches}
 
@@ -62,21 +62,23 @@
                 \begin{itemize}
                     \small
                     \item more difficult problem --- blind inverse problem
-                    \item Non Intrusive, passive hearing
+                    \item passive hearing
                     \item Time Difference of Arrivals only
-                    \item Need multi-microphones
+                    \item only multi-microphones
                     \\\hspace{-1em}\textcolor{gray}{\footnotesize \textbf{Application} smart speakers, robot}
                 \end{itemize}
             \end{block}
-        }
-        \only<2>{
-            \column{0.48\textwidth}
-            \centering
-            Estimation is
-            \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
+            }
+
+        \only<5->{
+        \column{0.48\textwidth}
+        \centering
+        Estimation is
+        \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
         }
     \end{columns}
 
+    \pause[6]
     \vfill
     \textcolor{myred}{\textbf{Scenario:} signal source, only TOAs and passive system}
 
@@ -85,52 +87,82 @@
 \begin{frame}{Passive Acoustic Echo Estimation}
 
     \begin{block}{\alert{Passive} Acoustic Echo Estimation:}
-
-        \vspace{1em}
         \small
+
+        \pause
+        \vspace{.5em}
         \begin{columns}[T,onlytextwidth] % align columns
             \begin{column}{.48\textwidth}
                 \textbf{RIR-\alert{based} approaches}
+            \end{column}
+            \begin{column}{.48\textwidth}
+                \textbf{RIR-\alert{agnostic} approaches}
+            \end{column}%
+        \end{columns}
+
+        \vspace{.5em}
+        \begin{columns}[onlytextwidth] % align columns
+            \begin{column}{.48\textwidth}
                 \includegraphics[trim={0 31em 0 7em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
+            \end{column}
+            \begin{column}{.48\textwidth}
+                \includegraphics[trim={0 0 0 47em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
+            \end{column}%
+        \end{columns}
+
+        \vspace{.5em}
+        \begin{columns}[T,onlytextwidth] % align columns
+            \begin{column}{.48\textwidth}
                 \begin{enumerate}
                     \item SIMO BCE problem $\implies$ RIRs
                     \item Peak picking $\implies$ Echoes
                 \end{enumerate}
+            \end{column}
+            \begin{column}{.48\textwidth}
+                \begin{enumerate}
+                    \item Estimation in the space $\kbrace{\tau_i^{(r)},\alpha_i^{(r)}}_{i,r}$
+                    \\\textcolor{gray}{(+ \small direction of arrivals can be used instead)}
+                \end{enumerate}
+            \end{column}%
+        \end{columns}
+        \pause
+
+        \vspace{1em}
+        \begin{columns}[T,onlytextwidth] % align columns
+            \begin{column}{.48\textwidth}
                 Pros
                 \begin{itemize}
                     \item SIMO BCE is well studied % (elegant framework)
                     \item Good in some scenario %\\$\hookrightarrow$ if not limitation
                 \end{itemize}
-                Cons
-                \begin{itemize}
-                    \item Full RIR is estimated
-                    \item Peak picking
-                    \item on-grid estimation %Pathological iss
-                \end{itemize}
-            \end{column}%
-            \hfill%
+            \end{column}
             \begin{column}{.48\textwidth}
-                \textbf{RIR-\alert{agnostic} approaches}
-                \includegraphics[trim={0 0 0 47em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
-                \begin{enumerate}
-                    \item Estimation directly in the echoes parameters space $\{\tau,\alpha\}$
-                    \\and direction of arrivals can be used instead
-                \end{enumerate}
-                Performed with
-                \begin{itemize}
-                    \item Cross-correlation %\\on-grid, eg. EM, Acoustic Cameras
-                    \item Cross-relation with super-resolution %\\off-grid,~\cite{mulan,blaster}
-                \end{itemize}
-                Pro
+                Pros
                 \begin{itemize}
                     \item No need for full RIRs
                     \item Sub-sampling accuracy
                     \item Low complexity
                     \item Sparsity and Non-negativity are respected
                 \end{itemize}
+            \end{column}%
+        \end{columns}
+        \pause
+
+        \vspace{1em}
+        \begin{columns}[T,onlytextwidth] % align columns
+            \begin{column}{.48\textwidth}
                 Cons
                 \begin{itemize}
-                    \item Exploratory
+                    \item Full RIR is estimated
+                    \item Peak picking
+                    \item on-grid estimation %Pathological iss
+                \end{itemize}
+            \end{column}
+            \begin{column}{.48\textwidth}
+                Cons
+                \begin{itemize}
+                    \item echo sorting
+                    \item exploratory
                 \end{itemize}
             \end{column}%
         \end{columns}
@@ -147,24 +179,30 @@
             \[
                 x_i = h_i \ast s
             \]
+            \visible<2->{
             \[
                 h_2 \ast x_1 = \textcolor{gray}{h_2 \ast h_1 \ast s  = h_1 \ast h_2 \ast s} = h_1 \ast x_2
             \]
+            }
 
             \column{0.3\textwidth}
             \centering
-            \only<1>{\includegraphics[width=0.9\textwidth]{figures/xrelation1.png}}
-            \only<2>{\includegraphics[width=0.9\textwidth]{figures/xrelation2.png}}
+            \only<1>{\includegraphics[width=0.9\textwidth]{figures/xrelation1.png}}%
+            \only<2->{\includegraphics[width=0.9\textwidth]{figures/xrelation2.png}}
         \end{columns}
     \end{block}
 
     \vspace*{-1em}
+    \pause[3]
 
     \begin{block}{Ideas:}
     \begin{enumerate}
         \item Sampled version of $x_1,x_2$ are available ($\mathbf{x}_1, \mathbf{x_2}$)
+        \pause
         \item echoes' TOAs $\propto$ sampling frequency
+        \pause
         \item Find echoes $\rightarrow$ \textbf{find sparse vectors} $\mathbf{h}_1, \mathbf{h}_2$ of length $L$
+        \pause
         \item Modeled as \textbf{Lasso}-like problem
 
         \vspace*{.25em}
@@ -181,7 +219,7 @@
                 \quad\text{s.t.}\quad\mathcal{C}(\mathbf{h}_1, \mathbf{h}_2)
             \end{equation*}
 
-            \vspace*{0.3em}
+            \vspace*{0.1em}
             \begin{center}
                 \footnotesize
                 \hspace{5mm} $\mathcal{P}(\mathbf{h}_1, \mathbf{h}_2)$ $\longrightarrow$ sparse promoting regularizer
@@ -197,14 +235,13 @@
     \end{enumerate}
 
     \vspace{-3mm}
-    \textcolor{gray}{\small $\mathbf{x_i} \ast \mathbf{h}_j$ computed as $\mathcal{T}(\mathbf{x}_i) \mathbf{h_j} \in \mathcal{O}(L^2)$}
-
     \begin{center}
         \footnotesize
         \textcolor{mygreen}{\cmark}  \cite{tong1994blind} \qquad \textcolor{mygreen}{\cmark}  \cite{lin2007blind,lin2008blind} \qquad \textcolor{mygreen}{\cmark} \cite{aissa2008blind} \\
         \textcolor{mygreen}{\cmark} \cite{kowalczyk2013blind} \qquad \textcolor{mygreen}{\cmark} \cite{crocco2015room,crocco2016estimation}
     \end{center}
 
+    \textcolor{gray}{\small $\mathbf{x_i} \ast \mathbf{h}_j$ computed as $\mathcal{T}(\mathbf{x}_i) \mathbf{h_j} \in \mathcal{O}(L^2)$}
     \end{block}
 
     % \begin{tikzpicture}[overlay,remember picture,x=1mm,y=-1mm,shift={(current page.north west)}]
@@ -217,15 +254,17 @@
 
     \begin{block}{1. Estimation is on-grid}
         \begin{itemize}
-        \item Sparsity and non-negativity not true ``on grid''
-        % We measure filters, not diracs
+            \item Sparsity and non-negativity not true ``on grid''
+            % We measure filters, not diracs
+            \pause[1]
 
-        \item \emph{Body guard} effect \cite{duval2017sparse}
-        \begin{itemize}
-            \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
-            \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
+            \item \emph{Body guard} effect \cite{duval2017sparse}
+            \begin{itemize}
+                \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
+                \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
+            \end{itemize}
         \end{itemize}
-        \end{itemize}
+        \pause[2]
     \end{block}
 
     \begin{block}{2. Pick Picking}
@@ -234,6 +273,7 @@
             %(using peak labeling with is NP-hard and need other prior knowledge)
         \end{itemize}
     \end{block}
+    \pause[3]
 
     \vfill
 
@@ -242,6 +282,7 @@
             \item[$\rightarrow$] Increase Precision
         \end{itemize}
     \end{block}
+    \pause[4]
 
     \begin{block}{4. Computational bottleneck}
     \begin{itemize}
@@ -250,10 +291,12 @@
         \begin{itemize}
             \item[$\longrightarrow$] memory usage
         \end{itemize}
+        \pause[5]
 
         \vspace*{.5em}
 
         \item Computational complexity: at best $\mathcal{O}(F_s^2)$ per iteration
+        \pause[6]
 
         \item the higher the sampling frequency, the more ill-conditioned \\
         \begin{itemize}
@@ -264,12 +307,14 @@
     \end{block}
 
     \begin{textblock*}{40mm}(80mm,15mm)
-        \includegraphics[width=\columnwidth]{figures/bodyguard.png}
+        \includegraphics<1->[width=\columnwidth]{figures/bodyguard.png}
     \end{textblock*}
 
+    \only<6->{
     \begin{textblock*}{40mm}(100mm,80mm)
         \textcolor{myred}{\textbf{How to solve this?}}
     \end{textblock*}
+    }
 
 \end{frame}
 
@@ -458,20 +503,20 @@
 \end{frame}
 
 
-\begin{frame}{Precision per threshold in typical scenario}
+% \begin{frame}{Precision per threshold in typical scenario}
 
-    \begin{table}[ht]
-        \centering
-        \input{tables/tab_blaster.tex}
-        \caption{$\text{RT}_{60} = 200$ ms and SNR = 20 dB.}
-    \end{table}
+%     \begin{table}[ht]
+%         \centering
+%         \input{tables/tab_blaster.tex}
+%         \caption{$\text{RT}_{60} = 200$ ms and SNR = 20 dB.}
+%     \end{table}
 
-    \begin{center}
-        \textcolor{mygreen}{\cmark \: \parbox{8em}{Invariant\\to threshold}} \qquad
-        \textcolor{myred}{\xmark \: \parbox{8em}{Sensitive \\to \# echoes}}
-    \end{center}
+%     \begin{center}
+%         \textcolor{mygreen}{\cmark \: \parbox{8em}{Invariant\\to threshold}} \qquad
+%         \textcolor{myred}{\xmark \: \parbox{8em}{Sensitive \\to \# echoes}}
+%     \end{center}
 
-\end{frame}
+% \end{frame}
 
 
 \begin{frame}<1>[label=echoes]{Performance per \# of echoes}
@@ -521,18 +566,25 @@
 \begin{frame}{\lantern - Data-driven off-grid AER}
 
     \begin{block}{\textbf{Observation 1:} Mapping from observation to echo is extremely difficult}
-        Later echoes are not considered, may help
+
+        \vspace{.1em}
+        Later echoes are not considered, they may help
     \end{block}
+    \pause
 
     \begin{block}{\textbf{Observation 2:} We have acoustic simulators}
-        Acoustic simulators based on ISM
-        \\source position, room $\leftarrow$ reverberation elements $\leftarrow$
-        \\annotation for free
+
+        \vspace{.1em}
+        Acoustic simulators based on ISM + annotation for free
     \end{block}
+    \pause
 
     \begin{block}{\textbf{Observation 3:} (Deep) Learning-based methods successful for localization}
+
+        \vspace{.1em}
         Echoes are strongly related to the source position
     \end{block}
+    \pause
 
     \begin{alertblock}{\textbf{Idea:} Use Deep Learning for AER}
         \begin{itemize}
@@ -546,7 +598,8 @@
 
 \begin{frame}{\lantern - Data \& Models}
 
-    \begin{block}{Which mapping?}
+    \vspace{-3mm}
+    \begin{block}{}
         \begin{columns}[onlytextwidth]
             \column{0.48\textwidth}
             \centering
@@ -559,6 +612,7 @@
             \textbf{Output:} target
         \end{columns}
 
+        \pause
         \begin{columns}[onlytextwidth]
             \column{0.48\textwidth}
             \centering
@@ -569,10 +623,10 @@
 
             \column{0.48\textwidth}
             \centering
-            \only<1>{\includegraphics[width=40mm]{figures/rirs1.pdf}}
-            \only<2>{\includegraphics[width=40mm]{figures/rirs2.pdf}}
-            \only<3>{\includegraphics[width=40mm]{figures/rirs3.pdf}}
-            \only<4>{\includegraphics[width=40mm]{figures/rirs4.pdf}}
+            % \only<2>{\includegraphics[width=40mm]{figures/rirs1.pdf}}%
+            % \only<3>{\includegraphics[width=40mm]{figures/rirs2.pdf}}%
+            % \only<4>{\includegraphics[width=40mm]{figures/rirs3.pdf}}%
+            \includegraphics[width=40mm]{figures/rirs4.pdf}
         \end{columns}
 
         \begin{columns}[T,onlytextwidth]
@@ -597,20 +651,26 @@
         \end{columns}
     \end{block}
 
-    \begin{block}{Which Model?}
+    \pause
+    \begin{block}{Model}
         \begin{itemize}
             \item Architecture: \textbf{CNN}~{\small\cite{chakrabarty2017broadband,nguyen2018autonomous}}
+
+            \pause
             \item Loss Function:
             \begin{enumerate}
                 \item RMSE (Multi-label regression) on $\mathcal{V}$
                 \item Gaussian log-likelihood $\to \kbrace{\mu, \sigma^2}$\hspace{.8em}\tikzmark{right}\tikzmark{T2}
                 \item Student log-likelihood $\to \kbrace{\mu, \lambda, \nu}$\tikzmark{B2}
             \end{enumerate}
+
+            \pause
             \item Virtually Supervised Learning (= data from acoustic simulator)
         \end{itemize}
 
     \end{block}
 
+    \pause
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:T2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:B2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
@@ -634,17 +694,21 @@
                     \item[Baseline:] $\mathtt{GCCPHAT}$ (only TDOA),
                                     \\$\mathtt{MLP}_{\calV}$~\cite{di2019mirage}
                     \item[Proposed:] $\mathtt{CNN}_{\calV}$, $\mathtt{CNN}_{\calV_{\calN}}$, $\mathtt{CNN}_{\calV_{\calT}}$
+
+                    \pause
                     \item[Metric:] normalized RMSE
                                     \\(0 = best fit, 1 = random)
                 \end{description}
 
             \end{column}
 
+            \pause
             \begin{column}{0.35\textwidth}
+            \small
             Train:
             \begin{itemize}
-                \item RT60, SNR
-                \item white noise
+                \item random RT60, random SNR
+                \item broadband source (wn)
                 \item instantaneous RTF
             \end{itemize}
             Test: similar to train
@@ -653,30 +717,31 @@
 
     \end{columns}
 
-    \only<1>{
+    \pause[3]
+
+    \only<4>{
     \begin{block}{}
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/lantern_snr10.pdf}
+        \includegraphics[width=0.9\textwidth]{figures/lantern_snr10.pdf}
     \end{block}
 
     \begin{center}
-        \textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs outperform\\GCC-PHAT and MLP}}
-        \hfill
-        \textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs more robust\\to noise}} % see the variance
-        \hfill
-        \textcolor{myred}{\xmark \: \parbox{8em}{Gaussian\\$\sim$ Student-T}}
+        \textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs outperform\\GCC-PHAT, MLP}}
+        \quad\textcolor{mygreen}{\cmark \: \parbox{8em}{CNNs\\less variance}} % see the variance
+        \quad\textcolor{myred}{\xmark \: \parbox{8em}{Gaussian\\$\sim$ Student-T}}
     \end{center}
     }
 
-    \only<2>{
+    \only<5>{
     \begin{block}{}
         \centering
-        \includegraphics[width=0.7\textwidth]{figures/lantern_snr.pdf}
+        \includegraphics[width=0.9\textwidth]{figures/lantern_snr.pdf}
     \end{block}
 
     \begin{center}
         \textcolor{mygreen}{\cmark \: \parbox{8em}{Generative\\better than\\Normal}}
-        \textcolor{mygreen}{\xmark \: \parbox{8em}{Gaussian $\sim$ Student-T}}
+        \quad\textcolor{myred}{\xmark \: \parbox{8em}{Gaussian\\$\sim$ Student-T}}
+        \quad\textcolor{myred}{\xmark \: \parbox{8em}{Bigger error on TDOE}}
     \end{center}
     }
 
