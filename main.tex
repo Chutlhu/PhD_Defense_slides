@@ -32,10 +32,14 @@
 % \setmathfont{Latin modern Math}
 
 % my packages
+\usepackage{mathtools}
 \usepackage{bookmark}
 
 \usepackage{tikz}
-\usetikzlibrary{calc,decorations.pathreplacing,tikzmark,arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{arrows.meta}
 
 \usepackage{pgfplots}
 \usepackage{multicol}
@@ -47,7 +51,6 @@
 \usepackage{adjustbox} % provide includegraphics with percentage
 \usepackage{booktabs} % provide \toprule
 \usepackage{multirow} % provide \multirow
-\usepackage{soul} % provide \st
 
 % GRIDS
 % \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
@@ -140,10 +143,22 @@
     %   \end{adjustbox}
     % \end{frame}
 
-    \section{Introduction}
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Introduction}
+    }
+
     \input{content/intro.tex}
 
-    \section{Problem Statement}
+    %section do not appear in the navigation bar
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Problem Statement}
+    }
     \input{content/model.tex}
 
     % \section{Acoustic Echo Estimation}

@@ -111,7 +111,6 @@
     {\small Some (inverse) problems}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
-            \small
             \begin{itemize}
                 \item Speaker Identification\tikzmark{top1}\tikzmark{bot1}
                 \item Sound Source Separation (SSS) \tikzmark{top2}
@@ -123,7 +122,6 @@
         \end{column}
 
         \begin{column}{0.48\textwidth}
-            \small
             \begin{itemize}
                 \item Voice Activity Detection\tikzmark{top4}
                 \item Diarization                \tikzmark{bot4}
@@ -136,37 +134,37 @@
         \end{column}
     \end{columns}
 
-    \pause
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Who?} (b.south -| {pic cs:right1});
-    \end{tikzpicture}
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small What?} (b.south -| {pic cs:right1});
-    \end{tikzpicture}
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Where?} (b.south -| {pic cs:right1});
-    \end{tikzpicture}
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small When?} (b.south -| {pic cs:right2});
-    \end{tikzpicture}
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
-    \end{tikzpicture}
+    % \pause
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+    %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Who?} (b.south -| {pic cs:right1});
+    % \end{tikzpicture}
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+    %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small What?} (b.south -| {pic cs:right1});
+    % \end{tikzpicture}
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+    %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Where?} (b.south -| {pic cs:right1});
+    % \end{tikzpicture}
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+    %      (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small When?} (b.south -| {pic cs:right2});
+    % \end{tikzpicture}
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+    %      (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
+    % \end{tikzpicture}
 
     \pause
     \vspace{-2mm}

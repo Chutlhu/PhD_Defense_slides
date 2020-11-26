@@ -5,14 +5,27 @@
     Sound propagation process $\Leftrightarrow$ Source $\to$ Filter $\to$ Receiver model
 
     \begin{equation*}
-        \contMic(t) = (\contRIR \contConv \contSrc)(t) + \contNse
+        \tikzmarknode{x}{}\contMic_i(t)
+                = (
+                    \textcolor{orange}{\contRIR_i}
+                    \tikzmarknode{A}{\contConv}
+                    \tikzmarknode{s}{\contSrc})(t) +
+                    + \tikzmarknode{n}{\contNse(t)}
     \end{equation*}
 
-    \begin{center}
-        \textcolor{myred}{\small\faExclamationTriangle~ continuous time}
-    \end{center}
+    \begin{tikzpicture}[overlay,remember picture,
+                        nodes={inner sep=1pt, align=center, font=\footnotesize},
+                        gray,>=stealth] %
+        \draw[->] (x.right) -- ++ (-8mm,+0mm) node[left] {{microphone signal}};
+        \draw[->] (s.north) -- ++ (+12mm,+4mm) node[right] {{source signal}};
+        \draw[->] (n.right) -- ++ (+8mm,+0mm) node[right] {{noise term}};
+        \draw[->] (A.south) -- ++ (-4mm,-4mm) node[right] {{continuous-time convolution}};
+    \end{tikzpicture}
 
-    $\contMic_i$, $i$-th microphone signal $\contSrc$ source, signal $\contRIR_i$, $i$-th Room Impulse Response $\contConv$, continuous convolution
+    \vpace{-3mm}
+    \hfill\textcolor{myred}{\small\faExclamationTriangle~ continuous time}
+
+    % $\contMic_i$, $i$-th microphone signal $\contSrc$ source, signal $\contRIR_i$, $i$-th Room Impulse Response $\contConv$, continuous convolution
 
     % \vspace{5mm}
     % \begin{columns}[T,onlytextwidth]
@@ -50,25 +63,43 @@
 
 \end{frame}
 
+
 \subsection{Current Challenges}
 
 \begin{frame}{Echoes in the RIR}
 
     RIR model
-    \begin{equation}
-        \contRIR_i(t) =
-    \end{equation}
+    \begin{columns}
+        \column{0.48\textwidth}
+        \begin{equation*}
+            \contRIR_i(t) = \textcolor{myred}{\contRIRidirect}(t)
+                          + \textcolor{myblue}{\contRIRiearly}(t)
+                          + \textcolor{mygreen}{\contRIRilate}(t)
+                          + \varepsilon_i(t)
+        \end{equation*}
+
+        \column{0.48\textwidth}
+        \includegraphics[width=.8\textwidth]{figures/rir_measured.png}
+
+    \end{columns}
 
     Echoes can be modeled as sum of Dirac's delta
 
-    Why is it so hard?
+    \begin{equation*}
+        \contRIR_i^\text{echoes} = \textcolor{myred}{\contRIRidirect}(t) + \textcolor{myblue}{\contRIRiearly}(t)
+            \approx \sum_{r=0}^{R} \alpha_i^{(r)} \delta(t - \textcolor{orange}{\tau_i^{(r)}})
+    \end{equation*}
+
+    \textbf{Goal:} estimated the $\set{\tau_i}_{i,r}$
+
+    \textbf{Challenges:}
     \begin{itemize}
-        \item $\alpha$ are distortion
-        \item $\cdot \to \ast$
-        \item $h_l$ reverberation
-        \item depends on the room
-        \item noise (undermodeling, measurement, sources)
-        \item even if we know it $\implies$ labeling
+        \item $\alpha$ distortion (even if we know it $\implies$ labeling)
+        \item $\alpha \to \alpha(t)$ (sum of diracs $\to$ sum of filters)
+        \item $h_l$ reverberation is included in the noise term
+        \item depends on the scene geometry (room, source and mic position)
+        \item presence of noise (interferences and measurements)
+        \item sampling process
     \end{itemize}
 
 \end{frame}
