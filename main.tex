@@ -1,26 +1,29 @@
-\documentclass[8pt,dvipsnames]{beamer}
+\documentclass[9pt,dvipsnames,aspectratio=43,compress]{beamer}
 
 \usetheme[sectionpage=progressbar,progressbar=frametitle]{metropolis}
-% \useoutertheme{progress1}
+\usepackage{appendixnumberbeamer}
+
+% SIDE NOTES
 % \usepackage{pgfpages}
 % \setbeameroption{show notes} % after pgfpages to works properly
 % \setbeameroption{show notes on second screen=right}
 
-% \useoutertheme{miniframes}      % add header navigation bar
-% \usecolortheme[dark]{solarized}
+% \usecolortheme[ligth]{solarized}
 
 % Change block size
 % https://github.com/matze/mtheme/issues/307#issuecomment-502212780
 % map default block to old-block
-
 % \let\oldblock\block
 % \let\endoldblock\endblock
 % \renewenvironment{block}[1]{\begin{oldblock}{#1}\vspace{0pt}}{\end{oldblock}} % change block by adding smallskip
 
+% Personal ICONs
+% \logo{text \raisebox{-0.5cm}{\includegraphics[width=1cm]{example-image-duck}}\hspace*{\textwidth}}
 
 % Font configuration
 \usepackage{fontspec}
 \usepackage{unicode-math}
+\usepackage[fixed]{fontawesome5} % for icons
 % Math Fonts
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -30,8 +33,10 @@
 
 % my packages
 \usepackage{bookmark}
+
 \usepackage{tikz}
-\usetikzlibrary{tikzmark,calc,decorations.pathreplacing}
+\usetikzlibrary{calc,decorations.pathreplacing,tikzmark,arrows.meta}
+
 \usepackage{pgfplots}
 \usepackage{multicol}
 \usepackage{kmath}
@@ -44,7 +49,18 @@
 \usepackage{multirow} % provide \multirow
 \usepackage{soul} % provide \st
 
+% GRIDS
 % \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
+
+% TOC
+\setbeamertemplate{section in toc}[circle]
+\setbeamercolor{section in toc}{fg=white} % \setbeamercolor{section in toc}{fg=gray}
+\setbeamerfont{section in toc}{size=\small}
+
+% \setbeamertemplate{subsection in toc}[circle]
+% \setbeamerfont{section in toc}{series=\bf}
+\setbeamerfont{subsection in toc}{size=\small} % \setbeamerfont{subsection in toc}{size=\footnotesize}
+\setbeamercolor{subsection in toc}{fg=white}
 
 % my colors
 \definecolor{darkblue}{HTML}{154360}
@@ -53,130 +69,94 @@
 \definecolor{myred}{RGB}{179,30,0}
 \definecolor{myblue}{HTML}{228BE6}
 
-
-% NAVIGATION BAR
-% \makeatletter
-% \setbeamertemplate{headline}{%
-%   \begin{beamercolorbox}[colsep=1pt]{upper separation line head}
-%   \end{beamercolorbox}
-%   \begin{beamercolorbox}{section in head/foot}
-%     \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
-%   \end{beamercolorbox}%
-%   \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
-%   \end{beamercolorbox}
+% SECTION BEGINNING with current TOC
+% \AtBeginSection{
+%   \frame{
+%     \sectionpage
+%     \tableofcontents[currentsection]
+%   }
 % }
-% \makeatother
-% \setbeamercolor{section in head/foot}{fg=normal text.bg, bg=structure.fg}
 
-% FOOTER
-\setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt} PhD Defense \hfill\secname\hfill\insertframenumber/\inserttotalframenumber}}
-\setbeamertemplate{navigation symbols}{}
-
-% SECTION BEGINNING
-\AtBeginSection{
-  \frame{
-    \sectionpage
-    \tableofcontents[currentsection]
-  }
-}
-
-
-% % my commands
+% my commands
 \input{my_macros.tex}
+% my math notation
+\input{my_math_notation.tex}
 
-\title{\textsc{Echo-aware} signal processing \\for audio scene analysis}
+% theme extention
+\input{includes/header.tex}
+\input{includes/footer.tex}
+
+\title{Echo-aware signal processing \\for audio scene analysis}
 \date{\today}
 \author{Diego \textsc{Di Carlo}}
 \institute{
   \begin{description}
-    \item[PhD Director:] Nancy \textsc{Bertin}
-    \item[PhD Supervisor:] Antoine \textsc{Deleforge}
-    \item[Jury members:] Laurent \textsc{Girin} (reviewer)
+    \item[PhD supervisors:] Antoine \textsc{Deleforge}
+                        \\ Nancy \textsc{Bertin}
+    \item[Jury members:] Laurent \textsc{Girin} (reviewer - president)
                         \\Simon \textsc{Doclo} (reviewer)
-                        \\Fabio \textsc{Antonacci}
-                        \\Renaud \textsc{Seguier}
-    \item[Collaborators:] Cl\'ement \textsc{Elvira},
-                         \\Robin \textsc{Scheibler}, Ivan \textsc{Dokmani{\'c}},
-                         \\Sharon \textsc{Gannot}, Pinchas \textsc{Tandeitnik}
+                        \\Fabio \textsc{Antonacci (examiner)}
+                        \\Renaud \textsc{Seguier (examiner)}
+    % \item[Collaborators:] Cl\'ement \textsc{Elvira},
+    %                      \\Robin \textsc{Scheibler}, Ivan \textsc{Dokmani{\'c}},
+    %                      \\Sharon \textsc{Gannot}, Pinchas \textsc{Tandeitnik}
   \end{description}
 
   \vspace{\baselineskip}
   Universit\'e de Rennes 1, IRISA/INRIA, Panama research group
 }
 
-% \vspace{\baselineskip}
-% \textbf{Rapporteurs avant soutenance :}
-% \newline
-% \begin{tabular}{@{}lll}
 % Laurent GIRIN & Professeur & GIPSA-Lab, Grenoble-INP \\
 % Simon DOCLO & Full professor & Carl von Ossietzky Universität, Oldenburg
-% \end{tabular}
 
-% \vspace{\baselineskip}
-% \textbf{Composition du Jury :}
-% \newline
-% \begin{tabular}{@{}llll}
 %     Pr\'{e}sident :         & Laurent GIRIN       & Professeur            & GIPSA-Lab, Grenoble-INP \\
 %     Examinateurs :          & Simon DOCLO         & Full professor        & Carl von Ossietzky Universität, Oldenburg \\
 %                             & Renaud SEGUIER      & Professeur            & CentraleSupélec, Cesson-Sévigné \\
 %                             & Fabio ANTONACCI     & Assistant professor   & Politecnico di Milano \\
 %     Dir. de th\`{e}se :     & Nancy BERTIN        & Chargée de recherche  &  IRISA, Rennes\\
 %     Co-dir. de th\`{e}se :  & Antoine DELEFORGE   & Charge de recherche   & Inria Grand Est, Nancy\\
-% \end{tabular}
 
-% \vspace{\baselineskip}
-% {\normalsize \textbf{Invit\'{e}(s) :}}\\
-% \footnotesize
-% \begin{tabular}{@{}ll}
-% Pr\'{e}nom Nom & Fonction et \'{e}tablissement d'exercice \\
-% \end{tabular}
-
-\makeatletter
-\setlength{\metropolis@titleseparator@linewidth}{.93pt}
-\setlength{\metropolis@progressonsectionpage@linewidth}{.93pt}
-\setlength{\metropolis@progressinheadfoot@linewidth}{.93pt}
-\makeatother
 
 \begin{document}
 
-    \maketitle
+    % COVER PAGE
+    {
+      % in case of background image in the first slide
+      % \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{./imgs/codingImageNineEdited.jpg}}
+      \maketitle
+    }
 
-    \begin{frame}[standout]{Overview}
+    % % TOC
+    % \begin{frame}[standout,t]{}
 
-      \begin{adjustbox}{minipage=.7\textwidth,margin=0pt \smallskipamount,center}
+    %   \vspace{20mm}
+    %   \begin{adjustbox}{minipage=.7\textwidth,margin=0pt \smallskipamount,center}
+    %     \alert{Echo-aware signal processing
+    %     \\for audio scene analysis}
 
-        \alert{Echo-aware signal processing
-        \\for audio scene analysis}
-
-        \vspace{\baselineskip}
-        \setbeamercolor{part in toc}{fg=gray}
-        % \setbeamercolor{section in toc}{fg=gray}
-        \setbeamercolor{section in toc}{fg=white}
-        \setbeamerfont{section in toc}{size=\small}
-        \setbeamercolor{subsection in toc}{fg=white}
-        \setbeamerfont{subsection in toc}{size=\small}
-        \tableofcontents
-      \end{adjustbox}
-    \end{frame}
+    %     \pause
+    %     \vspace{\baselineskip}
+    %     \tableofcontents
+    %   \end{adjustbox}
+    % \end{frame}
 
     \section{Introduction}
     \input{content/intro.tex}
 
-    \section{Modeling}
+    \section{Problem Statement}
     \input{content/model.tex}
 
-    \section{Acoustic Echo Estimation}
-    \input{content/estimation.tex}
+    % \section{Acoustic Echo Estimation}
+    % \input{content/estimation.tex}
 
-    \section{Echo-aware Application}
-    \input{content/application.tex}
+    % \section{Echo-aware Application}
+    % \include{content/application.tex}
 
-    \section{Echo-aware Dataset}
-    \input{content/data.tex}
+    % \section{Echo-aware Dataset}
+    % \include{content/data.tex}
 
-    \section{Conclusion}
-    \input{content/conclusion.tex}
+    % \section{Conclusion}
+    % \include{content/conclusion.tex}
 
     % \appendix
 

@@ -1,0 +1,161 @@
+% Some commands for the template
+% -------------------------------------------------------------------------------------
+
+\setbeamertemplate{section in toc}[circle]
+\setbeamerfont{section in toc}{series=\bf}
+\setbeamertemplate{subsection in toc}[ball unnumbered]
+\setbeamerfont{subsection in toc}{size=\footnotesize}
+
+
+% Navigation circles
+\makeatletter
+\setbeamertemplate{headline}{%
+
+\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+\end{beamercolorbox}
+
+\begin{beamercolorbox}{section in head/foot}
+  \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+\end{beamercolorbox}%
+
+\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+\end{beamercolorbox}
+}
+\setbeamercolor{section in head/foot}{fg=normal text.bg, bg=structure.fg}
+
+% Navigation circles become squares
+\setbeamertemplate{mini frame}
+{%
+    \begin{pgfpicture}{0pt}{0pt}{.1cm}{.1cm}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{.7*\the\beamer@boxsize}{.7*\the\beamer@boxsize}}
+        \pgfusepath{fill,stroke}
+    \end{pgfpicture}%
+}
+
+\setbeamertemplate{mini frame in current subsection}
+{%
+    \begin{pgfpicture}{0pt}{0pt}{.1cm}{.1cm}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{.7*\the\beamer@boxsize}{.7*\the\beamer@boxsize}}
+        \pgfusepath{stroke}
+    \end{pgfpicture}%
+}
+
+\makeatother
+
+% Some personal commands
+\newcommand{\persoframetitle}[1]{
+  \vspace{1em}
+  {\bf \Large #1}
+  \vspace{0.3em}
+  \hrule
+  \vfill
+}
+
+% The progress bar
+% -------------------------------------------------------------------------------------
+\usenavigationsymbolstemplate{}
+\definecolor{pbblue}{HTML}{000000}% color for the progress bar and the circle
+
+\makeatletter
+
+\def\progressbar@progressbar{} % the progress bar
+
+\newcount\progressbar@tmpcounta% auxiliary counter
+
+\newcount\progressbar@tmpcountb% auxiliary counter
+
+\newdimen\progressbar@pbht %progressbar height
+
+\newdimen\progressbar@pbwd %progressbar width
+
+\newdimen\progressbar@rcircle % radius for the circle
+
+\newdimen\progressbar@tmpdim % auxiliary dimension
+
+\progressbar@pbwd=\linewidth
+
+\progressbar@pbht=1pt
+
+\progressbar@rcircle=2.5pt
+
+\def\progressbar@progressbar{%
+
+    \progressbar@tmpcounta=\insertframenumber
+
+    \progressbar@tmpcountb=\inserttotalframenumber
+
+    \progressbar@tmpdim=\progressbar@pbwd
+
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+    \begin{tikzpicture}
+
+      \draw[line width=\progressbar@pbht]
+
+      (0pt, 0pt) -- ++ (\progressbar@pbwd,0pt);
+
+      \filldraw %
+      (\the\dimexpr\progressbar@tmpdim-\progressbar@rcircle\relax, .5\progressbar@pbht) circle (\progressbar@rcircle);
+
+      \node[draw,text width=3.5em,align=center,inner sep=1pt,anchor=east] at (0,0) {\insertframenumber/\inserttotalframenumber};
+
+    \end{tikzpicture}%
+
+}
+
+%% Une progressbar / logo dans le bas des slides
+
+%\addtobeamertemplate{footline}{}
+
+%{%
+
+%	\begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
+
+%		\progressbar@progressbar%
+
+%	\end{beamercolorbox}%11
+
+%\setlength\unitlength{1ex}%
+
+%\begin{picture}(0,0)
+
+% \put{} defines the position of the frame
+
+%\put(80,4){International Geoscience and Remote Sensing Symposium 30/07/2019}%
+
+%\put(135,4){\includegraphics[width=0.15\textwidth]{Figures/logo_igarss_dark.pdf}}%
+
+%\put(110,4){Ammar Mian, 30 July 2019}%
+
+%\end{picture}%
+
+%}
+
+
+
+% Beamer: How to place images behind text (z-order)
+
+% (http://tex.stackexchange.com/a/134311)
+
+% -------------------------------------------------------------------------------------
+
+\makeatletter
+
+\newbox\@backgroundblock
+
+\newenvironment{backgroundblock}[2]{%
+
+  \global\setbox\@backgroundblock=\vbox\bgroup%
+
+    \unvbox\@backgroundblock%
+
+    \vbox to0pt\bgroup\vskip#2\hbox to0pt\bgroup\hskip#1\relax%
+
+}{\egroup\egroup\egroup}
+
+\addtobeamertemplate{background}{\box\@backgroundblock}{}
+
+\makeatother
+

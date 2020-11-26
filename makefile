@@ -5,6 +5,7 @@ all: main.pdf
 
 main.pdf: main.tex logs
 	latexmk -pdflatex=lualatex -pdf -interaction=nonstopmode --shell-escape -file-line-error -f -jobname=logs/main main.tex
+	# latexmk -pdflatex=latex -pdf -interaction=nonstopmode --shell-escape -file-line-error -f -jobname=logs/main main.tex
 	cp ./logs/main.pdf ./main.pdf
 
 clean:

@@ -1,6 +1,4 @@
-\subsection{Introduction}
-
-\begin{frame}{Acoustic Echo Retrieval}
+\begin{frame}[t]{Acoustic Echo Retrieval}
 
     % Given the echo model
     % \begin{equation*}
@@ -49,9 +47,9 @@
                     \small
                     \item \textbf{easier} problem
                     \item \textbf{intrusive} or specific setup
-                    \item Time of Arrival accessible
-                    \item single mic
-                    \\\hspace{-1em}\textcolor{gray}{\footnotesize \textbf{Application} Sonar, Calibration, Measurements}
+                    \item Time of Arrival (\textbf{TOA}s) accessible
+                    \\\hspace{.3em} $\implies$ \textbf{single} mic
+                    \\\hspace{-1em}\textcolor{gray}{\footnotesize \textbf{Application} sonar, calibration, measurements}
                 \end{itemize}
             \end{block}
 
@@ -61,11 +59,11 @@
                 \vspace{-2mm}
                 \begin{itemize}
                     \small
-                    \item more difficult problem --- blind inverse problem
-                    \item passive hearing
-                    \item Time Difference of Arrivals only
-                    \item only multi-microphones
-                    \\\hspace{-1em}\textcolor{gray}{\footnotesize \textbf{Application} smart speakers, robot}
+                    \item \textbf{blind inverse} problem (harder)
+                    \item \textbf{passive} listening
+                    \item Time Difference of Arrivals (\textbf{TDOA}s) only
+                    \\\hspace{.3em} \textbf{multi-mic}
+                    \\\hspace{-1em}\textcolor{gray}{\footnotesize \textbf{Application} a-posteriori processing, smart speakers, ...}
                 \end{itemize}
             \end{block}
             }
@@ -80,11 +78,11 @@
 
     \pause[6]
     \vfill
-    \textcolor{myred}{\textbf{Scenario:} signal source, only TOAs and passive system}
+    \textcolor{myred}{\textbf{Our case:} signal source, only TOAs and passive system (I mics)}
 
 \end{frame}
 
-\begin{frame}{Passive Acoustic Echo Estimation}
+\begin{frame}[t]{Passive Acoustic Echo Estimation}
 
     \begin{block}{\alert{Passive} Acoustic Echo Estimation:}
         \small
@@ -132,14 +130,15 @@
             \begin{column}{.48\textwidth}
                 Pros
                 \begin{itemize}
-                    \item SIMO BCE is well studied % (elegant framework)
+                    \item SIMO BCE is well studied (eg. LASSO)% (elegant framework)
+                    \\\textcolor{gray}{\small (many frameworks and solver)}
                     \item Good in some scenario %\\$\hookrightarrow$ if not limitation
                 \end{itemize}
             \end{column}
             \begin{column}{.48\textwidth}
                 Pros
                 \begin{itemize}
-                    \item No need for full RIRs
+                    \item No full RIRs, no peak picking
                     \item Sub-sampling accuracy
                     \item Low complexity
                     \item Sparsity and Non-negativity are respected
@@ -161,8 +160,10 @@
             \begin{column}{.48\textwidth}
                 Cons
                 \begin{itemize}
-                    \item echo sorting
-                    \item exploratory
+                    \item no direct re-use of LASSO studies
+                    \item exploratory (no solver)
+                    \item easy ill-conditioned
+                    \item only few works~\cite{tukuljac2018mulan,condat2015cadzow}
                 \end{itemize}
             \end{column}%
         \end{columns}
@@ -321,73 +322,72 @@
 
 \begin{frame}[t]{AER: Challenges and Contribution}
 
-  \begin{columns}[T,onlytextwidth]
+%   \begin{columns}[T,onlytextwidth]
 
-    \column{0.45\textwidth}
-    \begin{block}{State Of The Art}
-    \begin{enumerate}
-        \item discrete (sparse) SIMO BCE
-        \\based on time-domain XREL
-        \item Peak-picking
-    \end{enumerate}
-    \end{block}
+%     \column{0.45\textwidth}
+%     \begin{block}{State Of The Art}
+%     \begin{enumerate}
+%         \item discrete (sparse) SIMO BCE
+%         \\based on time-domain XREL
+%         \item Peak-picking
+%     \end{enumerate}
+%     \end{block}
 
-    \column{0.45\textwidth}
-    \only<2,3>{
-        \begin{block}{$\implies$ however}
+%     \column{0.45\textwidth}
+%     \only<2,3>{
+%         \begin{block}{$\implies$ however}
+%             \begin{itemize}
+%                 \item Estimation in the RIR space
+%                 \\memory issue
+%                 \item Echoes are ``off-grid''
+%                 \\accuracy issues and mismatch
+%                 \item Peak picking and labeling
+%                 \\tuned and NP-hard
+%             \end{itemize}
+%         \end{block}
+%     }
+
+%     \end{columns}
+
+%     \vspace{1em}
+
+    \begin{alertblock}{$\implies$ we propose}
+
+    \vspace*{.5em}
+    \begin{columns}[T, onlytextwidth]
+        \column{0.45\textwidth}
+        \blaster {\small \cite{di2020blaster}}
+        \begin{enumerate}
+            \item Knowledge-based approach
+            \item BCE + Continuous Dictionary
+            \\based on XREL
+            \item Iterative-like approach
+            \item Inputs:
             \begin{itemize}
-                \item Estimation in the RIR space
-                \\memory issue
-                \item Echoes are ``off-grid''
-                \\accuracy issues and mismatch
-                \item Peak picking and labeling
-                \\tuned and NP-hard
+                \item stereo mic recordings
+                \item \# echoes
             \end{itemize}
-        \end{block}
-    }
+            \item Output: $\set{\tau_i^{(r)}, \alpha_i^{(r)}}_{i,r}$
+        \end{enumerate}
 
+        \column{0.45\textwidth}
+        \lantern {\small \cite{di2019mirage}}
+        \begin{enumerate}
+            \item Learning-based regression
+            \item Deep Learning used for SSL
+            \item Inputs: stereo audio feature
+            \item Output in the TDOA space
+            \\($\neq$ Echo space)
+        \end{enumerate}
     \end{columns}
-
-    \vspace{1em}
-
-    \only<3>{
-        \begin{alertblock}{$\implies$ we propose}
-
-        \vspace*{.5em}
-        \begin{columns}[T, onlytextwidth]
-            \column{0.45\textwidth}
-            \blaster {\small \cite{di2020blaster}}
-            \begin{enumerate}
-                \item Knowledge-based approach
-                \item BCE + Continuous Dictionary
-                \\based on XREL
-                \item Iterative-like approach
-                \item Inputs:
-                \begin{itemize}
-                    \item stereo mic recordings
-                    \item \# echoes
-                \end{itemize}
-                \item Output: $\set{\tau_i^{(r)}, \alpha_i^{(r)}}_{i,r}$
-            \end{enumerate}
-
-            \column{0.45\textwidth}
-            \lantern {\small \cite{di2019mirage}}
-            \begin{enumerate}
-                \item Learning-based regression
-                \item Deep Learning used for SSL
-                \item Inputs: stereo audio feature
-                \item Output in the TDOA space
-                \\($\neq$ Echo space)
-            \end{enumerate}
-        \end{columns}
-    \end{alertblock}
-    }
+\end{alertblock}
 
 \end{frame}
 
 \subsection{\blaster}
 
 \begin{frame}{\blaster - Knowledge-based Off-grid AER}
+
     \begin{block}{\textbf{Observation 1:} the cross relation remains true in the frequency domain}
         \begin{equation*}
             \mathcal{F}x_1 \cdot \mathcal{F}h_2 (\sfrac{n}{F_s}) = \mathcal{F}x_2 \cdot \mathcal{F}h_1(\sfrac{n}{F_s}) \qquad n=0\dots N-1
@@ -396,9 +396,11 @@
 
         \vspace{.5em}
 
+        \pause
         \begin{block}{\textbf{Observation 2:} $\mathcal{F}\delta_{\mathrm{echo}}$ is known in closed-form}
         \end{block}
 
+        \pause
         \vspace{1.em}
         \begin{block}{\textbf{Observation 3:} $\mathcal{F}{\mathrm{x_i}}$ can be (well) approximated by DFT}
         \begin{equation*}
@@ -407,6 +409,7 @@
         \end{block}
 
 
+        \pause
         \vfill
         \setbeamercolor{block title}{fg=white,bg=darkblue}
         \setbeamercolor{block body}{fg=black,bg=bluegreen!10}
@@ -426,9 +429,10 @@
         \end{equation*}
         \end{block}
 
+        \pause
         \begin{center}
-            Looks like a \textbf{Lasso} problem, but $\mathcal{F}h_2 (f)$ is a continuous function.
-            \\Instance of a \textbf{BLasso} problem\cite{bredies2020sparsity}
+            $\sim$ \textbf{Lasso} problem, but $\mathcal{F}h_2 (f)$ is a continuous function.
+            \\Instance of a \textbf{BLasso} problem~\cite{bredies2020sparsity}
             \\Solved with Sliding Frank-Wolfe algorithm \cite{denoyelle2019sliding}
         \end{center}
 
@@ -438,12 +442,12 @@
             \cmark \, \parbox{8em}{anchor prevents \\ trivial solution}}
         \end{center}
 
-        In the manuscript:
-        \begin{itemize}
-            \item From Lasso to BLasso
-            \item Pseudocode of the Algorithm
-            \item How to manually tuned lambda
-        \end{itemize}
+        % In the manuscript:
+        % \begin{itemize}
+        %     \item From Lasso to BLasso
+        %     \item Pseudocode of the Algorithm
+        %     \item How to manually tuned lambda
+        % \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{\blaster - Experimental Results}
@@ -460,7 +464,7 @@
         \begin{column}{0.45\textwidth}
             \begin{block}{Methods}
                 \begin{itemize}
-                    \item BSN \cite{lin2007blind}
+                    \item BSN --- SIMO BCE\cite{lin2007blind}
                     \item IL1C: iteratively-weighted $\ell_1$ constraint SIMO BCE
                     \\\cite{crocco2015room}
                     \item \blaster: Proposed off-grid approach
@@ -474,13 +478,22 @@
         \end{column}
     \end{columns}
 
+    \pause
+    \begin{block}{Dataset}
+        \begin{itemize}
+            \footnotesize
+            \item $\mathcal{D^{\text{SNR}}}$: $SNR \in [0, 20]$ dB, $\text{RT}_{60} = 400$ ms
+            \item $\mathcal{D^{\text{RT60}}}$: $\text{RT}_{60} = [100, 1000]$ ms, $SNR = 20$ dB
+        \end{itemize}
+    \end{block}
 
-    % \begin{block}{Metrics}
-    %     \begin{itemize}
-    %         \item Precision (how many estimated echoes are correct)
-    %         \item RMSE (error on the correct guess)
-    %     \end{itemize}
-    % \end{block}
+    \pause
+    \begin{block}{Metrics}
+        \begin{itemize}
+            \item Precision (how many estimated echoes are correct)
+            \item RMSE (error on the correct guess)
+        \end{itemize}
+    \end{block}
 
 \end{frame}
 

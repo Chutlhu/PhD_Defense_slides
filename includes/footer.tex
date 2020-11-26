@@ -1,0 +1,66 @@
+% first remove mtheme page number
+
+
+
+%%% CLEMENT's FOOTER
+% used in ICASSP2020
+
+% \setbeamertemplate{footline}[text line]{%
+%   \parbox{\linewidth}{\vspace*{-8pt}\faGraduationCap~PhD Defense\hfill\secname\hfill\insertframenumber/\inserttotalframenumber}}
+% \setbeamertemplate{navigation symbols}{}
+
+
+
+%%% FROM BRELOY
+%%% https://ammarmian.github.io/
+
+% NEW PROGRESS BAR
+\usenavigationsymbolstemplate{}
+\definecolor{pbblue}{HTML}{0A75A8}% color for the progress bar and the circle
+
+\makeatletter
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@rcircle % radius for the circle
+\newdimen\progressbar@tmpdim % auxiliary dimension
+\progressbar@pbwd=\linewidth
+\progressbar@pbht=1pt
+\progressbar@rcircle=2.5pt
+\def\progressbar@progressbar{%
+
+    \progressbar@tmpcounta=\insertframenumber
+    \progressbar@tmpcountb=\inserttotalframenumber
+    \progressbar@tmpdim=\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+    \begin{tikzpicture}
+
+      \draw[line width=\progressbar@pbht] (0pt, 0pt) -- ++ (\progressbar@pbwd,0pt);
+      \filldraw (\the\dimexpr\progressbar@tmpdim-\progressbar@rcircle\relax, .5\progressbar@pbht) circle (\progressbar@rcircle);
+      \node[draw,text width=3.5em,align=center,inner sep=1pt,anchor=east] at (0,0) {\insertframenumber/\inserttotalframenumber};
+    \end{tikzpicture}%
+}
+\makeatother
+
+
+% Set the progress bar
+\makeatletter
+\addtobeamertemplate{footline}{}{%
+	\begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
+        \progressbar@progressbar%
+    \end{beamercolorbox}%
+
+    % \setlength\unitlength{1ex}%
+    % \begin{picture}(0,0)
+    % \put{} defines the position of the frame
+    % \put(80,4){International Geoscience and Remote Sensing Symposium 30/07/2019}%
+    % \put(135,4){\includegraphics[width=0.15\textwidth]{example-image-1}}%
+    % \put(110,4){Ammar Mian, 30 July 2019}%
+    % \end{picture}%
+
+}
+\makeatother
