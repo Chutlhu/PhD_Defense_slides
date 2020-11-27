@@ -11,9 +11,21 @@
 %     \metroset{block=fill}
 %     \begin{alertblock}{#1}}{\end{alertblock}}
 
-\newenvironment{mydefblock}[1]{
+\newenvironment{mydefblock}[1]{%
     \metroset{block=fill}
-    \begin{alertblock}{#1}}{\end{alertblock}}
+    \begin{alertblock}{#1}}%
+    {\end{alertblock}}
+
+\newenvironment<>{mysotablock}[1][]{%
+    \setbeamercolor{postit}{fg=black,bg=bluegreen!10}
+    \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
+
+\newenvironment<>{mycontriblock}[1][]{%
+  \setbeamercolor{postit}{fg=black,bg=mygreen!20}
+  \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
+
+
+\newcommand{\addendum}[1]{{\color{gray}\small (#1)}}
 
 \newcommand{\mytriag}{\llap{\color{black!30}\scriptsize\raisebox{1pt}{$\blacktriangleright$}\quad}}
 
@@ -27,11 +39,14 @@
 \newcommand{\cmark}{\textcolor{mygreen}{\ding{51}}}%
 \newcommand{\xmark}{\textcolor{myred}{\ding{55}}}%
 
+\newcommand{\aka}{\textit{a.k.a.}}
+\newcommand{\eg}{\textit{e.g.}}
+\newcommand{\ie}{\textit{i.e.}}
+
+
 % MATH
 \newcommand{\echoModelFreq}{\ensuremath{\sum_{r=0}^{R} \alpha_i^{(r)}(f) \cste^{- \csti 2 \pi \tau_i^{(r)} f_k}}}
 \newcommand{\timeavg}{\ensuremath{\underset{t}{\mathtt{avg.}}}}
-
-
 
 
 \usepackage{pgffor}

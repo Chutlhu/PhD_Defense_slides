@@ -1,0 +1,151 @@
+% \begin{frame}
+%     \begin{columns}[T,onlytextwidth]
+%     %     \begin{column}{0.60\textwidth}
+%     %         \begin{block}{Audio signal processing methods}
+%     %                 \begin{itemize}
+%     %                     \item<3-> \alert{ignore} it
+%     %                     \item<4-> assume it \alert{free-field}
+%     %                     \item<5-> model it \alert{entirely}
+%     %                     \item<6-> model as \alert{few reflection}\tikzmark{top6}
+%     %                     \item<7-> model it as \alert{early and late} parts\hspace{1em}\tikzmark{right6}\tikzmark{bot6}
+%     %                 \end{itemize}
+%     %         \end{block}
+%     %     \end{column}
+%     %     \begin{column}{0.38\textwidth}
+%     %         \only<3>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%     %         \only<4>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%     %         \only<5>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%     %         \only<6>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%     %         \only<7->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%     %     \end{column}
+%         \end{columns}
+
+%     \only<8->{
+%         \begin{tikzpicture}[overlay, remember picture]
+%             \node[anchor=base] (a) at (pic cs:top6) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+%             \node[anchor=base] (b) at (pic cs:bot6) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+%             \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+%             (a.north -| {pic cs:right6}) -- node[right,inner sep=1em] {
+%                 \textcolor{myred}{\textbf{Echo-aware methods}}} (b.south -| {pic cs:right6});
+%         \end{tikzpicture}
+%     }
+
+%     \visible<9->{
+%         \begin{block}{Modelling the sound field}
+%             \begin{itemize}
+%                 \item as free field $\implies$ \textbf{simple}, but \textbf{incoherent} processing (lost of energy)
+%                 \item entirely $\implies$ \textbf{coherent} processing, but very \textbf{challenging}
+%             \end{itemize}
+%         \end{block}
+%     }
+
+%     \vfill
+%     \begin{block}{Echo-aware processing}
+%     \end{block}
+
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.3\textwidth}
+%             \alert{Free-field} processing
+%             \\{\small(only direct path)}
+%         \end{column}\hfill
+%         \begin{column}{0.3\textwidth}
+%             \alert{Echo} processing
+%             \\{\small(only specular reflection)}
+%         \end{column}\hfill
+%         \begin{column}{0.3\textwidth}
+%             \alert{Reverberant} processing
+%             \\{\small(entire sound field)}
+%         \end{column}
+%     \end{columns}%
+
+%     \vfill
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.3\textwidth}
+%             \small
+%             \begin{itemize}
+%                 \item[\cmark] \textcolor{mygreen}{``simple'' processing} %closed-from formulas %fully deterministic
+%                 \item[\cmark] \textcolor{mygreen}{``short'' processing} % STFT, no latency
+%                 \item[\xmark] \textcolor{myred}{Reflection are interferences}
+%                 \item[\xmark] \textcolor{myred}{Neglect most of the sound energy}
+%                 \item[\xmark] \textcolor{myred}{incoherence $\implies$ distortion}
+%             \end{itemize}
+%         \end{column}\hfill
+%         \begin{column}{0.3\textwidth}
+%             \small
+%             \begin{itemize}
+%                 \item short processing %  echoes $\rightleftarrows$ positions
+%                 \item simple processing
+%                 \item reflection are integrated,
+%                 \\late reverberation can considered
+%                 \item reflection are difficult to estimate
+%                 \item reflection need to be correctly estimated
+%             \end{itemize}
+%         \end{column}\hfill
+%         \begin{column}{0.3\textwidth}
+%             \small
+%             \begin{itemize}
+%                 % fully deterministic and stochastic processing
+%                 \item difficult processing %estimation is extremely difficult, more parameters to estimate
+%                 \item long precessing
+%                 \item Reflection perfectly integrated
+%             \end{itemize}
+%         \end{column}
+%     \end{columns}
+
+%         \\Anechoic processing
+%         \begin{itemize}
+%             \item short processing
+%             \item[\cmark] sound field tends to be diffuse
+%             \item[\xmark] sound reflection as interferences
+%             \\neglect most of the sound energy
+%             \\ignore the correlation between the direct sound and its reflection and consequently may result in a distorted output
+%             \item[\xmark] coherent processing becomes impossible
+%         \end{itemize}
+%         Echo-processing
+%         \begin{itemize}
+%             \item Middle processing
+%             perceive coming from all directions~\cite{daldegan1988}
+%         \end{itemize}
+%         Reverberant processing
+%         \begin{itemize}
+%             \item Long processing
+%             \item[\cmark] narrowband approximation is valid
+%             \item[\cmark] sound field is described by full RIRs
+%             \item[\cmark] all reflection can be \alert{coherently} processed
+%             \item[\xmark] long frames impose lantency
+%         \end{itemize}
+%     \end{block}
+% \end{frame}
+
+
+% \begin{frame}{\blaster - conclusion}
+
+%     Observation
+%     \begin{itemize}
+%         \item[\cmark] Smaller RMSE
+%         \item[\xmark] Sensitive to source signal
+%     \end{itemize}
+
+%     Future work:
+%     \begin{itemize}
+%         \item Real data
+%         \item Extention to Multichannel
+%         \item Relative Transfer Function
+%     \end{itemize}
+
+% \end{frame}
+
+% \begin{frame}{Precision per threshold in typical scenario}
+
+%     \begin{table}[ht]
+%         \centering
+%         \input{tables/tab_blaster.tex}
+%         \caption{$\text{RT}_{60} = 200$ ms and SNR = 20 dB.}
+%     \end{table}
+
+%     \begin{center}
+%         \textcolor{mygreen}{\cmark \: \parbox{8em}{Invariant\\to threshold}} \qquad
+%         \textcolor{myred}{\xmark \: \parbox{8em}{Sensitive \\to \# echoes}}
+%     \end{center}
+
+% \end{frame}

@@ -53,7 +53,7 @@
 \usepackage{multirow} % provide \multirow
 
 % GRIDS
-% \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
+\usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
 
 % TOC
 \setbeamertemplate{section in toc}[circle]
@@ -129,40 +129,33 @@
       \maketitle
     }
 
-    % % TOC
-    % \begin{frame}[standout,t]{}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Introduction}
+    % }
 
-    %   \vspace{20mm}
-    %   \begin{adjustbox}{minipage=.7\textwidth,margin=0pt \smallskipamount,center}
-    %     \alert{Echo-aware signal processing
-    %     \\for audio scene analysis}
+    % \input{content/intro.tex}
 
-    %     \pause
-    %     \vspace{\baselineskip}
-    %     \tableofcontents
-    %   \end{adjustbox}
-    % \end{frame}
+    % %section do not appear in the navigation bar
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Problem Statement}
+    % }
+    % \input{content/model.tex}
 
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Introduction}
-    }
-
-    \input{content/intro.tex}
 
     %section do not appear in the navigation bar
     {
       \makeatletter
       \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
       \makeatother
-      \section{Problem Statement}
+      \section{Acoustic Echo Estimation}
     }
-    \input{content/model.tex}
-
-    % \section{Acoustic Echo Estimation}
-    % \input{content/estimation.tex}
+    \input{content/estimation.tex}
 
     % \section{Echo-aware Application}
     % \include{content/application.tex}
