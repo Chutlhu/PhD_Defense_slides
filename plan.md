@@ -2,8 +2,7 @@
 
 ## Introduction
 
-<!-- Hello everyone -->
-Hello everyone and thanks to be here today.
+Good morning everyone and thanks to be here today.
 
 The title of my PhD thesis is:
 Echo-aware Signal Processing for Audio Scene Analysis.
@@ -91,6 +90,20 @@ To summarize the title:
 Audio Scene Analysis give us our problems we want to solve;
 Signal processing give us models and tools;
 And echoes echoes give us useful information that can be used for better processing.
+
+In my PhD I addressed this along 3 directions:
+
+The first direction consists in estimating the properties of acoustic echoes, for which we propose two methods, one analytical and one based on machine-learning.
+The main different with respect to state of the art is that they do not require any parameter tuning or model the propagation entirely.
+
+In the fist part, we will assume to know the properties of acoustic echoes used for boosting classical audio signal processing methods for sound source separation, sound source localization, speech enhancement and the estimation of the room shape.
+
+Finally, since most of the validation of the above methods is conducted on synthetic data and no dataset have been yet proposed for specific echo-aware processing, we build our own.
+
+The presentation of today will cover partially the manuscript, highlighting to major contribution of the thesis.
+The first part is dedicated to the two estimation methods,
+the second part will present an echo-aware application in sound source localization
+and we will conclude with the presentation of the dataset with its validation on Speech Enhancement
 
 
 ### Challenges and Objective
