@@ -1,0 +1,130 @@
+% \begin{frame}{Audio signal processing and sound propagation}
+
+%     \begin{columns}[T,onlytextwidth]
+
+%         \begin{column}{.48\textwidth}
+%             \begin{block}{Sound propagation is}
+%                 \begin{itemize}
+%                 \item<1-> completely ignored
+%                 \item<2-> assumed free-field case (\textit{anechoic})
+%                 \item<3-> model it full (\textit{reverberant})
+%                 \item<4-> \textit{learned} it full (\textit{reverberant})
+%                 \item<5-> model few early echoes (\textit{multipath})
+%             \end{itemize}
+%             All methods can be grouped accordingly
+%             \end{block}
+%         \end{column}
+
+%         \begin{column}{.48\textwidth}
+%             \centering
+%             \only<1>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<2>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<3>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<4>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+%             \only<5->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
+
+%             \vspace{-2.3em}
+%             \begin{equation*}
+%                 \begin{aligned}
+%                     x_i(t) &= (h_i \ast s)(t)\\
+%                     h_i( t) &= \textcolor{myred}{h_i^d(t)} + \textcolor{myblue}{h_i^e(t)} + \textcolor{mygreen}{h_i^r(t)}
+%                 \end{aligned}
+%             \end{equation*}
+%         \end{column}
+
+%     \end{columns}
+
+%     % \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
+%     %     \begin{itemize}
+%     %         \item detrimentally affect typical Audio Scene Analysis algorithm
+%     %         \item undesired interfering source
+%     %         \item undesired position of the true sources (TDOA disambiguation)
+%     %     \end{itemize}
+
+%     % \end{alertblock}
+%     \begin{block}{Recall}
+%         \begin{itemize}
+%             \item anechoic case $\implies$ simple mapping, but incoherence processing
+%             \item reverberant case $\implies$ hard mapping and estimation, but coherent processing
+%         \end{itemize}
+%         \hfill \textcolor{myred}{\textbf{What can we do with echoes?}}
+%     \end{block}
+% \end{frame}
+
+
+
+% \begin{frame}{\faFlask~Experimental results \hfill\faMapMarked*}
+
+%     \textbf{Data:} virtually generated close dataset as for \lantern
+%     \\\textbf{Metric:} angular mean error and accuracy (thr=10, 20)
+
+%     \pause[1]
+%     \begin{columns}[T,onlytextwidth]
+
+%         \begin{column}{.4\textwidth}
+%         \begin{block}{AOA estimation}
+%             \begin{itemize}
+%                 \item[\cmark] Similar when wn
+%                 \item[\xmark] Huge drop when noise
+%                 \item[\xmark] Huge drop when speech and noise
+%             \end{itemize}
+%         \end{block}
+%         \end{column}
+
+%         \begin{column}{.58\textwidth}
+
+%             \centering
+%             \small
+%             \begin{tabular}{cl|cc}
+%             \toprule
+%             \mathtt{AOA} &             &    \multicolumn{2}{c}{ACCURACY}  \\
+%                        & Input         &  $\theta<\ang{10}$ &  $\theta<\ang{20}$ \\
+%             \midrule
+%             MIRAGE     &   wn          &    4.10 (77)    &  5.97 (97)  \\
+%             MIRAGE     &   wn+n        &    5.00 (26)    &  9.89 (54)  \\
+%             GCC-PHAT   &   wn          &    4.22 (81)    &   6.19 (97) \\
+%             GCC-PHAT   &   wn+n        &    4.03 (65)    &   5.34 (83) \\
+%             \visible<3->{MIRAGE     &   sp          &    4.83 (63)    &  7.26 (82)  }\\
+%             \visible<3->{MIRAGE     &   sp+n        &    4.60 (16)    &  9.88 (35)  }\\
+%             \visible<3->{GCC-PHAT   &   sp 		   &    4.08 (82)    &   5.34 (97)  }\\
+%             \visible<3->{GCC-PHAT   &   sp+n        &    4.70 (19)    &   8.38 (32) }\\
+%             \bottomrule
+%         \end{tabular}
+%         \end{column}
+%     \end{columns}
+
+%     \pause[4]
+%     \vspace{5mm}
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{.25\textwidth}
+%             \begin{block}{2D SSL estimation}
+%                 \textcolor{gray}{\small (both Az. and El.)}
+%             \end{block}
+%         \end{column}
+
+%         \begin{column}{.74\textwidth}
+%             \centering
+%             \small
+%             \begin{tabular}{cl|cc|cc}
+%             \toprule
+%             \textbf{DoA}      &               &  \multicolumn{2}{c|}{ACCURACY} &   \multicolumn{2}{c}{ACCURACY} \\
+%                             &               &  \multicolumn{2}{c|}{$<\ang{10}$} &   \multicolumn{2}{c}{$<\ang{20}$} \\
+%                             &    Input    &  $\theta$ &  $\phi$ &  $\theta$ &  $\phi$ \\
+%             \midrule
+%             MIRAGE &  wn           &   4.5 (59) &  3.9 (71) &   6.8 (79) &   5.9 (88) \\
+%             MIRAGE &  wn+n     &   4.4 (18) &  5.5 (26) &   9.4 (35) &  11.1 (66) \\
+%             MIRAGE &  sp       &   4.6 (45) &  4.8 (59) &   8.1 (71) &   7.2 (83) \\
+%             MIRAGE &  sp+n &   5.2 (17) &  5.9 (12) &  10.7 (38) &  12.3 (43) \\
+%             \bottomrule
+%         \end{tabular}
+
+%         \end{column}
+
+%     \end{columns}
+
+%     \begin{center}
+%         \textcolor{mygreen}{\cmark \: \parbox{12em}{Solved ``impossible''\\localization}}
+%         \quad \textcolor{myred}{\xmark \: \parbox{12em}{Performance depending on\\echo estimation}}
+%     \end{center}
+
+% \end{frame}

@@ -1,6 +1,8 @@
 % \subsection{Motivation}
 
-\begin{frame}{Scenario}
+\begin{frame}{Echo-aware signal processing for \alert{audio scene} analysis}
+
+    Current Scenario
 
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.65\textwidth}
@@ -16,7 +18,7 @@
             \textbf{Sound}
             \begin{itemize}
                 \item<1-> produced by \alert{sources}
-                \item<2-> recorded by \alert{microphones}
+                \item<2-> recorded by (array of) \alert{microphones}
                 \item<3-> corrupted by \alert{noise}
                 \item<4-> propagates in the \alert{space}
                 \item<5-> interacts with the \alert{room}
@@ -27,7 +29,7 @@
 
 \end{frame}
 
-\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
+\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene} analysis}
 
 
     \begin{columns}
@@ -96,7 +98,7 @@
 
 \end{frame}
 
-\begin{frame}[t]{Echo-aware \alert{signal processing for audio scene analysis}}
+\begin{frame}[t]{Echo-aware \alert{signal processing} for audio scene analysis}
 
     \begin{center}
         \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
@@ -179,63 +181,39 @@
 \end{frame}
 
 
-% \begin{frame}{Echo-aware \alert{signal processing} for audio scene analysis}
+\begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
 
-%     \vfill
-%     \begin{block}{Signal Model}
-%         \begin{columns}
-%             \begin{column}{0.45\textwidth}
-%                 \centering
-%                 \includegraphics[width=0.5\textwidth]{example-image-a}
-%             \end{column}
-%             \begin{column}{0.58\textwidth}
-%                 \begin{itemize}
-%                     \item produced by sources
-%                     \item propagates in the room
-%                     \item corrupted by noise
-%                     \item recorded by microphone
-%                 \end{itemize}
-%             \end{column}
-%         \end{columns}
-%     \end{block}
-
-% \end{frame}
-
-\begin{frame}[t]{\alert{Echo-aware signal processing for audio scene analysis}}
-
-    {\scriptsize
-    \begin{block}{Sound interacts with environment}
+    \begin{block}{Sound interacts with indoor environment:}
         \begin{itemize}
-            \item[] it is reflected (specularly and diffusely)\hspace{1em}\tikzmark{rightA}\tikzmark{topA}
-            \item[$+$] it is diffracted
-            \item[$+$] it is absorbed and transmitted
-            \item[$+$] other physical interaction\tikzmark{botA}
+            \item[] it is reflected,\hspace{1em}\tikzmark{rightA}\tikzmark{topA}
+            \\\hspace{1em} specularly and diffusely
+            \item[$+$] it is absorbed,
+            \item[$+$] it is transmitted,
+            \item[$+$] and other.\tikzmark{botA}
         \end{itemize}
     \end{block}
-    }
 
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:topA) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:botA) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
         \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
             (a.north -| {pic cs:rightA}) -- node[right,inner sep=1em]
-                {$=$ all sound propagation}
+                {$=$ all reverberation}
             (b.south -| {pic cs:rightA});
     \end{tikzpicture}
 
-    \visible<1->{
     \begin{mydefblock}{Acoustic Echoes}
 
-        \vspace{-3mm}
+        \vspace{-2mm}
         \begin{columns}[onlytextwidth]
             \begin{column}{0.60\textwidth}
                 \begin{itemize}
-                    \item \textbf{Elements} of \textbf{reverberation}
-                    \item \textbf{Standing out} for time and strength
-                    \item \textbf{Repetition} of a sound but \textbf{after}
+                    \item Elements of reverberation
+                    \item Specular reflection standing out for time and strength
+                    \item Repetition of a sound but after
                     \begin{itemize}
-                        \item time $\Leftrightarrow$ distance
                         \item same content
+                        \item delay $\Leftrightarrow$ distance
                     \end{itemize}
                 \end{itemize}
             \end{column}
@@ -246,7 +224,6 @@
 
         \end{columns}
     \end{mydefblock}
-    }
 
     \begin{block}{Everyday examples:}
 

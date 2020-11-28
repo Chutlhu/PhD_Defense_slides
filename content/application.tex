@@ -1,57 +1,6 @@
-% \begin{frame}{Audio signal processing and sound propagation}
+\subsection{State of the Art}
 
-%     \begin{columns}[T,onlytextwidth]
-
-%         \begin{column}{.48\textwidth}
-%             \begin{block}{Sound propagation is}
-%                 \begin{itemize}
-%                 \item<1-> completely ignored
-%                 \item<2-> assumed free-field case (\textit{anechoic})
-%                 \item<3-> model it full (\textit{reverberant})
-%                 \item<4-> \textit{learned} it full (\textit{reverberant})
-%                 \item<5-> model few early echoes (\textit{multipath})
-%             \end{itemize}
-%             All methods can be grouped accordingly
-%             \end{block}
-%         \end{column}
-
-%         \begin{column}{.48\textwidth}
-%             \centering
-%             \only<1>{\adjincludegraphics[Clip={.00\width} {0\height} {.80\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
-%             \only<2>{\adjincludegraphics[Clip={.20\width} {0\height} {.60\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
-%             \only<3>{\adjincludegraphics[Clip={.40\width} {0\height} {.40\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
-%             \only<4>{\adjincludegraphics[Clip={.60\width} {0\height} {.20\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
-%             \only<5->{\adjincludegraphics[Clip={.80\width} {0\height} {.00\width} {0\height},width=\textwidth]{figures/prop_it.png}}%
-
-%             \vspace{-2.3em}
-%             \begin{equation*}
-%                 \begin{aligned}
-%                     x_i(t) &= (h_i \ast s)(t)\\
-%                     h_i( t) &= \textcolor{myred}{h_i^d(t)} + \textcolor{myblue}{h_i^e(t)} + \textcolor{mygreen}{h_i^r(t)}
-%                 \end{aligned}
-%             \end{equation*}
-%         \end{column}
-
-%     \end{columns}
-
-%     % \begin{alertblock}{$\Leftarrow$ \textbf{strong early reflection} and \textbf{strong reverberation} level}
-%     %     \begin{itemize}
-%     %         \item detrimentally affect typical Audio Scene Analysis algorithm
-%     %         \item undesired interfering source
-%     %         \item undesired position of the true sources (TDOA disambiguation)
-%     %     \end{itemize}
-
-%     % \end{alertblock}
-%     \begin{block}{Recall}
-%         \begin{itemize}
-%             \item anechoic case $\implies$ simple mapping, but incoherence processing
-%             \item reverberant case $\implies$ hard mapping and estimation, but coherent processing
-%         \end{itemize}
-%         \hfill \textcolor{myred}{\textbf{What can we do with echoes?}}
-%     \end{block}
-% \end{frame}
-
-\begin{frame}{Echo-aware Application}
+\begin{frame}[t]{Echo-aware Application \hfill\faBook}
 
     \begin{block}{Echoes = same content, different time/direction}
         \centering
@@ -60,13 +9,19 @@
         \only<3->{\adjincludegraphics[Clip={.66\width} {0\height} {.00\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
     \end{block}
 
-    \pause[4]
+    \begin{textblock*}{30mm}(100mm,25mm)
+        \centering
+        \small
+        \textcolor{myred}{%
+            Image Source Model
+            \\$\Leftrightarrow$
+            \\Image Microphone Model}
+    \end{textblock*}
+
     Recent literature on echo-aware processing:
-    \pause[5]
     \begin{columns}[T,onlytextwidth]
         \column{.32\textwidth}
         \begin{block}{\textbf{What?}}
-            \small
             Echoes = repetitions
             \begin{itemize}
                 \item \only<-7>{Sound Source Separation}\only<8->{\alert{Sound Source Separation}}
@@ -75,12 +30,10 @@
                 \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2020raking}}
             \end{itemize}
         \end{block}
-
-        \pause[6]
         \column{.32\textwidth}
         \begin{block}{\textbf{Where?}}
             \small
-            Echoes $\in$ indoor propagation
+            Echoes $\gets$ image
             \begin{itemize}
                 \item \only<-7>{Sound Source Localization}\only<8->{\alert{Sound Source Localization}}
                 \\{\footnotesize\cite{ribeiro2010turning,jensen2019method}}
@@ -92,8 +45,6 @@
                 \\{\footnotesize\cite{evers2018acoustic,krekovic2016echoslam}}
             \end{itemize}
         \end{block}
-
-        \pause[7]
         \column{.32\textwidth}
         \begin{block}{\textbf{How?}}
             \small
@@ -107,14 +58,48 @@
         \end{block}
     \end{columns}
 
+
     \begin{center}
         \textcolor{gray}{\small (In-depth literature review in the manuscript.)}
     \end{center}
 \end{frame}
 
-\subsection{\mirage}
+\begin{frame}{Sound Source Localization {\hfill\small (common knowledge)} \faBook}
 
-\begin{frame}[t]{\mirage - Sound Source Locatization with Echoes}
+    \begin{columns}[T,onlytextwidth]
+        \column{0.6\textwidth}
+        \begin{block}{SSL with 2 microphones}
+            \begin{itemize}
+                \item 1D SSL: only angle of arrival (\alert{AOA})\iconAOA
+                \item can be approximated from \alert{TDOA}using e.g.GCC-PHAT
+                \\\cite{knapp1976generalized}
+                \\\textcolor{gray}{\small (known limitation, but good in practice)}
+            \end{itemize}
+        \end{block}
+        \column{0.38\textwidth}
+        \adjincludegraphics[Clip={0\width} {0.5\height} {0\width} {0\height},width=0.8\textwidth]{figures/ssl.png}
+    \end{columns}
+    \pause
+
+    \begin{columns}[T,onlytextwidth]
+        \column{0.6\textwidth}
+        \begin{block}{SSL with more microphones}
+            \begin{itemize}
+                \item 2D SSL: azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
+                \item[1.] AOA for each pair can be ``fuse''  together
+                \\(e.g. angular spectra in SRP-PHAT~\cite{dibiase2001robust})
+                \\\textcolor{gray}{\small (known limitation, but good in practice)}
+            \end{itemize}
+        \end{block}
+        \column{0.38\textwidth}
+        \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
+    \end{columns}
+
+\end{frame}
+
+\subsection{Echo-aware Sound Source Localization}
+
+\begin{frame}[t]{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
 
     \vspace*{5mm}
     \begin{columns}
@@ -174,55 +159,26 @@
 
 \end{frame}
 
-\begin{frame}{\mirage - Sound Source Locatization with Echoes}
-
-    \begin{columns}[T,onlytextwidth]
-        \column{0.6\textwidth}
-        \begin{block}{SSL with 2 microphones}
-            \begin{itemize}
-                \item 1D SSL: only angle of arrival (AOA)
-                \item e.g. GCC-PHAT for TDOA estimation~\cite{knapp1976generalized}
-                \\\textcolor{gray}{\small (known limitation, but good in practice)}
-            \end{itemize}
-        \end{block}
-        \column{0.38\textwidth}
-        \adjincludegraphics[Clip={0\width} {0.5\height} {0\width} {0\height},width=0.8\textwidth]{figures/ssl.png}
-    \end{columns}
-    \pause
-
-    \begin{columns}[T,onlytextwidth]
-        \column{0.6\textwidth}
-        \begin{block}{SSL with more microphones}
-            \begin{itemize}
-                \item 2D SSL: azimuth and elevation
-                \item[1.] For each pair $p$:
-                \\\hspace{1em} AOA$_p \gets$ TDOA-based 2-mic-SSL
-                \item[2.] ``Fuse''  together all the observation
-                \\(Angular spectra, Probability distributions)
-                \item e.g. SRP-PHAT~\cite{dibiase2001robust}
-            \end{itemize}
-        \end{block}
-        \column{0.38\textwidth}
-        \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
-    \end{columns}
-
-    \pause
-    \textbf{Baseline:} GCC-PHAT on true microphones
-
-    \pause
+\begin{frame}{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
     \textbf{Proposed Approach:} using \lantern (DNN-based TDOA estimation)
-
-    \pause
+    \textbf{Baseline:} GCC-PHAT on true microphones
     \begin{description}
         \item[issue:] just punctual estimation cannot be ``fused''
         \item[solution:] use \lantern in generative mode (mic pos assumed known)
     \end{description}
 \end{frame}
 
-\begin{frame}{\mirage - Results}
+\begin{frame}{\faFlask~Experimental results \hfill\faMapMarked*}
 
-    \textbf{Data:} virtually generated closeddataset as for \lantern
-    \\\textbf{Metric:} angular mean error and accuracy (thr=10, 20)
+    \begin{mycontriblock}
+        \textbf{Proposed:} $\MLP$ with \mirage~(mod of SRP-PHAT\footnotemark[1])
+    \end{mycontriblock}
+    \begin{mysotablock}
+        \textbf{Baseline:} $\GCCPHAT$\footnotemark[2]
+    \end{mysotablock}
+
+    \textbf{Data:} virtually generated close dataset as for \lantern
+    \\\textbf{Metric:} Accuracy ($<$ang{10},    $<$\ang{20}) \addendum{\faReply~also error in the manuscript}
 
     \pause[1]
     \begin{columns}[T,onlytextwidth]
@@ -243,42 +199,22 @@
             \small
             \begin{tabular}{cl|cc}
             \toprule
-            \mathtt{AOA} &             &    \multicolumn{2}{c}{ACCURACY}  \\
-                       & Input         &  $\theta<\ang{10}$ &  $\theta<\ang{20}$ \\
+            \textbf{AOA}\iconAOA &             &    \multicolumn{2}{c}{ACCURACY}  \\
+                         & Input       &  $\alpha<\ang{10}$ &  $\alpha<\ang{20}$ \\
             \midrule
-            MIRAGE     &   wn          &    4.10 (77)    &  5.97 (97)  \\
-            MIRAGE     &   wn+n        &    5.00 (26)    &  9.89 (54)  \\
-            GCC-PHAT   &   wn          &    4.22 (81)    &   6.19 (97) \\
-            GCC-PHAT   &   wn+n        &    4.03 (65)    &   5.34 (83) \\
-            \visible<3->{MIRAGE     &   sp          &    4.83 (63)    &  7.26 (82)  }\\
-            \visible<3->{MIRAGE     &   sp+n        &    4.60 (16)    &  9.88 (35)  }\\
-            \visible<3->{GCC-PHAT   &   sp 		   &    4.08 (82)    &   5.34 (97)  }\\
-            \visible<3->{GCC-PHAT   &   sp+n        &    4.70 (19)    &   8.38 (32) }\\
+            MIRAGE     &   wn          &    77    &  97  \\
+            MIRAGE     &   wn+n        &    26    &  54  \\
+            GCC-PHAT   &   wn          &    81    &  97  \\
+            GCC-PHAT   &   wn+n        &    65    &  83  \\
+            MIRAGE     &   sp          &    63    &  82 \\
+            MIRAGE     &   sp+n        &    16    &  35 \\
+            GCC-PHAT   &   sp 		   &    82    &  97 \\
+            GCC-PHAT   &   sp+n        &    19    &  32 \\
             \bottomrule
         \end{tabular}
-        % \begin{column}{.74\textwidth}
-
-        %     \centering
-        %     \small
-        %     \begin{tabular}{cl|ccc|cc}
-        %     \toprule
-        %     &                  &         & nRMSE                         &              &\multicolumn{2}{c}{ACCURACY}  \\
-        %     & Input            &    \scriptsize{TDOA}    &   \scriptsize{iTDOA} 		 &     \scriptsize{TDOE} 		 & $\theta<\ang{10}$ &  $\theta<\ang{20}$ \\
-        %     \midrule
-        %     MIRAGE     &   wn          &    0.18 & 0.28          &    0.25 	         & 4.10 (77)    &  5.97 (97) \\
-        %     MIRAGE     &   wn+n        &    0.68 & 0.69          &    0.89 			 & 5.00 (26)    &  9.89 (54) \\
-        %     MIRAGE     &   sp          &    0.31 & 0.34          &    0.56           & 4.83 (63)    &  7.26 (82) \\
-        %     MIRAGE     &   sp+n        &    0.99 & 0.98   	     &    1.48 			 & 4.60 (16)    &  9.88 (35) \\
-        %     GCC-PHAT   &   wn          &    0.21 &     -  		 &       -			 & 4.22 (81)    &   6.19 (97) \\
-        %     GCC-PHAT   &   wn+n        &    0.68 &     -  		 &       -			 & 4.03 (65)    &   5.34 (83) \\
-        %     GCC-PHAT   &   sp 		   &    0.32 &     -  		 &       -			 & 4.08 (82)    &   5.34 (97) \\
-        %     GCC-PHAT   &   sp+n        &    1.38 &     -  		 &       -			 & 4.70 (19)    &   8.38 (32) \\
-        %     \bottomrule
-        % \end{tabular}
         \end{column}
     \end{columns}
 
-    \pause[4]
     \vspace{5mm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{.25\textwidth}
@@ -292,14 +228,14 @@
             \small
             \begin{tabular}{cl|cc|cc}
             \toprule
-            \textbf{DoA}      &               &  \multicolumn{2}{c|}{ACCURACY} &   \multicolumn{2}{c}{ACCURACY} \\
-                            &               &  \multicolumn{2}{c|}{$<\ang{10}$} &   \multicolumn{2}{c}{$<\ang{20}$} \\
-                            &    Input    &  $\theta$ &  $\phi$ &  $\theta$ &  $\phi$ \\
+            \textbf{DoA}\iconDOA    &               &  \multicolumn{4}{c}{ACCURACY} \\
+                    &               &  \multicolumn{2}{c|}{$<\ang{10}$} &   \multicolumn{2}{c}{$<\ang{20}$} \\
+                    &    Input      &  $\theta$\iconAz &  $\phi$\iconEl &  $\theta$\iconAz &  $\phi$\iconEl \\
             \midrule
-            MIRAGE &  wn           &   4.5 (59) &  3.9 (71) &   6.8 (79) &   5.9 (88) \\
-            MIRAGE &  wn+n     &   4.4 (18) &  5.5 (26) &   9.4 (35) &  11.1 (66) \\
-            MIRAGE &  sp       &   4.6 (45) &  4.8 (59) &   8.1 (71) &   7.2 (83) \\
-            MIRAGE &  sp+n &   5.2 (17) &  5.9 (12) &  10.7 (38) &  12.3 (43) \\
+            MIRAGE &  wn        &   59 &  71 &   79 &  88 \\
+            MIRAGE &  wn+n      &   18 &  26 &   35 &  66 \\
+            MIRAGE &  sp        &   45 &  59 &   71 &  83 \\
+            MIRAGE &  sp+n      &   17 &  12 &   38 &  43 \\
             \bottomrule
         \end{tabular}
 
@@ -312,15 +248,13 @@
         \quad \textcolor{myred}{\xmark \: \parbox{12em}{Performance depending on\\echo estimation}}
     \end{center}
 
+
+    \vfill
+    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
+    \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
+
 \end{frame}
 
-
-% \subsection{separake}
-
-% \begin{frame}
-
-
-% \end{frame}
 
 % \subsection{Interim conclusion (3/4)}
 

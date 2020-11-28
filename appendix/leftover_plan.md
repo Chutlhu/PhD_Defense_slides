@@ -10,87 +10,95 @@ Echo-aware Signal Processing for Audio Scene Analysis.
 
 In a nutshell, it deals with the problem of estimating acoustic echoes and use their information to leverage typical problem of audio signal processing.
 
+### Scenario
 
-Before going in the details, I will brake down the title of the thesis:
+In order to better introduce the subject of today, let us consider the following **scenario**:
 
-### Audio scene / Scenario
 
-In order to better introduce the topic of the thesis, let us consider how sound is recording in everyday application, for instance this exactly videoconference.
 
-First sound is produced by sound sources, in this case myself, but can be also a speakers or music instruments.
-And the sound is recorded by the microphones of my laptop, that we call here microphone array.
-This microphones convert sound into electrical signal than are analyzed and used by the device,
-for instance to be transmitted to you.
 
-However in general the sound can be corrupted by other sound sources and by measurement noise.
 
-And more important, before reaching the laptop, the sound propagates space, and more in detail it interacts with it especially when we are indoor.
-This lead to the well known reverberation effect.
+Currently the **microphones** of my laptop are hopefully recording
+
+- the sound of my voice,
+- some source of noise, such as the computer fan, transmission noise, the traffic outside, someone of my family in the other rooms, music that my brother is playing, the mobile phone, etc.
+
+These are sound **sources**.
+However, if you think about it, there is much more.
+From the only audio, you may understand that:
+
+- I am speaking close to the microphones, somehow in foreground with respect to the rest.
+- The interfering sound source is far away and probably moving.
+- We can understand if we are in a indoor or outdoor environment.
+
+The microphones recording keep tracks of the environment where the sound are being recorded.
+
+In natural environment, the sound propagates and interact with the environment.
+The overall effect is well known and it called *reverberation*.
+All these makes the audio scene we are immersed into and we assumed it is recorded by microphones.
+
+The **audio scene** are all the element that describe.
 
 ### Audio Scene Analysis
 
-You on the other side, listen to the microphone recordings.
-And even without watching the camera you may understand and infer my information.
+We can broadly categorize the information as
 
-That is because sound carries information and in particular
-semantic information  on the nature of the sound source and its content.
-For instance that I am a man, and what I am saying.
+- semantic information, about the source nature and its content
+- spatial information, about source position and room geometry
+- and temporal information, when someone is speaking
 
-But sound carry also spatial information, for instance if I am closer or further, or in a small or big room.
-And finally temporal information, about when a sound source is active or note.
+and we can recognize in this division some fundamental questions that we instinctively process and answer:
 
-All of this information create what we called an audio scene.
-And your brain is particular efficient in extract, process and organize the information within.
+- *Who* is speaking, *What* is the content, *What* is the noise
+- *Where* the speakers are located
+- *When* the speaker is speaking and is not
+- and *how* the sound is propagates and produced.
 
-A key question that we ask with our research here is if we can build system, software even robots that can do this automatically?
+We leave the *Why* to other field of studies.
+
+We will refer to the process of extracting and organizing such information for raw microphones recordings as
+Audio Scene Analysis.
+
+Human and animals are known to perform some of these task effortlessly,
+such as be able to understand a conversation in crowdy bar or use acoustic echoes for orientation.
+The role of our studies is to develop system that are able to do it as well.
+You can think about smart speakers, robots, hearing aids and measurements techniques, better teleconferencing system.
 
 ### Signal Processing
 
-The sound can be modeled as signal and studied within the research field of Signal Processing.
-It offer models, frameworks and tools to extract and organize information from sounds.
-This is done by defining the problems.
+Signal processing offers us mathematical models, frameworks and tools to address the problems we mentioned earlier.
 
-Typical problems are separating or enhancing a target sound form the rest, or say where a sound source is, or quantify the amount of reverberation or automatically transcribe speech, say who is speaking and many many other.
+For instance we can identify the following well-know problems,
+each of ones is dedicated to address a specific natural question.
 
-The problems are well know problem that which produced large and vast literature and are intensively studied.
+Most of them are well know open problem which produced large and vast literature.
 
-In can be noticed that these problems are strictly related to the some natural questions, such as Who, What, , When, Where and How. The why is not considered for philosophical reason.
-
-And it should be noticed that this problems are naturally interconnected:
-namely the solution of one of these question can be easier if information about the other is available.
-
-For instance knowing the how sound propagates in a space, can help in localizing the sound sources, which can help in isolating their sounds.
-
+It is really important to notice that all the problem are naturally interconnected.
+The resolution of one of the above problem may be better if prior information is available.
 
 ### Echo aware approach
 
-Exactly for these reason we focus today on acoustic echoes.
+Audio Scene Analysis give us our problems we want to solve
+Signal processing give us models and tools
 
-Sound propagates and interact with the surrounding indoor space:
-it can be reflected on surfaces, it can be absorbed or transmitted.
-And we it is reflected it can be specularly and diffusely.
+You may ask then... what is the role of acoustic echoes?
+Echoes give us useful information that can be used for better processing.
 
-All of these effects create the complex indoor sound propagation or reverberation.
+Acoustic echoes are elements of Sound Propagation.
+Therefore their knowledge can be used to better inform inverse problems.
+Their information gives an idea of the mixing filters.
 
-From a physical point of view, Acoustic echoes are element of reverberation, that is particular specular reflection which stand out for strength and timing.
+Moreover we can also interpret them:
 
-More commonly, they are are repetition of sound that usually arrive later.
-Notice that an echo carry the same sound content and its delay is related to the distance that the sound travel.
+- As sound repetition: echoes brings sound information (example of beamforming??)
+- As sound spatialization: they time of arrival (and direction of arrival) depends on the room geometry (example of rooge)
 
-We can se this is everyday examples such as in the echo points in the mountains.
-Probably the most striking example of the properties of echoes are the bats that use it to
-navigate in the dark and hunting. Such techniques is used by dolphins it is a the based of the sonar technology.
+Accoring to the how the sound propagation is modeled in audio signal processing methods, we can device it is
 
-In signal processing the sound propagation is typically either completely ignored or considered full.
-In the former case, this assumption lead to huge simplification, but consider reverberation as noise term. While the latter is very challenging.
-The echo-aware processing offer the an alternative that allow better modeling, while not requiring to fully estimated the sound propagation.
-
-### Outline and contribution
-
-To summarize the title:
-Audio Scene Analysis give us our problems we want to solve;
-Signal processing give us models and tools;
-And echoes echoes give us useful information that can be used for better processing.
+  - on that completely ignore it
+  - free-field models
+  - multipath-models
+  - reverberatan models
 
 
 ### Challenges and Objective

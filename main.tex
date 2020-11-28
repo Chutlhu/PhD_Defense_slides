@@ -51,9 +51,10 @@
 \usepackage{adjustbox} % provide includegraphics with percentage
 \usepackage{booktabs} % provide \toprule
 \usepackage{multirow} % provide \multirow
+\usepackage{siunitx}  % provide \ang
 
 % GRIDS
-\usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
+% \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
 
 % TOC
 \setbeamertemplate{section in toc}[circle]
@@ -107,6 +108,10 @@
 
   \vspace{\baselineskip}
   Universit\'e de Rennes 1, IRISA/INRIA, Panama research group
+
+  \vspace{\baselineskip}
+  Colophon:
+  Metropolis Beamer Template based on Alexander Honorat and Antoine Chatalic. Icon from Flikon.com
 }
 
 % Laurent GIRIN & Professeur & GIPSA-Lab, Grenoble-INP \\
@@ -129,14 +134,14 @@
       \maketitle
     }
 
-    % {
-    %   \makeatletter
-    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %   \makeatother
-    %   \section{Introduction}
-    % }
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Introduction}
+    }
 
-    % \input{content/intro.tex}
+    \input{content/intro.tex}
 
     % %section do not appear in the navigation bar
     % {
@@ -149,22 +154,42 @@
 
 
     %section do not appear in the navigation bar
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Acoustic Echo Estimation}
-    }
-    \input{content/estimation.tex}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Acoustic Echo Estimation}
+    % }
+    % \input{content/estimation.tex}
 
-    % \section{Echo-aware Application}
-    % \include{content/application.tex}
+    %section do not appear in the navigation bar
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Application}
+    % }
+    % \input{content/application.tex}
 
-    % \section{Echo-aware Dataset}
-    % \include{content/data.tex}
+    % %section do not appear in the navigation bar
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Dataset}
+    % }
+    % \input{content/data.tex}
 
-    % \section{Conclusion}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Dataset}
+    % }
     % \include{content/conclusion.tex}
+
+
+
 
     % \appendix
 
@@ -178,7 +203,6 @@
     %   \themename will automatically turn off slide numbering and progress bars for
     %   slides in the appendix.
     % \end{frame}
-
 
 
     \begin{frame}[allowframebreaks]{References}
