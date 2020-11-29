@@ -2,72 +2,59 @@
 
 \begin{frame}[t]{Acoustic Echo Retrieval \hfill\faPalette}
     \begin{columns}[T,onlytextwidth]
-
         \column{0.55\textwidth}
-            \vspace{.1em}
-            Estimating early (strong) reflections for microphones recordings
-            % \begin{itemize}
-            %     \item their time of arrivals $\tauir^$
-            %     \\\addendum{\aka TOAs Estimation}
-            %     \item their amplitude $\ampir$
-            % \end{itemize}
+            Estimating early (strong) reflections for microphones recordings, i.e.,
             \begin{equation*}
-                \{\contMic_i\}_i \longrightarrow \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}
+                \{\contMic_i\}_i \longrightarrow \{ \tauir, \textcolor{gray}{\ampir} \}_{i,r}
             \end{equation*}
-            {\small estimating $\tauir$ $\to$ TOAs estimation}
-
         \column{0.4\textwidth}
             \begin{figure}
                 \centering
                 \includegraphics[width=\textwidth]{./figures/arrivals.png}
             \end{figure}
-
     \end{columns}
 
     \vfill
-    \textbf{Scenarios:}
     \begin{columns}[T,onlytextwidth]
         \column{0.48\textwidth}
-        \centering
-        Source signal is
-        \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
+        \textbf{Scenarios:} the source signal is
 
-            \only<4>{
-            \column{0.48\textwidth}
-            \begin{block}{Active}
+        \begin{center}
+            \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
+        \end{center}
 
-                \vspace{-2mm}
-                \begin{itemize}
-                    \small
-                    \item[\faVolumeUp] \textbf{intrusive} or specific setup
-                    % \item known emitted signal
-                    \item[\faSun] \textbf{non-blind} problem
-                    % \item Time of Arrival (\textbf{TOA}s) accessible
-                    % \\\hspace{.3em} $\implies$ \textbf{single} mic
-                    \\\hspace{-1em}\addendum{\footnotesize \textbf{Application:} sonar, calibration, measurements, etc.}
-                \end{itemize}
-            \end{block}
+        \only<4>{
+        \column{0.48\textwidth}
+        Active
+        \vspace{-2mm}
+        \begin{itemize}
+            \small
+            \item[\faEye] \textbf{non-blind} problem
+            \item[\faVolumeUp] \textbf{intrusive} or specific setups
+            % \item known emitted signal
+            % \item Time of Arrival (\textbf{TOA}s) accessible
+            % \\\hspace{.3em} $\implies$ \textbf{single} mic
+            \\\hspace{-1em}\addendum{\footnotesize \textbf{Application:} sonar, calibration, measurements, etc.}
+        \end{itemize}
 
-            \vspace{-2mm}
-            \begin{block}{Passive}
-
-                \vspace{-2mm}
-                \begin{itemize}
-                    \small
-                    \item \textbf{passive} and more common setups
-                    % \item \alert{un}knwon
-                    \item[\faSun] \textbf{blind inverse} problem (harder)
-                    % \item Time Difference of Arrivals (\textbf{TDOA}s) only
-                    % \\\hspace{.3em} \textbf{multi-mic}
-                    \\\hspace{-1em}\addendum{\footnotesize \textbf{Applications:} passive listening, smart speakers, etc.}
-                \end{itemize}
-            \end{block}
-            }
+        \vspace{-5mm}
+        Passive
+        \vspace{-2mm}
+        \begin{itemize}
+            \small
+            \item[\faEyeSlash] \textbf{blind inverse} problem (harder)
+            \item[\faMicrophone] \textbf{passive} and more common setups
+            % \item \alert{un}knwon
+            % \item Time Difference of Arrivals (\textbf{TDOA}s) only
+            % \\\hspace{.3em} \textbf{multi-mic}
+            \\\hspace{-1em}\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, laptop, etc.}
+        \end{itemize}
+        }
 
         \only<5->{
         \column{0.48\textwidth}
         \centering
-        Estimation is
+        \textbf{Methods:} the estimation is
         \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
         }
     \end{columns}
@@ -101,74 +88,67 @@
 
         \vspace{.5em}
         \begin{columns}[T,onlytextwidth] % align columns
-            \begin{column}{.02\textwidth}
-            \end{column}
-
             \begin{column}{.48\textwidth}
+                \small
                 \begin{enumerate}
-                    \item BCE problem $\implies$ RIRs
+                    \item ``BCE''\footnotemark[1] problem $\implies$ RIRs
                     \item Peak picking $\implies$ Echoes
                 \end{enumerate}
             \end{column}
             \begin{column}{.48\textwidth}
+                \small
                 \begin{enumerate}
-                    \item Estimation in $\Theta = \tauFamily$ % in the space
+                    \item Direct off-grid estimation of $\set{\tauir, \ampir}$
+                    e.g., with maximum-likelihood
                     % \\\textcolor{gray}{(+ \small direction of arrivals can be used instead)}
                 \end{enumerate}
             \end{column}%
         \end{columns}
 
         \vspace{1em}
-        \begin{columns}[onlytextwidth] % align columns
-            \begin{column}{.02\textwidth}
-                \textcolor{mygreen}{\textbf{Pros}}
-            \end{column}
-
-            \begin{column}{.48\textwidth}
+        \begin{columns}[T,onlytextwidth] % align columns
+            \column{.48\textwidth}
+                \small
                 \begin{itemize}
-                    \item BCE is well studied
-                    \addendum{\footnotesize eg. LASSO}% (elegant framework)
-                    \\\textcolor{gray}{\small (many frameworks, solver, >20 years of literature)}
-                    \item Currently state of the art
-                    \\good in some application %\\$\hookrightarrow$ if not limitation
+                    \item[\cmark] \pro{BCE is well and known studied}
+                    \item[\cmark] \pro{it is the state of the art}
+                    \\{\scriptsize~\cite{crocco2016estimation}}
+                    \item[\cmark] \pro{reasonably good for some application}
                 \end{itemize}
-            \end{column}
-            \begin{column}{.48\textwidth}
+            \column{.48\textwidth}
+                \small
                 \begin{itemize}
-                    \item No full RIRs + no peak picking
+                    \item[\cmark] \pro{No full RIRs \& no peak picking}
                     \begin{itemize}
-                        \item Lower complexity
-                        \item Sub-sampling accuracy
+                        \item lower complexity
+                        \item less hyperparameters
                     \end{itemize}
-                    \item Echo model is respected (bypassing sampling)
-                    \\\addendum{\footnotesize Sparsity, Non-negativity}
+                    \item[\cmark] \pro{Echo properties are respected}
+                    \\\addendum{\footnotesize e.g. Sparsity, Non-negativity}
                     \end{itemize}
-            \end{column}%
         \end{columns}
 
         \vspace{1em}
-        \begin{columns}[onlytextwidth] % align columns
-            \begin{column}{.02\textwidth}
-                \textcolor{myred}{\textbf{Cons}}
-            \end{column}
-
-            \begin{column}{.48\textwidth}
+        \begin{columns}[T,onlytextwidth] % align columns
+            \column{.48\textwidth}
+                \small
                 \begin{itemize}
-                    \item Full RIR is estimated
-                    \item Peak picking
-                    \item On-grid estimation %Pathological iss
+                    \item[\xmark] \con{Full RIRs need to be estimated}
+                    \item[\xmark] \con{Peak picking has hyperparameters}
+                    \item[\xmark] \con{Issues due to \textit{on-grid} estimation}
+                    \\[\footnotesize \faReply~next topic]
                 \end{itemize}
-            \end{column}
-            \begin{column}{.48\textwidth}
+            \column{.48\textwidth}
+                \small
                 \begin{itemize}
-                    \item[\faWpexplorer] exploratory (no solver)
-                    % \\only~\cite{tukuljac2018mulan} on acoustic
-                    % \\peak estimation~\cite{condat2015cadzow}
-                    \item[\faLanguage] no direct translation of BCE
-                    \item easy ill-conditioned
+                    \item[\xmark] \con{exploratory \faWpexplorer}
+                    \\\addendum{no standard solver, few works on audio}
+                    % \item[\xmark] \con{no ``simple'' implementation}
+                    % \\\addendum{not standard math of BCE}
                 \end{itemize}
-            \end{column}%
         \end{columns}
+
+    \footnotetext[1]{Blind Channel Estimation}
 
 \end{frame}
 
@@ -178,15 +158,15 @@
 
         \vspace{-2mm}
         \begin{itemize}
-            \item[\faTh] Sparsity and non-negativity not true ``on grid''
+            \item Sparsity and non-negativity not true ``on grid''
             % We measure filters, not diracs
 
-            \item[\faUsers] \emph{Body guard} effect \cite{duval2017sparse}
+            \item \emph{Body guard} effect \cite{duval2017sparse}
             \begin{itemize}
                 \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
                 \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
             \end{itemize}
-            \item[\faSearchPlus] Pick Picking
+            \item Pick Picking
             \begin{itemize}
                 \item[$\rightarrow$] manually tuned / corrected
                 \item[$\rightarrow$] echo labeling (NP-hard problem)
@@ -197,7 +177,7 @@
     \begin{columns}[onlytextwidth]
         \column{0.60\textwidth}
 
-        \begin{block}{How about higher $F_s$?}
+        \begin{block}{How about higher sampling rate $F_s$?}
 
             \vspace{-2mm}
             \begin{itemize}
@@ -205,7 +185,7 @@
             \end{itemize}
         \end{block}
 
-        \begin{block}{Sorry, computational bottleneck!}
+        \begin{block}{But, computational bottleneck!}
 
             \vspace{-2mm}
             \begin{itemize}
@@ -213,10 +193,9 @@
                 \begin{itemize}
                     \item[$\longrightarrow$] memory usage
                 \end{itemize}
-                \item Computational complexity: at best $\mathcal{O}(F_s^2)$ per iteration
-                \item the higher the sampling frequency, the more ill-conditioned \\
+                \item the higher the sampling frequency
                 \begin{itemize}
-                    \item[$\longrightarrow$] slow convergence
+                    \item[$\longrightarrow$] more ill-conditioned
                 \end{itemize}
             \end{itemize}
         \end{block}
@@ -245,7 +224,14 @@
 
 \begin{frame}{Proposed approach: learning-based \& off-grid \hfill\faBrain}
 
-    \textbf{Recall}: AER $\Leftrightarrow$ $\{\contMic_i\}_i \overset{?}{\longrightarrow} \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}$
+    % \textbf{Recall}: AER $\Leftrightarrow$ $\{\contMic_i\}_i \overset{?}{\longrightarrow} \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}$
+    \begin{mydefblock}{Idea: (Deep) Learning-based AER}
+        \begin{enumerate}
+            \item Use \alert{virtually} supervised deep learning models
+            \item Estimate first echo (simple but important)
+            \item Only 2 microphones
+        \end{enumerate}
+    \end{mydefblock}
 
     \vfill
     \textbf{Observations:}
@@ -262,14 +248,7 @@
         \\{\small\cite{nguyen2018autonomous,perotin2019regression} \textcolor{myred}{\faExclamationTriangle~Not only DNN}}
     \end{itemize}
 
-    \vfill
-    \begin{mydefblock}{Idea: (Deep) Learning-based AER}
-        \begin{enumerate}
-            \item Extend \alert{virtually} learning-based SSL to AER
-            \item Estimate first echo estimation (simple but important)
-            \item Only 2 microphones
-        \end{enumerate}
-    \end{mydefblock}
+
 
 \end{frame}
 

@@ -109,158 +109,93 @@ and we will conclude with the presentation of the dataset with its validation on
 
 ## Problem statement
 
-In the following slides we will see how echoes and signals are modeled in the context of audio digital signal processing.
+In the following slides we will see how signals and echoes are modeled in the context of audio digital signal processing.
 
 ### Signal Model
 
 The complete sound propagation include all the interaction of the sound travelling in whole environment starting from a source and reaching a microphone.
-This process can be modeled as a source-filter-receiver process, where the sound propagation acts as a filter for the source signals.
+
+In math, it translates as follows.
+The continuous time signal of the microphone corresponds to the time-domain convolution between the source signal and such filter, with is commonly known as room impulse response
+Note that here the tilde denotes time domain.
+
+The room impulse response is a linear filter that describes the acoustic response of the room to a prefect impulsive sound.
+A room impulse response depends on spatial and acoustic properties of the environments such as microphones and source position, room shape and size, and the type of material the surfaces are covered with.
+Because of this their are unique for each source and microphone pairs.
+
+### Echoes in the RIR
+
+Because a Room Impulse Response describes the physical response of a room, it can be subdivided in 3 parts of different physical properties:
+
+In particular we can identify the direct path which corresponds to the contribution of the direct propagation sound.
+It is commonly followed by a few isolated peaks which correspond to the strongest specular reflection, namely our echoes.
+And finally the reverberation tail accounting for later reflection and the diffusion effects.
+
+Based on this observation, the Room Impulse Response can be approximated at first as a stream of impulses, in math Dirac deltas located at the time of arrival of the reflection.
+
+The goal of echoes estimation is retrieve the time of arrival and the amplitude of such reflections.
+
+Acoustic Echo Retrieval is a extremely challenging task, complicated by the following effects:
+First the shape of the RIRs is highly sensitive to the geometrical properties of the audio scene.
+Second the recordings typically feature reverberation making the this undermodeling term not ignorable. And recordings also are corrupted by noise from other sources or due to the measurement process.
+And finally the amplitude coefficient of the echoes are distorted by physical effect (such as frequency dependent absorption coefficient) and processing effect (such as sampling).
+
+In fact the arrival of the echoes are continuos while our signal in the computers are not.
+The process of sampling echoes blur out the true location and amplitude of the echo.
 
 
-<!-- These effects occurs in different proportion based on the geometrical and physical properties of the objects in the space. -->
+## Acoustic Echo Retrieval
 
-<!-- In particular when a sound reach a big smooth surface, part of it is **reflected specularly** and part of it is absorbed,
-soft surfaces like wood or wool absorb more then hard surface, like concrete walls.
-If the surface is rough then, part of the energy is *scattered* around in random directions.
-Absorption, diffusion and specular reflection always occurs, but in different proportion, depending on the geometrical and physical properties of the surfaces and the frequency excited by the original source.
-Other effects exists, such as diffraction and transmission are here neglected. -->
+Now we will introduce briefly the state of the art in acoustic echoes estimation and I will present you to contribution.
 
+### AER
 
-From a signal processing point of view the sound recorded at any microphone can be generalized to any sound source as input-filter-output process:
+Acoustic Echo Retrieval is the problem of estimating echoes timings and coefficients.
 
-- the input is the sound source signal
-- the filter accounts for the whole sound propagation and it can be described with the so-called acoustic impulse response (AIR), which is the signal corresponding to the propagation of a perfect impulsive sound.
-- the output is the sound recorded at the microphones
+This can be pursued typically in two type of scenario: active or passive.
 
-If we record the sound field of a single omnidirectional point source emitting an impulse sound, at
-the microphones we will records something like:
+In the former case the emitted signal is known.
+This make the problem of estimating filter, and therefore, its components, non-blind, so easier.
+The payoff is that the device need to sense the environment by emitting with sound actively or knowing the attended sound priori, which can be used in specific setup.
+This is typical approach used for sonar, device calibration or acoustic measurements.
 
-In math, the sound at the microphone can be modeled as the convolution between the source and the filter.
+On the overside, passive systems are more common in everyday application such as smart spakers or laptop performing passive recording.
+As the source signal is unknown the task is much harder.
 
-In general AIR and acoustic filters are very complicated.
-However for simple indoor environments, such as office, meeting room and classroom, some key elements can be recognized:
+We will assume to be in single source, passive system scenario.
 
-- a direct path which accounts for the time the sound takes to travel from the source position to the microphones position
-- a few distinct early reflection which can be modeled with the specular low
-- reverberation due to the continuous bouncing of reflection
+In passive scenario, two are the main approaches that can be found in the literature:
+the one that estimate echoes after having estimate the room impulse response and the one that try to solve this problem directly in the smaller space of the echo parameter, in  few number of delay.
 
-For this peculiar shapes, there referred to as room impulse response, aka RIR.
+### Passive AER
 
-According to how the sound propagation is modeled, we can define different audio signal processing approaches:
+Both the approaches have pros and cons and here is a summary.
 
-The early reflection are what we consider as echoes, since they can characterized by a particular prominence and time sparsity.
+For RIR-based approaches, first the Room Impulse Response is estimated by typically solving a blind channel estimation (or BCE) problem. On the estimation, the echoes are identified as the strongest peaks using peak picking or peak labeling strategies.
 
-### Echoes and Signal Processing II
+The main benefit of this approach is that such approaches rely on well studied frameworks for inverse problem, reliable solver and produced a vast literature even the the case for rir estimation.
+Moreover they are currently the state of the art in RIR estimation and perform reasonably well in certain application.
 
+However they suffer of some important drawbacks.
+First the full RIR need to be estimated leading to some computational and memory issues.
+Secondly the peak picking operation is not straightforward for the distortion on the amplitudes and typically it needs to be tuned manually.
+And finally, they suffer on some pathological issues due to their on-grid nature, that I will illustrate in a few slide.
 
-<!-- ### Echoes and Signal Processing II
+To overcome this limitation, RIR-agnostics perform the estimation directly in the parameter space of the echo model, such as delays and amplitudes, using maximum-likelihood approaches.
 
-In light of the signal processing theory, this process can be modeled with the typical source-filter-receiver model, where the relation between input and output is express with the following convolution.
+The main benefit is that the RIR are not estimated entirely saving memory and complexity and since there is no peak-picking less hyperparameter tuning is needed.
 
-$$ x_{ij} = (h_{ij} \ast s_j)(t) $$
+Moreover, here the echoes are truly sparse and non-negative, since we are considering the sampling process explicitly in the model.
 
-In other words, microphone $i$ listens to the convolution between the signal of source $j$ and a filter which, in case of room acoustics, accounts for the full propagation of the sound in the room.
+The main drawbacks of this approach is that are very recent and not investigated fully.
+Ad-hoc powerful solvers or frameworks that can be used out-of-the-box are not present.
 
-From the physics, we know that this phenomenon is
-
-- time invariant in static scenario,
-- and linear. Therefore it is easy to generalize to multiple microphones and sources.
-
-Room Impulse Responses are complicated and long filters that  collects all the element of indoor reverberation and sound interaction with the environments.
-
-However, they a common shape can be identified and illustrated as function of time.
-
-- First there is the so-called direct path, with describe the time and amplitude of the sound reaching the receiver.
-- Second, in order of time we have the early echoes, which are repetition of
-
-### Physics to Signal Processing
-
-Sound is emitted by a sound **source**, propagates and interact with the surrounding the **indoor spaces** and is recorded by a **receiver**, such as a microphones.
-
-In particular, the sound can be absorbed, reflected specularly and diffusely and diffracted.
-
-If we imagine to produce an impulse sound, such as a clap or a gun shot. In the recording of the sound we will observe first the sound itself, called the direct path. Then some reflection will arrive and finally all the reflection will accumulate.
-
-In light of signal processing and communication theory, we can model this process as a **input-channel-output system**. The channel is characterized by the so-called **impulse response** and the relation between input and output is express mathematically by the convolution operator. Therefore in our context, this is called **room impulse response**, $h$.
-
-Several element can be identified in the **RIR**.
-
-- the direct path is the line-of-sight contribution of the sound wave.
-- the early echoes comprise few disjoint specular reflection coming from room surface. They are typically characterized by **sparsity** in the time and amplitude prominence greater than the later contributions.
-- the late reverberation collects all the later reflection.
-
-Note that if we assume the **anechoic** condition...
-**Continuous echo model here**
-
-*Transition How do we model this in computer? This quantities are continuous....*
-
-### Signal Processing to Digital signal processing
-
-The **RIR** account for the filtering effect due to sound propagation from a source to a microphone in a indoor space:
-
-$$\tilde{x}(t) = (\tilde{h} \ast \tilde{s})(t) $$
-$$h(t) = \sum_k^K \delta{t - \tau_k}$$
-
-Unfortunately, these quantities are not accessible as they are continuous.
-
-Through the use of microphones, our window into the continuous physical world of acoustics is narrow, both it time and in frequency.
-
-In particular what we **observe** is the sampling version of $x(t)$, namely $x[n]$ where $n$ is a integer multiple of the sampling frequency
-
-Here, we decide to model this as the linear convolution between the digital version of the filter $h[n]$ and the digital version of the source signal $s[n]$. Not that this is general is not true and some approximation are made. -->
-
-### Echo Model
-
-Finally we will use the following model.
-
-Type of noise
-
-- interference
-- measurement error
-- diffuse noise sources
-
-### 1 Interim Conclusion
-
-- RIRs are the signal processing of the sound propagation
-- Mic recordings = Convolution between RIRs and Source
-- Echoes are repetition of sounds
-- Echoes can be seen in the RIR
-- RIR as ISM
-- Echoes are off grid -> echo model in the frequency domain
-
-## Echo Estimation / Retrieval
-
-### Intro on acoustic echo estimation
-
-First we need to estimate the echoes properties, we identify as the time of arrival and the strength of a sound reflection.
-We will refer to is as **Acoustic Echo Retrieval**.
-
-The problem of identifying only the arrival time is typically known as Time of Arrival, aka TOA estimation.
+### Limitation and bottleneck
 
 
-In the literature we can identify many way to address this problems.
-
-At first, we can can broadly classify existing method based on the availability of the **transmitted signals**.
-If the reference signal is know then it is the case of **active**
-
-#### Based on emitted signal?
+### Proposed approach
 
 
-### Blaster
-
-### Lantern
-
-### 2 Interim Conclusion
-
-## Echo Application
-
-### Echo-aware applications
-
-### SSL - MIRAGE
-
-### SSS - Separake
-
-### 3 Interim Conclusion
 
 ## Echo-aware dataset
 
@@ -390,4 +325,4 @@ RESULTS HERE
 - Jsm
 - Teaching
 - MBSSLocate
-- Pyroomacoustics
+- Pyroomacoustics -->

@@ -2,28 +2,19 @@
 
 \begin{frame}[t]{Signal model}
 
-    Sound propagation process $\Leftrightarrow$ Source $\to$ Filter $\to$ Receiver model
+    % Sound propagation process $\Leftrightarrow$ Source $\to$ Filter $\to$ Receiver model
+
+    For one source and $I$ microphones:
 
     \begin{equation*}
-        \tikzmarknode{x}{}\contMic_i(t)
+        \tikzmarknode{x}{\contMic}_i(t)
                 = (
-                    \textcolor{orange}{\contRIR_i}
+                    \textcolor{orange}{\tikzmarknode{h}{\contRIR}_i}
                     \tikzmarknode{A}{\contConv}
-                    \tikzmarknode{s}{\contSrc})(t) +
-                    + \tikzmarknode{n}{\contNse(t)}
+                    \tikzmarknode{s}{\contSrc})(t)
+                    + \tikzmarknode{n}{\contNse}(t)
+                    \quad i \in I
     \end{equation*}
-
-    \begin{tikzpicture}[overlay,remember picture,
-                        nodes={inner sep=1pt, align=center, font=\footnotesize},
-                        gray,>=stealth] %
-        \draw[->] (x.right) -- ++ (-8mm,+0mm) node[left] {{microphone signal}};
-        \draw[->] (s.north) -- ++ (+12mm,+4mm) node[right] {{source signal}};
-        \draw[->] (n.right) -- ++ (+8mm,+0mm) node[right] {{noise term}};
-        \draw[->] (A.south) -- ++ (-4mm,-4mm) node[right] {{continuous-time convolution}};
-    \end{tikzpicture}
-
-    \vspace{-3mm}
-    \hfill\textcolor{myred}{\small\faExclamationTriangle~ continuous time}
 
     % $\contMic_i$, $i$-th microphone signal $\contSrc$ source, signal $\contRIR_i$, $i$-th Room Impulse Response $\contConv$, continuous convolution
 
@@ -40,13 +31,27 @@
     %     \end{column}
     % \end{columns}
 
-    \begin{mydefblock}{Room Impulse Response (RIR)}
+    \begin{mydefblock}{\tikzmarknode{RIR}{Room Impulse Response} (RIR)}
+        \small
         \begin{itemize}
             \item linear filtering effect of the sound
             \item acoustic response of a room to a (prefect) impulsive sound
             \item depends on spatial properties (room geometry, mic/src position)
+            \item $\contRIR_i \neq \contRIR_j$
         \end{itemize}
     \end{mydefblock}
+
+
+    \begin{tikzpicture}[overlay,remember picture,
+        nodes={inner sep=1pt, align=center, font=\footnotesize},
+        gray!70,>=stealth] %
+    \draw[->] (x.north) to[out=90, in=0]   ++ (-8mm,+4mm) node[left] {{mic. signal}};
+    \draw[->] (s.north) to[out=90, in=180] ++ (+8mm,+4mm) node[right] {{source signal}};
+    \draw[->] (n.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{noise term}};
+    \draw[->] (A.south) to[out=-90, in=180] ++ (+8mm,-8mm) node[right] {{\faExclamationTriangle~continuous-time convolution}};
+    \draw[->] (h.south) to[out=-90, in=90] (RIR.north);
+    \end{tikzpicture}
+
 
     \begin{columns}
         \column{0.48\textwidth}
@@ -66,159 +71,85 @@
 
 \subsection{Current Challenges}
 
-\begin{frame}{Echoes in the RIR}
-
-    RIR model
-    \begin{columns}
+\begin{frame}{Problem Statement}
+    \begin{columns}[T,onlytextwidth]
         \column{0.48\textwidth}
         \begin{equation*}
-            \contRIR_i(t) = \textcolor{myred}{\contRIRidirect}(t)
-                          + \textcolor{myblue}{\contRIRiearly}(t)
-                          + \textcolor{mygreen}{\contRIRilate}(t)
-                          + \varepsilon_i(t)
+            \begin{aligned}
+                \contMic_i(t) &= (\contRIR_i \contConv \contSrc)(t) + \contNse(t)\\
+                \contRIR_i(t) &= \textcolor{myred}{\contRIRidirect}(t)
+                              + \textcolor{myblue}{\contRIRiearly}(t)
+                              + \textcolor{mygreen}{\contRIRilate}(t)
+
+            \end{aligned}
         \end{equation*}
+        \begin{itemize}\small
+            \item $\textcolor{myred}{\contRIRidirect}(t)$ = direct path
+            \item $\textcolor{myblue}{\contRIRiearly}(t)$ = early reflection
+            \item $\textcolor{mygreen}{\contRIRilate}(t)$ = late reverberation
+        \end{itemize}
 
         \column{0.48\textwidth}
         \includegraphics[width=.8\textwidth]{figures/rir_measured.png}
 
     \end{columns}
 
-    Echoes can be modeled as sum of Dirac's delta
+    Echoes can be modeled as sum of Dirac's delta function:
 
     \begin{equation*}
-        \contRIR_i^\text{echoes} = \textcolor{myred}{\contRIRidirect}(t) + \textcolor{myblue}{\contRIRiearly}(t)
-            \approx \sum_{r=0}^{R} \alpha_i^{(r)} \delta(t - \textcolor{orange}{\tau_i^{(r)}})
+        \contRIR_i(t) =
+            \textcolor{myred}{\contRIRidirect}(t) + \textcolor{myblue}{\contRIRiearly}(t) + \varepsilon_i(t)
+            \approx \sum_{r=0}^{R} \ampir \delta(t - \textcolor{alert}{\tauir}) + \tikzmarknode{error}{\varepsilon}_i(t)
     \end{equation*}
 
-    \textbf{Goal:} estimated the $\set{\tau_i}_{i,r}$
+    \begin{textblock*}{20mm}(100mm,60mm)
+        \footnotesize
+        \tikzmarknode{model}{models} later echoes, reverberation and other.
+    \end{textblock*}
 
-    \textbf{Challenges:}
-    \begin{itemize}
-        \item $\alpha$ distortion (even if we know it $\implies$ labeling)
-        \item $\alpha \to \alpha(t)$ (sum of diracs $\to$ sum of filters)
-        \item $h_l$ reverberation is included in the noise term
-        \item depends on the scene geometry (room, source and mic position)
-        \item presence of noise (interferences and measurements)
-        \item sampling process (MULAN image)
-    \end{itemize}
+
+    \begin{tikzpicture}[overlay,remember picture,
+        nodes={inner sep=1pt, align=center, font=\footnotesize},
+        gray!70,>=stealth] %
+    \draw[->] (error.north) to[out=-90, in=180] (model.west);
+    \end{tikzpicture}
+
+
+    \begin{mydefblock}{Goals: Acoustic Echo Retrieval (AER)}
+        Estimated $\set{\alert{\tauir}, \ampir_i}_{i,r}$
+        for the microphone signal $\set{x_i}_i$
+    \end{mydefblock}
+    \addendum{\scriptsize {Estimation of only $\tauir$ is known as TOAs estimation}}
 
 \end{frame}
 
-% \begin{frame}{Echoes and Room Impulse Response}
 
-%     \begin{columns}[onlytextwidth]
-%         \begin{column}{0.60\textwidth}
-%             \begin{block}{RIRs can be modeled with the Image Methods}
-%                 \begin{itemize}
-%                     \item \textbf{specular reflection} only
-%                     \item for cuboid room, \textbf{it is} the sound prop.
-%                     \item in general, \textbf{well models the early part} of RIRs.
-%                     \item unique for each source and mic source
-%                 \end{itemize}
-%             \end{block}
-%         \end{column}
-%         \begin{column}{0.38\textwidth}
-%             \centering
-%             \includegraphics[width=0.8\textwidth]{figures/ism.png}
-%             {\small\itshape ``playing billiard in a concert hall''}
-%         \end{column}
-%     \end{columns}
+\begin{frame}{Problem Statement}
 
-%     \vspace{2mm}
-%     \pause
-%     \begin{columns}[onlytextwidth]
-%         \begin{column}{0.45\textwidth}
-%             \centering
-%             % \textbf{Time domain}
-%             \begin{equation*}
-%                 h_i^e(t) = \sum_{r=0}^{R} \alpha_i^{(r)} \delta(t - \tau_i^{(r)})
-%             \end{equation*}
-%             {\small sum of Dirac's delta}
-%         \end{column}%
-%         \pause
-%         \begin{column}{0.05\textwidth}
-%             \centering
-%             $\overset{\text{more realistic}}{\longrightarrow}$
-%         \end{column}%
-%         \begin{column}{0.45\textwidth}
-%             \centering
-%             % \textbf{Frequency domain}
-%             \begin{equation*}
-%                 H_i^e(f) = \sum_{r=0}^{R} \alpha_i^{(r)}(f) \cste^{-\csti 2 \pi f \tau_i^{(r)}}
-%             \end{equation*}
-%             {\small sum of filters}
-%         \end{column}
-%     \end{columns}
+    \begin{mydefblock}{Goals: Acoustic Echo Retrieval (AER)}
+        Estimated $\set{\alert{\tauir}, \ampir_i}_{i,r}$
+        for the microphone signal $\set{x_i}_i$
+    \end{mydefblock}
 
-%     \pause
-%     \vfill
-%     \begin{block}{RIRs accounts for}
+    \textbf{Challenges:}
+    \begin{itemize}
+        \item RIRs depend on the scene geometry (room, source and mic position)
+        \item Big under-modelling error
+        \begin{itemize}
+            \item in the RIR model due to late reverberation
+            \item in the signal model due to interferences and noise
+        \end{itemize}
+        \item $\ampir$ are distorted:
+        \begin{itemize}
+            \item $\ampir \to \ampir(t)$ (e.g. air attenuation, wall absorption)
+            \\\hspace{.5em}$\implies$ echo model is sum of filters
+            \item sampling process{\footnotesize~\cite{tukuljac2018mulan}}
+        \end{itemize}
+    \end{itemize}
 
-%         \vspace{3mm}
-%         \begin{columns}[T,onlytextwidth]
-%             \column{0.48\textwidth}
-%             the \textbf{geometry} of the room
-%             \begin{itemize}
-%                 \item \alert{Room shape and size}
-%                 \item \alert{Mic and Source position}
-%                 \item other objects (eg. reflectors)
-%             \end{itemize}
-%             \column{0.48\textwidth}
-%             the \textbf{acoustic properties} of
-%             \begin{itemize}
-%                 \item surface materials
-%                 \item objects materials
-%             \end{itemize}
-%         \end{columns}
-%     \end{block}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{figures/basismismatch.png}
+        \\{\addendum{\scriptsize Courtesy of Helena Tukuljac~\cite{tukuljac2018mulan}}}
+    \end{center}
 
-%     \pause
-%     \begin{mydefblock}{Echoes}
-%         \centering
-%         strong and distinct specular reflection
-%     \end{mydefblock}
-
-% \end{frame}
-
-% \begin{frame}{Echoes in (Digital) Signal Processing}
-
-%     \begin{block}{Room Impulse Response}
-%         \begin{equation*}
-%             \tilde{x}_i = (\tilde{h}_i \ast \tilde{s})(t) \longrightarrow \tilde{X}_i( f) = \tilde{H}_{ij}( f) \tilde{S}( f)
-%         \end{equation*}
-%         the linear filtering effect due to the propagation of sound from a source to a microphone in a indoor space
-%     \end{block}
-
-%     \begin{block}{Observation}
-%         Our vision is limited both in time (finite and discrete) and in frequency (finite and discrete)
-%         \begin{equation}
-%             x_i[n] = ...
-%         \end{equation}
-%     \end{block}
-
-%     \begin{block}{Signal model in the frequency domain}
-%         \begin{equation*}
-%             x_i = (h_i \ast s)(t)\;\longrightarrow\;X(f) = H_i(f) S(f)
-%         \end{equation*}
-%     \end{block}
-
-%     \begin{block}{Approximations}
-%         \begin{itemize}
-%             \item Narrowband Approximation
-%             \item DTFT echo model in the DFT
-%         \end{itemize}
-%     \end{block}
-
-% \end{frame}
-
-%% \subsection*{interim conclusion}
-% \begin{frame}{Interim Conclusion I}
-%     \begin{alertblock}{Approximations}
-%         \begin{itemize}
-%             \item Echoes are well described by specular reflection
-%             \item Echoes are off-grid by nature
-%             \item Sampling and quantization make them hard
-%             \item Processing in the discrete frequency domain, but with continuous time echo model
-%         \end{itemize}
-%     \end{alertblock}
-% \end{frame}
+\end{frame}
