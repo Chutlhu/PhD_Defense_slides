@@ -1,375 +1,382 @@
-\subsection*{State of The Art}
+% \subsection*{State of The Art}
 
-\begin{frame}[t]{Acoustic Echo Retrieval \hfill\faPalette}
-    \begin{columns}[T,onlytextwidth]
-        \column{0.55\textwidth}
-            Estimating early (strong) reflections for microphones recordings, i.e.,
-            \begin{equation*}
-                \{\contMic_i\}_i \longrightarrow \{ \tauir, \textcolor{gray}{\ampir} \}_{i,r}
-            \end{equation*}
-        \column{0.4\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=\textwidth]{./figures/arrivals.png}
-            \end{figure}
-    \end{columns}
+% \begin{frame}[t]{Acoustic Echo Retrieval \hfill\faBook}
+%     \begin{columns}[T,onlytextwidth]
+%         \column{0.55\textwidth}
+%             Estimating early (strong) reflections for microphones recordings, i.e.,
+%             \begin{equation*}
+%                 \{\contMic_i\}_i \longrightarrow \{ \tauir, \textcolor{gray}{\ampir} \}_{i,r}
+%             \end{equation*}
+%         \column{0.4\textwidth}
+%             \begin{figure}
+%                 \centering
+%                 \includegraphics[width=\textwidth]{./figures/arrivals.png}
+%             \end{figure}
+%     \end{columns}
 
-    \vfill
-    \begin{columns}[T,onlytextwidth]
-        \column{0.48\textwidth}
-        \textbf{Scenarios:} the source signal is
+%     \vfill
+%     \begin{columns}[T,onlytextwidth]
+%         \column{0.48\textwidth}
+%         \textbf{Scenarios:} the source signal is
 
-        \begin{center}
-            \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
-        \end{center}
+%         \begin{center}
+%             \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
+%         \end{center}
 
-        \only<4>{
-        \column{0.48\textwidth}
-        Active
-        \vspace{-2mm}
-        \begin{itemize}
-            \small
-            \item[\faEye] \textbf{non-blind} problem
-            \item[\faVolumeUp] \textbf{intrusive} or specific setups
-            % \item known emitted signal
-            % \item Time of Arrival (\textbf{TOA}s) accessible
-            % \\\hspace{.3em} $\implies$ \textbf{single} mic
-            \\\hspace{-1em}\addendum{\footnotesize \textbf{Application:} sonar, calibration, measurements, etc.}
-        \end{itemize}
+%         \only<4>{
+%         \column{0.48\textwidth}
+%         Active
+%         \vspace{-2mm}
+%         \begin{itemize}
+%             \small
+%             \item[\faEye] \textbf{non-blind} problem
+%             \item[\faVolumeUp] \textbf{intrusive} or specific setups
+%             % \item known emitted signal
+%             % \item Time of Arrival (\textbf{TOA}s) accessible
+%             % \\\hspace{.3em} $\implies$ \textbf{single} mic
+%             \\\hspace{-1em}\addendum{\footnotesize \textbf{Application:} sonar, calibration, measurements, etc.}
+%         \end{itemize}
 
-        \vspace{-5mm}
-        Passive
-        \vspace{-2mm}
-        \begin{itemize}
-            \small
-            \item[\faEyeSlash] \textbf{blind inverse} problem (harder)
-            \item[\faMicrophone] \textbf{passive} and more common setups
-            % \item \alert{un}knwon
-            % \item Time Difference of Arrivals (\textbf{TDOA}s) only
-            % \\\hspace{.3em} \textbf{multi-mic}
-            \\\hspace{-1em}\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, laptop, etc.}
-        \end{itemize}
-        }
+%         \vspace{-5mm}
+%         Passive
+%         \vspace{-2mm}
+%         \begin{itemize}
+%             \small
+%             \item[\faEyeSlash] \textbf{blind inverse} problem (harder)
+%             \item[\faMicrophone] \textbf{passive} and more common setups
+%             % \item \alert{un}knwon
+%             % \item Time Difference of Arrivals (\textbf{TDOA}s) only
+%             % \\\hspace{.3em} \textbf{multi-mic}
+%             \\\hspace{-1em}\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, laptop, etc.}
+%         \end{itemize}
+%         }
 
-        \only<5->{
-        \column{0.48\textwidth}
-        \centering
-        \textbf{Methods:} the estimation is
-        \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
-        }
-    \end{columns}
+%         \only<5->{
+%         \column{0.48\textwidth}
+%         \centering
+%         \textbf{Methods:} the estimation is
+%         \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
+%         }
+%     \end{columns}
 
-    \vfill
-    \textcolor{myred}{\textbf{Our case:} signal source and passive system of ($I$ microphones)}
+%     \vfill
+%     \textcolor{myred}{\textbf{Our case:} signal source and passive system of ($I$ microphones)}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}[t]{\alert{Passive} Acoustic Echo Retrieval \hfill\faPalette}
+% \begin{frame}[t]{\alert{Passive} Acoustic Echo Retrieval \hfill\faBook}
 
-        \vspace{.5em}
-        \begin{columns}[T,onlytextwidth] % align columns
-            \begin{column}{.48\textwidth}
-                \textbf{RIR-\alert{based} approaches}
-            \end{column}
-            \begin{column}{.48\textwidth}
-                \textbf{RIR-\alert{agnostic} approaches}
-            \end{column}%
-        \end{columns}
+%         \vspace{.5em}
+%         \begin{columns}[T,onlytextwidth] % align columns
+%             \begin{column}{.48\textwidth}
+%                 \textbf{RIR-\alert{based} approaches}
+%             \end{column}
+%             \begin{column}{.48\textwidth}
+%                 \textbf{RIR-\alert{agnostic} approaches}
+%             \end{column}%
+%         \end{columns}
 
-        \vspace{.5em}
-        \begin{columns}[onlytextwidth] % align columns
-            \begin{column}{.48\textwidth}
-                \includegraphics[trim={0 31em 0 7em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
-            \end{column}
-            \begin{column}{.48\textwidth}
-                \includegraphics[trim={0 0 0 40em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
-            \end{column}%
-        \end{columns}
+%         \vspace{.5em}
+%         \begin{columns}[onlytextwidth] % align columns
+%             \begin{column}{.48\textwidth}
+%                 \includegraphics[trim={0 31em 0 7em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
+%             \end{column}
+%             \begin{column}{.48\textwidth}
+%                 \includegraphics[trim={0 0 0 40em},clip,width=.9\textwidth]{./figures/based-agnostic.png}
+%             \end{column}%
+%         \end{columns}
 
-        \vspace{.5em}
-        \begin{columns}[T,onlytextwidth] % align columns
-            \begin{column}{.48\textwidth}
-                \small
-                \begin{enumerate}
-                    \item ``BCE''\footnotemark[1] problem $\implies$ RIRs
-                    \item Peak picking $\implies$ Echoes
-                \end{enumerate}
-            \end{column}
-            \begin{column}{.48\textwidth}
-                \small
-                \begin{enumerate}
-                    \item Direct off-grid estimation of $\set{\tauir, \ampir}$
-                    e.g., with maximum-likelihood
-                    % \\\textcolor{gray}{(+ \small direction of arrivals can be used instead)}
-                \end{enumerate}
-            \end{column}%
-        \end{columns}
+%         \vspace{.5em}
+%         \begin{columns}[T,onlytextwidth] % align columns
+%             \begin{column}{.48\textwidth}
+%                 \small
+%                 \begin{enumerate}
+%                     \item ``BCE''\footnotemark[1] problem $\implies$ RIRs
+%                     \item Peak picking $\implies$ Echoes
+%                 \end{enumerate}
+%             \end{column}
+%             \begin{column}{.48\textwidth}
+%                 \small
+%                 \begin{enumerate}
+%                     \item Direct off-grid estimation of $\set{\tauir, \ampir}$
+%                     e.g., with maximum-likelihood
+%                     % \\\textcolor{gray}{(+ \small direction of arrivals can be used instead)}
+%                 \end{enumerate}
+%             \end{column}%
+%         \end{columns}
 
-        \vspace{1em}
-        \begin{columns}[T,onlytextwidth] % align columns
-            \column{.48\textwidth}
-                \small
-                \begin{itemize}
-                    \item[\cmark] \pro{BCE is well and known studied}
-                    \item[\cmark] \pro{it is the state of the art}
-                    \\{\scriptsize~\cite{crocco2016estimation}}
-                    \item[\cmark] \pro{reasonably good for some application}
-                \end{itemize}
-            \column{.48\textwidth}
-                \small
-                \begin{itemize}
-                    \item[\cmark] \pro{No full RIRs \& no peak picking}
-                    \begin{itemize}
-                        \item lower complexity
-                        \item less hyperparameters
-                    \end{itemize}
-                    \item[\cmark] \pro{Echo properties are respected}
-                    \\\addendum{\footnotesize e.g. Sparsity, Non-negativity}
-                    \end{itemize}
-        \end{columns}
+%         \vspace{1em}
+%         \begin{columns}[T,onlytextwidth] % align columns
+%             \column{.48\textwidth}
+%                 \small
+%                 \begin{itemize}
+%                     \item[\cmark] \pro{BCE is well and known studied}
+%                     \item[\cmark] \pro{it is the state of the art}
+%                     \\{\scriptsize~\cite{crocco2016estimation}}
+%                     \item[\cmark] \pro{reasonably good for some application}
+%                 \end{itemize}
+%             \column{.48\textwidth}
+%                 \small
+%                 \begin{itemize}
+%                     \item[\cmark] \pro{No full RIRs \& no peak picking}
+%                     \begin{itemize}
+%                         \item lower complexity
+%                         \item less hyperparameters
+%                     \end{itemize}
+%                     \item[\cmark] \pro{Echo properties are respected}
+%                     \\\addendum{\footnotesize e.g. Sparsity, Non-negativity}
+%                     \end{itemize}
+%         \end{columns}
 
-        \vspace{1em}
-        \begin{columns}[T,onlytextwidth] % align columns
-            \column{.48\textwidth}
-                \small
-                \begin{itemize}
-                    \item[\xmark] \con{Full RIRs need to be estimated}
-                    \item[\xmark] \con{Peak picking has hyperparameters}
-                    \item[\xmark] \con{Issues due to \textit{on-grid} estimation}
-                    \\[\footnotesize \faReply~next topic]
-                \end{itemize}
-            \column{.48\textwidth}
-                \small
-                \begin{itemize}
-                    \item[\xmark] \con{exploratory \faWpexplorer}
-                    \\\addendum{no standard solver, few works on audio}
-                    % \item[\xmark] \con{no ``simple'' implementation}
-                    % \\\addendum{not standard math of BCE}
-                \end{itemize}
-        \end{columns}
+%         \vspace{1em}
+%         \begin{columns}[T,onlytextwidth] % align columns
+%             \column{.48\textwidth}
+%                 \small
+%                 \begin{itemize}
+%                     \item[\xmark] \con{Full RIRs need to be estimated}
+%                     \item[\xmark] \con{Peak picking has hyperparameters}
+%                     \item[\xmark] \con{Issues due to \textit{on-grid} estimation}
+%                     \\[\footnotesize \faReply~next topic]
+%                 \end{itemize}
+%             \column{.48\textwidth}
+%                 \small
+%                 \begin{itemize}
+%                     \item[\xmark] \con{exploratory \faWpexplorer}
+%                     \\\addendum{no standard solver, few works on audio}
+%                     % \item[\xmark] \con{no ``simple'' implementation}
+%                     % \\\addendum{not standard math of BCE}
+%                 \end{itemize}
+%         \end{columns}
 
-    \footnotetext[1]{Blind Channel Estimation}
+%     \footnotetext[1]{Blind Channel Estimation}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}{Limitations \& bottleneck  \hfill\faPalette}
+% \begin{frame}{Limitations \& bottleneck  \hfill\faBook}
 
-    \begin{block}{\faExclamationCircle~ Estimation is on-grid}
+%     \begin{block}{\faExclamationCircle~ Echoes are not necessarely ``on-grid''}
 
-        \vspace{-2mm}
-        \begin{itemize}
-            \item Sparsity and non-negativity not true ``on grid''
-            % We measure filters, not diracs
+%         \vspace{-2mm}
+%         \begin{itemize}
+%             \item Sparsity and non-negativity not true ``on grid''
+%             % We measure filters, not diracs
 
-            \item \emph{Body guard} effect \cite{duval2017sparse}
-            \begin{itemize}
-                \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
-                \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
-            \end{itemize}
-            \item Pick Picking
-            \begin{itemize}
-                \item[$\rightarrow$] manually tuned / corrected
-                \item[$\rightarrow$] echo labeling (NP-hard problem)
-            \end{itemize}
-        \end{itemize}
-    \end{block}
+%             \item \emph{Body guard} effect \cite{duval2017sparse}
+%             \begin{itemize}
+%                 \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
+%                 \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
+%             \end{itemize}
+%             \item Pick Picking
+%             \begin{itemize}
+%                 \item[$\rightarrow$] manually tuned / corrected
+%             \end{itemize}
+%         \end{itemize}
+%     \end{block}
 
-    \begin{columns}[onlytextwidth]
-        \column{0.60\textwidth}
+%     \begin{columns}[onlytextwidth]
+%         \column{0.60\textwidth}
 
-        \begin{block}{How about higher sampling rate $F_s$?}
+%         \begin{block}{How about higher sampling rate $F_s$?}
 
-            \vspace{-2mm}
-            \begin{itemize}
-                \item[$\rightarrow$] Increase Precision
-            \end{itemize}
-        \end{block}
+%             \vspace{-2mm}
+%             \begin{itemize}
+%                 \item[$\rightarrow$] Increase Precision
+%             \end{itemize}
+%         \end{block}
 
-        \begin{block}{But, computational bottleneck!}
+%         \begin{block}{But, computational bottleneck!}
 
-            \vspace{-2mm}
-            \begin{itemize}
-                \item Bigger vectors and matrices
-                \begin{itemize}
-                    \item[$\longrightarrow$] memory usage
-                \end{itemize}
-                \item the higher the sampling frequency
-                \begin{itemize}
-                    \item[$\longrightarrow$] more ill-conditioned
-                \end{itemize}
-            \end{itemize}
-        \end{block}
+%             \vspace{-2mm}
+%             \begin{itemize}
+%                 \item Bigger vectors and matrices
+%                 \begin{itemize}
+%                     \item[$\longrightarrow$] memory usage
+%                 \end{itemize}
+%                 \item the higher the sampling frequency
+%                 \begin{itemize}
+%                     \item[$\longrightarrow$] more ill-conditioned
+%                 \end{itemize}
+%             \end{itemize}
+%         \end{block}
 
-        \column{0.38\textwidth}
-        \begin{center}
-            \textcolor{myred}{\textbf{How to solve this?}}
-        \end{center}
-        \begin{mycontriblock}
-            RIR-agnostic + off-grid
-            \begin{enumerate}
-                \item Learning-based
-                \item Analytical
-            \end{enumerate}
-        \end{mycontriblock}
+%         \column{0.38\textwidth}
+%         \begin{center}
+%             \textcolor{myred}{\textbf{How to address this?}}
+%         \end{center}
+%         \begin{mycontriblock}
+%             RIR-agnostic + off-grid
+%             \begin{enumerate}
+%                 \item Deep Neural Network
+%                 \item Continuous Dictionary
+%             \end{enumerate}
+%         \end{mycontriblock}
 
-    \end{columns}
+%     \end{columns}
 
-    \begin{textblock*}{40mm}(80mm,15mm)
-        \includegraphics<1->[width=\columnwidth]{figures/bodyguard.png}
-    \end{textblock*}
+%     \begin{textblock*}{40mm}(80mm,15mm)
+%         \includegraphics<1->[width=\columnwidth]{figures/bodyguard.png}
+%     \end{textblock*}
 
-\end{frame}
+% \end{frame}
 
-\subsection{Learning-based AER}
+% \subsection{\lantern}
 
-\begin{frame}{Proposed approach: learning-based \& off-grid \hfill\faBrain}
+% \begin{frame}{Proposed approach: learning-based \& off-grid \hfill\faBrain}
 
-    % \textbf{Recall}: AER $\Leftrightarrow$ $\{\contMic_i\}_i \overset{?}{\longrightarrow} \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}$
-    \begin{mydefblock}{Idea: (Deep) Learning-based AER}
-        \begin{enumerate}
-            \item Use \alert{virtually} supervised deep learning models
-            \item Estimate first echo (simple but important)
-            \item Only 2 microphones
-        \end{enumerate}
-    \end{mydefblock}
+%     % \textbf{Recall}: AER $\Leftrightarrow$ $\{\contMic_i\}_i \overset{?}{\longrightarrow} \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}$
+%     \begin{mydefblock}{Idea: (Deep) Learning-based AER}
+%         \begin{enumerate}
+%             \item Use \alert{virtually} supervised deep learning models
+%             \item Estimate first echo (simple but important)
+%             \item Only 2 microphones
+%         \end{enumerate}
+%     \end{mydefblock}
 
-    \vfill
-    \textbf{Observations:}
-    \begin{itemize}
-        \item This \textit{direct} mapping is difficult, the \textit{inverse} ``is not''
-        \\$\rightarrow$ acoustic simulators:
-            $\quad \text{mic/src/room}
-            \quad \longrightarrow \quad
-            \tauir,\ampir, \quad \contRIR_i, \quad \contMic_i$
-        \item Acoustic simulator are ``simple'', versatile and fast
-        \\$\to$ many data
-        \item This approach is successfully in \textit{Sound Source Localization}
-        \\$\to$ position is related to echoes
-        \\{\small\cite{nguyen2018autonomous,perotin2019regression} \textcolor{myred}{\faExclamationTriangle~Not only DNN}}
-    \end{itemize}
+%     \vfill
+%     \textbf{Motivations:}
+%     \begin{itemize}
+%         \item This \textit{direct} mapping is difficult, the \textit{inverse} ``is not''
+%         \\$\rightarrow$ acoustic simulators:
+%             $\text{mic/src/room geometry}
+%             \; \longrightarrow \;
+%             \set{\tauir,\ampir}, \; \contRIR_i, \quad \contMic_i$
+%         \item Acoustic simulator are ``simple'', versatile and fast
+%         \\$\to$ many data
+%         \item This approach is successful in \textit{Sound Source Localization}
+%         \\$\to$ position is related to echoes
+%         \\{\small\cite{kataria2017hearing,nguyen2018autonomous,perotin2019regression} \textcolor{myred}{\faExclamationTriangle~Not only DNN}}
+%     \end{itemize}
 
+% \end{frame}
 
+% \begin{frame}{Proposed approache: models \hfill\faBrain}
 
-\end{frame}
+%     \begin{columns}[T,onlytextwidth]
+%         \column{0.48\textwidth}
+%         \textbf{Inputs:}
+%         {\small Interchannel level and phase difference features\footnotemark[1] from
+%             \[ \footnotesize
+%             R[f] = \timeavg \frac{X_2[f,t]}{X_1[f,t]}
+%             \approx \timeavg \frac{H_2[f]\alert{S[f,t]}}{H_1[f]\alert{S[f,t]}}
+%             \]
+%             \\$\approx$ the relative transfer function
+%             \\$\to$ remove source dependency
+%         }
 
-\begin{frame}{Models \hfill\faBrain}
+%         \column{0.48\textwidth}
+%         \textbf{Output:} {\small Inter and intra arrival delays}
+%         \begin{columns}
+%             \column{0.60\textwidth}
+%             \includegraphics<1>[width=\textwidth]{figures/lantern_rir_tdoa1(1).png}%
+%             \includegraphics<2>[width=\textwidth]{figures/lantern_rir_tdoa1(2).png}%
+%             \includegraphics<3->[width=\textwidth]{figures/lantern_rir_tdoa1(3).png}%
+%             \column{0.45\textwidth}
+%             \footnotesize
+%             \centering
+%             4 TOA
+%             \\$\downarrow$
+%             \\3 Time \alert{Difference} of Arrivals (\alert{\textbf{TDOAs}})\footnotemark[1]
+%         \end{columns}
+%         \begin{center}
+%             \small
+%             \textbf{HP:} first $\Leftrightarrow$ strongest echo
+%         \end{center}
+%     \end{columns}
 
-    \begin{columns}[T,onlytextwidth]
-        \column{0.48\textwidth}
-        \textbf{Inputs:}
-        {\small Interchannel level and phase difference features\footnotemark[1] from
-            \[ \footnotesize
-            R[f] = \timeavg \frac{X_2[f,t]}{X_1[f,t]}
-            \approx \timeavg \frac{H_2[f]\alert{S[f,t]}}{H_1[f]\alert{S[f,t]}}
-            \]
-            \\$\approx$ the relative transfer function
-            \\$\to$ remove source dependency
-        }
+%     \pause[4]
+%     \vfill
+%     \begin{itemize}
+%         \item Architecture: $\MLP$, $\CNN$~{\footnotesize\cite{chakrabarty2017broadband,nguyen2018autonomous}}
+%         \item Loss Function:
+%         \begin{enumerate}
+%             \item RMSE (Multi-label regression) $\to$ TDOAs
+%             \item Gaussian log-likelihood $\to \kbrace{\mu_\tau, \sigma^2_\tau} \;\forall \tau \in$ TDOAs \hspace{1em}\tikzmark{CNN}\tikzmark{CNNtop}
+%             \item Student log-likelihood $\to \kbrace{\mu_\tau, \lambda_\tau, \nu_\tau} \;\forall \tau \in$ TDOAs \tikzmark{CNNbot}
+%         \end{enumerate}
 
-        \column{0.48\textwidth}
-        \textbf{Output:} {\small Inter and intra arrival delays}
-        \begin{columns}
-            \column{0.60\textwidth}
-            \includegraphics<1>[width=\textwidth]{figures/lantern_rir_tdoa1(1).png}%
-            \includegraphics<2>[width=\textwidth]{figures/lantern_rir_tdoa1(2).png}%
-            \includegraphics<3->[width=\textwidth]{figures/lantern_rir_tdoa1(3).png}%
-            \column{0.45\textwidth}
-            \footnotesize
-            \centering
-            4 TOA
-            \\$\downarrow$
-            \\3 Time \alert{Difference} of Arrivals (\alert{\textbf{TDOAs}})\footnotemark[1]
-        \end{columns}
-        {\small \textbf{HP:} first $\Leftrightarrow$ strongest echo (close-surface)}
-    \end{columns}
+%         \pause[6]
+%         \item Data:
+%         \begin{itemize}
+%             \item Virtually-supervised learning (= data from acoustic simulator)
+%             \item white-noise as source signal + noise
+%             \item 2 microphone in close-surface scenario
+%         \end{itemize}
+%     \end{itemize}
 
-    \begin{center}
-        \only<4>{\includegraphics[trim={0 0 0 20},clip,width=0.6\textwidth]{figures/dnn_mlp.png}}%
-        \only<5>{\includegraphics[trim={0 0 0 20},clip,width=0.6\textwidth]{figures/dnn_cnn.png}}%
-    \end{center}
+%     \visible<5->{
+%     \begin{tikzpicture}[overlay, remember picture]
+%         \node[anchor=base] (a) at (pic cs:CNNtop) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+%         \node[anchor=base] (b) at (pic cs:CNNbot) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+%         \draw [decoration={brace,amplitude=0.35em},decorate,thick,gray]
+%             (a.north -| {pic cs:CNN}) -- node[right,inner sep=1em] {
+%                 \small \parbox{12em}{Good for data fusion\\Similar to \textbf{MDN}\\~{\footnotesize\cite{bishop1994mixture}}}
+%                 } (b.south -| {pic cs:CNN});
+%     \end{tikzpicture}
+%     }
 
-    \vspace{-3mm}
-    \begin{itemize}
-        \item Architecture: $\MLP$, $\CNN$~{\footnotesize\cite{chakrabarty2017broadband,nguyen2018autonomous}}
-        \item Loss Function:
-        \begin{enumerate}
-            \item RMSE (Multi-label regression) $\to$ TDOAs
-            \item Gaussian log-likelihood $\to \kbrace{\mu_\tau, \sigma^2_\tau} \;\forall \tau \in$ TDOAs \hspace{1em}\tikzmark{CNN}\tikzmark{CNNtop}
-            \item Student log-likelihood $\to \kbrace{\mu_\tau, \lambda_\tau, \nu_\tau} \;\forall \tau \in$ TDOAs \tikzmark{CNNbot}
-        \end{enumerate}
-        \item Data:
-        \begin{itemize}
-            \item Virtually-supervised learning (= data from acoustic simulator)
-            \item white-noise as source signal + noise
-        \end{itemize}
-    \end{itemize}
+%     \visible<1->{
+%         \footnotetext[1]{\tiny $\mathtt{ILD} = \log\kvbar{R}$, $\mathtt{IPD} = \arg{R/\kvbar{R}}$}
+%     }
 
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:CNNtop) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:CNNbot) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.35em},decorate,thick,gray]
-         (a.north -| {pic cs:CNN}) -- node[right,inner sep=1em] {
-             \small \parbox{12em}{for data fusion\\similar to \textbf{MDN}~{\footnotesize\cite{bishop1994mixture}}}
-             } (b.south -| {pic cs:CNN});
-    \end{tikzpicture}
+% \end{frame}
 
+% \begin{frame}{\faFlask~Experimental results \hfill\faBrain}
 
-    \vfill
-    \footnotetext[1]{\tiny See appendix for detailed computation}
+%     \vspace{2mm}
+%     \begin{mycontriblock}
+%         \textbf{Proposed Method:} $\MLP$, $\CNN$, $\CNNn$, $\CNNt$
+%     \end{mycontriblock}
+%     \begin{mysotablock}
+%         \textbf{Baseline:} $\GCCPHAT${\tiny~\cite{knapp1976generalized}}
+%     \end{mysotablock}
 
-\end{frame}
+%     \textbf{Metrics:} normalized RMSE (0 = best fit, 1 = random fit)
 
-\begin{frame}{\faFlask~Experimental results \hfill\faBrain}
-    \textbf{Metrics:} normalized RMSE (0 = best fit, 1 = random fit)
+%     % \vspace{2mm}
+%     % \begin{columns}[T,onlytextwidth]
 
-    \begin{mycontriblock}
-        \textbf{Proposed Method:} $\MLP$, $\CNN$, $\CNNn$, $\CNNt$
-    \end{mycontriblock}
-    \begin{mysotablock}
-        \textbf{Baseline:} $\GCCPHAT$\footnotemark[1]
-    \end{mysotablock}
+%     %     \column{0.32\textwidth}
+%     %     Are better than baseline?
+%     %     \\\addendum{\footnotesize only TDOA on direct path}
+%     %     \\\hspace{.3em}$\to$ yes \cmark
 
-    % \vspace{2mm}
-    \begin{columns}[T,onlytextwidth]
+%     %     \column{0.32\textwidth}
+%     %     Echoes' \alert{TDOAs}?
+%     %     \\\hspace{.3em}$\to$ yes \cmark
+%     %     \\\hspace{.3em}$\to$ CNN better than MLP
 
-        \column{0.32\textwidth}
-        Are better than baseline?
-        \\\addendum{\footnotesize only TDOA on direct path}
-        \\\hspace{.3em}$\to$ yes \cmark
+%     %     \column{0.32\textwidth}
+%     %     Are robust to noise?
+%     %     \\\hspace{.3em}$\to$ yes \cmark
+%     %     \\\hspace{.3em}$\to$ \CNNn/\CNNt better than \CNN
 
-        \column{0.32\textwidth}
-        Echoes' \alert{TDOAs}?
-        \\\hspace{.3em}$\to$ yes \cmark
-        \\\hspace{.3em}$\to$ CNN better than MLP
+%     % \end{columns}
 
-        \column{0.32\textwidth}
-        Are robust to noise?
-        \\\hspace{.3em}$\to$ yes \cmark
-        \\\hspace{.3em}$\to$ \CNNn/\CNNt better than \CNN
+%     \begin{center}
+%         \includegraphics<1>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_snr1.pdf}%
+%         \includegraphics<2>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_snr2.pdf}%
+%         \includegraphics<3>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_snr3.pdf}%
+%         \includegraphics<4->[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_snr4.pdf}%
+%     \end{center}
 
-    \end{columns}
+%     \vspace{-3mm}
+%     \visible<2->{\textbf{Observation:}}
 
-    \begin{center}
-        \includegraphics<1>[height=0.33\textwidth]{figures/lantern_snr10.pdf}%
-        \includegraphics<2->[height=0.33\textwidth]{figures/lantern_snr.pdf}
-    \end{center}
+%     \vspace{-2mm}
+%     \begin{itemize}\small
+%         \item<2->[\cmark] $\MLP$ outperforms $\GCCPHAT$ on TDOA estimation
+%         \item<3->[\cmark] $\CNN$ outperforms $\MLP$ (lower error and smaller variance)
+%         \item<4->[\cmark] $\CNNn$ and $\CNNt$ outperform $\CNN$ (lower error and smaller variance)
+%         \item<4->[\xmark] TDOA between DP and 1$^\text{st}$ echo more difficult
+%         \item<5->[\xmark] In general, only the first echo on white noise
+%     \end{itemize}
 
-    \begin{textblock*}{20mm}(110mm,70mm)
-        \faExclamationTriangle Only 2 echoes
-        \\\faExclamationTriangle work in progress (more echoes and generalization)
-        \\\faExclamationTriangle application later on speech
-    \end{textblock*}
+% \end{frame}
 
-    \vfill
-    \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
-
-\end{frame}
-
-% \input{appendix/leftover_mirage.tex}
 
 \subsection{\blaster}
 
-\begin{frame}{State of the Art {\hfill\small (common knowledge)}\faBook}
+\begin{frame}{State of the Art \hfill\faBook}
 
     \begin{block}{Key ingredient -- \textit{Cross relation identity}}
 
@@ -380,8 +387,6 @@
                 \contMic_1 &= \contRIR_1 \contConv \contSrc
                 \\\contRIR_2 \contConv \contMic_1 = \textcolor{gray}{\contRIR_2 \contConv \contRIR_1 \contConv \contSrc}
                     &\textcolor{gray}{= \contRIR_1 \contConv \contRIR_2 \contConv \contSrc} = \contRIR_1 \contConv \contMic_2
-                % \\\only<1>{\contRIR_2 \contConv \contMic_1 &= \contRIR_1 \contConv \contMic_2}
-                %   \only<2->{\contRIR_2 \contConv \contMic_1 &- \contRIR_1 \contConv \contMic_2 = 0}
             \end{align*}
 
             \column{0.3\textwidth}
@@ -391,16 +396,15 @@
         \end{columns}
     \end{block}
 
-    \vfill
     \begin{block}{Ideas:}
     \begin{enumerate}
         \small
-        \item[\faCreativeCommonsSamplingPlus] Sampled version of $\contMic_1,\contMic_2$ are available ($\discMic_1, \discMic_2$)
-        \item Echoes' $\tauir$ $\propto$ sampling frequency
+        \item Sampled version of $\contMic_1,\contMic_2$ are available: $\discMic_1, \discMic_2$
+        \item Echo TOAs $\propto$ sampling frequency
         \item Find echoes $\rightarrow$ \textbf{find sparse vectors} $\discRIR_1, \discRIR_2$ of length $L$
         \item Modeled as \textbf{Lasso}-like problem
 
-        \vspace*{.25em}
+        \vspace*{2mm}
         \begin{mysotablock}
             \begin{equation*}
                 \widehat{\discRIR}_1, \widehat{\discRIR}_2 \in
@@ -417,21 +421,23 @@
                 \hspace{5mm} \footnotesize $\mathcal{C}(\discRIR_1, \discRIR_2)$ $\longrightarrow$ constraints e.g. \parbox{6em}{nonnegativity\\anchor}
             \end{center}
         \end{mysotablock}
-
+        \begin{tikzpicture}[overlay,remember picture, %
+            nodes={inner sep=1pt, align=center, color=gray, font=\footnotesize}, %
+            gray,>=stealth] %
+            \draw[->] (conv.north) to[out=90, in=180] ++ (+10mm,+4mm) node[right] %
+            {{= $\mathtt{Toeplitz}(\discMic_i) \discRIR_j \in \mathcal{O}(L^2)$}};
+        \end{tikzpicture}
     \end{enumerate}
-    \begin{tikzpicture}[overlay,remember picture, %
-        nodes={inner sep=1pt, align=center, color=gray, font=\footnotesize}, %
-        gray,>=stealth] %
-    \draw[->] (conv.north) to[out=90, in=180] ++ (+10mm,+4mm) node[right] %
-        {{= $\mathtt{Toeplitz}(\discMic_i) \discRIR_j \in \mathcal{O}(L^2)$}};
-    \end{tikzpicture}
     \end{block}
 
-    \begin{center}
-        \footnotesize
-        \textcolor{mygreen}{\cmark}  \cite{tong1994blind} \qquad \textcolor{mygreen}{\cmark}  \cite{lin2008blind} \qquad \textcolor{mygreen}{\cmark} \cite{aissa2008blind} \\
-        \textcolor{mygreen}{\cmark} \cite{kowalczyk2013blind} \qquad \textcolor{mygreen}{\cmark} \cite{crocco2015room,crocco2016estimation}
-    \end{center}
+    \vspace{-12mm}
+    \begin{block}{}
+        \begin{center}
+            \footnotesize
+            \textcolor{mygreen}{\cmark}  \cite{tong1994blind} \qquad \textcolor{mygreen}{\cmark}  \cite{lin2008blind} \qquad \textcolor{mygreen}{\cmark} \cite{aissa2008blind} \\
+            \textcolor{mygreen}{\cmark} \cite{kowalczyk2013blind} \qquad \textcolor{mygreen}{\cmark} \cite{crocco2016estimation}
+        \end{center}
+    \end{block}
 
  \end{frame}
 
