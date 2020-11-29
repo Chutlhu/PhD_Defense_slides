@@ -130,27 +130,28 @@
     % COVER PAGE
     {
       % in case of background image in the first slide
-      % \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{./imgs/codingImageNineEdited.jpg}}
+      \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
       \maketitle
     }
 
     {
+      % make this section section not appear in the navigation bar
       \makeatletter
       \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
       \makeatother
+      \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
       \section{Introduction}
     }
-
     \input{content/intro.tex}
 
-    % %section do not appear in the navigation bar
-    % {
-    %   \makeatletter
-    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %   \makeatother
-    %   \section{Problem Statement}
-    % }
-    % \input{content/model.tex}
+    %section do not appear in the navigation bar
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Problem Statement}
+    }
+    \input{content/model.tex}
 
 
     %section do not appear in the navigation bar

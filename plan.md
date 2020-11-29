@@ -80,9 +80,10 @@ We can se this is everyday examples such as in the echo points in the mountains.
 Probably the most striking example of the properties of echoes are the bats that use it to
 navigate in the dark and hunting. Such techniques is used by dolphins it is a the based of the sonar technology.
 
-In signal processing the sound propagation is typically either completely ignored or considered full.
-In the former case, this assumption lead to huge simplification, but consider reverberation as noise term. While the latter is very challenging.
-The echo-aware processing offer the an alternative that allow better modeling, while not requiring to fully estimated the sound propagation.
+In signal processing the sound propagation is typically either ignored or modeled it fully.
+In the former case, this assumption lead to huge simplification, but consider reverberation as noise term, as a nuisance. While the latter, the estimation of the full sound propagation effect is very challenging.
+The echo-aware processing offer an attractive alternative that allow better modeling, while not requiring to fully estimated the sound propagation.
+This was particularly underlined by a paper from Microsoft Research, titled turning enemy into friends, referring to echoes in signal processing.
 
 ### Outline and contribution
 
@@ -92,6 +93,7 @@ Signal processing give us models and tools;
 And echoes echoes give us useful information that can be used for better processing.
 
 In my PhD I addressed this along 3 directions:
+ESTIMATION, APPLICATION and DATA.
 
 The first direction consists in estimating the properties of acoustic echoes, for which we propose two methods, one analytical and one based on machine-learning.
 The main different with respect to state of the art is that they do not require any parameter tuning or model the propagation entirely.
@@ -103,58 +105,17 @@ Finally, since most of the validation of the above methods is conducted on synth
 The presentation of today will cover partially the manuscript, highlighting to major contribution of the thesis.
 The first part is dedicated to the two estimation methods,
 the second part will present an echo-aware application in sound source localization
-and we will conclude with the presentation of the dataset with its validation on Speech Enhancement
+and we will conclude with the presentation of the dataset with its validation on Speech Enhancement.
 
+## Problem statement
 
-### Challenges and Objective
+In the following slides we will see how echoes and signals are modeled in the context of audio digital signal processing.
 
-Current challenges:
+### Signal Model
 
-- Turning enemies into friends
-  - Anechoic (neglecting echoes) -> echoes are enemy
-  - Reverberation (modeling the full RIRs) -> very challenging task
-- estimating acoustic echoes in noisy environment is a non-trivial task
-- how to use properly the information?
+The complete sound propagation include all the interaction of the sound travelling in whole environment starting from a source and reaching a microphone.
+This process can be modeled as a source-filter-receiver process, where the sound propagation acts as a filter for the source signals.
 
-In this thesis we will see how to estimate the echoes and how to estimate them and how to integrate this
-
-- model echoes in signal processing
-- estimate echoes
-- apply echoes
-- data for validation
-
-### Contribution
-
-In the context of echo-aware processing, we can identify the following scheme
-
-OBSERVATION -> ECHO ESTIMATION -> ECHO APPLICATION
-
-contributions:
-
-- estimation !
-  - knowledge based ?
-  - learning based  ?
-- application !
-  - source separation !  --> not today
-  - speech enhancement !
-  - source localization !
-  - room geomentry estimation !
-- observation / data #
-  - dEchorate #
-
-
-## Echo-aware Signal Models
-
-In the following slides we will see how echoes are modeled in the context of room acoustics and consequently described in audio signal processing.
-
-### Echoes and Signal Processing I
-
-The complete sound propagation include all the interaction of the sound travelling in whole environment.
-This processing including different types of interaction with surrounding surfaces and objects
-
-- specular and diffuse reflections
-- absorption
-- diffraction, interferences and transmission
 
 <!-- These effects occurs in different proportion based on the geometrical and physical properties of the objects in the space. -->
 
