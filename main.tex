@@ -162,13 +162,13 @@
     %   }
     % \input{content/estimation.tex}
 
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Echo-aware Application}
-    }
-    \input{content/application.tex}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Application}
+    % }
+    % \input{content/application.tex}
 
     % %section do not appear in the navigation bar
     % {
@@ -179,15 +179,13 @@
     % }
     % \input{content/data.tex}
 
-    % {
-    %   \makeatletter
-    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %   \makeatother
-    %   \section{Echo-aware Dataset}
-    % }
-    % \include{content/conclusion.tex}
-
-
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Echo-aware Dataset}
+    }
+    \input{content/conclusion.tex}
 
 
     \appendix

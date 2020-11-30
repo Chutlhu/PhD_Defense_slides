@@ -1,141 +1,198 @@
-\begin{frame}{Summary of contributions}
+% \begin{frame}{Summary of contributions}
 
-    % \begin{mydefblock}{Channelges and Objctive}
-    %     \begin{enumerate}
-    %         \item How to \textbf{estimate} acoustic echoes?
-    %         \item How to \textbf{extend methods} for echo-aware audio scene analysis
-    %     \end{enumerate}
-    % \end{mydefblock}
+%     % \begin{mydefblock}{Channelges and Objctive}
+%     %     \begin{enumerate}
+%     %         \item How to \textbf{estimate} acoustic echoes?
+%     %         \item How to \textbf{extend methods} for echo-aware audio scene analysis
+%     %     \end{enumerate}
+%     % \end{mydefblock}
 
-    % \pause
-    \vfill
+%     % \pause
+%     \vfill
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.48\textwidth}
+%             \centering
+%             \textbf{1. How to estimate echoes?}
+%         \end{column}
+%         \begin{column}{0.48\textwidth}
+%             \centering
+%             \textbf{2. How to use echoes?}
+%         \end{column}
+%     \end{columns}
+
+%     \pause
+%     \begin{columns}[T]
+%         \begin{column}{0.48\textwidth}
+%             \begin{description}
+%                 \item[Analytical] approach{\footnotesize%
+%                 \\\cmark{} non-neg.ty and sparsity
+%                 \\\cmark{} low RMSE by super-resolution
+%                 \\\xmark{} dep. on source and \# echoes
+%                 }
+
+%                 \pause
+%                 \item[Learning-based]  {\footnotesize
+%                 \\\cmark{} promising results
+%                 \\\xmark{} only 2 echoes, how more?
+%                 \\\xmark{} dep. on source}
+
+%                 \pause
+%                 \item[both:] \\{\footnotesize
+%                 \item[\cmark] off-grid \& parameter-free methods
+%                 \item[\xmark] only synthetic \& stereo data
+%                 }
+%             \end{description}
+%         \end{column}
+
+%         \pause
+%         \begin{column}{0.48\textwidth}
+%             \begin{description}
+%                 \item[\mirage] Echo-aware SSL {\footnotesize
+%                 \\\cmark{} Impossible 2D SSL
+%                 \\\cmark{} Easy to extend
+%                 }
+%                 \pause
+%                 \item[\separake] Echo-aware SSS {\footnotesize
+%                 \\\cmark{} echo boost SSS
+%                 \\\cmark{} easy integration in NMF
+%                 }
+%                 \pause
+%                 \item[both:] \\{\footnotesize
+%                 \\dep. on echo estimation
+%                 \\only synthetic data}
+%             \end{description}
+
+
+%             % \begin{itemize}
+%             %     \item Echo-aware Source Separation
+%             %     \\$\hookrightarrow$ \separake
+%             %     \item Echo-aware Source Localization
+%             %     \\$\hookrightarrow$ \mirage
+%             %     \item Echo-aware Speech Enhancement
+%             %     \item Echo-aware Room Geometry Estimation
+%             % \end{itemize}
+%         \end{column}
+%     \end{columns}
+
+%     \pause
+%     \begin{center}
+%         \textbf{3. Where to find echoes?}
+%         \begin{columns}[T,onlytextwidth]
+%             \column{0.48\textwidth}
+%             \begin{description}
+%                 \item[\dechorate:] dataset {\footnotesize%
+%                 \\\cmark{} dataset for AER, SE and RooGE
+%                 \\\cmark{} geom labels $\leftrightarrow$ echo labels
+%                 \\\xmark{} few inconsistency
+%                 \\\xmark{} shoebox, linear array and directional
+%                 }
+%             \end{description}
+
+%             \pause
+%             \column{0.48\textwidth}
+%             \begin{description}
+%                 \item[\dechorate:] Validation {\footnotesize%
+%                     \\\cmark{} on RooGE
+%                     \\\cmark{} on echo-aware SE
+%                     \\\xmark{} echo-SE similar to ReTF-SE
+%                     \\\xmark{} echo-SE suffer for mismatch
+%                 }
+%             \end{description}
+%         \end{columns}
+%     \end{center}
+% \end{frame}
+
+
+
+\begin{frame}[t]{Summary of contributions}
+
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \centering
-            \textbf{1. How to estimate echoes?}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \centering
-            \textbf{2. How to use echoes?}
-        \end{column}
-    \end{columns}
 
-    \pause
-    \begin{columns}[T]
         \begin{column}{0.48\textwidth}
-            \begin{description}
-                \item[\blaster:] knowledge-based{\footnotesize%
-                \\\cmark{} non-neg.ty and sparsity
-                \\\cmark{} low RMSE by super-resolution
-                \\\xmark{} dep. on source and \# echoes
-                \\\xmark{} vanilla solver}
-
-                \pause
-                \item[\lantern:] Learning-based {\footnotesize
-                \\\cmark{} promising results
-                \\\xmark{} only 2 echoes, how more?
-                \\\xmark{} dep. on source}
-
-                \pause
-                \item[both:] \\{\footnotesize
-                \item[\cmark] off-grid \& parameter-free methods
-                \item[\xmark] only synthetic \& stereo data
-                }
-            \end{description}
+            \begin{center}
+                \alert{How to estimate them?}
+            \end{center}
+            \\In passive stereo scenario:
+            \begin{itemize}
+                \item Learning-based method{\footnotesize
+                \begin{itemize}
+                    \item off grid estimation
+                    \item depends on source and \# echoes
+                \end{itemize}}
+                \item Analytical method{\footnotesize
+                \begin{itemize}
+                    \item estimation on first echo' TDOAs
+                    \item only on synthetic data
+                \end{itemize}}
+            \end{itemize}
         \end{column}
 
-        \pause
         \begin{column}{0.48\textwidth}
-            \begin{description}
-                \item[\mirage] Echo-aware SSL {\footnotesize
-                \\\cmark{} Impossible 2D SSL
-                \\\cmark{} Easy to extend
-                }
-                \pause
-                \item[\separake] Echo-aware SSS {\footnotesize
-                \\\cmark{} echo boost SSS
-                \\\cmark{} easy integration in NMF
-                }
-                \pause
-                \item[both:] \\{\footnotesize
-                \\dep. on echo estimation
-                \\only synthetic data}
-            \end{description}
-
-
-            % \begin{itemize}
-            %     \item Echo-aware Source Separation
-            %     \\$\hookrightarrow$ \separake
-            %     \item Echo-aware Source Localization
-            %     \\$\hookrightarrow$ \mirage
-            %     \item Echo-aware Speech Enhancement
-            %     \item Echo-aware Room Geometry Estimation
-            % \end{itemize}
+            \begin{center}
+                \alert{How to use them?}
+            \end{center}
+            \begin{itemize}
+                \item Source Localization{\footnotesize
+                \begin{itemize}
+                    \item allow 2D DoA estimation with 2 mic
+                    \item depends on the echo estimator
+                \end{itemize}}
+                \item Source Separation
+                \item Speech Enhancement{\footnotesize
+                \begin{itemize}
+                    \item in theory early echoes helps
+                    \item needs to be accurately estimated
+                \end{itemize}}
+                \item Room Geometry Estimation
+            \end{itemize}
         \end{column}
     \end{columns}
 
-    \pause
-    \begin{center}
-        \textbf{3. Where to find echoes?}
-        \begin{columns}[T,onlytextwidth]
-            \column{0.48\textwidth}
-            \begin{description}
-                \item[\dechorate:] dataset {\footnotesize%
-                \\\cmark{} dataset for AER, SE and RooGE
-                \\\cmark{} geom labels $\leftrightarrow$ echo labels
-                \\\xmark{} few inconsistency
-                \\\xmark{} shoebox, linear array and directional
-                }
-            \end{description}
 
-            \pause
-            \column{0.48\textwidth}
-            \begin{description}
-                \item[\dechorate:] Validation {\footnotesize%
-                    \\\cmark{} on RooGE
-                    \\\cmark{} on echo-aware SE
-                    \\\xmark{} echo-SE similar to ReTF-SE
-                    \\\xmark{} echo-SE suffer for mismatch
-                }
-            \end{description}
-        \end{columns}
-    \end{center}
+    \begin{block}{}
+        \alert{Where to find them?}
+        \begin{itemize}
+            \item \dechorate
+            \\Echo-aware database for both estimation and application{\footnotesize
+            \begin{itemize}
+                \item echo annotation $\Leftrightarrow$ geometry annotation
+                \item synthetic $\Leftrightarrow$ real RIRs
+            \end{itemize}}
+        \end{itemize}
+    \end{block}
+
 \end{frame}
 
 \begin{frame}{Echo-aware perspective}
 
     Directions for future work:
-    \pause
     \begin{itemize}
         \item[\mytriag] on \textbf{estimation}
-        \begin{description}
-            \item[\blaster] {\small extended to multichannel~\cite{peic2020sparse} and ReTF~\cite{doclo2002gsvd}
-                            \\use high-level priors (RT$_{60}$, DRR, Diffusion)~\cite{badeau2019common}}
-            \item[\lantern] {\small extended physic-based learning
-                            \\more than 2 echoes: network or learning}
-        \end{description}
+        \begin{itemize}\small
+            \item develop theoretical guaranties for off-grid acoustic echo retrieval
+            \item for DNN: extended physic-based learning or other learning paradigm
+            \\\addendum{i.e., unfolding or curriculum learning}
+        \end{itemize}
 
         \vfill
-        \pause
         \item[\mytriag] on \textbf{application}
         \begin{itemize}
-            \item validation on real data (eg. smart home speaker)
-            \item use \dechorate data for validation
-            \item other Audio Scene Analysis problem
-            \item other field of echoes (Seismology, Underwater acoustic, Volcano tomography)
+            % \item Validation on real data (eg. smart home speaker)
+            % \item other Audio Scene Analysis problem
+            \item other field of echoes:
+            \\(Seismology, Underwater acoustic, Volcanology, Sniper Detection, etc.)
         \end{itemize}
 
         \vfill
         \item[\mytriag] on \dechorate
         \begin{itemize}
-            \item Synthetic to Real RIRs
-            \item popularization and divulgation of these data
-            \item write how to and how not echo-aware dataset
+            \item Synthetic to Real RIRs (style transfer, new types to acoustic simulators)
+            \item Benchmark for echo-aware algorithms
         \end{itemize}
 
         \vfill
-        \pause
-        \item[\mytriag] Echo estimation $\Longleftrightarrow$ Audio Analysis
+        \item[\mytriag] \textbf{``close the loop'':} audio analysis $\Leftrightarrow$ echo estimation
+        \\in the thesis only the $\Rightarrow$ direction.
     \end{itemize}
 
 \end{frame}
@@ -144,38 +201,45 @@
 \begin{frame}{List of publications and artifacts}
     \begin{block}{Publications}
     \begin{itemize}
-        \small
         \item Estimation
-        \begin{itemize}
-            \item \lantern \cite{di2019mirage}
-            \item \dechorate \cite{di2020blaster}
+        \begin{itemize}\small
+            \item deep learning method in~\cite{di2019mirage}
+            \item \blaster --- analytical method in~\cite{di2020blaster}
         \end{itemize}
         \item Application
-        \begin{itemize}
-            \item \mirage \cite{di2019mirage}
-            \item \separake \cite{scheibler2018separake}
+        \begin{itemize}\small
+            \item \mirage --- sound source localization in~\cite{di2019mirage}
+            \item \separake --- sound source separation in~\cite{scheibler2018separake}
         \end{itemize}
         \item Data
-        \begin{itemize}
-            \item \dechorate (Unpublished)
+        \begin{itemize}\small
+            \item \dechorate --- database (journal in progress)
         \end{itemize}
         \item Other
-        \begin{itemize}
+        \begin{itemize}\small
             \item Signal Processing CUP 2019 \cite{deleforge2019audio}
             \item LOCATA Challenge 2019 \cite{lebarbenchon2018evaluation}
-            \item Collaboration with Honda \cite{di2019honda}
+            \item Collaboration with Honda on multichannel \mirage
         \end{itemize}
     \end{itemize}
     \end{block}
 
     \begin{block}{Code}
-        \small
-        \begin{description}
-            \item[$\mathtt{dEchorate}$:] GUI and code for \dechorate (and RooGE)
-            \item[$\mathtt{Risotto}$:] library for Relative Transfer Function
-            \item[$\mathtt{Brioche}$:] library for echo-aware Spatial filtering
-            \item[$\mathtt{pyMBSSLocate}$:] MBSSLocate in Python
-            \item[$\mathtt{Separake}$:] Multichannel NMF in Python
-        \end{description}
+        \begin{columns}[T,onlytextwidth]
+            \column{0.48\textwidth}
+            \begin{itemize}\small
+                \item $\mathtt{dEchorate}$: GUI and code for \dechorate
+                \item $\mathtt{Risotto}$: library for ReTF estimation
+                \item $\mathtt{Brioche}$: library for Spatial filtering
+            \end{itemize}
+
+            \column{0.48\textwidth}
+            \begin{itemize}\small
+                \item $\mathtt{pyMBSSLocate}$: MBSSLocate in Python
+                \item $\mathtt{Separake}$: Multichannel NMF in Python
+            \end{itemize}
+        \end{columns}
     \end{block}
+
+    \hfill\con{\Large \textbf{Thank you!}}
 \end{frame}

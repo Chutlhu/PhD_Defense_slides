@@ -1,28 +1,58 @@
 \subsection{\dechorate}
 
-\begin{frame}{\dechorate: echo-aware dataset  \hfill\faTint}
+\begin{frame}{Echo-aware datasets  \hfill\faBook}
 
-    \alert{\iconAlert Everything so far was a simulation}
+    \con{\iconAlert~Everything so far was a simulation}
 
-    \begin{mysotablock}{We need data}
+    \vspace{1mm}
+    \begin{block}{Echo-aware database requires:}
         \begin{itemize}
-            \item why?
-            \item practice
-            \item positioning acoustic
-            \item expertise
+            \item annotation of the echoes;
+            \item annotation of the geometry;
+            \item should cover a vast number of echo-aware applications;
+            \item expertise in signal processing, acoustics and
+            \item proper recording devices.
         \end{itemize}
+    \end{block}
 
-    \end{mysotablock}
+\end{frame}
 
-    \begin{mycontriblock}{\dechorate: echo-aware dataset}
-        \begin{itemize}
-            \item different room configurations
-            \\($to$ flipping wall panels)
-            \item 6 array $\times$ 5 mics $\times$ 4 sources $\times$ 11 room conf. = 1320 annotated RIRs
-            \item application to Room Geometry Estimation, Speech Enhancement and Acoustic Echo Retrieval
+\begin{frame}[t]{\dechorate  \hfill\faDatabase}
+    \vspace{2mm}
+    \begin{mycontriblock}{\textbf{Characteristics} of \dechorate}
+        \begin{itemize}\small
+            \item different room configurations and RT60 ($\to$ flipping wall panels)
+            \item 6 array $\times$ 5 mics $\times$ 4 sources $\times$ 11 wall conf. = \textbf{1320 annotated RIRs} at 48 kHz
+            \item geometry annotation $\Leftrightarrow$ echo annotation in the RIRs
+            \item real RIRs $\Leftrightarrow$ synthetic RIRs
+            \item application to  Acoustic Echo Retrieval, Room Geometry Estimation, Speech Enhancement, ...
+            \item silence, chirps, speech, noise, diffuse bubble noise for 64 GB
         \end{itemize}
     \hfill {\small \myThankTo{prof Gannot, ing. Tandeitnik}}
     \end{mycontriblock}
+
+    \vfill
+    \only<1>{
+        \begin{center}
+            \includegraphics[trim={0 0 0 10em},clip,width=\textwidth]{figures/dechorate/fornitures.jpg}
+        \end{center}
+    }
+    \only<2>{
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/recording_setup}
+            \end{column}\hfill
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/mic}
+            \end{column}\hfill
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=\textwidth]{figures/dechorate/panels}
+            \end{column}
+        \end{columns}
+    }
+
+\end{frame}
+
 
     % \begin{block}{\alert{Data} in audio signal processing}
     %     \begin{enumerate}
@@ -59,19 +89,33 @@
 
 \end{frame}
 
-\begin{frame}{\dechorate: echo-aware dataset \hfill\faTint}
+\begin{frame}{\dechorate: the skyline view \hfill\faTint}
 
     \begin{center}
-        \includegraphics[trim={10em 0 0 0},clip,width=\linewidth]{figures/dechorate/rir_skyline_final_mod4paper.pdf}
+        \includegraphics<1>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline0.pdf}
+        \includegraphics<2>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline1.pdf}
+        \includegraphics<3>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline2.pdf}
+        \includegraphics<4>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline3.pdf}
+        \includegraphics<5>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline4.pdf}
+        \includegraphics<6>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline6.pdf}
+        \includegraphics<7>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline7.pdf}
     \end{center}
 
-    \vspace*{-2mm}
-    RIR Skyline showing
+    \small
     \begin{itemize}
-        \item absolute value of stacked RIRs as a figure
-        \item[$\times$] manual echo annotation
-        \item[$\circ$] \textit{matching} echo annotation for \texttt{ISM simulator}
+        \item<1-> each column correspond to the absolute values of one RIR
+        \item<2-> every 5 columns corresponds to one array
+        \item<3-> every 30 column corresponds to one sound source
+        \item<6-> $\times$ corresponds to manual echo location, $\circ$ to geometric annotation
     \end{itemize}
+
+
+    % RIR Skyline showing
+    % \begin{itemize}
+    %     \item absolute value of stacked RIRs as a figure
+    %     \item[$\times$] manual echo annotation
+    %     \item[$\circ$] \textit{matching} echo annotation for \texttt{ISM simulator}
+    % \end{itemize}
 \end{frame}
 
 \subsection{Speech Enhancement with \dechorate}
@@ -106,23 +150,23 @@
     \end{mydefblock}
 
     \pause
-    SE via \textbf{linear spatial filtering}
+    SE via \textbf{linear spatial filtering} in the STFT domain
     \begin{columns}[onlytextwidth]
-        \column{.3\textwidth}\centering
-            $\bfh\bfs + \bfn = \bfx \in \bbC^{I}$
+        \column{.4\textwidth}\centering
+            $\bfx[f,t] = \bfh[f]\bfs[f,t] + \bfn[f,t]  \in \bbC^{I}$
         \column{.05\textwidth}\centering
             $\longrightarrow$
-        \column{.3\textwidth}\centering
+        \column{.2\textwidth}\centering
         \begin{align*}
-            \khermitian{\bfw} \in \bbC^{I} \\
+            \khermitian{\bfw}[f] \in \bbC^{I} \\
         \end{align*}
         \column{.05\textwidth}\centering
         \begin{align*}
             \longrightarrow \\
         \end{align*}
-        \column{.3\textwidth}\centering
+        \column{.4\textwidth}\centering
         \begin{align*}
-            \khermitian{\bfw} \bfx \approx \bfs \\
+            \khermitian{\bfw}[f] \bfx[f,t] \approx \bfs[f,t] \\
         \end{align*}
     \end{columns}
 
@@ -130,7 +174,6 @@
     \begin{itemize}
         \small
         \item \textbf{target is distortionless} (vs. Multichannel Wiener Filtering)
-        \item Partial \textit{steering vectors} from \textbf{geometry} \hspace{1em}\textcolor{gray}{\small(if anechoic $\implies$ DS based on AOA)}
         \item many variant, e.g. enhance or null multiple sources~\cite{gannot2017consolidated}
     \end{itemize}
 
@@ -145,7 +188,7 @@
             \bbE\kbrace{\set{ \kvvbar{\khermitian{\bfw} \bfx }_2^2}}
             \quad\text{s.t.}\quad\khermitian{\bfw}\bfh = 1
         \end{equation*}
-        \textcolor{myred}{\small Reducing output energy + distortionless $\Leftrightarrow$ reduce any noise}
+        \textcolor{myred}{\small Reducing output energy + distortionless $\Leftrightarrow$ reduce any uncorrelated noise}
     \end{beamercolorbox}
 
 \end{frame}
@@ -161,43 +204,46 @@
             \centering
             \small
             \begin{tabular}{llll}
-                & Noise covariance matrix & Steering Vectors\\
-                $\mathtt{DS}$                          &     -      & Direct Path (AOA)\\
-                $\mathtt{MVDR}_\mathtt{DP}$            &   Noise    & Direct Path (AOA)\\
-                $\mathtt{MVDR}_\mathtt{ReTF}$          &   Noise    & Relative Transfer Function\\
-                \only<-2>{$\mathtt{MVDR}_\mathtt{Rake}$}%
-                \only<3->{\alert{$\mathtt{MVDR}_\mathtt{Rake}}$}%
-                            &   Noise    & Relative Early Echoes\\
-                \visible<2->{%
-                $\mathtt{MVDR}_\mathtt{DP+Late}$       &   Noise + Late Diffusion   & Direct Path (AOA)\\
-                $\mathtt{MVDR}_\mathtt{ReTF+Late}$     &   Noise + Late Diffusion   & Relative Transfer Function\\
-                \only<-2>{$\mathtt{MVDR}_\mathtt{Rake+Late}$}%
-                \only<3->{\alert{$\mathtt{MVDR}_\mathtt{Rake+Late}$}}%
-                            &   Noise + Late Diffusion   & Relative Early Echoes\\
-                }
+                & Noise covariance matrix & RIRs\\
+                \visible<1->{$\mathtt{DS}$                              &     -      & Direct Path (AOA)\\}
+                \visible<2->{$\mathtt{MVDR}_\mathtt{DP}$                &   Noise    & Direct Path (AOA)\\}
+                \visible<2->{$\mathtt{MVDR}_\mathtt{ReTF}$              &   Noise    & Relative Transfer Function\\}
+                \visible<3->{\alert{$\mathtt{MVDR}_\mathtt{Rake}$}      &   Noise    & \alert{4 Early Echoes}\\}
+                \visible<4->{$\mathtt{MVDR}_\mathtt{DP+Late}$           &   Noise + Late Diffusion   & Direct Path (AOA)\\}
+                \visible<4->{$\mathtt{MVDR}_\mathtt{ReTF+Late}$         &   Noise + Late Diffusion   & Relative Transfer Function\\}
+                \visible<4->{\alert{$\mathtt{MVDR}_\mathtt{Rake+Late}$} &   Noise + Late Diffusion   & \alert{4 Early Echoes}\\}
             \end{tabular}
         \end{table*}
     \end{center}
 
-    \vspace{-3mm}
-    \visible<4->{
-    \begin{block}{Comparison on \dechorate data}
-    \end{block}
+    {\small \textbf{Metrics:} Signal to Noise and Reverberant Ratio (SNRR) and Speech Quality (PESQ)
+    \\\textbf{Data:} \dechorate dataset, RT60 = 600 ms)
+    }
 
     \begin{center}
-        \includegraphics[width=\textwidth]{figures/dechorate/kowalkzy_results_boxplot_alpha.png}
+        \includegraphics<1>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming1.pdf}%
+        \includegraphics<2>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming2.pdf}%
+        \includegraphics<3>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming3.pdf}%
+        \includegraphics<4>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming4.pdf}%
+        \includegraphics<5>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming5.pdf}%
     \end{center}
-    }
 
-    \vspace{-3mm}
-    \visible<5->{
+    \textbf{Observations:}
     \begin{itemize}
-        \item<6-> \textit{In theory} echo-aware ws. echo-agnostic?
-        \\$\to$ Better than Direct Path, but ReTF and Rake are comparable
-        \item<7> Spatial filtering on Synthetic data vs. Measured data?
-        \\$\to$ Rake suffer from mismatch, but better than DP
+        \item the more information we use the better $\to$ so echoes helps;
+        \item \textit{in theory}, echo-aware beamformer are comparable to ReTF beamformers;
+        \item \textit{in practice}, the performance drops, but not for ReTF beamformers.
     \end{itemize}
-    }
+
+    % \vspace{-3mm}
+    % \visible<5->{
+    % \begin{itemize}
+    %     \item<6-> \textit{In theory} echo-aware ws. echo-agnostic?
+    %     \\$\to$ Better than Direct Path, but ReTF and Rake are comparable
+    %     \item<7> Spatial filtering on Synthetic data vs. Measured data?
+    %     \\$\to$ Rake suffer from mismatch, but better than DP
+    % \end{itemize}
+    % }
 \end{frame}
 
 
