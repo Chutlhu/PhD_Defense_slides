@@ -16,31 +16,16 @@
                     \quad i \in I
     \end{equation*}
 
-    % $\contMic_i$, $i$-th microphone signal $\contSrc$ source, signal $\contRIR_i$, $i$-th Room Impulse Response $\contConv$, continuous convolution
-
-    % \vspace{5mm}
-    % \begin{columns}[T,onlytextwidth]
-    %     \begin{column}{0.48\textwidth}
-    %         \centering
-    %         \includegraphics[width=\textwidth]{figures/rir_measured.png}
-    %     \end{column}
-    %     \begin{column}{0.48\textwidth}
-    %         \centering
-    %         \includegraphics<2>[width=\textwidth]{figures/rir_bang.png}
-    %         \includegraphics<3->[width=\textwidth]{figures/rir_schematic.png}
-    %     \end{column}
-    % \end{columns}
 
     \begin{mydefblock}{\tikzmarknode{RIR}{Room Impulse Response} (RIR)}
         \small
         \begin{itemize}
-            \item linear filtering effect of the sound
+            \item linear filtering effect of the sound propagation (reverberation)
             \item acoustic response of a room to a (prefect) impulsive sound
             \item depends on spatial properties (room geometry, mic/src position)
             \item $\contRIR_i \neq \contRIR_j$
         \end{itemize}
     \end{mydefblock}
-
 
     \begin{tikzpicture}[overlay,remember picture,
         nodes={inner sep=1pt, align=center, font=\footnotesize},
@@ -52,26 +37,10 @@
     \draw[->] (h.south) to[out=-90, in=90] (RIR.north);
     \end{tikzpicture}
 
-
-    \begin{columns}
-        \column{0.48\textwidth}
-            \centering
-            % real RIR with part
-            \includegraphics[width=0.8\textwidth]{figures/rir_measured.png}
-
-        \column{0.48\textwidth}
-            \centering
-            % bang RIR
-            \includegraphics[width=0.8\textwidth]{figures/rir_bang.png}
-
-    \end{columns}
-
 \end{frame}
 
 
-\subsection{Current Challenges}
-
-\begin{frame}{Problem Statement}
+\begin{frame}{Signal model}
     \begin{columns}[T,onlytextwidth]
         \column{0.48\textwidth}
         \begin{equation*}
@@ -90,10 +59,20 @@
         \end{itemize}
 
         \column{0.48\textwidth}
-        \includegraphics[width=.8\textwidth]{figures/rir_measured.png}
+        \includegraphics[width=.8\textwidth]{figures/rir_bang.png}
 
     \end{columns}
 
+    \begin{center}
+        % real RIR with part
+        \includegraphics[width=0.8\textwidth]{figures/rir_measured.png}
+    \end{center}
+
+\end{frame}
+
+\subsection{Current Challenges}
+
+\begin{frame}{Problem Statement}
     Echoes can be modeled as sum of Dirac's delta function:
 
     \begin{equation*}
@@ -102,9 +81,9 @@
             \approx \sum_{r=0}^{R} \ampir \delta(t - \textcolor{alert}{\tauir}) + \tikzmarknode{error}{\varepsilon}_i(t)
     \end{equation*}
 
-    \begin{textblock*}{20mm}(100mm,60mm)
+    \begin{textblock*}{40mm}(100mm,20mm)
         \footnotesize
-        \tikzmarknode{model}{models} later echoes, reverberation and other.
+        \textcolor{gray}{\tikzmarknode{model}{models} later echoes, reverberation and other.}
     \end{textblock*}
 
 
@@ -119,7 +98,7 @@
         Estimated $\set{\alert{\tauir}, \ampir_i}_{i,r}$
         for the microphone signal $\set{x_i}_i$
     \end{mydefblock}
-    \addendum{\scriptsize {Estimation of only $\tauir$ is known as TOAs estimation}}
+    % \addendum{\scriptsize {Estimation of only $\tauir$ is known as TOAs estimation}}
 
 \end{frame}
 
@@ -131,25 +110,23 @@
         for the microphone signal $\set{x_i}_i$
     \end{mydefblock}
 
-    \textbf{Challenges:}
-    \begin{itemize}
-        \item RIRs depend on the scene geometry (room, source and mic position)
-        \item Big under-modelling error
+    \begin{block}{Challenges:}
         \begin{itemize}
-            \item in the RIR model due to late reverberation
-            \item in the signal model due to interferences and noise
+            \item RIRs depend on the scene geometry (room, source and mic position)
+            \item Big under-modelling error (late reverberation and noise)
+            \item $\ampir$ are distorted:
+            \begin{itemize}
+                \item due to air attenuation, wall absorption:
+                \item $\ampir \to \ampir(t) \implies$ echo model is sum of filters
+                \item due to sampling process{\footnotesize~\cite{tukuljac2018mulan}}
+            \end{itemize}
         \end{itemize}
-        \item $\ampir$ are distorted:
-        \begin{itemize}
-            \item $\ampir \to \ampir(t)$ (e.g. air attenuation, wall absorption)
-            \\\hspace{.5em}$\implies$ echo model is sum of filters
-            \item sampling process{\footnotesize~\cite{tukuljac2018mulan}}
-        \end{itemize}
-    \end{itemize}
+    \end{block}
 
     \begin{center}
         \includegraphics[width=0.8\textwidth]{figures/basismismatch.png}
         \\{\addendum{\scriptsize Courtesy of Helena Tukuljac~\cite{tukuljac2018mulan}}}
+        \\{\small \textcolor{myred}{\iconAlert~sampling breaks sparsity and non-negativity}}
     \end{center}
 
 \end{frame}

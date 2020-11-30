@@ -2,253 +2,461 @@
 
 ## Introduction
 
-Good morning everyone and thanks to be here today.
+Good morning everyone and thanks to being here today.
 
 The title of my PhD thesis is:
 Echo-aware Signal Processing for Audio Scene Analysis.
+and this was supervised by Nancy Bertin from the team Panama in INRIA Rennes and
+Antoine Deleforge from the team Multispeech in INRIA Nancy
 
-In a nutshell, it deals with the problem of estimating acoustic echoes and use their information to leverage typical problem of audio signal processing.
+In a nutshell, this thesis deal with the problem of estimating acoustic echoes and use their information to leverage typical problems of audio signal processing.
 
+Before going in the details of the contribution, I will better explain the title
 
-Before going in the details, I will brake down the title of the thesis:
+and to this end,
 
 ### Audio scene / Scenario
 
-In order to better introduce the topic of the thesis, let us consider how sound is recording in everyday application, for instance this exactly videoconference.
+Let us consider how sound is being recorded at this very moment on my laptop.
 
-First sound is produced by sound sources, in this case myself, but can be also a speakers or music instruments.
-And the sound is recorded by the microphones of my laptop, that we call here microphone array.
-This microphones convert sound into electrical signal than are analyzed and used by the device,
-for instance to be transmitted to you.
+At first, the sound is produced by sound sources, in this case, myself.
+And in general, it can be also produced by other speakers or music instruments.
 
-However in general the sound can be corrupted by other sound sources and by measurement noise.
+Secondly, the sound is recorded by multiple microphones of my laptop, namely a microphone array.
+These microphones convert sound into electrical signals than are analyzed and processed by some software, for instance, to be transmitted to you.
 
-And more important, before reaching the laptop, the sound propagates space, and more in detail it interacts with it especially when we are indoor.
-This lead to the well known reverberation effect.
+However in general the sound can be corrupted by other interfering sources and by measurement noise.
+
+And more important, before reaching the laptop, the sound propagates in space, interacting with it especially when we are indoor scenario
+This lead to the well-known reverberation effect.
 
 ### Audio Scene Analysis
 
 You on the other side, listen to the microphone recordings.
-And even without watching the camera you may understand and infer my information.
+And even without watching the camera you may understand and infer some information.
 
-That is because sound carries information and in particular
-semantic information  on the nature of the sound source and its content.
-For instance that I am a man, and what I am saying.
+That is because sound carries information.
 
-But sound carry also spatial information, for instance if I am closer or further, or in a small or big room.
-And finally temporal information, about when a sound source is active or note.
+We can retrieve from it semantic information about the nature of the sound source and its content --- for instance, the words of my speech.
+
+We can retrieve spatial information on the location of the sources in the space --- for instance, that I am closer or further away from the microphones.
+
+And finally temporal information, about when a sound source is active or not.
 
 All of this information create what we called an audio scene.
-And your brain is particular efficient in extract, process and organize the information within.
+And our brain is particularly efficient to process and organize the information within.
 
-A key question that we ask with our research here is if we can build system, software even robots that can do this automatically?
+So, can a computer do this as well?
 
 ### Signal Processing
 
-The sound can be modeled as signal and studied within the research field of Signal Processing.
-It offer models, frameworks and tools to extract and organize information from sounds.
-This is done by defining the problems.
+Computer and digital systems implement units based on signal processing models, frameworks and tools that extracts and organizes information from sounds.
 
-Typical problems are separating or enhancing a target sound form the rest, or say where a sound source is, or quantify the amount of reverberation or automatically transcribe speech, say who is speaking and many many other.
+These units typically address specific problems, such as
+ separating or enhancing a target sound form the rest,
+or say where a sound source is,
+or quantify the amount of reverberation affecting sound recordings
+and many others
 
-The problems are well know problem that which produced large and vast literature and are intensively studied.
+The problems are well-known problems each of those produced large and vast literature that spans many years of research.
 
-In can be noticed that these problems are strictly related to the some natural questions, such as Who, What, , When, Where and How. The why is not considered for philosophical reason.
+In can be noticed that these problems are strictly related to some natural questions, such as
+Who is speaking,
+Where is the speaker,
+What is the content of the speech,
 
-And it should be noticed that this problems are naturally interconnected:
-namely the solution of one of these question can be easier if information about the other is available.
-
-For instance knowing the how sound propagates in a space, can help in localizing the sound sources, which can help in isolating their sounds.
+And all of them are naturally interconnected:
+For instance, knowing how sound propagates in a space, can help in localizing the sound sources, which can help later in isolating their them and therefore extracting their semantic content.
 
 
 ### Echo aware approach
 
-Exactly for these reason we focus today on acoustic echoes.
+Exactly, for this reason, today we focus on how sound propagates indoor.
 
-Sound propagates and interact with the surrounding indoor space:
 it can be reflected on surfaces, it can be absorbed or transmitted.
-And we it is reflected it can be specularly and diffusely.
+And when it is reflected it can be specularly like a mirror and diffusely, namely scattered around.
 
-All of these effects create the complex indoor sound propagation or reverberation.
+When indoor, all of these lead to a complex result called reverberation.
 
-From a physical point of view, Acoustic echoes are element of reverberation, that is particular specular reflection which stand out for strength and timing.
+From a physical point of view, Acoustic echoes are specular reflections which stand out in the overall reverberation effect in terms of their strength and timing.
 
-More commonly, they are are repetition of sound that usually arrive later.
-Notice that an echo carry the same sound content and its delay is related to the distance that the sound travel.
+More commonly, they are repetitions of sound that usually arrive shortly later.
 
-We can se this is everyday examples such as in the echo points in the mountains.
-Probably the most striking example of the properties of echoes are the bats that use it to
-navigate in the dark and hunting. Such techniques is used by dolphins it is a the based of the sonar technology.
+So they carry the same content of the sound source
+and its delay is related to the distance that the sound travel
 
-In signal processing the sound propagation is typically either ignored or modeled it fully.
-In the former case, this assumption lead to huge simplification, but consider reverberation as noise term, as a nuisance. While the latter, the estimation of the full sound propagation effect is very challenging.
-The echo-aware processing offer an attractive alternative that allow better modeling, while not requiring to fully estimated the sound propagation.
-This was particularly underlined by a paper from Microsoft Research, titled turning enemy into friends, referring to echoes in signal processing.
+and this information can be expoiled
+
+Probably the most striking example of this are bats that use of echoes is to navigate and hunt in the dark. But also some cetacea and also it is at the base of the sonar technology.
+
+In signal processing, the sound propagation is typically either ignored to simplify the processing or modelled it fully, which is very challengin
+
+The echo-aware processing offers an attractive alternative that allows better modelling, while not requiring to fully estimate the sound propagation.
+
+This was particularly underlined by a paper from Microsoft Research Group, titled turning enemy into friends, referring to echoes for the task of sound source localization.
 
 ### Outline and contribution
 
 To summarize the title:
-Audio Scene Analysis give us our problems we want to solve;
+Audio Scene Analysis give us problems we want to solve;
 Signal processing give us models and tools;
-And echoes echoes give us useful information that can be used for better processing.
+And echoes give us useful information that can be used for better processing.
 
-In my PhD I addressed this along 3 directions:
+This thesis work aims at improving the current state-of-the-art signal processing along three axes
 ESTIMATION, APPLICATION and DATA.
 
-The first direction consists in estimating the properties of acoustic echoes, for which we propose two methods, one analytical and one based on machine-learning.
-The main different with respect to state of the art is that they do not require any parameter tuning or model the propagation entirely.
+Regarding estimation, we present two approaches:
+one is an analytical method based on the continuous dictionary and one is based on a deep learning model.
+In contrast with the state of the art, both the methods do not require any parameter tuning or the modelling of the entire sound field.
 
-In the fist part, we will assume to know the properties of acoustic echoes used for boosting classical audio signal processing methods for sound source separation, sound source localization, speech enhancement and the estimation of the room shape.
+The second part of this thesis focuses on extending existing methods in audio scene analysis to their echo-aware forms.
+The manuscript shows examples in Sound Source Localization, Separation, Speech Enhancement and Room Geometry Estimation.
 
-Finally, since most of the validation of the above methods is conducted on synthetic data and no dataset have been yet proposed for specific echo-aware processing, we build our own.
+Finally, since most of the validation of the proposed methods is conducted only on synthetic data and no dataset has been yet proposed in the literature for specific echo-aware processing, we collected our data and we propose as a new database dubbed dEchorate.
 
-The presentation of today will cover partially the manuscript, highlighting to major contribution of the thesis.
+The presentation of today will cover partially the manuscript, highlighting to the major contribution of the thesis.
 The first part is dedicated to the two estimation methods,
-the second part will present an echo-aware application in sound source localization
-and we will conclude with the presentation of the dataset with its validation on Speech Enhancement.
+the second part will present an echo-aware application in sound source localization, and we will conclude with the presentation of the dataset with its validation on Speech Enhancement.
+
+For more details, you can see the manuscript.
 
 ## Problem statement
 
-In the following slides we will see how signals and echoes are modeled in the context of audio digital signal processing.
+In the following slides, we will see how signals and echoes are modelled in the context of audio digital signal processing.
 
 ### Signal Model
 
-The complete sound propagation include all the interaction of the sound travelling in whole environment starting from a source and reaching a microphone.
+The complete reverberation includes all the interaction of the sound travelling from a source and reaching a microphone.
 
-In math, it translates as follows.
-The continuous time signal of the microphone corresponds to the time-domain convolution between the source signal and such filter, with is commonly known as room impulse response
-Note that here the tilde denotes time domain.
+In math, we see that the continuous-time signal of the microphone corresponds to the time-domain convolution between the source signal and a filter plus a noise term.
 
-The room impulse response is a linear filter that describes the acoustic response of the room to a prefect impulsive sound.
-A room impulse response depends on spatial and acoustic properties of the environments such as microphones and source position, room shape and size, and the type of material the surfaces are covered with.
-Because of this their are unique for each source and microphone pairs.
+This filter is commonly known as room impulse response and it describes the acoustic response of the room to a perfect impulsive sound.
+
+For this reason, it depends on spatial and acoustic properties of the environments such as the position of the microphones and source, the room shape and size, and the type of material the surfaces are covered with. Because of this, each RIR is different for each position of source and microphone pairs and room.
 
 ### Echoes in the RIR
 
-Because a Room Impulse Response describes the physical response of a room, it can be subdivided in 3 parts of different physical properties:
+A room impulse response can be subdivided into 3 parts corresponding to  different physical moments:
 
-In particular we can identify the direct path which corresponds to the contribution of the direct propagation sound.
-It is commonly followed by a few isolated peaks which correspond to the strongest specular reflection, namely our echoes.
-And finally the reverberation tail accounting for later reflection and the diffusion effects.
+The direct path is the contribution of the line-of-sight propagation from the mic to the source.
+
+The early reflection or simply echoes comprise few disjoint reflections coming typically from room surfaces and are usually characterized by sparsity in the time domain and amplitude prominence greater than the later reflections.
+
+The latter part is the late reverberation and collects many reflections occurring simultaneously. This part is characterized by a diffuse sound field with exponentially decreasing energy.
 
 Based on this observation, the Room Impulse Response can be approximated at first as a stream of impulses, in math Dirac deltas located at the time of arrival of the reflection.
 
-The goal of echoes estimation is retrieve the time of arrival and the amplitude of such reflections.
+Plus, a noise term that model later echos and reverberation tail.
 
-Acoustic Echo Retrieval is a extremely challenging task, complicated by the following effects:
-First the shape of the RIRs is highly sensitive to the geometrical properties of the audio scene.
-Second the recordings typically feature reverberation making the this undermodeling term not ignorable. And recordings also are corrupted by noise from other sources or due to the measurement process.
-And finally the amplitude coefficient of the echoes are distorted by physical effect (such as frequency dependent absorption coefficient) and processing effect (such as sampling).
+The goal of acoustic echo retrieval is to retrieve the time of arrival and the amplitude of such reflections from the microphone recordings.
 
-In fact the arrival of the echoes are continuos while our signal in the computers are not.
-The process of sampling echoes blur out the true location and amplitude of the echo.
+Usually, more attention is paid on the estimation of the time of arrival only, since it has direct application to source localization and geometry estimation.
+
+### Challenges
+
+Acoustic Echo Retrieval is an extremely challenging task, complicated by the following effects:
+
+First, the shape of the RIRs is highly sensitive to the geometrical properties of the audio scene.
+
+Second, the recordings typically feature reverberation making this under modelling term not ignorable. And recordings also are corrupted by external noise from other sources or due to the measurement process.
+
+And finally, the amplitude coefficient of the echoes are distorted by physical effects (such as frequency-dependent coefficient) and processing effect (such as sampling).
+
+In fact, the arrival of the echoes is continuos value while our signal in the computers are not.
+The process of sampling echoes, which involve sync kernel, blur out the true location and amplitude of the echo.
+Most important, notice that the signal is no more sparse and non-negative.
+
+As we will see later, this is pathological issues that affect methods assuming the RIR are discrete-domain signals.
 
 
 ## Acoustic Echo Retrieval
 
-Now we will introduce briefly the state of the art in acoustic echoes estimation and I will present you to contribution.
+Now we will introduce briefly the state of the art in acoustic echoes retrieval and then we will move to the contributions.
 
 ### AER
 
-Acoustic Echo Retrieval is the problem of estimating echoes timings and coefficients.
+Our task is to retrieve echo times of arrival and amplitude from microphones recordings.
 
-This can be pursued typically in two type of scenario: active or passive.
+This can be pursued typically in two types of scenario: active or passive.
 
-In the former case the emitted signal is known.
-This make the problem of estimating filter, and therefore, its components, non-blind, so easier.
-The payoff is that the device need to sense the environment by emitting with sound actively or knowing the attended sound priori, which can be used in specific setup.
-This is typical approach used for sonar, device calibration or acoustic measurements.
+In the former case, the emitted signal is known.
 
-On the overside, passive systems are more common in everyday application such as smart spakers or laptop performing passive recording.
-As the source signal is unknown the task is much harder.
+This makes the problem of estimating the filters and its components, non-blind, so easier.
+The payoff is that our device needs to sense the environment by emitting sound actively or knowing the attended sound apriori, which limited the possible use-cases.
+This can be used for sonar, device calibration or acoustic measurements.
 
-We will assume to be in single source, passive system scenario.
+Alternatively, passive systems are more common in everyday application such as smart speakers or laptop performing passive recording.
+But, as the source signal is unknown, the task is much harder.
 
-In passive scenario, two are the main approaches that can be found in the literature:
-the one that estimate echoes after having estimate the room impulse response and the one that try to solve this problem directly in the smaller space of the echo parameter, in  few number of delay.
+In general, we will assume to be in the challenging scenario of a passive system listening to a single source.
+
+In a passive setting, two are the main approaches that can be found in the literature:
+the one that estimates echoes after having estimated the room impulse response and the one that directly estimates them.
 
 ### Passive AER
 
-Both the approaches have pros and cons and here is a summary.
+For the first case, the Room Impulse Response is assumed to be a discrete vector and use some optimization tools to estimate it.
+After it, the echoes are identified as the strongest peaks using peak picking or peak labelling strategies.
 
-For RIR-based approaches, first the Room Impulse Response is estimated by typically solving a blind channel estimation (or BCE) problem. On the estimation, the echoes are identified as the strongest peaks using peak picking or peak labeling strategies.
+The main benefit of this approach is that the first step is a well-studied inverse problem for which many successful frameworks and reliable solvers are available and it can count on a vast literature even the specific case of RIR estimation.
 
-The main benefit of this approach is that such approaches rely on well studied frameworks for inverse problem, reliable solver and produced a vast literature even the the case for rir estimation.
-Moreover they are currently the state of the art in RIR estimation and perform reasonably well in certain application.
+And they perform reasonably well on some applications.
 
-However they suffer of some important drawbacks.
-First the full RIR need to be estimated leading to some computational and memory issues.
-Secondly the peak picking operation is not straightforward for the distortion on the amplitudes and typically it needs to be tuned manually.
-And finally, they suffer on some pathological issues due to their on-grid nature, that I will illustrate in a few slide.
+However, they suffer from some important drawbacks.
+First, the full RIR need to be estimated leading to some computational and memory issues.
+Secondly, the peak picking operation cannot be easily automatized and it needs to be tuned manually.
+And finally, they suffer on some pathological issues due to their discrete modelling, that I will illustrate in the following slide.
 
-To overcome this limitation, RIR-agnostics perform the estimation directly in the parameter space of the echo model, such as delays and amplitudes, using maximum-likelihood approaches.
+To overcome this limitation, the other methods performs the estimation directly in the parameter space of the echo model, such as delays and amplitudes, using maximum-likelihood approaches.
 
 The main benefit is that the RIR are not estimated entirely saving memory and complexity and since there is no peak-picking less hyperparameter tuning is needed.
 
-Moreover, here the echoes are truly sparse and non-negative, since we are considering the sampling process explicitly in the model.
+Moreover, here the echoes are truly sparse and non-negative since the sampling process is explicitly considered in the model.
 
 The main drawbacks of this approach is that are very recent and not investigated fully.
 Ad-hoc powerful solvers or frameworks that can be used out-of-the-box are not present.
 
-### Limitation and bottleneck
-
-A common limitation of the state-of-the-art approaches is that echoes are not necessarily on grid.
-This leads to a pathological bodyguard effect where two smaller spikes are estimated instead.
-
-This slow down the converge of the algorithm as well as it affects the performances since peak picking tools need to manually be tuned or corrected.
-
-To avoid this, oversampling could be used, at the cost of two problems:
-
-first it increase the memory usage, since bigger matrices and vectors need to be computed and stored in memory.
-
-and secondly, by increasing the sampling frequency and so the size of the problem, it risk to become ill-conditioned.
-
-To overcome this limitation, we will propose two methods which operate echo estimation directly and off-the-grid: one based on deep learning and one based on the theory of continuous dictionary.
-
+Our contribution belongs to this category.
+Now I will present the solution with deep learning.
 
 ### Deep Learning
 
-The first proposed model for acoustic echo retrieval is based on deep learning models.
+The first proposed model for acoustic echo retrieval is based on deep learning.
 
-In particular it uses the framework of virtually-supervised learning, where the data are generated by virtual simulator.
-We will consider the simple case of estimating only the first echo time of arrival in stereophonic recording.
-On one hand this case is simple, on the other it has direct application to sound source localization.
+In particular, it uses the framework of virtually-supervised learning, where the data are generated synthetically by the virtual simulator.
 
-The main reason to follow this approach are as follows.
+We will consider the simple case of estimating only the time of arrival of the first echo at a mic pair.
 
-First we notice that estimating echo properties form raw recordings is difficult, but the inverse is not.
-In fact, this is the job of virtual acoustic simulators that from the characteristic of an audio scene (such as room size, mic and source position) can compute the echoes times, coefficient, as well as the full room impulse response and if the source signal is provided, also the microphones recordings.
+On one hand, this case is simple, on the other it has direct application to sound source localization as we will see in the next section.
 
-This simulators are simples, versatile and fast, allowing the user to generate many many data, which is known to be good for deep learning models.
+This approach is motived by
 
-Finally this whole idea of virtually supersized learning is currently an active direction in Sound Source Localization, a field that span several year and it is not only limited to neural network, but also other types of learning such as gaussian mixture model.
+First, we notice that estimating echo properties form raw recordings is difficult, but the inverse is not.
+In fact, this is the job of virtual acoustic simulators that from the characteristic of an audio scene can compute full room impulse response, its parameters and a reverberated microphone recordings.
+
+These simulators are simple, versatile and fast, allowing the user to generate as many data as he wants, which is known to be good for deep learning models.
+
+Finally, this whole idea of virtually supersized learning is currently an active direction in Sound Source Localization and it is not only limited to DNN, but also other learning models such as gaussian mixture model.
 
 ### Deep Learning Model
 
-Deep Neural Network are supervised learning models, namely that learn from examples.
-These examples are based on input/output pairs and the model learning how to estimated the output from the input.
+Deep Neural Network is a supervised learning model, namely, that learn from examples.
 
-In our case the input are the ILD and IPD which corresponds to the magnitude and phase of the ratio between the spectra of the two microphones.
-It can be shown that this ratio approximate in same case the ratio between the two room impulse response and it is independent on the input signal.
+These examples are based on input/output pairs and the model learns the function that maps the input to the output.
 
-As output we consider the time of arrival of the direct path and the first echo on both of the channels.
-To be more precise, instead of taking this with respect of the origin of time, which is unknow is passive scenario.
-We consider the Time Difference of Arrival of this elements with respect to the arrival of the direct path of the first microphones.
+In our case, the inputs are the ILD and IPD which corresponds to the magnitude and phase of the ratio between the spectra of the two microphones.
+It can be shown that this ratio approximate in some cases the ratio between the spectrum of the two room impulse response removing the dependences on the input signal.
 
-We consider two types of models: a simple Multi Layer Preceptor network and the more common now, the Conv. Neural Network which have been recently proposed in sound source localization methods.
+As output, we consider the time of arrival of the direct path and the first echo on both of the channels.
+To be more precise, instead of taking this with respect to the origin of time, which is unknown is the passive scenario.
+We consider only the three Time Difference of Arrival of these elements with respect to the arrival of the direct path of the first microphones.
+
+We consider two types of models: a simple fully connected and a Conv. Neural Network which is a popular model in machine learning and in sound source localization methods.
 
 We consider 3 different cost function:
-one is the comman root mean squared error on the TDOAs of interest,
+one is the common root mean squared error on the TDOAs of interest,
 and two based on Gaussian and Student-T log-likelihood.
-In this latter case, for each TDOA, the network outputs the value of the mean, the variance and in case of student t the mean, the shape and the scale.
+In this latter case, for each TDOA, the network outputs the value of the mean, the variance and in case of student t distribution the scale too.
 
-These re-parametrization of the output of the DNN is useful for doing data-fusion and allows the network to say its level of certainty on the estimation.
+This re-parametrization of the output of the DNN is useful for doing data-fusion and allows the network to say its level of confidence on the estimation.
 
-Finally we used data generated by acoustic simulator which return RIRs and annotation of teh echoes. Then observation are generated by convolving the RIRs with white noise signals.
+Finally, we use data generated by acoustic simulator which return RIRs and echo annotation automatically. Then observation is generated by convolving the RIRs with white noise signals and some additive gaussian noise is added.
 
 ### Deep Learning Model Test
 
-In order to validate the performances, we tested the proposed methods against the baseline GCC-PHAT with is able to only recover the TDOAs between the two direct path and not the echoes.
+To validate the performances, we tested the proposed methods against the baseline GCC-PHAT with can only recover the TDOAs between the two direct path and not the echoes.
+
+As a performance metric, we consider the normalized Root Mean Square, for which the lower the better, and when it is equal to 1 means that the fit is not better than random.
+This was chosen to be able to compare TDOAs that span different ranges.
+
+Here are the results of GCC-PHAT for TDOA estimation.
+And we can see that even a simple Fully Connected model can outperform the task and GCC-PHAT can retrieve only direct path TDOAs.
+
+Secondly, we see that the CNN model outperform the fully connected in term of both error and variance indicating more robustness to noise.
+Anyway, this is expected and CNN is many complex models with more parameters than simple Fully Connected.
+
+Finally, we can see that using log-likelihood cost function reduce again the error and the variance of the estimation, even if there no significant difference between the Gaussian and Student-T.
+
+Finally, we can observe that TDOA between echoes is a more channelling task.
+
+Now we will move one
+
+
+### BLASTER
+
+#### State of the art
+
+The next contribution address explicitly the limitation of the state of the art methods which here described.
+
+The key ingredient of these methods is the clever observation that in presence of no noise, two channels commute with respect to the convolution operation with their filters.
+This property undergoes with the name of cross-relation identity.
+
+Now, assuming that we have access the sample version of the microphones signal, and assuming that echoes are multiple of the sampling rate,
+acoustic echo retrieval can be formulated as finding two sparse vectors than minimize a LASSO-like problem.
+
+Here the cost function comprises the error on the cross-relation plus a regularizer promoting sparsity and constraints imposing non-negativity and avoid non-trivial solution.
+
+This approach has been studied and further extended including different types of constraint and ad-hoc regularizers.
+
+The two main drawbacks here are that the full filters of fixed length need to be estimated and the echoes are not necessarily on the grid leading to the before-mentioned limitation.
+
+#### proposed method
+We proposed here another direction which results from a collaboration with a colleague of mine, Clement Elvira, whose expertise is in superresulution for inverse problem.
+
+First, we can write the cross-relation in the continuous frequency domain, where the convolution becomes a product.
+
+Secondly, as the filter is modelled as a train of Diracs, we know how to write its closed-form in the Fourier domain, namely, as a sum of complex exponentials.
+
+Finally, the continuous-time Fourier transform can be well approximated by the DFT operator when many samples are available which is the case for our audio signals.
+
+We can then re-write the previous discrete-time LASSO problem as an instance of Beurling LASSO, which is the continuous domain equivalent.
+
+Note that now the solutions are no-more discrete vectors, a small collection of Diracs.
+
+Therefore, there is no need for computing huge matrices, but only the DFT of the observed signals.
+
+The so-called Total Variation norm here promotes a solution that a linear combination of Diracs which is exactly what we are looking for and it is somehow similar to the l1 norm used in the discrete case.
+
+Then we add non-negativity constraints and anchor constraint which is used to avoid the trivial solution.
+
+The problem can be solved using a gradient descent methods called Sliding Frank Wolk Algorithm recently proposed.
+
+#### Results
+
+We observe promising results on noiseless synthetic data with filters matching the echo-model, namely, we model only the early part of the room impulse response.
+
+This leads us to consider noisy synthetic data where the long filter with long reverberation tail is taken into account.
+
+We generate thousand RIRs for cuboid room of random volumes where two microphones and one sound source are randomly deployed.
+
+RIRs are generated with Image Source Methods implemented by the  Pyroomacoustics library.
+
+The source can be either white noise and speech.
+
+In order to study the performances, 2 datasets have been generated:
+one varying randomly the level of noise (ake SNR) while keeping fixed the amount of reverberation (measured in RT60).
+Conversely, the other by fixing the noise level and drawing random level of reverberation.
+
+For comparison, we choose 2 discrete-time RIR-based methods
+which are based on the discrete-time LASSO problem.
+
+Our methods is dubbed Blaster which stands for Blind And Sparse Technique for Echo Retrieval.
+
+#### Results # Echo Precsion
+
+At first, we compare these methods in function of the precision and  number of echoes we want to retrieve
+
+Precision measures how many estimated echoes are correct, so the higher the better.
+
+We can plot this metric here for both noise and speech source signal.
+
+And we can see at first that the proposed method coloured in RED leads to comparable results to the state of the art coloured in BLUE
+which both outperform the baseline in GREEN.
+
+However, we can see that the proposed method is more sensitive to the number of echoes and the source signal.
+
+Note that we can recover accurately the first two echoes, which is promising, since the practical advance of knowing 2 or 3 echoes per channel has been demonstrated in the echo-aware application in source separation and localization.
+
+#### Results RT60 Error
+
+Considering now the task of predicting the time of arrival of the first SEVEN strongest echoes we plot here the performances in term of Room Mean Squared Error with confidence bar, so here the lower the better.
+
+By row, we can see the performance with respect to SNR and RT60, by column with respect to the source signal.
+
+In general, the error on the echo timing of the proposed approach is significantly smaller due to its off-grid nature of the method.
+
+And some robustness is shown with respect to noise and reverberation level as no significant trends are observed
+
+However again we can see that the performances depend on the nature of the sound source, as a higher error is observed on speech data.
+
+We are currently working to address these limitations. For instance
+by pre-processing the input observation, considering the Relative Transfer Function instead of the raw DFT of the observation --- a direction suggested by a similar and very recent work.
+extend the estimation to a multichannel array and ever consider to exploit the array geometry which in some application is known a priori.
+and test on real data
+
+## Echo aware Application
+
+After having seen some ways to estimate the echoes, we can pass at the second part of this presentation which focuses on extending existing methods in audio scene analysis to their echo-aware forms.
+
+### SOTA
+
+As we said earlier, the echoes carry the same energy content of the sound source, but they arrive later and possibly from a different direction.
+
+These time and direction depend on the geometry of the audio scene.
+
+Let s consider the following example:
+
+2 microphones listening to two sound sources and one of these is between the direct path.
+
+You can see interfering source cover the direct propagation path of the target.
+
+Now, if we consider the reflections instead, we can have a new point of view of the source. This is similar to what you would do with a mirror.
+That is why this is called the mirror or image source model.
+
+However, an other perfectly equivalent model exists, which instead of mirroring the source, mirror the microphones and the same properties holds.
+
+From the signal processing point of view, instead, this makes a difference, since we can assume to have access to more microphones and more microphones means typically better processing.
+
+Based on this intuition, many researchers included echoes in signal processing application.
+
+In particular, in sound source separation and speech enhancement some methods try to gather the source energy of the echoes otherwise lost.
+
+For the geometry-based task, the concept of image source is used to better estimate the position of the source or the microphones, or conversely the surface position, allowing to retrieve in some case the full geometry of the room.
+
+And finally, as an element of the sound propagation, the echoes provide important cues for the entire room impulse response and also acoustic properties for room acoustic measurements.
+
+I will now discuss the application of Sound Source Localization and Speech Enhancement, while in the manuscript you can find details on sound source separation and room geometry estimation.
+
+### SSL
+
+The task of sound source localization is to estimate the position of the target sound source in the space.
+
+Retrieving the full 3D cartesian position is very challenging and typically the problem is relaxed direction of arrival estimation, where the distance is ignored.
+
+Depending on the number of microphones available, the are two types of Direction on Arrival:
+
+With only 2 microphones only one angle between the microphone frame can be estimated.
+
+This is typically called Angle of Arrival estimation and knowing the distance between of the microphone pair it can be formulated as a TDOAs estimation problem, which can be solved with GCC-PHAT.
+
+When multiple microphones are available the direction of arrival (or DoA) can be estimated knowing the array geometry and the Angle of Arrival for each microphone pair.
+
+For this occasion, some algorithm such as SPR-PHAT consider histograms of possible TDOAs for each pair and aggregate all the contribution with respect to the global reference point.
+
+
+### Mirage
+
+We can this idea of aggregating the multiple microphones with the proposed echo-aware method for Sound Source Localization.
+
+Consider the following example where a single source is recorded by two microphones placed close to a surface.
+
+We consider only a signal mic pair because it can be further generalizable to any array geometry.
+
+And we consider the close-reflective surface scenario so the strongest echoes is also the earliest and the absorption coefficient can be fairly assumed frequency independent.
+
+And moreover it has a direct application to tabletop devices such as smart speakers.
+
+Now, resolving the reflection from the surface with the image microphone model we can expand the array.
+
+We will refer to this as the MIRAGE array, where mirage stands for Microphone Array Augmentation with Echoes.
+
+However, how do we access all the microphones pair?
+
+For the application in Sound Source Localization, we are interested in the time difference of arrival between the microphones.
+
+It turns out that these quantities are related to the echos, as we can define the real TDOAs as the difference between the two direct paths.
+
+The image TDOA as the difference between the first echoes
+
+and the time difference of Echoe, or TDOE as the time difference between the arrival of the direct path and its first echo.
+
+### Proposed approach
+
+Therefore the key idea here to use Multiple Microphone SSL methods on the Mirage array.
+
+and if you notice, these are the same TDOAs that we estimated with the Deep Learning model in the first part.
+
+Therefore the proposed approach use the TDOAs estimated with the
 
 
 
@@ -257,7 +465,7 @@ In order to validate the performances, we tested the proposed methods against th
 All the methodologies presented so far where evaluated on synthetic data.
 This is a common procedure in many audio signal processing research.
 
-- collecting and annotating exhaustive data covering many application is tedious task
+- collecting and annotating exhaustive data covering much application is a tedious task
 - (echo-aware methods) annotation of early echoes require expertise and equipment
 - (learning methods) lot of data and acoustic scenario
 - (acoustic simulators) acoustic simulators can reach a good level of approximation (some applications)
@@ -265,7 +473,7 @@ This is a common procedure in many audio signal processing research.
   - ASR (\cite{Google})
 
 For all these reasons, many works are validated on simulated data.
-Nevertheless real data are necessary to validate the approaches and many RIRs databases are available online.
+Nevertheless, real data are necessary to validate the approaches and many RIRs databases are available online.
 
 We can divide them broadly in two groups:
 
@@ -278,7 +486,7 @@ We can divide them broadly in two groups:
   - geometrical annotation of src, mic, room
   - different room shapes
   - the signal annotation is partially available (need to be computed a posteriori by the user)
-  - $\Rightarrow$ the contains strong echoes, but no multichannel arrays, nor multiple speaker or various RT60
+  - $\Rightarrow$ the contains strong echoes, but no multichannel arrays, nor multiple speakers or various RT60
 
 ### Recording & Annotation
 

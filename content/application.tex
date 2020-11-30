@@ -64,13 +64,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}{Sound Source Localization {\hfill\small (common knowledge)} \faBook}
+\begin{frame}{Sound Source Localization (SSL) {\hfill\small (common knowledge)} \faBook}
+
+    \textbf{SSL} $\to$ 3D position of sound source
 
     \begin{columns}[T,onlytextwidth]
         \column{0.6\textwidth}
         \begin{block}{SSL with 2 microphones}
             \begin{itemize}
-                \item 1D SSL: only angle of arrival (\alert{AOA})\iconAOA
+                \item Only angle of arrival (\alert{AOA})\iconAOA
                 \item can be approximated from \alert{TDOA}using e.g.GCC-PHAT
                 \\\cite{knapp1976generalized}
                 \\\textcolor{gray}{\small (known limitation, but good in practice)}
@@ -85,7 +87,7 @@
         \column{0.6\textwidth}
         \begin{block}{SSL with more microphones}
             \begin{itemize}
-                \item 2D SSL: azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
+                \item Only Directon of Arrival (DoA):  azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
                 \item[1.] AOA for each pair can be ``fuse''  together
                 \\(e.g. angular spectra in SRP-PHAT~\cite{dibiase2001robust})
                 \\\textcolor{gray}{\small (known limitation, but good in practice)}
@@ -101,8 +103,8 @@
 
 \begin{frame}[t]{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
 
-    \vspace*{5mm}
-    \begin{columns}
+    \vspace*{2mm}
+    \begin{columns}[T,onlytextwidth]
 
         \begin{column}{0.5\textwidth}
             \begin{block}{The \alert{Picnic} Scenario:}
@@ -112,7 +114,7 @@
                     \item<1-> Two microphones
                     \begin{itemize}
                         \item<1->[$\rightarrow$] passive scenario
-                        \item<1->[$\rightarrow$] generalizable to more pairs
+                        \item<1->[$\rightarrow$] generalizable to any array geometry
                     \end{itemize}
                     \item<2-> Close to a very reflective surface
                     \begin{itemize}
@@ -139,12 +141,10 @@
             \begin{block}{Each pair is augmented with echoes}
                 \begin{center}
                     \textcolor{myred}{\textbf{Mirage Array}}
+                    \\\addendum{Microphone Array Augmetation with Echoes}
                 \end{center}
             How to access the \textit{image} microphones?
             \end{block}
-            \visible<8>{
-            \textbf{idea:} use SSL algorithm on it
-            \\\textbf{recall:} echoes are known}
         \end{column}
 
         \begin{column}{0.5\textwidth}
@@ -160,12 +160,45 @@
 \end{frame}
 
 \begin{frame}{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
-    \textbf{Proposed Approach:} using \lantern (DNN-based TDOA estimation)
-    \textbf{Baseline:} GCC-PHAT on true microphones
-    \begin{description}
-        \item[issue:] just punctual estimation cannot be ``fused''
-        \item[solution:] use \lantern in generative mode (mic pos assumed known)
-    \end{description}
+
+    \vspace*{2mm}
+    \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \begin{block}{}
+            \begin{description}
+                \small
+                \item[Idea:] DoA estimate on the MIRAGE array.
+                \item[Recall:] these TDOAs are the same of the DNN-based method
+            \end{description}
+        \end{block}
+
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \centering
+            \adjincludegraphics[Clip={0.5\width} {0\height} {0\width} {0\height},width=0.9\textwidth]{figures/mirage.png}
+        \end{column}
+    \end{columns}
+
+
+    \vspace{2mm}
+    \begin{mycontriblock}
+        \textbf{Proposed Approach:}
+        \begin{itemize}
+            \item use proposed DNN-based TDOA estimation
+            \item fuse together the estimation $\ldots$
+            \begin{itemize}
+                \item knowing the position of the microphones;
+                \item use the error on a validation set as measure of uncertainty.
+            \end{itemize}
+        \end{itemize}
+    \end{mycontriblock}
+
+    \vspace{2mm}
+    \begin{mysotablock}
+        \textbf{Baseline:} GCC-PHAT on true microphones
+    \end{mysotablock}
+
 \end{frame}
 
 \begin{frame}{\faFlask~Experimental results \hfill\faMapMarked*}

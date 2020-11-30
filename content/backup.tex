@@ -1,0 +1,66 @@
+\begin{frame}{Limitations \& bottleneck  \hfill\faBook}
+
+    \begin{block}{\faExclamationCircle~ Echoes are not necessarely ``on-grid''}
+
+        \vspace{-2mm}
+        \begin{itemize}
+            \item Sparsity and non-negativity not true ``on grid''
+            % We measure filters, not diracs
+
+            \item \emph{Body guard} effect \cite{duval2017sparse}
+            \begin{itemize}
+                \item[$\rightarrow$] low recall $\implies$ low accuracy % (2 echoes instead of 1)
+                \item[$\rightarrow$] slow convergence % bouncing between 2 echoes
+            \end{itemize}
+            \item Pick Picking
+            \begin{itemize}
+                \item[$\rightarrow$] manually tuned / corrected
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+
+    \begin{columns}[onlytextwidth]
+        \column{0.60\textwidth}
+
+        \begin{block}{How about higher sampling rate $F_s$?}
+
+            \vspace{-2mm}
+            \begin{itemize}
+                \item[$\rightarrow$] Increase Precision
+            \end{itemize}
+        \end{block}
+
+        \begin{block}{But, computational bottleneck!}
+
+            \vspace{-2mm}
+            \begin{itemize}
+                \item Bigger vectors and matrices
+                \begin{itemize}
+                    \item[$\longrightarrow$] memory usage
+                \end{itemize}
+                \item the higher the sampling frequency
+                \begin{itemize}
+                    \item[$\longrightarrow$] more ill-conditioned
+                \end{itemize}
+            \end{itemize}
+        \end{block}
+
+        \column{0.38\textwidth}
+        \begin{center}
+            \textcolor{myred}{\textbf{How to address this?}}
+        \end{center}
+        \begin{mycontriblock}
+            RIR-agnostic + off-grid
+            \begin{enumerate}
+                \item Deep Neural Network
+                \item Continuous Dictionary
+            \end{enumerate}
+        \end{mycontriblock}
+
+    \end{columns}
+
+    \begin{textblock*}{40mm}(80mm,15mm)
+        \includegraphics<1->[width=\columnwidth]{figures/bodyguard.png}
+    \end{textblock*}
+
+\end{frame}

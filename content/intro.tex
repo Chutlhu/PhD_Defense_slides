@@ -110,28 +110,47 @@
     \end{mydefblock}
 
     \pause
-    {\small Some (inverse) problems}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
+            \footnotesize
             \begin{itemize}
-                \item Speaker Identification\tikzmark{top1}\tikzmark{bot1}
-                \item Sound Source Separation (SSS) \tikzmark{top2}
-                \item Speech Enhancement (SE)
-                \item Automatic Speech Recognition (ASR)\hspace{0.5em}\tikzmark{right1}\tikzmark{bot2}
-                \item Sound Source Localization (SSL) \tikzmark{top3}
-                \item Room Geometry Estimation (RooGE)  \tikzmark{bot3}
+                \item Sound Source Separation
+                \item Speech Enhancement
+                \item Sound Source Localization
+                \item Room Geometry Estimation
             \end{itemize}
         \end{column}
 
         \begin{column}{0.48\textwidth}
-            \begin{itemize}
-                \item Voice Activity Detection\tikzmark{top4}
-                \item Diarization                \tikzmark{bot4}
-                \item RT$_{60}$ estimation       \tikzmark{top5}
-                \item Acoustic Channel Estimation\hspace{0.5em}\tikzmark{right2}
-                \item Wall Absorption Estimation\tikzmark{bot5}
-                \item \textit{and many many other}
+            \begin{itemize}\footnotesize
+                \item Voice Activity Detection
+                \item Reverberation level estimation
+                \item Acoustic Channel Estimation
+                \item ...
             \end{itemize}
+
+    % \begin{columns}[T,onlytextwidth]
+    %     \begin{column}{0.48\textwidth}
+    %         \footnotesize
+    %         \begin{itemize}
+    %             \item Speaker Identification\tikzmark{top1}\tikzmark{bot1}
+    %             \item Sound Source Separation \tikzmark{top2}
+    %             \item Speech Enhancement
+    %             \item Automatic Speech Recognition\hspace{0.5em}\tikzmark{right1}\tikzmark{bot2}
+    %             \item Sound Source Localization \tikzmark{top3}
+    %             \item Room Geometry Estimation \tikzmark{bot3}
+    %         \end{itemize}
+    %     \end{column}
+
+    %     \begin{column}{0.48\textwidth}
+    %         \begin{itemize}\footnotesize
+    %             \item Voice Activity Detection\tikzmark{top4}
+    %             \item Diarization                \tikzmark{bot4}
+    %             \item RT$_{60}$ estimation       \tikzmark{top5}
+    %             \item Acoustic Channel Estimation\hspace{0.5em}\tikzmark{right2}
+    %             \item Wall Absorption Estimation\tikzmark{bot5}
+    %             \item ...
+    %         \end{itemize}
 
         \end{column}
     \end{columns}
@@ -172,10 +191,10 @@
     \vspace{-2mm}
     \begin{center}
         HOW  $\overset{\text{helps}}{\longrightarrow}$ WHERE
-             $\overset{\text{helps}}{\longrightarrow}$ WHEN
-             $\overset{\text{helps}}{\longrightarrow}$ WHAT
-             $\overset{\text{helps}}{\longrightarrow}$ HOW
-             $\overset{\text{helps}}{\longrightarrow}$ ...
+            $\overset{\text{helps}}{\longrightarrow}$ WHEN
+            $\overset{\text{helps}}{\longrightarrow}$ WHAT
+            $\overset{\text{helps}}{\longrightarrow}$ HOW
+            $\overset{\text{helps}}{\longrightarrow}$ ...
     \end{center}
 
 \end{frame}
@@ -185,8 +204,8 @@
 
     \begin{block}{Sound interacts with indoor environment:}
         \begin{itemize}
-            \item[] it is reflected,\hspace{1em}\tikzmark{rightA}\tikzmark{topA}
-            \\\hspace{1em} specularly and diffusely
+            \item[] it is reflected\tikzmark{topA}
+            \\\hspace{1em} specularly and diffusely\hspace{1em}\tikzmark{rightA}
             \item[$+$] it is absorbed,
             \item[$+$] it is transmitted,
             \item[$+$] and other.\tikzmark{botA}
@@ -198,18 +217,18 @@
         \node[anchor=base] (b) at (pic cs:botA) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
         \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
             (a.north -| {pic cs:rightA}) -- node[right,inner sep=1em]
-                {$=$ all reverberation}
+                {$=$ reverberation}
             (b.south -| {pic cs:rightA});
     \end{tikzpicture}
 
-    \begin{mydefblock}{Acoustic Echoes}
+    \begin{mydefblock}{Acoustic Echoes: distict specular reflection}
 
         \vspace{-2mm}
         \begin{columns}[onlytextwidth]
-            \begin{column}{0.60\textwidth}
+            \begin{column}{0.58\textwidth}
                 \begin{itemize}
-                    \item Elements of reverberation
-                    \item Specular reflection standing out for time and strength
+                    \item Specular reflection standing out
+                    \\for time and strength
                     \item Repetition of a sound but after
                     \begin{itemize}
                         \item same content
@@ -217,27 +236,27 @@
                     \end{itemize}
                 \end{itemize}
             \end{column}
-            \begin{column}{0.38\textwidth}
+            \begin{column}{0.40\textwidth}
                 \centering
-                \includegraphics[width=.8\textwidth]{figures/echoes}
+                \includegraphics[width=\textwidth]{figures/echoes}
             \end{column}
 
         \end{columns}
     \end{mydefblock}
+\end{frame}
 
-    \begin{block}{Everyday examples:}
+\begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
 
-        \vspace*{2mm}
-        \begin{columns}[T,onlytextwidth]
-            \column{.4\textwidth}
-            Bat
-            Dolphins
-            Sonars
-            \column{.22\textwidth}
-            \includegraphics[width=\textwidth]{figures/echo_nature.jpg}
-            \addendum{\small\faCopyright[regular]~Skin & Bones}
-        \end{columns}
-    \end{block}
+    \textbf{Everyday examples:} bats, dolphins and sonars
+
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/echo_nature.jpg}
+        \addendum{\small\faCopyright[regular]~Skin & Bones}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
 
 
     \begin{columns}
@@ -249,10 +268,17 @@
         \end{itemize}
 
         \column{0.48\textwidth}
-        \begin{mydefblock}{Echo-aware methods}
-            Consider echoes for better processing
-        \end{mydefblock}
     \end{columns}
+
+    \begin{mydefblock}{Echo-aware methods}
+        explicitly account for some acoustic reflection to boost the performances
+        \begin{center}
+            \textit{Turing Enemies into Friends}
+        \end{center}
+        \hfill \cite{ribeiro2010turning}
+    \end{mydefblock}
+
+
 
 \end{frame}
 
@@ -295,8 +321,8 @@
             \centering
             \alert{How to estimate them?}
             \begin{itemize}
-                \item Analytical method
                 \item Learning-based method
+                \item Analytical method
             \end{itemize}
             {\small no parameter tuning
             \\no full sound modeling}
@@ -313,10 +339,11 @@
         \end{column}
     \end{columns}
 
-    \begin{center}
         \alert{Where to find them?}
-        \\Echo-aware database for
-        \\estimation and application
-    \end{center}
+        \begin{itemize}
+            \item \dechorate
+            \\Echo-aware database for
+            \\both estimation and application
+        \end{itemize}
     \end{block}
 \end{frame}

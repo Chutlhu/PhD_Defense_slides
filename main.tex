@@ -1,4 +1,4 @@
-\documentclass[9pt,dvipsnames,aspectratio=43,compress]{beamer}
+\documentclass[8pt,dvipsnames,aspectratio=43,compress]{beamer}
 
 \usetheme[sectionpage=progressbar,progressbar=frametitle]{metropolis}
 \usepackage{appendixnumberbeamer}
@@ -162,14 +162,13 @@
     %   }
     % \input{content/estimation.tex}
 
-    %section do not appear in the navigation bar
-    % {
-    %   \makeatletter
-    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %   \makeatother
-    %   \section{Echo-aware Application}
-    % }
-    % \input{content/application.tex}
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Echo-aware Application}
+    }
+    \input{content/application.tex}
 
     % %section do not appear in the navigation bar
     % {
