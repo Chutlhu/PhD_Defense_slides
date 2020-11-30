@@ -11,7 +11,7 @@ Antoine Deleforge from the team Multispeech in INRIA Nancy
 
 In a nutshell, this thesis deal with the problem of estimating acoustic echoes and use their information to leverage typical problems of audio signal processing.
 
-Before going in the details of the contribution, I will better explain the title 
+Before going in the details of the contribution, I will better explain the title
 
 and to this end,
 
@@ -53,14 +53,14 @@ So, can a computer do this as well?
 Computer and digital systems implement units based on signal processing models, frameworks and tools that extracts and organizes information from sounds.
 
 These units typically address specific problems, such as
- separating or enhancing a target sound form the rest, 
-or say where a sound source is, 
+ separating or enhancing a target sound form the rest,
+or say where a sound source is,
 or quantify the amount of reverberation affecting sound recordings
 and many others
 
 The problems are well-known problems each of those produced large and vast literature that spans many years of research.
 
-In can be noticed that these problems are strictly related to some natural questions, such as 
+In can be noticed that these problems are strictly related to some natural questions, such as
 Who is speaking,
 Where is the speaker,
 What is the content of the speech,
@@ -80,7 +80,7 @@ When indoor, all of these lead to a complex result called reverberation.
 
 From a physical point of view, Acoustic echoes are specular reflections which stand out in the overall reverberation effect in terms of their strength and timing.
 
-More commonly, they are repetitions of sound that usually arrive shortly later. 
+More commonly, they are repetitions of sound that usually arrive shortly later.
 
 So they carry the same content of the sound source
 and its delay is related to the distance that the sound travel
@@ -105,8 +105,8 @@ And echoes give us useful information that can be used for better processing.
 This thesis work aims at improving the current state-of-the-art signal processing along three axes
 ESTIMATION, APPLICATION and DATA.
 
-Regarding estimation, we present two approaches: 
-one is an analytical method based on the continuous dictionary and one is based on a deep learning model. 
+Regarding estimation, we present two approaches:
+one is an analytical method based on the continuous dictionary and one is based on a deep learning model.
 In contrast with the state of the art, both the methods do not require any parameter tuning or the modelling of the entire sound field.
 
 The second part of this thesis focuses on extending existing methods in audio scene analysis to their echo-aware forms.
@@ -130,7 +130,7 @@ The complete reverberation includes all the interaction of the sound travelling 
 
 In math, we see that the continuous-time signal of the microphone corresponds to the time-domain convolution between the source signal and a filter plus a noise term.
 
-This filter is commonly known as room impulse response and it describes the acoustic response of the room to a perfect impulsive sound. 
+This filter is commonly known as room impulse response and it describes the acoustic response of the room to a perfect impulsive sound.
 
 For this reason, it depends on spatial and acoustic properties of the environments such as the position of the microphones and source, the room shape and size, and the type of material the surfaces are covered with. Because of this, each RIR is different for each position of source and microphone pairs and room.
 
@@ -198,7 +198,7 @@ the one that estimates echoes after having estimated the room impulse response a
 For the first case, the Room Impulse Response is assumed to be a discrete vector and use some optimization tools to estimate it.
 After it, the echoes are identified as the strongest peaks using peak picking or peak labelling strategies.
 
-The main benefit of this approach is that the first step is a well-studied inverse problem for which many successful frameworks and reliable solvers are available and it can count on a vast literature even the specific case of RIR estimation. 
+The main benefit of this approach is that the first step is a well-studied inverse problem for which many successful frameworks and reliable solvers are available and it can count on a vast literature even the specific case of RIR estimation.
 
 And they perform reasonably well on some applications.
 
@@ -279,7 +279,7 @@ Finally, we can see that using log-likelihood cost function reduce again the err
 
 Finally, we can observe that TDOA between echoes is a more channelling task.
 
-Now we will move one 
+Now we will move one
 
 
 ### BLASTER
@@ -327,7 +327,7 @@ We observe promising results on noiseless synthetic data with filters matching t
 
 This leads us to consider noisy synthetic data where the long filter with long reverberation tail is taken into account.
 
-We generate thousand RIRs for cuboid room of random volumes where two microphones and one sound source are randomly deployed. 
+We generate thousand RIRs for cuboid room of random volumes where two microphones and one sound source are randomly deployed.
 
 RIRs are generated with Image Source Methods implemented by the  Pyroomacoustics library.
 
@@ -350,7 +350,7 @@ Precision measures how many estimated echoes are correct, so the higher the bett
 
 We can plot this metric here for both noise and speech source signal.
 
-And we can see at first that the proposed method coloured in RED leads to comparable results to the state of the art coloured in BLUE 
+And we can see at first that the proposed method coloured in RED leads to comparable results to the state of the art coloured in BLUE
 which both outperform the baseline in GREEN.
 
 However, we can see that the proposed method is more sensitive to the number of echoes and the source signal.
@@ -380,7 +380,7 @@ After having seen some ways to estimate the echoes, we can pass at the second pa
 
 ### SOTA
 
-As we said earlier, the echoes carry the same energy content of the sound source, but they arrive later and possibly from a different direction. 
+As we said earlier, the echoes carry the same energy content of the sound source, but they arrive later and possibly from a different direction.
 
 These time and direction depend on the geometry of the audio scene.
 
@@ -431,7 +431,7 @@ Consider the following example where a single source is recorded by two micropho
 
 We consider only a single microphone pair because it can be further generalizable to any array geometry.
 
-And we consider the close-reflective surface scenario so the strongest echoes are also the earliest and the absorption coefficient can be fairly assumed frequency independent. 
+And we consider the close-reflective surface scenario so the strongest echoes are also the earliest and the absorption coefficient can be fairly assumed frequency independent.
 
 Moreover, it has a direct application to tabletop devices such as smart speakers.
 
@@ -441,7 +441,7 @@ We will refer to this as the MIRAGE array, where mirage stands for Microphone Ar
 
 However, how do we access all the microphones pair?
 
-For the application in Sound Source Localization, we are interested in the time difference of arrival between the microphones. 
+For the application in Sound Source Localization, we are interested in the time difference of arrival between the microphones.
 
 It turns out that these quantities are related to the echos, as we can define the real TDOAs as the difference between the two direct paths.
 
@@ -463,7 +463,7 @@ We compare this method with GCCPHAT we can access the TDOAs of the true micropho
 
 The two methods are tested on a synthetic data of the strongly echoic condition when two microphones are placed close to a reflector attending a sound source randomly placed in the room.
 
-The performances will be reported in terms of accuracy, that is the percentage of correctly guessed 
+The performances will be reported in terms of accuracy, that is the percentage of correctly guessed
 
 At first, we can compare the performances for the task of retrieving only the angle of arrival, namely the real TDOAs.
 
@@ -518,7 +518,7 @@ each column correspond to the absolute values of one RIR
 
  every 30 columns correspond to one sound source
 
-and finally, we mark the annotation of the from the peaks in the RIR corresponding to the echos with an × 
+and finally, we mark the annotation of the from the peaks in the RIR corresponding to the echos with an ×
 
 and with a circle the one coming from the geometrical annotation.
 
@@ -530,7 +530,7 @@ Speech enhancement is the task of improving the quality of a target sound source
 
 In a nutshell, given the following multichannel signal model in the short-time frequency domain, the goal is to find a linear filter w that applied the recordings return the clean source signal.
 
-As opposed to Multichannel Wiener Filter, typical spatial filtering via beamforming impose the so-called distortionless constraint, aiming at enhancing the target sound without adding any distortion. 
+As opposed to Multichannel Wiener Filter, typical spatial filtering via beamforming impose the so-called distortionless constraint, aiming at enhancing the target sound without adding any distortion.
 
 It can be generalized to enhance multiple sound sources but also to cancel out target ones.
 
@@ -544,7 +544,7 @@ The solution of the previous problem can be computed in closed-form, however, it
 
 Now we are going to show the performances same common types of beamformer on the Dechorate data for the task of speech denoising and dereverberation.
 
-IT will be measured in term of Signal to Noise and Reverberant Ratio and PESQ quantifying the perceptual quality of the speech. 
+IT will be measured in term of Signal to Noise and Reverberant Ratio and PESQ quantifying the perceptual quality of the speech.
 
 For both, the higher the better.
 
@@ -564,7 +564,7 @@ This is not the case for ReTF beamformers,  since are independent on the echo an
 
 ### Summary of the interim conclusion
 
-To summarize, in this thesis, we studied acoustic echoes for audio scene analysis and signal processing. 
+To summarize, in this thesis, we studied acoustic echoes for audio scene analysis and signal processing.
 
 The three main lines of work can be briefly summarized as follows:
 
