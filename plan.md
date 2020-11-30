@@ -376,7 +376,7 @@ and test on real data
 
 ## Echo aware Application
 
-After having seen some ways to estimate the echoes, we can pass at the second part of this presentation which focuses on extending existing methods in audio scene analysis to their echo-aware forms.
+After having seen some ways to estimate the echoes, we can pass at the second part of this presentation which focuses on extending methods in audio scene analysis to their echo-aware forms.
 
 ### SOTA
 
@@ -386,42 +386,41 @@ These time and direction depend on the geometry of the audio scene.
 
 Let s consider the following example:
 
-2 microphones listening to two sound sources and one of these is between the direct path.
+2 microphones listening to a target sound source and an interfering one is placed between them.
 
-You can see interfering source cover the direct propagation path of the target.
+As you can see the inteferer hide the direct propagation path of the target.
 
-Now, if we consider the reflections instead, we can have a new point of view of the source. This is similar to what you would do with a mirror.
-That is why this is called the mirror or image source model.
+Now, if we consider the reflections instead, we can have a new point of view of the source. This is called the image source model.
 
-However, an other perfectly equivalent model exists, which instead of mirroring the source, mirror the microphones and the same properties holds.
+However, another perfectly equivalent model exists, which instead of mirroring the source, mirror the microphones and the same properties holds.
 
-From the signal processing point of view, instead, this makes a difference, since we can assume to have access to more microphones and more microphones means typically better processing.
+From the signal processing point of view, instead, this makes a difference, since we access to more microphones and more microphones means typically better processing capabilities.
 
 Based on this intuition, many researchers included echoes in signal processing application.
 
-In particular, in sound source separation and speech enhancement some methods try to gather the source energy of the echoes otherwise lost.
+In particular, in sound source separation and speech enhancement some methods try to gather the source energy of the echoes which is otherwise lost.
 
 For the geometry-based task, the concept of image source is used to better estimate the position of the source or the microphones, or conversely the surface position, allowing to retrieve in some case the full geometry of the room.
 
-And finally, as an element of the sound propagation, the echoes provide important cues for the entire room impulse response and also acoustic properties for room acoustic measurements.
+And finally, as an element of the sound propagation, the echoes provide important cues for the entire room impulse response and also properties of interest for acousticians.
 
-I will now discuss the application of Sound Source Localization and Speech Enhancement, while in the manuscript you can find details on sound source separation and room geometry estimation.
+I will now discuss the application on Sound Source Localization and Speech Enhancement, while in the manuscript you can find details on sound source separation and room geometry estimation.
 
 ### SSL
 
 The task of sound source localization is to estimate the position of the target sound source in the space.
 
-Retrieving the full 3D cartesian position is very challenging and typically the problem is relaxed direction of arrival estimation, where the distance is ignored.
+Retrieving the full 3D cartesian position of a sound source is very challenging and typically the problem is relaxed to direction of arrival estimation, where the distance is ignored.
 
-Depending on the number of microphones available, the are two types of Direction on Arrival:
+Depending on the number of microphones available, the are two types of Direction on Arrival estimation.
 
-With only 2 microphones only one angle between the microphone frame can be estimated.
+With only 2 microphones, only one angle in the microphone frame can be estimated.
 
-This is typically called Angle of Arrival estimation and knowing the distance between of the microphone pair it can be formulated as a TDOAs estimation problem, which can be solved with GCC-PHAT.
+This is typically called Angle of Arrival estimation and knowing the distance between the microphone pair, it can be re-casted as a TDOAs estimation problem, which can be solved with well know GCC-PHAT method.
 
-When multiple microphones are available the direction of arrival (or DoA) can be estimated knowing the array geometry and the Angle of Arrival for each microphone pair.
+Instead, when multiple microphones are available the direction of arrival (or DoA) can be estimated knowing the array geometry and the Angle of Arrival for each microphone pair.
 
-For this occasion, some algorithm such as SPR-PHAT consider histograms of possible TDOAs for each pair and aggregate all the contribution with respect to the global reference point.
+For this occasion, some algorithm such as SPR-PHAT consider histograms of possible TDOAs for each pair of microphones and aggregate all the contribution with respect to the global reference point.
 
 
 ### Mirage
@@ -430,13 +429,13 @@ We can this idea of aggregating the multiple microphones with the proposed echo-
 
 Consider the following example where a single source is recorded by two microphones placed close to a surface.
 
-We consider only a signal mic pair because it can be further generalizable to any array geometry.
+We consider only a single microphone pair because it can be further generalizable to any array geometry.
 
-And we consider the close-reflective surface scenario so the strongest echoes is also the earliest and the absorption coefficient can be fairly assumed frequency independent.
+And we consider the close-reflective surface scenario so the strongest echoes are also the earliest and the absorption coefficient can be fairly assumed frequency independent.
 
-And moreover it has a direct application to tabletop devices such as smart speakers.
+And moreover, it has a direct application to tabletop devices such as smart speakers.
 
-Now, resolving the reflection from the surface with the image microphone model we can expand the array.
+Now, resolving the reflections with the image microphone model we can expand the array.
 
 We will refer to this as the MIRAGE array, where mirage stands for Microphone Array Augmentation with Echoes.
 
@@ -452,13 +451,34 @@ and the time difference of Echoe, or TDOE as the time difference between the arr
 
 ### Proposed approach
 
-Therefore the key idea here to use Multiple Microphone SSL methods on the Mirage array.
+Therefore the key idea here to use Multiple Microphone SSL method on the Mirage array.
 
 and if you notice, these are the same TDOAs that we estimated with the Deep Learning model in the first part.
 
-Therefore the proposed approach use the TDOAs estimated with the
+Therefore the proposed approach uses the TDOAs estimated with the MLP model and the estimation are fused knowing the position of the two microphones with respect to the surface and we used the error on the validation set as a measure of uncertainty.
 
+We compare this method with GCCPHAT we can access the TDOAs of the true microphones.
 
+### Results
+
+The two methods are tested on a synthetic data of the strongly echoic condition when two microphones are placed close to a reflector attending a sound source randomly placed in the room.
+
+The performances will be reported in terms of accuracy, that is the percentage of correctly guessed
+
+At first, we can compare the performances for the tast of retrieving only the angle of arrival, namely the real TDOAs.
+
+For a noiseless recording featuring white noise source and we can see that mirage perform slightly worse but still comparable and in a range of 20 degree of error both the methods guess the position of the source with 97%.
+
+When we add external noise, GCCPHAT outperform the proposed methods even if the performances drop with respect to the noiseless case. While this is expected for the baseline method, it suggests us that a simple deep model is not able to generalize to noise data.
+
+This is happening also with speech data. While the PHAT transform help of the baseline method makes it robust to the sparse spectrum of the speech, a simple DNN is not able to generalize to this data and it suggests that more powerful models and features should be taken into account.
+
+The following table reports the performances for the task of Direction of Arrival estimation, that is both azimth and elevation.
+
+We can see that the proposed model allows DoA estimation with an accuracy of 79% for azimuth and 88% for elevation for white noise source in noiseless condition.
+While it is slightly able to generalize to speech, the performances drop.
+
+And finally, we should mention that these performances reflect the poor performances on echo estimation.
 
 ## Echo-aware dataset
 

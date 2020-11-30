@@ -18,7 +18,7 @@
             \\Image Microphone Model}
     \end{textblock*}
 
-    Recent literature on echo-aware processing:
+    Some literature on echo-aware processing:
     \begin{columns}[T,onlytextwidth]
         \column{.32\textwidth}
         \begin{block}{\textbf{What?}}
@@ -66,15 +66,14 @@
 
 \begin{frame}{Sound Source Localization (SSL) {\hfill\small (common knowledge)} \faBook}
 
-    \textbf{SSL} $\to$ 3D position of sound source
+    \faAlert We do not consider here distance estimation.
 
     \begin{columns}[T,onlytextwidth]
         \column{0.6\textwidth}
         \begin{block}{SSL with 2 microphones}
             \begin{itemize}
                 \item Only angle of arrival (\alert{AOA})\iconAOA
-                \item can be approximated from \alert{TDOA}using e.g.GCC-PHAT
-                \\\cite{knapp1976generalized}
+                \item can be approximated from \alert{TDOA} using e.g. \GCCPHAT\footnotemark[1]
                 \\\textcolor{gray}{\small (known limitation, but good in practice)}
             \end{itemize}
         \end{block}
@@ -89,13 +88,16 @@
             \begin{itemize}
                 \item Only Directon of Arrival (DoA):  azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
                 \item[1.] AOA for each pair can be ``fuse''  together
-                \\(e.g. angular spectra in SRP-PHAT~\cite{dibiase2001robust})
+                \\(e.g. angular spectra in SRP-PHAT\footnotemark[2])
                 \\\textcolor{gray}{\small (known limitation, but good in practice)}
             \end{itemize}
         \end{block}
         \column{0.38\textwidth}
         \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
     \end{columns}
+
+    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
+    \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
 
 \end{frame}
 
@@ -161,7 +163,7 @@
 
 \begin{frame}{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
 
-    \vspace*{2mm}
+    % \vspace*{2mm}
     \begin{columns}[T,onlytextwidth]
     \begin{column}{0.5\textwidth}
         \begin{block}{}
@@ -181,110 +183,99 @@
     \end{columns}
 
 
-    \vspace{2mm}
     \begin{mycontriblock}
         \textbf{Proposed Approach:}
-        \begin{itemize}
-            \item use proposed DNN-based TDOA estimation
+        \begin{enumerate}
+            \item use proposed \MLP~model for \alert{TDOAs} estimation
             \item fuse together the estimation $\ldots$
             \begin{itemize}
+                \item of the \mirage array (similar to SRP-PHAT\footnotemark[1])
                 \item knowing the position of the microphones;
                 \item use the error on a validation set as measure of uncertainty.
             \end{itemize}
-        \end{itemize}
+        \end{enumerate}
     \end{mycontriblock}
 
-    \vspace{2mm}
+    \vspace{1mm}
     \begin{mysotablock}
-        \textbf{Baseline:} GCC-PHAT on true microphones
+        \textbf{Baseline:} \GCCPHAT on true microphones\footnotemark[2]
     \end{mysotablock}
+
+    \vspace{1mm}
+    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
+    \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
 
 \end{frame}
 
 \begin{frame}{\faFlask~Experimental results \hfill\faMapMarked*}
 
+    \vspace*{2mm}
     \begin{mycontriblock}
-        \textbf{Proposed:} $\MLP$ with \mirage~(mod of SRP-PHAT\footnotemark[1])
+        \textbf{Proposed:} $\MLP$ with \mirage
     \end{mycontriblock}
+
+    \vspace{1mm}
     \begin{mysotablock}
-        \textbf{Baseline:} $\GCCPHAT$\footnotemark[2]
+        \textbf{Baseline:} $\GCCPHAT$\footnotemark
     \end{mysotablock}
 
-    \textbf{Data:} virtually generated close dataset as for \lantern
-    \\\textbf{Metric:} Accuracy ($<$ang{10},    $<$\ang{20}) \addendum{\faReply~also error in the manuscript}
+    \textbf{Data:} 200 synthetic stereophonic recordings for close-surface scenario
+    \\\textbf{Metric:} accuracy in \% ($<$\ang{10},    $<$\ang{20}) \addendum{\footnotesize \faReply~also error in the manuscript}
 
     \pause[1]
-    \begin{columns}[T,onlytextwidth]
+    \vspace{2mm}
+    \begin{columns}[T]
 
-        \begin{column}{.4\textwidth}
-        \begin{block}{AOA estimation}
-            \begin{itemize}
-                \item[\cmark] Similar when wn
-                \item[\xmark] Huge drop when noise
-                \item[\xmark] Huge drop when speech and noise
-            \end{itemize}
-        \end{block}
-        \end{column}
-
-        \begin{column}{.58\textwidth}
+        \begin{column}{.48\textwidth}
 
             \centering
-            \small
+            \footnotesize
             \begin{tabular}{cl|cc}
             \toprule
             \textbf{AOA}\iconAOA &             &    \multicolumn{2}{c}{ACCURACY}  \\
                          & Input       &  $\alpha<\ang{10}$ &  $\alpha<\ang{20}$ \\
             \midrule
-            MIRAGE     &   wn          &    77    &  97  \\
-            MIRAGE     &   wn+n        &    26    &  54  \\
-            GCC-PHAT   &   wn          &    81    &  97  \\
-            GCC-PHAT   &   wn+n        &    65    &  83  \\
-            MIRAGE     &   sp          &    63    &  82 \\
-            MIRAGE     &   sp+n        &    16    &  35 \\
-            GCC-PHAT   &   sp 		   &    82    &  97 \\
-            GCC-PHAT   &   sp+n        &    19    &  32 \\
+            \visible<1->{\mirage     &   wn          &    77    &  97  }\\
+            \visible<2->{\mirage     &   wn+n        &    26    &  54  }\\
+            \visible<1->{\GCCPHAT   &   wn          &    \textbf{81}    &  \textbf{97}  }\\
+            \visible<2->{\GCCPHAT   &   wn+n        &    65    &  83  }\\
+            \midrule
+            \visible<3->{\mirage     &   sp          &    63    &  82 }\\
+            \visible<4->{\mirage     &   sp+n        &    16    &  35 }\\
+            \visible<3->{\GCCPHAT   &   sp 		   &    \textbf{82}    &  \textbf{97} }\\
+            \visible<4->{\GCCPHAT   &   sp+n        &    19    &  32 }\\
             \bottomrule
         \end{tabular}
         \end{column}
-    \end{columns}
 
-    \vspace{5mm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{.25\textwidth}
-            \begin{block}{2D SSL estimation}
-                \textcolor{gray}{\small (both Az. and El.)}
-            \end{block}
-        \end{column}
-
-        \begin{column}{.74\textwidth}
+        \begin{column}{.48\textwidth}
+        \visible<5->{
             \centering
-            \small
+            \footnotesize
             \begin{tabular}{cl|cc|cc}
             \toprule
             \textbf{DoA}\iconDOA    &               &  \multicolumn{4}{c}{ACCURACY} \\
                     &               &  \multicolumn{2}{c|}{$<\ang{10}$} &   \multicolumn{2}{c}{$<\ang{20}$} \\
                     &    Input      &  $\theta$\iconAz &  $\phi$\iconEl &  $\theta$\iconAz &  $\phi$\iconEl \\
             \midrule
-            MIRAGE &  wn        &   59 &  71 &   79 &  88 \\
-            MIRAGE &  wn+n      &   18 &  26 &   35 &  66 \\
-            MIRAGE &  sp        &   45 &  59 &   71 &  83 \\
-            MIRAGE &  sp+n      &   17 &  12 &   38 &  43 \\
+            \mirage &  wn        &   \textbf{59} &  \textbf{71} &   \textbf{79} &  \textbf{88} \\
+            \mirage &  wn+n      &   18 &  26 &   35 &  66 \\
+            \mirage &  sp        &   45 &  59 &   71 &  83 \\
+            \mirage &  sp+n      &   17 &  12 &   38 &  43 \\
             \bottomrule
         \end{tabular}
-
+        }
         \end{column}
 
     \end{columns}
 
-    \begin{center}
-        \textcolor{mygreen}{\cmark \: \parbox{12em}{Solved ``impossible''\\localization}}
-        \quad \textcolor{myred}{\xmark \: \parbox{12em}{Performance depending on\\echo estimation}}
-    \end{center}
-
-
-    \vfill
-    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
-    \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
+    \textbf{Observation}
+        \begin{itemize}
+            \item<1->[\cmark] \pro{comparable to baseline when white noise source in noiseless case}
+            \item<4->[\xmark] \con{not generalize to noisy and speech data}
+            \item<5->[\cmark] \pro{Solved ``impossible'' localization}
+            \item<6->[\iconAlert] Performance depending on echo estimation methods
+        \end{itemize}
 
 \end{frame}
 
