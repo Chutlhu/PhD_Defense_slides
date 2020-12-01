@@ -7,11 +7,11 @@
     \vspace{1mm}
     \begin{block}{Echo-aware database requires:}
         \begin{itemize}
-            \item annotation of the echoes;
-            \item annotation of the geometry;
-            \item should cover a vast number of echo-aware applications;
-            \item expertise in signal processing, acoustics and
-            \item proper recording devices.
+            \item annotation of the echoes
+            \item annotation of the geometry
+            \item should cover a vast number of echo-aware applications
+            \item expertise in signal processing, acoustics
+            \item proper recording devices
         \end{itemize}
     \end{block}
 
@@ -104,8 +104,8 @@
     \small
     \begin{itemize}
         \item<1-> each column correspond to the absolute values of one RIR
-        \item<2-> every 5 columns corresponds to one array
-        \item<3-> every 30 column corresponds to one sound source
+        \item<2-> a block of 5 columns corresponds to one array
+        \item<3-> a block of 30 columns corresponds to 6 array for 1 sound source
         \item<6-> $\times$ corresponds to manual echo location, $\circ$ to geometric annotation
     \end{itemize}
 
@@ -195,7 +195,7 @@
 
 \begin{frame}[t]{Echo-aware Speech Enhancement}
 
-    \begin{block}{Closed-form solution, but it requires:}
+    \begin{block}{Methods and requirements:}
     \end{block}
 
     \vspace{-3mm}
@@ -204,7 +204,7 @@
             \centering
             \small
             \begin{tabular}{llll}
-                & Noise covariance matrix & RIRs\\
+                Methods                                                 & Noise covariance matrix & RIRs\\
                 \visible<1->{$\mathtt{DS}$                              &     -      & Direct Path (AOA)\\}
                 \visible<2->{$\mathtt{MVDR}_\mathtt{DP}$                &   Noise    & Direct Path (AOA)\\}
                 \visible<2->{$\mathtt{MVDR}_\mathtt{ReTF}$              &   Noise    & Relative Transfer Function\\}
@@ -217,7 +217,6 @@
     \end{center}
 
     {\small \textbf{Metrics:} Signal to Noise and Reverberant Ratio (SNRR) and Speech Quality (PESQ)
-    \\\textbf{Data:} \dechorate dataset, RT60 = 600 ms)
     }
 
     \begin{center}
@@ -226,6 +225,7 @@
         \includegraphics<3>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming3.pdf}%
         \includegraphics<4>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming4.pdf}%
         \includegraphics<5>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming5.pdf}%
+        \addendum{\small RT60 = 600 ms}
     \end{center}
 
     \textbf{Observations:}

@@ -17,7 +17,7 @@
     \vfill
     \begin{columns}[T,onlytextwidth]
         \column{0.48\textwidth}
-        \textbf{Scenarios:} the source signal is
+        \textbf{2 Scenarios:} the source signal is
 
         \begin{center}
             \includegraphics[width=.9\textwidth]{./figures/active-passive.png}
@@ -37,7 +37,6 @@
             \\\hspace{-1em}\addendum{\footnotesize \textbf{Application:} sonar, calibration, measurements, etc.}
         \end{itemize}
 
-        \vspace{-5mm}
         Passive
         \vspace{-2mm}
         \begin{itemize}
@@ -49,13 +48,6 @@
             % \\\hspace{.3em} \textbf{multi-mic}
             \\\hspace{-1em}\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, laptop, etc.}
         \end{itemize}
-        }
-
-        \only<5->{
-        \column{0.48\textwidth}
-        \centering
-        \textbf{Methods:} the estimation is
-        \includegraphics[width=.9\textwidth]{./figures/based-agnostic.png}
         }
     \end{columns}
 
@@ -122,7 +114,6 @@
                         \item[$\to$] lower complexity
                         \item[$\to$] less hyperparameters
                     \end{itemize}
-                    \item[\cmark] \pro{Sparsity, Non-negativity are respected}
                     \end{itemize}
         \end{columns}
 
@@ -142,17 +133,14 @@
                 \end{itemize}
 
 
-                \textcolor{myred}{\textbf{Proposed appoach}} RIR-agnostic \& off-grid:
+                \textcolor{myred}{\textbf{Proposed appoach}} RIR-agnostic \& continuous:
                 \begin{mycontriblock}
                     \begin{enumerate}
                         \item Learning-based approach
-                        \item analytical approach
+                        \item Analytical approach
                     \end{enumerate}
                 \end{mycontriblock}
         \end{columns}
-
-
-    \footnotetext[1]{Blind Channel Estimation}
 
 \end{frame}
 
@@ -164,35 +152,34 @@
     \begin{mydefblock}{Idea: (Deep) Learning-based AER}
         \begin{enumerate}
             \item Use \alert{virtually} supervised deep learning models
-            \item Estimate first echo (simple but important)
-            \\\addendum{[\footnotesize \faReply~See Section Application]}
-            \item Only 2 microphones
+            \item Estimate first echo (simple but important) \addendum{\footnotesize \faReply~See Section Application}
+            \item Only 2 microphones attending 1 source
         \end{enumerate}
     \end{mydefblock}
 
     \vfill
     \textbf{Motivations:}
     \begin{itemize}
-        \item This \textit{direct} mapping is difficult, the \textit{inverse} ``is not''
+        \item This \textit{inverse} mapping is difficult has no solution in general, \textit{direct} mapping ``is not''
         \\$\rightarrow$ acoustic simulators:
             $\text{mic/src/room geometry}
             \; \longrightarrow \;
             \set{\tauir,\ampir}, \; \contRIR_i, \quad \contMic_i$
         \item Acoustic simulator are ``simple'', versatile and fast
-        \\$\to$ many data
-        \item This approach is successful in \textit{Sound Source Localization}
-        \\$\to$ position is related to echoes
-        \\{\small\cite{kataria2017hearing,nguyen2018autonomous,perotin2019regression} \textcolor{myred}{\faExclamationTriangle~Not only DNN}}
+        \\$\to$ large dataset
+        % \item This approach is successful in \textit{Sound Source Localization}
+        % \\$\to$ position is related to echoes
+        % \\{\small\cite{kataria2017hearing,nguyen2018autonomous,perotin2019regression} \textcolor{myred}{\faExclamationTriangle~Not only DNN}}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Proposed approache: models \hfill\faProjectDiagram}
+\begin{frame}{Proposed approach: models \hfill\faProjectDiagram}
 
     \begin{columns}[T,onlytextwidth]
         \column{0.48\textwidth}
         \textbf{Inputs:}
-        {\small Interchannel level and phase difference features\footnotemark[1] from
+        {\small Interchannel level and phase difference features from
             \[ \footnotesize
             R[f] = \timeavg \frac{X_2[f,t]}{X_1[f,t]}
             \approx \timeavg \frac{H_2[f]\alert{S[f,t]}}{H_1[f]\alert{S[f,t]}}
@@ -213,7 +200,7 @@
             \centering
             4 TOA
             \\$\downarrow$
-            \\3 Time \alert{Difference} of Arrivals (\alert{\textbf{TDOAs}})\footnotemark[1]
+            \\3 Time \alert{Difference} of Arrivals (\alert{\textbf{TDOAs}})
         \end{columns}
         \begin{center}
             \small
@@ -235,26 +222,25 @@
         \pause[6]
         \item Data:
         \begin{itemize}
-            \item Virtually-supervised learning (= data from acoustic simulator)
+            \item synthetic data
             \item white-noise as source signal + AWGN of 0, 10, 20 dB
             \item 2 microphone in close-surface scenario
         \end{itemize}
     \end{itemize}
 
-    \visible<5->{
-    \begin{tikzpicture}[overlay, remember picture]
-        \node[anchor=base] (a) at (pic cs:CNNtop) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-        \node[anchor=base] (b) at (pic cs:CNNbot) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-        \draw [decoration={brace,amplitude=0.35em},decorate,thick,gray]
-            (a.north -| {pic cs:CNN}) -- node[right,inner sep=1em] {
-                \small \parbox{12em}{Good for data fusion\\Similar to \textbf{MDN}\\~{\footnotesize\cite{bishop1994mixture}}}
-                } (b.south -| {pic cs:CNN});
-    \end{tikzpicture}
-    }
-
-    \visible<1->{
-        \footnotetext[1]{\tiny $\mathtt{ILD} = \log\kvbar{R}$, $\mathtt{IPD} = \arg{R/\kvbar{R}}$}
-    }
+    % \visible<5->{
+    % \begin{tikzpicture}[overlay, remember picture]
+    %     \node[anchor=base] (a) at (pic cs:CNNtop) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+    %     \node[anchor=base] (b) at (pic cs:CNNbot) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+    %     \draw [decoration={brace,amplitude=0.35em},decorate,thick,gray]
+    %         (a.north -| {pic cs:CNN}) -- node[right,inner sep=1em] {
+    %             \small \parbox{12em}{Good for data fusion\\Similar to \textbf{MDN}\\~{\footnotesize\cite{bishop1994mixture}}}
+    %             } (b.south -| {pic cs:CNN});
+    % \end{tikzpicture}
+    % }
+    % \visible<1->{
+    %     \footnotetext[1]{\tiny $\mathtt{ILD} = \log\kvbar{R}$, $\mathtt{IPD} = \arg{R/\kvbar{R}}$}
+    % }
 
 \end{frame}
 
@@ -315,7 +301,7 @@
 \subsection{\blaster}
 
 \begin{frame}{(Discrete) RIR-based methods: the State of the Art \hfill\faBook}
-
+    \small
     \begin{block}{Key ingredient -- \textit{Cross relation identity}}
         \begin{equation*}
             \begin{cases}
@@ -333,7 +319,7 @@
     \begin{block}{Ideas:}
     \begin{enumerate}
         \small
-        \item Sampled version of $\contMic_1,\contMic_2$ are available: $\discMic_1, \discMic_2$
+        % \item Sampled version of $\contMic_1,\contMic_2$ are available: $\discMic_1, \discMic_2$ WRITE EVERYTHING IN THE DISCRETE
         \item Echo TOAs $\propto$ sampling frequency
         \item Find echoes $\rightarrow$ \textbf{find sparse non-negative vectors} $\discRIR_1, \discRIR_2$ of length $L$
         \item Modeled as \textbf{Lasso}-like problem
@@ -428,25 +414,18 @@
             \textcolor{mygreen}{\cmark{No huge matrix} \qquad
             \cmark \, \parbox{8.5em}{Solutions is \\ a train of Dirac} \qquad
             \cmark \, \parbox{8em}{anchor prevents \\ trivial solution}}
+
+            Perfect recovery in the noiseless synthetic case
+            \cmark \pro{Promising results on noiseless data with RIRs matching the echo-model}
         \end{center}
 
-        \begin{center}
-            solved with Sliding Frank-Wolfe algorithm \cite{denoyelle2019sliding}
-        \end{center}
+        % \begin{center}
+        %     solved with Sliding Frank-Wolfe algorithm \cite{denoyelle2019sliding}
+        % \end{center}
 
 \end{frame}
 
 \begin{frame}[t]{\faFlask~Experimental results \hfill\faJediOrder}
-    % \begin{block}{Scenario}
-    %     \begin{itemize}
-    %         \item simulation data with ISM with Pyroomacoustics
-    %         \item 1 source, 2 microphones, random room geometry
-    %         \item Full RIRs
-    %         \item 2 sources: broadband and speech
-    %         \item 2 datasets: different SNR, different RT60
-    %     \end{itemize}
-    % \end{block}
-    \cmark \pro{Promising results on noiseless data with RIRs macthing the echo-model}
 
     \begin{columns}[onlytextwidth]
         \begin{column}{0.50\textwidth}
@@ -469,7 +448,7 @@
 
     \begin{mysotablock}
 
-        \textbf{Baseline:} discrete RIR-based methods based on LASSO
+        \textbf{Baselines:} discrete RIR-based methods based on LASSO
         \begin{itemize}
             \item BSN: Blind, Sparse and Non-negative \cite{lin2007blind}
             \item IL1C: iteratively-weighted $\ell_1$ constraint~\cite{crocco2015room}
@@ -480,7 +459,7 @@
 
     \vspace{2mm}
     \begin{mycontriblock}
-        Proposed method: off-grid rir-agnostic based on BLasso
+        \textbf{Proposed method:} continuous RIR-agnostic based on BLasso
         \\Blind and Sparse Technique for Echo Retrieval (\blaster)
     \end{mycontriblock}
 
@@ -515,7 +494,7 @@
 
 \begin{frame}{Error per Dataset/Signal while recovering 7 echoes \hfill\faJediOrder}
 
-    \textbf{Metric:} \alert{RMSE} on the mather echoes = error on the correct guess
+    \textbf{Metric:} \alert{RMSE} on matched echoes = error on the correct guess
 
     \begin{center}
         \begin{overpic}[width=0.6\textwidth]{figures/e_k-7_thr-2_bns_crocco_blaster.pdf}

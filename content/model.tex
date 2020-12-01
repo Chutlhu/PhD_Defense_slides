@@ -1,6 +1,6 @@
 \subsection{Signal Model}
 
-\begin{frame}[t]{Signal model}
+\begin{frame}{Signal model}
 
     % Sound propagation process $\Leftrightarrow$ Source $\to$ Filter $\to$ Receiver model
 
@@ -17,6 +17,7 @@
     \end{equation*}
 
 
+    \vfill
     \begin{mydefblock}{\tikzmarknode{RIR}{Room Impulse Response} (RIR)}
         \small
         \begin{itemize}
@@ -81,7 +82,7 @@
             \approx \sum_{r=0}^{R} \ampir \delta(t - \textcolor{alert}{\tauir}) + \tikzmarknode{error}{\varepsilon}_i(t)
     \end{equation*}
 
-    \begin{textblock*}{40mm}(100mm,20mm)
+    \begin{textblock*}{30mm}(100mm,35mm)
         \footnotesize
         \textcolor{gray}{\tikzmarknode{model}{models} later echoes, reverberation and other.}
     \end{textblock*}
@@ -90,7 +91,7 @@
     \begin{tikzpicture}[overlay,remember picture,
         nodes={inner sep=1pt, align=center, font=\footnotesize},
         gray!70,>=stealth] %
-    \draw[->] (error.north) to[out=-90, in=180] (model.west);
+    \draw[->] (error.north) to[out=90, in=180] (model.west);
     \end{tikzpicture}
 
 

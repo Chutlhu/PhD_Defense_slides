@@ -2,8 +2,6 @@
 
 \begin{frame}{Echo-aware signal processing for \alert{audio scene} analysis}
 
-    Current Scenario
-
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.65\textwidth}
             \begin{figure}
@@ -39,7 +37,7 @@
             \alert{Semantic} information
 
             \vspace*{0.5em}
-            \includegraphics[trim={0 0 170em 0},clip,width=0.5\textwidth]{figures/semantic.png}
+            \includegraphics[trim={0 0 170em 0},clip,width=0.7\textwidth]{figures/semantic.png}
         \end{column}}
         \visible<2->{
         \begin{column}[t]{0.3\textwidth}
@@ -47,7 +45,7 @@
             \alert{Spatial} information
 
             \vspace*{0.5em}
-            \includegraphics[trim={0 0 170em 0},clip,width=0.5\textwidth]{figures/spatial.png}
+            \includegraphics[trim={0 0 170em 0},clip,width=0.7\textwidth]{figures/spatial.png}
         \end{column}}
         \visible<3->{
         \begin{column}[t]{0.3\textwidth}
@@ -55,7 +53,7 @@
             \alert{Temporal} information
 
             \vspace*{0.5em}
-            \includegraphics[trim={0 0 170em 0},clip,width=0.5\textwidth]{figures/temporal.png}
+            \includegraphics[trim={0 0 170em 0},clip,width=0.7\textwidth]{figures/temporal.png}
         \end{column}}
     \end{columns}
 
@@ -86,7 +84,8 @@
     \end{mydefblock}
 
     \begin{center}
-        \includegraphics[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
+        \includegraphics<4>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/auditory_scene_analysis.png}%
+        \includegraphics<5>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
     \end{center}
     }
 
@@ -112,20 +111,20 @@
     \pause
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
-            \footnotesize
+            \small
             \begin{itemize}
-                \item Sound Source Separation
-                \item Speech Enhancement
-                \item Sound Source Localization
-                \item Room Geometry Estimation
+                \item Sound Source Separation\tikzmark{top2}
+                \item Speech Enhancement\tikzmark{bot2}
+                \item Sound Source Localization\hspace{1em}\tikzmark{right1}\tikzmark{top3}
+                \item Room Geometry Estimation\tikzmark{bot3}
             \end{itemize}
         \end{column}
 
         \begin{column}{0.48\textwidth}
-            \begin{itemize}\footnotesize
-                \item Voice Activity Detection
-                \item Reverberation level estimation
-                \item Acoustic Channel Estimation
+            \begin{itemize}\small
+                \item Voice Activity Detection\tikzmark{top4}\tikzmark{bot4}
+                \item Reverberation level estimation\hspace{1em}\tikzmark{right2}\tikzmark{top5}
+                \item Acoustic Channel Estimation\tikzmark{bot5}
                 \item ...
             \end{itemize}
 
@@ -155,40 +154,38 @@
         \end{column}
     \end{columns}
 
-    % \pause
     % \begin{tikzpicture}[overlay, remember picture]
     %     \node[anchor=base] (a) at (pic cs:top1) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
     %     \node[anchor=base] (b) at (pic cs:bot1) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
     %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
     %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Who?} (b.south -| {pic cs:right1});
     % \end{tikzpicture}
-    % \begin{tikzpicture}[overlay, remember picture]
-    %     \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-    %     \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-    %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small What?} (b.south -| {pic cs:right1});
-    % \end{tikzpicture}
-    % \begin{tikzpicture}[overlay, remember picture]
-    %     \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-    %     \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-    %      (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Where?} (b.south -| {pic cs:right1});
-    % \end{tikzpicture}
-    % \begin{tikzpicture}[overlay, remember picture]
-    %     \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-    %     \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-    %      (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small When?} (b.south -| {pic cs:right2});
-    % \end{tikzpicture}
-    % \begin{tikzpicture}[overlay, remember picture]
-    %     \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
-    %     \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
-    %     \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
-    %      (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
-    % \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top2) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot2) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small What?} (b.south -| {pic cs:right1});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top3) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot3) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right1}) -- node[right,inner sep=1em] {\small Where?} (b.south -| {pic cs:right1});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top4) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot4) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small When?} (b.south -| {pic cs:right2});
+    \end{tikzpicture}
+    \begin{tikzpicture}[overlay, remember picture]
+        \node[anchor=base] (a) at (pic cs:top5) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
+        \node[anchor=base] (b) at (pic cs:bot5) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
+        \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
+         (a.north -| {pic cs:right2}) -- node[right,inner sep=1em] {\small How?} (b.south -| {pic cs:right2});
+    \end{tikzpicture}
 
     \pause
-    \vspace{-2mm}
     \begin{center}
         HOW  $\overset{\text{helps}}{\longrightarrow}$ WHERE
             $\overset{\text{helps}}{\longrightarrow}$ WHEN
@@ -202,37 +199,43 @@
 
 \begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
 
-    \begin{block}{Sound interacts with indoor environment:}
-        \begin{itemize}
-            \item[] it is reflected\tikzmark{topA}
-            \\\hspace{1em} specularly and diffusely\hspace{1em}\tikzmark{rightA}
-            \item[$+$] it is absorbed,
-            \item[$+$] it is transmitted,
-            \item[$+$] and other.\tikzmark{botA}
-        \end{itemize}
-    \end{block}
+    \begin{columns}[onlytextwidth]
+        \column{0.55\textwidth}
+        \begin{block}{Sound interacts with indoor environment:}
+            \small
+            \begin{itemize}
+                \item[] it is reflected\tikzmark{topA}
+                \\\hspace{1em} specularly and diffusely\hspace{1em}\tikzmark{rightA}
+                \item[$+$] it is absorbed,
+                \item[$+$] it is transmitted,
+                \item[$+$] it is diffracted, ect.\tikzmark{botA}
+            \end{itemize}
+        \end{block}
+
+        \column{0.55\textwidth}
+        \includegraphics[trim={0 0 50 0},clip,width=\textwidth]{figures/sound_refletion.png}
+    \end{columns}
 
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:topA) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:botA) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
         \draw [decoration={brace,amplitude=0.5em},decorate,thick,gray]
             (a.north -| {pic cs:rightA}) -- node[right,inner sep=1em]
-                {$=$ reverberation}
+                {{\small $=$ reverberation}}
             (b.south -| {pic cs:rightA});
     \end{tikzpicture}
 
-    \begin{mydefblock}{Acoustic Echoes: distict specular reflection}
+    \begin{mydefblock}{Acoustic Echoes: early specular reflection}
 
         \vspace{-2mm}
         \begin{columns}[onlytextwidth]
             \begin{column}{0.58\textwidth}
                 \begin{itemize}
-                    \item Specular reflection standing out
-                    \\for time and strength
-                    \item Repetition of a sound but after
+                    \item reflection ``standing out''
+                    \item Copy of a sound but after
                     \begin{itemize}
                         \item same content
-                        \item delay $\Leftrightarrow$ distance
+                        \item delayed $\Leftrightarrow$ distance
                     \end{itemize}
                 \end{itemize}
             \end{column}
@@ -251,29 +254,33 @@
 
     \begin{center}
         \includegraphics[width=\textwidth]{figures/echo_nature.jpg}
-        \addendum{\small\faCopyright[regular]~Skin & Bones}
+        \addendum{\small\faCopyright[regular]~Skin \& Bones}
     \end{center}
 
 \end{frame}
 
-\begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
+\begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
 
 
-    \begin{columns}
-        \column{0.48\textwidth}
-        Typically sound propagation is
+    \begin{columns}[onlytextwidth]
+        \column{0.90\textwidth}
+        In audio signal processing, sound propagation is typically
         \begin{itemize}
-            \item ignored $\implies$ simple processing but reverberation = noise
-            \item fully modeled and estimated $\implies$ very challenging
+            \item \alert{ignored} $\implies$ simple processing but reverberation = noise
+            \item \alert{fully modeled} and estimated $\implies$ very challenging
         \end{itemize}
 
-        \column{0.48\textwidth}
+        \column{0.05\textwidth}
     \end{columns}
 
     \begin{mydefblock}{Echo-aware methods}
-        explicitly account for some acoustic reflection to boost the performances
+        \begin{itemize}
+            \item explicitly account for some acoustic reflections to boost the performance
+            \item attractive alternative between ignoring reverberation and modelling it entirely
+        \end{itemize}
         \begin{center}
-            \textit{Turing Enemies into Friends}
+            \textit{Turning Enemies into Friends:
+            \\Using reflections to improve sound source localization.}
         \end{center}
         \hfill \cite{ribeiro2010turning}
     \end{mydefblock}
@@ -286,7 +293,7 @@
 
 \begin{frame}{Outline and contributions}
 
-    \begin{block}{Thesis title}
+    \begin{block}{Thesis title:}
 
         \vspace*{2mm}
         \begin{columns}[onlytextwidth]
@@ -295,13 +302,13 @@
                 \alert{Audio Scene Analysis}
                 \\\downarrow
                 \\context and problems
-            \end{column}\hfill\pause
+            \end{column}\hfill
             \begin{column}[T]{0.3\linewidth}
                 \centering
                 \alert{Signal Processing}
                 \\\downarrow
                 \\models and frameworks
-            \end{column}\hfill\pause
+            \end{column}\hfill
             \begin{column}[T]{0.3\linewidth}
                 \centering
                 \alert{Echo-aware}
@@ -310,40 +317,45 @@
             \end{column}\hfill
         \end{columns}
     \end{block}
-    \pause
 
     \vfill
-    \begin{block}{Thesis content:}
+    \begin{block}{Thesis contribution:}
 
         \vspace*{2mm}
         \begin{columns}[T,onlytextwidth]
         \begin{column}{0.48\textwidth}
             \centering
-            \alert{How to estimate them?}
+            \alert{1. How to estimate them?}
             \begin{itemize}
-                \item Learning-based method
-                \item Analytical method
+                \only<1>{\item Learning-based method}
+                \only<2>{\item Learning-based method \alert{\textbf{1a}}}
+                \only<1>{\item Analytical method}
+                \only<2>{\item Analytical method \alert{\textbf{2a}}}
+            % {\small no parameter tuning
+            % \\no full sound modeling}
             \end{itemize}
-            {\small no parameter tuning
-            \\no full sound modeling}
         \end{column}
         \begin{column}{0.48\textwidth}
             \centering
-            \alert{How to use them?}
+            \alert{2. How to use them?}
             \begin{itemize}
-                \item Source Localization
-                \item Source Separation
-                \item Speech Enhancement
-                \item Room Geometry Estimation
+                \only<1>{\item Source Localization}
+                \only<2>{\item Source Localization \alert{\textbf{2a}}}
+                \only<1>{\item Source Separation}
+                \only<2>{\item \textcolor{alert!60}{Source Separation}\addendum{\small not today}}
+                \only<1>{\item Speech Enhancement}
+                \only<2>{\item Speech Enhancement \alert{\textbf{3b}}}
+                \only<1>{\item Room Geometry Estimation}
+                \only<2>{\item \textcolor{alert!60}{Room Geometry Estimation}\addendum{\small not today}}
             \end{itemize}
         \end{column}
     \end{columns}
 
-        \alert{Where to find them?}
+    \alert{3. Where to find them?}
         \begin{itemize}
-            \item \dechorate
-            \\Echo-aware database for
-            \\both estimation and application
+            \only<1>{\item \dechorate}
+            \only<2>{\item \dechorate \alert{\textbf{3a}}}
+            \\Echo-aware database for both estimation and application
         \end{itemize}
     \end{block}
 \end{frame}
