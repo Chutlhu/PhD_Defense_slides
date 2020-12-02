@@ -1,16 +1,17 @@
 \subsection{State of the Art}
 
-\begin{frame}[t]{Echo-aware Application \hfill\faBook}
+\begin{frame}[t]{Echo-aware Applications \hfill\faBook}
 
     \begin{block}{Echoes: same content, different time/direction}
         \centering
-        \only<1>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(0).png}}%
-        \only<2>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(1).png}}%
-        \only<3>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(2).png}}%
-        \only<4->{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(3).png}}%
+        \only<1>{\includegraphics[width=0.45\textwidth]{figures/image_src_mic(0).png}}%
+        \only<2>{\includegraphics[width=0.45\textwidth]{figures/image_src_mic(1).png}}%
+        \only<3>{\includegraphics[width=0.45\textwidth]{figures/image_src_mic(2).png}}%
+        \only<4->{\includegraphics[width=0.45\textwidth]{figures/image_src_mic(3).png}}%
     \end{block}
 
-    \begin{textblock*}{30mm}(95mm,20mm)
+    \pause[4]
+    \begin{textblock*}{30mm}(95mm,35mm)
         \centering
         \small
         \textcolor{myred}{%
@@ -19,15 +20,18 @@
             \\Image Microphone Model}
     \end{textblock*}
 
+    \pause[5]
     \begin{columns}[T,onlytextwidth]
         \column{.32\textwidth}
         \begin{block}{\textbf{What?}}
             \small
             Echoes = copy
+
+            \vspace{-2mm}
             \begin{itemize}
-                \item \only<-7>{Sound Source Separation}\only<8->{\alert{Sound Source Separation}}
+                \item \only<-5>{Sound Source Separation}\only<6->{\alert{Sound Source Separation}}
                 \\{\footnotesize\cite{leglaive2016multichannel}}
-                \item \only<-7>{Speech Enhancement}\only<8->{\alert{Speech Enhancement}}
+                \item \only<-5>{Speech Enhancement}\only<6->{\alert{Speech Enhancement}}
                 \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2019raking}}
             \end{itemize}
         \end{block}
@@ -35,21 +39,21 @@
         \begin{block}{\textbf{Where?}}
             \small
             Echoes $\gets$ image
+
+            \vspace{-2mm}
             \begin{itemize}
-                \item \only<-7>{Sound Source Localization}\only<8->{\alert{Sound Source Localization}}
+                \item \only<-5>{Sound Source Localization}\only<6->{\alert{Sound Source Localization}}
                 \\{\footnotesize\cite{ribeiro2010turning,jensen2019method}}
-                \item Microphone Calibration
-                \\{\footnotesize\cite{dokmanic2015raking,salvati2016sound}}
-                \item \only<-7>{Room Geometry Estimation}\only<8->{\alert{Room Geometry Estimation}}
-                \\{\footnotesize\cite{antonacci2012inferences,crocco2017uncalibrated}}
-                \item Acoustic SLAM
-                \\{\footnotesize\cite{evers2018acoustic,krekovic2016echoslam}}
+                \item \only<-5>{Room Geometry Estimation}\only<6->{\alert{Room Geometry Estimation}}
+                \\{\footnotesize\cite{antonacci2012inference,crocco2017uncalibrated}}
             \end{itemize}
         \end{block}
         \column{.32\textwidth}
         \begin{block}{\textbf{How?}}
             \small
             Echoes $\in$ sound propagation
+
+            \vspace{-2mm}
             \begin{itemize}
                 \item Blind Channel Estimation
                 \\{\footnotesize\cite{lin2007blind,crocco2017uncalibrated}}
@@ -59,7 +63,7 @@
         \end{block}
     \end{columns}
 
-
+    \vspace{-3mm}
     \begin{center}
         \textcolor{gray}{\small (In-depth literature review in the manuscript.)}
     \end{center}
@@ -79,7 +83,7 @@
             \end{itemize}
         \end{block}
         \column{0.38\textwidth}
-        \adjincludegraphics[Clip={0\width} {0.5\height} {0\width} {0\height},width=0.8\textwidth]{figures/ssl.png}
+        \includegraphics[width=\textwidth]{figures/1d_ssl.png}
     \end{columns}
     \pause
 
@@ -89,13 +93,13 @@
             \begin{itemize}
                 \item Two Direction of Arrival (DoA):
                 \\azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
-                \item[1.] AOA for each pair can be ``fused'' together
-                \\(e.g. angular spectra in SRP-PHAT\footnotemark[2])
-                \\\textcolor{gray}{\small (known limitation, but good in practice)}
+                \item[1.] AOA at each pair can be ``fused'' together
+                \\\addendum{e.g., angular spectra in SRP-PHAT\footnotemark[2]}
+                \\\addendum{known limitation, but good in practice}
             \end{itemize}
         \end{block}
         \column{0.38\textwidth}
-        \adjincludegraphics[Clip={0\width} {0\height} {0\width} {0.5\height},width=0.9\textwidth]{figures/ssl.png}
+        \includegraphics[width=\textwidth]{figures/2d_ssl.png}
     \end{columns}
 
     \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
@@ -132,10 +136,11 @@
 
         \begin{column}{0.5\textwidth}
             \centering
-            \only<-4>{\includegraphics[width=0.9\textwidth]{figures/mirage1.png}}%
-            \only<5>{\includegraphics[width=0.9\textwidth]{figures/mirage2.png}}%
-            \only<6>{\includegraphics[width=0.9\textwidth]{figures/mirage3.png}}%
-            \only<7->{\includegraphics[width=0.9\textwidth]{figures/mirage4.png}}%
+            \only<1,2>{\includegraphics[width=0.9\textwidth]{figures/mirage1.png}}%
+            \only<3,4>{\includegraphics[width=0.9\textwidth]{figures/mirage2.png}}%
+            \only<5>{\includegraphics[width=0.9\textwidth]{figures/mirage3.png}}%
+            \only<6>{\includegraphics[width=0.9\textwidth]{figures/mirage4.png}}%
+            \only<7>{\includegraphics[width=0.9\textwidth]{figures/mirage5.png}}%
         \end{column}
     \end{columns}
 
@@ -153,13 +158,14 @@
             \end{block}
         \end{column}
 
+        \visible<4->{
         \begin{column}{0.5\textwidth}
             \centering
-            \includegraphics<2-4>[width=\textwidth]{figures/rirs1.pdf}%
+            \includegraphics<-4>[width=\textwidth]{figures/rirs1.pdf}%
             \includegraphics<5>[width=\textwidth]{figures/rirs2.pdf}%
             \includegraphics<6>[width=\textwidth]{figures/rirs3.pdf}%
-            \includegraphics<7->[width=\textwidth]{figures/rirs4.pdf}%
-        \end{column}
+            \includegraphics<7>[width=\textwidth]{figures/rirs4.pdf}%
+        \end{column}}
     \end{columns}
 
 
@@ -168,19 +174,18 @@
 \begin{frame}{Sound Source Localization \alert{with Echoes} \hfill\faMapMarked*}
 
     % \vspace*{2mm}
-    \begin{columns}[T,onlytextwidth]
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \begin{block}{}
-                \small
-                \textbf{Idea:} DoA estimate on the MIRAGE array.
-                \textbf{Recall:} these TDOAs are the same of the DNN-based method
+            \textbf{Idea:} DoA estimate on the \mirage array
+            \\\textbf{Recall:} same TDOAs as for Learning-based method
         \end{block}
 
     \end{column}
 
     \begin{column}{0.5\textwidth}
         \centering
-            \adjincludegraphics[Clip={0.5\width} {0\height} {0\width} {0\height},width=0.8\textwidth]{figures/mirage.png}
+            \includegraphics[width=0.8\textwidth]{figures/mirage2.png}
         \end{column}
     \end{columns}
 
@@ -188,14 +193,12 @@
     \begin{mycontriblock}
         \textbf{Proposed Approach:}
         \begin{enumerate}
-            \item use proposed learning-based approach (\MLP) for \alert{TDOAs} estimation for each pair
-            \item fuse together the estimation $\ldots$
-            \begin{enumerate}
-                \item use the error on a validation set as measure of uncertainty.
-                \item DDDDDDOOOODOO DDOO BETTER HERE
-                for each pair of the \mirage array (similar to SRP-PHAT\footnotemark[1]),
-                \item knowing the position of the microphones,
-            \end{enumerate}
+            \item estimate \alert{TDOAs} using proposed learning-based approach (\MLP)
+            \item fuse together the estimation (SRP-PHAT-like algorithm\footnotemark[1]),
+            \begin{itemize}
+                \item the error on a validation set provides measure of uncertainty
+                \item microphone positions are known
+            \end{itemize}
         \end{enumerate}
     \end{mycontriblock}
 
@@ -277,7 +280,7 @@
             \item<1->[\cmark] \pro{comparable to baseline when white noise source in noiseless case}
             \item<4->[\xmark] \con{not generalize to noisy and speech data}
             \item<5->[\cmark] \pro{Takled ``impossible'' localization}
-            \item<6->[\iconAlert] Performance depending on echo estimation methods (work in progress)
+            \item<6->[\iconAlert] Performance depending on echo estimator (work in progress)
         \end{itemize}
 
 \end{frame}

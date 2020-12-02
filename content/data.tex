@@ -17,7 +17,7 @@
 
 \end{frame}
 
-\begin{frame}[t]{\dechorate  \hfill\faDatabase}
+\begin{frame}[t]{\dechorate  \hfill\faPaintBrush}
     \vspace{2mm}
     \begin{mycontriblock}{\textbf{Characteristics} of \dechorate}
         \begin{itemize}\small
@@ -34,7 +34,7 @@
     \vfill
     \only<1>{
         \begin{center}
-            \includegraphics[trim={0 0 0 10em},clip,width=\textwidth]{figures/dechorate/fornitures.jpg}
+            \includegraphics[trim={0 0 0 10em},clip,width=0.8\textwidth]{figures/dechorate/fornitures.jpg}
         \end{center}
     }
     \only<2>{
@@ -87,26 +87,25 @@
     %     \\signal annotation \quad $\Longleftrightarrow$ \quad geometric annotation}
     % \end{center}
 
-\end{frame}
 
-\begin{frame}{\dechorate: the skyline view \hfill\faTint}
+\begin{frame}{\dechorate: the skyline view \hfill\faPaintBrush}
 
     \begin{center}
-        \includegraphics<1>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline0.pdf}
-        \includegraphics<2>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline1.pdf}
-        \includegraphics<3>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline2.pdf}
-        \includegraphics<4>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline3.pdf}
-        \includegraphics<5>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline4.pdf}
-        \includegraphics<6>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline6.pdf}
-        \includegraphics<7>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline7.pdf}
+        \includegraphics<1>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline0.pdf}%
+        \includegraphics<2>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline1.pdf}%
+        \includegraphics<3>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline2.pdf}%
+        \includegraphics<4>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline3.pdf}%
+        \includegraphics<5>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline4.pdf}%
+        \includegraphics<6>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline6.pdf}%
+        \includegraphics<7>[trim={10em 5 0 0},clip,width=0.89\linewidth]{figures/dechorate_skyline7.pdf}%
     \end{center}
 
     \small
     \begin{itemize}
         \item<1-> each column correspond to the absolute values of one RIR
-        \item<2-> a block of 5 columns corresponds to one array
-        \item<3-> a block of 30 columns corresponds to 6 array for 1 sound source
-        \item<6-> $\times$ corresponds to manual echo location, $\circ$ to geometric annotation
+        \item<3-> a block of 5 columns corresponds to one array
+        \item<4-> a block of 30 columns corresponds to 6 array for 1 sound source
+        \item<5-> $\times$ corresponds to manual echo location, $\circ$ to geometric annotation
     \end{itemize}
 
 
@@ -118,9 +117,10 @@
     % \end{itemize}
 \end{frame}
 
-\subsection{Speech Enhancement with \dechorate}
+\subsection{Speech Enhancement with \dechorate \hfill\faComments}
 
-\begin{frame}[t]{Echo-aware Speech Enhancement with \dechorate}
+\begin{frame}{Speech Enhancement with \dechorate \hfill\faComments}
+
     \begin{mydefblock}{Speech Enhancement (SE)}
         Improve the quality of a \alert{target} sound source w.r.t.:
         \begin{columns}[T,onlytextwidth]
@@ -149,69 +149,53 @@
         \end{columns}
     \end{mydefblock}
 
-    \pause
-    SE via \textbf{linear spatial filtering} in the STFT domain
-    \begin{columns}[onlytextwidth]
-        \column{.4\textwidth}\centering
-            $\bfx[f,t] = \bfh[f]\bfs[f,t] + \bfn[f,t]  \in \bbC^{I}$
-        \column{.05\textwidth}\centering
-            $\longrightarrow$
-        \column{.2\textwidth}\centering
-        \begin{align*}
-            \khermitian{\bfw}[f] \in \bbC^{I} \\
-        \end{align*}
-        \column{.05\textwidth}\centering
-        \begin{align*}
-            \longrightarrow \\
-        \end{align*}
-        \column{.4\textwidth}\centering
-        \begin{align*}
-            \khermitian{\bfw}[f] \bfx[f,t] \approx \bfs[f,t] \\
-        \end{align*}
-    \end{columns}
+    \pause[3]
+    \begin{block}{}
+        SE via \textbf{linear spatial filtering} in the STFT domain
+        \begin{equation*}
+            \bfX[f,t] = \bfH[f]\bfS[f,t] + \bfN[f,t]  \in \bbC^{I}
+            \quad\longrightarrow
+            \quad\khermitian{\bfW}[f] \in \bbC^{I}
+            \quad\longrightarrow
+            \quad\khermitian{\bfW}[f] \bfX[f,t] \approx \bfS[f,t]
+        \end{equation*}
 
-    \pause
-    \begin{itemize}
-        \small
-        \item \textbf{target is distortionless} (vs. Multichannel Wiener Filtering)
-        \item many variant, e.g. enhance or null multiple sources~\cite{gannot2017consolidated}
-    \end{itemize}
+        \vspace{-3mm}
+        \begin{itemize}
+            \item \textbf{target is distortionless} (vs. Multichannel Wiener Filtering)
+            \item many variant, e.g. enhance or null multiple sources~\cite{gannot2017consolidated}
+        \end{itemize}
+    \end{block}
 
-    \pause
-    \vfill
-    \vspace*{.25em}
+    \pause[4]
     \setbeamercolor{postit}{fg=black,bg=bluegreen!10}
     \begin{beamercolorbox}[sep=.5em]{postit}
         \centering
         \begin{equation*}
-            \widehat{\bfw} = \underset{\bfw}{\arg\min} \;
-            \bbE\kbrace{\set{ \kvvbar{\khermitian{\bfw} \bfx }_2^2}}
-            \quad\text{s.t.}\quad\khermitian{\bfw}\bfh = 1
+            \widehat{\bfW} = \underset{\bfW}{\arg\min} \;
+            \bbE\kbrace{\kvvbar{\khermitian{\bfW} \bfX }_2^2}
+            \quad\text{s.t.}\quad\khermitian{\bfW}\bfH = 1
         \end{equation*}
         \textcolor{myred}{\small Reducing output energy + distortionless $\Leftrightarrow$ reduce any uncorrelated noise}
     \end{beamercolorbox}
 
 \end{frame}
 
-\begin{frame}[t]{Echo-aware Speech Enhancement}
+\begin{frame}[t]{Speech Enhancement with \dechorate \hfill\faComments}
 
-    \begin{block}{Methods and requirements:}
-    \end{block}
-
-    \vspace{-3mm}
     \begin{center}
         \begin{table*}
             \centering
             \small
-            \begin{tabular}{llll}
-                Methods                                                 & Noise covariance matrix & RIRs\\
-                \visible<1->{$\mathtt{DS}$                              &     -      & Direct Path (AOA)\\}
-                \visible<2->{$\mathtt{MVDR}_\mathtt{DP}$                &   Noise    & Direct Path (AOA)\\}
-                \visible<2->{$\mathtt{MVDR}_\mathtt{ReTF}$              &   Noise    & Relative Transfer Function\\}
-                \visible<3->{\alert{$\mathtt{MVDR}_\mathtt{Rake}$}      &   Noise    & \alert{4 Early Echoes}\\}
-                \visible<4->{$\mathtt{MVDR}_\mathtt{DP+Late}$           &   Noise + Late Diffusion   & Direct Path (AOA)\\}
-                \visible<4->{$\mathtt{MVDR}_\mathtt{ReTF+Late}$         &   Noise + Late Diffusion   & Relative Transfer Function\\}
-                \visible<4->{\alert{$\mathtt{MVDR}_\mathtt{Rake+Late}$} &   Noise + Late Diffusion   & \alert{4 Early Echoes}\\}
+            \begin{tabular}{l|l|l}
+                \textbf{Methods} & \textbf{Noise covariance matrix} & \textbf{RIRs}\\
+                \visible<1->{$\mathtt{DS}$                              &     -      & Direct path (AOA)\\}%
+                \visible<2->{$\mathtt{MVDR}_\mathtt{DP}$                &   Noise    & Direct path (AOA)\\}%
+                \visible<2->{$\mathtt{MVDR}_\mathtt{ReTF}$\footnotemark[1]              &   Noise    & Relative Transfer Function\\}%
+                \visible<3->{\alert{$\mathtt{MVDR}_\mathtt{Rake}$}\footnotemark[2]      &   Noise    & \alert{4 strongest echoes per channel}\\}%
+                \visible<4->{$\mathtt{MVDR}_\mathtt{DP+Late}$           &   Noise + Late Diffusion\footnotemark[3]   & Direct path (AOA)\\}%
+                \visible<4->{$\mathtt{MVDR}_\mathtt{ReTF+Late}$\footnotemark[1]         &   Noise + Late Diffusion\footnotemark[3]   & Relative Transfer Function\\}%
+                \visible<4->{\alert{$\mathtt{MVDR}_\mathtt{Rake+Late}$}\footnotemark[2] &   Noise + Late Diffusion\footnotemark[3]   & \alert{4 strongest echoes per channel}}
             \end{tabular}
         \end{table*}
     \end{center}
@@ -220,20 +204,34 @@
     }
 
     \begin{center}
-        \includegraphics<1>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming1.pdf}%
-        \includegraphics<2>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming2.pdf}%
-        \includegraphics<3>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming3.pdf}%
-        \includegraphics<4>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming4.pdf}%
-        \includegraphics<5>[trim={0 0 300 0},clip,width=0.8\textwidth]{figures/dechorate_beamforming5.pdf}%
-        \addendum{\small RT60 = 600 ms}
+        \includegraphics<1>[trim={0 0 300 0},clip,width=0.9\textwidth]{figures/dechorate_beamforming1.pdf}%
+        \includegraphics<2>[trim={0 0 300 0},clip,width=0.9\textwidth]{figures/dechorate_beamforming2.pdf}%
+        \includegraphics<3>[trim={0 0 300 0},clip,width=0.9\textwidth]{figures/dechorate_beamforming3.pdf}%
+        \includegraphics<4>[trim={0 0 300 0},clip,width=0.9\textwidth]{figures/dechorate_beamforming4.pdf}%
+        \includegraphics<5>[trim={0 0 300 0},clip,width=0.9\textwidth]{figures/dechorate_beamforming5.pdf}%
     \end{center}
 
-    \textbf{Observations:}
-    \begin{itemize}
-        \item the more information we use the better $\to$ so echoes helps;
-        \item \textit{in theory}, echo-aware beamformer are comparable to ReTF beamformers;
-        \item \textit{in practice}, the performance drops, but not for ReTF beamformers.
-    \end{itemize}
+    \begin{textblock*}{20mm}(95mm,80mm)
+        \addendum{\small RT60 = 600 ms}
+    \end{textblock*}
+
+    % \textbf{Observations:}
+    % \begin{itemize}
+    %     \item the more information we use the better $\to$ so echoes helps;
+    %     \item \textit{in theory}, echo-aware beamformer are comparable to ReTF beamformers;
+    %     \item \textit{in practice}, the performance drops, but not for ReTF beamformers.
+    % \end{itemize}
+
+    \vspace{-4mm}
+    \begin{block}{}
+        \tiny
+        \visible<2->{$^\text{1}$Using~\cite{markovich2018performance},}
+        \visible<3->{$^\text{2}$Using~\cite{kowalczyk2019raking},}
+        \visible<4->{$^\text{3}$Using~\cite{schwartz2016joint},}
+    \end{block}
+
+
+
 
     % \vspace{-3mm}
     % \visible<5->{

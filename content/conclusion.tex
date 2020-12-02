@@ -114,15 +114,15 @@
             \end{center}
             \\In passive stereo scenario:
             \begin{itemize}
-                \item Learning-based method{\footnotesize
-                \begin{itemize}
-                    \item off grid estimation
-                    \item depends on source and \# echoes
-                \end{itemize}}
                 \item Analytical method{\footnotesize
                 \begin{itemize}
-                    \item estimation on first echo' TDOAs
-                    \item only on synthetic data
+                    \item[\cmark] \pro{direct estimation}
+                    \item[\xmark] \con{depends on source and \# echoes}
+                \end{itemize}}
+                \item Learning-based method{\footnotesize
+                \begin{itemize}
+                    \item[\cmark] \pro{estimation on first echo' TDOAs}
+                    \item[\xmark] \con{only on synthetic data and noise source}
                 \end{itemize}}
             \end{itemize}
         \end{column}
@@ -134,16 +134,16 @@
             \begin{itemize}
                 \item Source Localization{\footnotesize
                 \begin{itemize}
-                    \item allow 2D DoA estimation with 2 mic
-                    \item depends on the echo estimator
+                    \item[\cmark] \pro{2D DoA estimation with 2 mic}
+                    \item[\xmark] \con{depends on the echo estimator}
                 \end{itemize}}
-                \item Source Separation
                 \item Speech Enhancement{\footnotesize
                 \begin{itemize}
-                    \item in theory early echoes helps
-                    \item needs to be accurately estimated
+                    \item[\cmark] \pro{in theory early echoes helps}
+                    \item[\xmark] \con{... need to be accurately estimated}
                 \end{itemize}}
-                \item Room Geometry Estimation
+                \item \textcolor{gray!70}{Source Separation {\footnotesize\faReply}}
+                \item \textcolor{gray!70}{Room Geometry Estimation {\footnotesize\faReply}}
             \end{itemize}
         \end{column}
     \end{columns}
@@ -155,8 +155,8 @@
             \item \dechorate
             \\Echo-aware database for both estimation and application{\footnotesize
             \begin{itemize}
-                \item echo annotation $\Leftrightarrow$ geometry annotation
-                \item synthetic $\Leftrightarrow$ real RIRs
+                \item[\cmark] \pro{echo annotation $\Leftrightarrow$ geometry annotation}
+                \item[\cmark] \pro{synthetic $\Leftrightarrow$ real RIRs}
             \end{itemize}}
         \end{itemize}
     \end{block}
@@ -171,7 +171,6 @@
         \begin{itemize}\small
             \item develop theoretical guaranties for off-grid acoustic echo retrieval
             \item for DNN: extended physics-based learning or other learning paradigm
-            \\\addendum{i.e., unfolding or curriculum learning}
         \end{itemize}
 
         \vfill
@@ -186,50 +185,51 @@
         \item[\mytriag] on \dechorate
         \begin{itemize}
             \item Synthetic to Real RIRs (style transfer, new type of acoustic simulator)
-            \item Benchmarking for echo-aware algorithms
+            \item Benchmark data for echo-aware algorithms
         \end{itemize}
 
         \vfill
         \item[\mytriag] \textbf{``close the loop'':}  echo estimation $\Leftrightarrow$ audio analysis
-        \\in the thesis only the $\Rightarrow$ direction.
+        \begin{itemize}
+            \item in the thesis only the $\Rightarrow$
+        \end{itemize}
     \end{itemize}
 
 \end{frame}
 
 
 \begin{frame}{List of publications and artifacts}
-    \begin{block}{Publications}
     \begin{itemize}
-        \item Estimation
+        \item On estimation
         \begin{itemize}\small
             \item deep learning method in~\cite{di2019mirage}
-            \item \blaster --- analytical method in~\cite{di2020blaster}
+            \item \blaster: analytical method in~\cite{di2020blaster}
         \end{itemize}
-        \item Application
+        \item On applications
         \begin{itemize}\small
-            \item \mirage --- sound source localization in~\cite{di2019mirage}
-            \item \separake --- sound source separation in~\cite{scheibler2018separake}
+            \item \mirage: sound source localization in~\cite{di2019mirage}
+            \item \separake: sound source separation in~\cite{scheibler2018separake}
         \end{itemize}
-        \item Data
+        \item On data
         \begin{itemize}\small
-            \item \dechorate --- database (journal in progress)
+            \item \dechorate: database (journal in progress)
         \end{itemize}
         \item Other
         \begin{itemize}\small
             \item Signal Processing CUP 2019 \cite{deleforge2019audio}
             \item LOCATA Challenge 2019 \cite{lebarbenchon2018evaluation}
-            \item Collaboration with Honda on multichannel \mirage
+            \item Collaboration with Honda Research Group on multichannel \mirage
         \end{itemize}
     \end{itemize}
-    \end{block}
 
+    \vspace{-2mm}
     \begin{block}{Code}
         \begin{columns}[T,onlytextwidth]
             \column{0.48\textwidth}
             \begin{itemize}\small
                 \item $\mathtt{dEchorate}$: GUI and code for \dechorate
-                \item $\mathtt{Risotto}$: library for ReTF estimation
-                \item $\mathtt{Brioche}$: library for Spatial filtering
+                \item $\mathtt{Risotto}$: ReTF estimation
+                \item $\mathtt{Brioche}$: echo-aware Spatial filtering
             \end{itemize}
 
             \column{0.48\textwidth}
@@ -237,8 +237,13 @@
                 \item $\mathtt{pyMBSSLocate}$: MBSSLocate in Python
                 \item $\mathtt{Separake}$: Multichannel NMF in Python
             \end{itemize}
+
+            \pause
+            \begin{center}
+                \con{\Huge \textbf{Thank you!}}
+            \end{center}
+
         \end{columns}
     \end{block}
 
-    \hfill\con{\Huge \textbf{Thank you!}}
 \end{frame}
