@@ -17,12 +17,18 @@
     {\end{alertblock}}
 
 \newenvironment<>{mysotablock}[1][]{%
+    % \setbeamercolor{block title}{fg=white,bg=darkblue}
     \setbeamercolor{postit}{fg=black,bg=bluegreen!10}
-    \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
+  \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
 
 \newenvironment<>{mycontriblock}[1][]{%
   \setbeamercolor{postit}{fg=black,bg=mygreen!20}
   \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
+
+\newenvironment<>{myfutureblock}[1][]{%
+  \setbeamercolor{postit}{fg=myred,bg=mygreen!20}
+  \begin{beamercolorbox}[sep=.2em]{postit}#1}{\end{beamercolorbox}}
+
 
 \newcommand{\myThankTo}[1]{\textcolor{cyan}{(\faPeopleCarry~#1)}}
 
@@ -32,6 +38,9 @@
 \newcommand{\iconAz}{\faArrowsAltH}
 \newcommand{\iconEl}{\faArrowsAltV}
 \newcommand{\iconAlert}{\faExclamationTriangle}
+\renewcommand{\iconDNN}{%
+    \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill%
+    \quad\hbox{\includegraphics[height=1em]{figures/icon_dnn.png}}}
 
 \newcommand{\pro}[1]{\textcolor{mygreen}{#1}}
 \newcommand{\con}[1]{\textcolor{myred}{#1}}
@@ -54,6 +63,8 @@
 \newcommand{\eg}{\textit{e.g.}}
 \newcommand{\ie}{\textit{i.e.}}
 
+\newcommand{\RT}{\ensuremath{\mathtt{RT}_{60}}}
+\newcommand{\SNR}{\ensuremath{\mathtt{SNR}}}
 
 % MATH
 \newcommand{\echoModelFreq}{\ensuremath{\sum_{r=0}^{R} \alpha_i^{(r)}(f) \cste^{- \csti 2 \pi \tau_i^{(r)} f_k}}}

@@ -96,38 +96,27 @@
 
 
     \begin{mydefblock}{Goals: Acoustic Echo Retrieval (AER)}
-        Estimated $\set{\alert{\tauir}, \ampir_i}_{i,r}$
+        Estimated $\set{\tauir, \textcolor{gray}{\ampir_i}}_{i,r}$
         for the microphone signal $\set{x_i}_i$
     \end{mydefblock}
     % \addendum{\scriptsize {Estimation of only $\tauir$ is known as TOAs estimation}}
-
-\end{frame}
-
-
-\begin{frame}{Problem Statement}
-
-    \begin{mydefblock}{Goals: Acoustic Echo Retrieval (AER)}
-        Estimated $\set{\alert{\tauir}, \ampir_i}_{i,r}$
-        for the microphone signal $\set{x_i}_i$
-    \end{mydefblock}
 
     \begin{block}{Challenges:}
         \begin{itemize}
             \item RIRs depend on the scene geometry (room, source and mic position)
             \item Big under-modelling error (late reverberation and noise)
-            \item $\ampir$ are distorted:
+            \item In reality: $\ampir \to \ampir(t)$ due to
             \begin{itemize}
-                \item due to air attenuation, wall absorption:
-                \item $\ampir \to \ampir(t) \implies$ echo model is sum of filters
-                \item due to sampling process{\footnotesize~\cite{tukuljac2018mulan}}
+                \item due to air attenuation, wall absorption, ...
+                \item due to sampling process
             \end{itemize}
         \end{itemize}
     \end{block}
 
-    \begin{center}
-        \includegraphics[width=0.8\textwidth]{figures/basismismatch.png}
-        \\{\addendum{\scriptsize Courtesy of Helena Tukuljac~\cite{tukuljac2018mulan}}}
-        \\{\small \textcolor{myred}{\iconAlert~sampling breaks sparsity and non-negativity}}
-    \end{center}
+    % \begin{center}
+    %     \includegraphics[width=0.8\textwidth]{figures/basismismatch.png}
+    %     \\{\addendum{\scriptsize Courtesy of Helena Tukuljac~\cite{tukuljac2018mulan}}}
+    %     \\{\small \textcolor{myred}{\iconAlert~sampling breaks sparsity and non-negativity}}
+    % \end{center}
 
 \end{frame}

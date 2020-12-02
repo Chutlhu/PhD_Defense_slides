@@ -4,59 +4,62 @@
 
 Good morning everyone and thanks to being here today.
 
-The title of my PhD thesis is:
+The title of my PhD thesis is
 Echo-aware Signal Processing for Audio Scene Analysis.
-and this was supervised by Nancy Bertin from the team Panama in INRIA Rennes and
-Antoine Deleforge from the team Multispeech in INRIA Nancy
 
-In a nutshell, this thesis deal with the problem of estimating acoustic echoes and use their information to leverage typical problems of audio signal processing.
+and it was supervised by Nancy Bertin from the team Panama in INRIA Rennes
+and Antoine Deleforge from the team Multispeech in INRIA Nancy
 
-Before going in the details of the contribution, I will better explain the title
+In a nutshell, this thesis deals with the problem of estimating acoustic echoes and leverage their properties to address typical problems of audio signal processing.
+
+Before going in the details of the thesis contribution, I will first break down the this title
 
 and to this end,
 
 ### Audio scene / Scenario
 
-Let us consider how sound is being recorded at this very moment on my laptop.
+Let us consider how sound is produced and recorded in everyday applications.
 
-At first, the sound is produced by sound sources, in this case, myself.
-And in general, it can be also produced by other speakers or music instruments.
+At first, the sound is produced by sound sources, such as speakers or music instruments.
 
-Secondly, the sound is recorded by multiple microphones of my laptop, namely a microphone array.
-These microphones convert sound into electrical signals than are analyzed and processed by some software, for instance, to be transmitted to you.
+Secondly, the sound is recorded by devices featuring multiple microphones of my laptop, called microphone array.
 
-However in general the sound can be corrupted by other interfering sources and by measurement noise.
+These microphones convert sound into electrical signals that are analyzed and processed by software.
 
-And more important, before reaching the laptop, the sound propagates in space, interacting with it especially when we are indoor scenario
-This lead to the well-known reverberation effect.
+However, in general the sound can be corrupted by other interfering sources such as air conditioning and by measurement error.
+
+The observation that is fundamental for this presentation is that,
+before reaching the laptop, the sound propagates in space and it interacts with it especially when we are indoor scenario
+
+This lead to the well-known effect called reverberation.
 
 ### Audio Scene Analysis
 
-You on the other side, listen to the microphone recordings.
-And even without watching the camera you may understand and infer some information.
+All these elements concur to form an audio scene,
+and form its microphones recordings many types of information can be extracted.
 
-That is because sound carries information.
+We can retrieve semantic information about the nature of the sound source and its content.
 
-We can retrieve from it semantic information about the nature of the sound source and its content --- for instance, the words of my speech.
-
-We can retrieve spatial information on the location of the sources in the space --- for instance, that I am closer or further away from the microphones.
+We can retrieve spatial information on the location of the sources in the space.
 
 And finally temporal information, about when a sound source is active or not.
 
-All of this information create what we called an audio scene.
-And our brain is particularly efficient to process and organize the information within.
+All of this process is called audio scene analysis.
+And our brain is particularly efficient at this.
 
-So, can a computer do this as well?
+Therefore, can computer do the same?
 
 ### Signal Processing
 
-Computer and digital systems implement units based on signal processing models, frameworks and tools that extracts and organizes information from sounds.
+Digital systems implement models, frameworks and tools based on audio signal processing,
+that is dedicated to process signal representing sound.
 
-These units typically address specific problems, such as
- separating or enhancing a target sound form the rest,
-or say where a sound source is,
-or quantify the amount of reverberation affecting sound recordings
-and many others
+These models typically address specific problems, such as
+
+- isolating a target sound form the rest,
+- or say where a sound source is,
+- or quantify the amount of reverberation affecting sound recordings
+- and many others
 
 The problems are well-known problems each of those produced large and vast literature that spans many years of research.
 

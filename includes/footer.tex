@@ -49,18 +49,20 @@
 
 % Set the progress bar
 \makeatletter
-\addtobeamertemplate{footline}{}{%
-	\begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
-        \progressbar@progressbar%
-    \end{beamercolorbox}%
 
-    % \setlength\unitlength{1ex}%
-    % \begin{picture}(0,0)
-    % \put{} defines the position of the frame
-    % \put(80,4){International Geoscience and Remote Sensing Symposium 30/07/2019}%
-    % \put(135,4){\includegraphics[width=0.15\textwidth]{example-image-1}}%
-    % \put(110,4){Ammar Mian, 30 July 2019}%
-    % \end{picture}%
-
+% SET not ADD!!!!
+\setbeamertemplate{footline}[text line]{%
+\begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
+  \progressbar@progressbar%
+\end{beamercolorbox}%
+%     % \setlength\unitlength{1ex}%
+%     % \begin{picture}(0,0)
+%     % \put{} defines the position of the frame
+%     % \put(80,4){International Geoscience and Remote Sensing Symposium 30/07/2019}%
+%     % \put(135,4){\includegraphics[width=0.15\textwidth]{example-image-1}}%
+%     % \put(110,4){Ammar Mian, 30 July 2019}%
+%     % \end{picture}%
 }
+\setbeamertemplate{navigation symbols}{}
+
 \makeatother

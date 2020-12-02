@@ -54,7 +54,7 @@
 \usepackage{siunitx}  % provide \ang
 
 % GRIDS
-% \usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
+\usepackage[texcoord,grid,gridunit=mm,gridcolor=black!30,subgridcolor=gray!20]{eso-pic}
 
 % TOC
 \setbeamertemplate{section in toc}[circle]
@@ -97,7 +97,7 @@
   \begin{description}
     \item[PhD supervisors:] Antoine Deleforge
                         \\ Nancy Bertin
-    \item[Jury members:] Renaud Seguier (president)
+    \item[Jury members:] Renaud Seguier (president, examiner)
                         \\Simon Doclo (reviewer)
                         \\Laurent Girin (reviewer)
                         \\Fabio Antonacci (examiner)
@@ -134,24 +134,24 @@
       \maketitle
     }
 
-    {
-      % make this section section not appear in the navigation bar
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
-      \section{Introduction}
-    }
-    \input{content/intro.tex}
+    % {
+    %   % make this section section not appear in the navigation bar
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
+    %   \section{Introduction}
+    % }
+    % \input{content/intro.tex}
 
-    {
-      %section do not appear in the navigation bar
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Problem Statement}
-    }
-    \input{content/model.tex}
+    % {
+    %   %section do not appear in the navigation bar
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Problem Statement}
+    % }
+    % \input{content/model.tex}
 
 
     {
@@ -162,30 +162,30 @@
       }
     \input{content/estimation.tex}
 
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Echo-aware Application}
-    }
-    \input{content/application.tex}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Application}
+    % }
+    % \input{content/application.tex}
 
-    %section do not appear in the navigation bar
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Echo-aware Dataset}
-    }
-    \input{content/data.tex}
+    % %section do not appear in the navigation bar
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Dataset}
+    % }
+    % \input{content/data.tex}
 
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Conclusion}
-    }
-    \input{content/conclusion.tex}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Conclusion}
+    % }
+    % \input{content/conclusion.tex}
 
 
     \appendix
