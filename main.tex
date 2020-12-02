@@ -154,21 +154,21 @@
     % \input{content/model.tex}
 
 
-    {
-        \makeatletter
-        \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-        \makeatother
-        \section{Acoustic Echo Estimation}
-      }
-    \input{content/estimation.tex}
-
     % {
-    %   \makeatletter
-    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %   \makeatother
-    %   \section{Echo-aware Application}
-    % }
-    % \input{content/application.tex}
+    %     \makeatletter
+    %     \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %     \makeatother
+    %     \section{Acoustic Echo Estimation}
+    %   }
+    % \input{content/estimation.tex}
+
+    {
+      \makeatletter
+      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+      \makeatother
+      \section{Echo-aware Application}
+    }
+    \input{content/application.tex}
 
     % %section do not appear in the navigation bar
     % {

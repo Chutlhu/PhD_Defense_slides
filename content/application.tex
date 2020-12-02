@@ -2,14 +2,15 @@
 
 \begin{frame}[t]{Echo-aware Application \hfill\faBook}
 
-    \begin{block}{Echoes = same content, different time/direction}
+    \begin{block}{Echoes: same content, different time/direction}
         \centering
-        \only<1>{\adjincludegraphics[Clip={0\width} {0\height} {.66\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
-        \only<2>{\adjincludegraphics[Clip={.33\width} {0\height} {.33\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
-        \only<3->{\adjincludegraphics[Clip={.66\width} {0\height} {.00\width} {0\height},width=0.5\textwidth]{figures/echo_aware.png}}%
+        \only<1>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(0).png}}%
+        \only<2>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(1).png}}%
+        \only<3>{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(2).png}}%
+        \only<4->{\includegraphics[width=0.5\textwidth]{figures/image_src_mic(3).png}}%
     \end{block}
 
-    \begin{textblock*}{30mm}(100mm,25mm)
+    \begin{textblock*}{30mm}(95mm,20mm)
         \centering
         \small
         \textcolor{myred}{%
@@ -18,16 +19,16 @@
             \\Image Microphone Model}
     \end{textblock*}
 
-    Some literature on echo-aware processing:
     \begin{columns}[T,onlytextwidth]
         \column{.32\textwidth}
         \begin{block}{\textbf{What?}}
+            \small
             Echoes = copy
             \begin{itemize}
                 \item \only<-7>{Sound Source Separation}\only<8->{\alert{Sound Source Separation}}
                 \\{\footnotesize\cite{leglaive2016multichannel}}
                 \item \only<-7>{Speech Enhancement}\only<8->{\alert{Speech Enhancement}}
-                \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2020raking}}
+                \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2019raking}}
             \end{itemize}
         \end{block}
         \column{.32\textwidth}
