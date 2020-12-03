@@ -46,7 +46,7 @@
     \visible<1->{\draw[->] (n.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{noise term}};}
     \visible<1->{\draw[->] (A.south) to[out=-90, in=180] ++ (+8mm,-8mm) node[right] {{\faExclamationTriangle~continuous-time convolution}};}
     \visible<2->{\draw[->] (h.south) to[out=-90, in=90] (RIR.north);}
-    \visible<1->{\draw[->] (H.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{\alert{Room Transfer Function (RTF)}}};}
+    \visible<3->{\draw[->] (H.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{\alert{Room Transfer Function (RTF)}}};}
     \end{tikzpicture}
 
 \end{frame}
@@ -65,19 +65,23 @@
             \end{aligned}
         \end{equation*}
         \begin{itemize}\small
-            \item $\textcolor{myred}{\contRIRidirect}(t)$ = direct path
-            \item $\textcolor{myblue}{\contRIRiearly}(t)$ = early reflection
-            \item $\textcolor{mygreen}{\contRIRilate}(t)$ = late reverberation
+            \item<2-> $\textcolor{myred}{\contRIRidirect}(t)$ = direct path
+            \item<3-> $\textcolor{myblue}{\contRIRiearly}(t)$ = early reflection
+            \item<4-> $\textcolor{mygreen}{\contRIRilate}(t)$ = late reverberation
         \end{itemize}
 
         \column{0.48\textwidth}
         \includegraphics[width=.8\textwidth]{figures/rir_bang.png}
+        \addendum{\footnoitesize \faCopyright[regular]~acousticshonoursproject}
 
     \end{columns}
 
     \begin{center}
         % real RIR with part
-        \includegraphics[width=0.8\textwidth]{figures/rir_measured.png}
+        \includegraphics<1>[width=0.8\textwidth]{figures/rir_elements0.pdf}%
+        \includegraphics<2>[width=0.8\textwidth]{figures/rir_elements1.pdf}%
+        \includegraphics<3>[width=0.8\textwidth]{figures/rir_elements2.pdf}%
+        \includegraphics<4>[width=0.8\textwidth]{figures/rir_elements3.pdf}%
     \end{center}
 
 \end{frame}
