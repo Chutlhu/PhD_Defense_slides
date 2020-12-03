@@ -85,7 +85,7 @@
             \end{column}%
         \end{columns}
 
-        \pause
+        \pause[1]
         \vspace{.5em}
         \begin{columns}[T,onlytextwidth] % align columns
             \begin{column}{.48\textwidth}
@@ -105,20 +105,20 @@
             \end{column}%
         \end{columns}
 
-        \pause
+        \pause[3]
         \vspace{1em}
         \begin{columns}[T,onlytextwidth] % align columns
             \column{.48\textwidth}
                 \small
                 \begin{itemize}
-                    \item[\cmark] \pro{BCE is well and known studied}
-                    \item[\cmark] \pro{reasonably good for some application}
+                    \item<3->[\cmark] \pro{BCE is well and known studied}
+                    \item<3->[\cmark] \pro{reasonably good for some application}
                     \\{\scriptsize~\cite{crocco2016estimation}}
                 \end{itemize}
             \column{.48\textwidth}
                 \small
                 \begin{itemize}
-                    \item[\cmark] \pro{No full RIRs \& no peak picking}
+                    \item<5->[\cmark] \pro{No full RIRs \& no peak picking}
                     \begin{itemize}\footnotesize
                         \item[$\kto$] lower complexity
                         \item[$\kto$] less hyperparameters
@@ -126,32 +126,32 @@
                     \end{itemize}
         \end{columns}
 
-        \pause
+        \pause[4]
         \vspace{1em}
         \begin{columns}[T,onlytextwidth] % align columns
             \small
             \column{.48\textwidth}
                 \begin{itemize}
-                    \item[\xmark] \con{Full RIRs need to be estimated}
-                    \item[\xmark] \con{Peak picking has hyperparameters}
-                    \item[\xmark] \con{Issues due to \textit{discrete} estimation}
+                    \item<4->[\xmark] \con{Full RIRs need to be estimated}
+                    \item<4->[\xmark] \con{Peak picking has hyperparameters}
+                    \item<4->[\xmark] \con{Issues due to \textit{discrete} estimation}
                 \end{itemize}
 
             \column{.48\textwidth}
-            \pause
                 \begin{itemize}
-                    \item[\xmark] \con{exploratory \faWpexplorer}
-                    \\\addendum{no standard solver, few works on audio}
+                    \item<5->[\xmark] \con{exploratory \faWpexplorer}
+                    \\\addendum{few works on audio}
                 \end{itemize}
 
+                \visible<6->{
                 \begin{mycontriblock}{\textcolor{myred}{\textbf{Proposed appoach}}}
                     \small
                     RIR-agnostic \& continuous:
                     \begin{enumerate}
-                        \item Learning-based approach
                         \item Analytical approach
+                        \item Learning-based approach
                     \end{enumerate}
-                \end{mycontriblock}
+                \end{mycontriblock}}
         \end{columns}
 
 \end{frame}
@@ -160,6 +160,7 @@
 \subsection{\blaster}
 
 \begin{frame}{(Discrete) RIR-based methods: the State of the Art \hfill\faBook}
+
     \small
     \begin{block}{Key ingredient -- \textit{Cross relation identity}}
 
@@ -193,7 +194,7 @@
                             orange,>=stealth] %
         \draw[<->] (h2.south) to[out=-90, in=-90] (h1.south);
         \end{tikzpicture}}
-        \only<4>{
+        \only<4->{
         Subtraction
         \begin{equation*}
             \begin{aligned}
@@ -217,6 +218,8 @@
         % \end{equation*}
     \end{block}
 
+    \pause[5]
+
     \begin{block}{Ideas:}
     \begin{enumerate}
         \small
@@ -225,6 +228,7 @@
         \item Find echoes $\rightarrow$ \textbf{find sparse non-negative vectors} $\discRIR_1, \discRIR_2$ of length $L$
         \item Modeled as \textbf{Lasso}-like problem
 
+        \pause[6]
         \vspace*{2mm}
         \begin{mysotablock}
             \begin{equation*}
@@ -252,6 +256,7 @@
     \end{enumerate}
     \end{block}
 
+    \pause[7]
     \vspace{-12mm}
     \begin{block}{}
         \begin{center}
@@ -349,6 +354,7 @@
         \end{column}
     \end{columns}
 
+    \pause
     \vfill
     \begin{mysotablock}
 
@@ -360,6 +366,7 @@
         {\footnotesize \hfill hyperparameters and peak-picking tuned via cross-validation}
     \end{mysotablock}
 
+    \pause
     \vfill
     \begin{mycontriblock}
         \textbf{Proposed method:} Blind and Sparse Technique for Echo Retrieval (\blaster)
