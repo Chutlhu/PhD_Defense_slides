@@ -14,25 +14,28 @@
             \end{figure}
     \end{columns}
 
-    \begin{block}{Scenarios:}
+    \pause
+    \begin{block}{Two scenarios:}
+
     \begin{columns}[onlytextwidth]
         \column{0.48\textwidth}
         \centering
         \includegraphics[width=.9\textwidth]{./figures/active.png}
 
         \column{0.48\textwidth}
-        Active scenario
         \begin{itemize}
             \small
-            \item[\faEye] \textbf{non-blind} problem
             \item[\faVolumeUp] \textbf{intrusive} or specific setups
+            \item[\faEye] \textbf{non-blind} problem
             % \item known emitted signal
             % \item Time of Arrival (\textbf{TOA}s) accessible
             % \\\hspace{.3em} $\implies$ \textbf{single} mic
-            \\\addendum{\footnotesize \textbf{Applications:} sonar, calibration, measurements, etc.}
+            \\\addendum{\footnotesize \textbf{Applications:} sonar, measurements, etc.}
         \end{itemize}
     \end{columns}
     \end{block}
+
+    \pause
 
     \begin{mycontriblock}
         \begin{columns}[onlytextwidth]
@@ -42,21 +45,18 @@
         \includegraphics[width=.9\textwidth]{./figures/passive.png}
 
         \column{0.48\textwidth}
-        Passive scenario
         \begin{itemize}
             \small
-            \item[\faEyeSlash] \textbf{blind inverse} problem (harder)
             \item[\faMicrophone] \textbf{passive} and more common setups
-            % \item \alert{un}knwon
-            % \item Time Difference of Arrivals (\textbf{TDOA}s) only
-            % \\\hspace{.3em} \textbf{multi-mic}
-            \\\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, laptop, etc.}
+            \item[\faEyeSlash] \textbf{blind inverse} problem (harder)
+            \\\addendum{\footnotesize \textbf{Applications:} recording on smart speakers, etc.}
         \end{itemize}
     \end{columns}
     \end{mycontriblock}
 
+    \pause
     \begin{center}
-        \textcolor{myred}{\textbf{Our case:} signal source and passive system of ($I$ microphones)}
+        \textcolor{myred}{\textbf{Our case:} signal source and passive microphone array}
     \end{center}
 
 \end{frame}
@@ -85,12 +85,13 @@
             \end{column}%
         \end{columns}
 
+        \pause
         \vspace{.5em}
         \begin{columns}[T,onlytextwidth] % align columns
             \begin{column}{.48\textwidth}
                 \small
                 \begin{enumerate}
-                    \item Discrete optimization $\implies$ RIRs
+                    \item \alter{Discrete} optimization $\implies$ RIRs
                     \item Peak picking $\implies$ Echoes
                 \end{enumerate}
             \end{column}
@@ -104,6 +105,7 @@
             \end{column}%
         \end{columns}
 
+        \pause
         \vspace{1em}
         \begin{columns}[T,onlytextwidth] % align columns
             \column{.48\textwidth}
@@ -124,6 +126,7 @@
                     \end{itemize}
         \end{columns}
 
+        \pause
         \vspace{1em}
         \begin{columns}[T,onlytextwidth] % align columns
             \small
@@ -133,12 +136,13 @@
                     \item[\xmark] \con{Peak picking has hyperparameters}
                     \item[\xmark] \con{Issues due to \textit{discrete} estimation}
                 \end{itemize}
+
             \column{.48\textwidth}
+            \pause
                 \begin{itemize}
                     \item[\xmark] \con{exploratory \faWpexplorer}
                     \\\addendum{no standard solver, few works on audio}
                 \end{itemize}
-
 
                 \begin{mycontriblock}{\textcolor{myred}{\textbf{Proposed appoach}}}
                     \small

@@ -127,12 +127,12 @@
 
 \begin{document}
 
-    % % COVER PAGE
-    % {
-    %   % in case of background image in the first slide
-    %   \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
-    %   \maketitle
-    % }
+    % COVER PAGE
+    {
+      % in case of background image in the first slide
+      \usebackgroundtemplate{\includegraphics[width=\paperwidth, height=\paperheight]{figures/background2.png}}
+      \maketitle
+    }
 
     % {
     %   % make this section section not appear in the navigation bar
@@ -144,23 +144,23 @@
     % }
     % \input{content/intro.tex}
 
-    % % {
-    % %   %section do not appear in the navigation bar
-    % %   \makeatletter
-    % %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    % %   \makeatother
-    % %   \section{Problem Statement}
-    % % }
+    % {
+    %   %section do not appear in the navigation bar
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Problem Statement}
+    % }
     % \input{content/model.tex}
 
 
-    % {
-    %     \makeatletter
-    %     \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-    %     \makeatother
-    %     \section{Acoustic Echo Estimation}
-    %   }
-    % \input{content/estimation.tex}
+    {
+        \makeatletter
+        \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+        \makeatother
+        \section{Acoustic Echo Estimation}
+      }
+    \input{content/estimation.tex}
 
     % {
     %   \makeatletter
@@ -170,22 +170,22 @@
     % }
     % \input{content/application.tex}
 
-    %section do not appear in the navigation bar
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Echo-aware Dataset}
-    }
-    \input{content/data.tex}
+    % %section do not appear in the navigation bar
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Echo-aware Dataset}
+    % }
+    % \input{content/data.tex}
 
-    {
-      \makeatletter
-      \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
-      \makeatother
-      \section{Conclusion}
-    }
-    \input{content/conclusion.tex}
+    % {
+    %   \makeatletter
+    %   \def\beamer@writeslidentry{\clearpage\beamer@notesactions}
+    %   \makeatother
+    %   \section{Conclusion}
+    % }
+    % \input{content/conclusion.tex}
 
 
     \appendix

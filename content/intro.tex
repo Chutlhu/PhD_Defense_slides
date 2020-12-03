@@ -1,6 +1,6 @@
 % \subsection{Motivation}
 
-\begin{frame}{Echo-aware signal processing for \alert{audio scene} analysis}
+\begin{frame}{Echo-aware signal processing for audio scene analysis}
 
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.65\textwidth}
@@ -22,16 +22,19 @@
                 \item<5-> interacts with the \alert{room}
                           \\$\hookrightarrow$ \alert{reverberation}
             \end{itemize}
+            \pause[6]
+            $\sum =$ \textbf{Audio Scene}
         \end{column}
     \end{columns}
 
 \end{frame}
 
-\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene} analysis}
+\begin{frame}[t]{Echo-aware signal processing for \alert{audio scene analysis}}
 
+    \pause
 
     \begin{columns}
-        \visible<1->{
+        \visible<2->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Semantic} information
@@ -39,7 +42,7 @@
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=0.7\textwidth]{figures/semantic.png}
         \end{column}}
-        \visible<2->{
+        \visible<3->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Spatial} information
@@ -47,7 +50,7 @@
             \vspace*{0.5em}
             \includegraphics[trim={0 0 170em 0},clip,width=0.7\textwidth]{figures/spatial.png}
         \end{column}}
-        \visible<3->{
+        \visible<4->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             \alert{Temporal} information
@@ -58,17 +61,17 @@
     \end{columns}
 
     \begin{columns}
-        \visible<1->{
+        \visible<2->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on nature and content
         \end{column}}
-        \visible<2->{
+        \visible<3->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on position and geometry
         \end{column}}
-        \visible<3->{
+        \visible<4->{
         \begin{column}[t]{0.3\textwidth}
             \centering
             on events activity
@@ -78,20 +81,20 @@
 
 
     \vfill
-    \visible<4->{
+    \visible<5->{
     \begin{mydefblock}{Audio Scene Analysis}
         Extraction and organization of all the information in the sound
     \end{mydefblock}
 
     \begin{center}
-        \includegraphics<4>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/auditory_scene_analysis.png}%
-        \includegraphics<5>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
+        \includegraphics<5>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/auditory_scene_analysis.png}%
+        \includegraphics<6>[trim={0 35mm 0 35mm},clip,width=0.8\textwidth]{figures/scene_analysis.png}
     \end{center}
     }
 
-    \only<5->{
+    \only<6->{
     \begin{textblock*}{40mm}(80mm,90mm)
-        \textcolor{myred}{\textbf{Can computer do it?}}
+        \textcolor{myred}{\faRobot~\textbf{Can computers do it?}}
     \end{textblock*}
     }
 
@@ -187,12 +190,18 @@
 
     \pause
     \begin{center}
-        HOW  $\overset{\text{helps}}{\longrightarrow}$ WHERE
-            $\overset{\text{helps}}{\longrightarrow}$ WHEN
-            $\overset{\text{helps}}{\longrightarrow}$ WHAT
-            $\overset{\text{helps}}{\longrightarrow}$ HOW
-            $\overset{\text{helps}}{\longrightarrow}$ ...
+        \tikzmarknode{how}{HOW}  $\xrightarrow{\textit{helps}}$ WHERE
+            $\xrightarrow{\textit{helps}}$ WHAT
+            $\xrightarrow{\textit{helps}}$ HOW
+            $\xrightarrow{\textit{helps}}$ \tikzmarknode{again}{...}
     \end{center}
+
+    \pause
+    \begin{tikzpicture}[overlay,remember picture,
+        nodes={inner sep=1pt, align=center, font=\footnotesize},
+        gray!70,>=stealth] %
+    \draw[->] (again.south) to[out=-90, in=-90] (how.south);
+    \end{tikzpicture}
 
 \end{frame}
 
@@ -216,6 +225,7 @@
         \includegraphics[trim={0 0 50 0},clip,width=\textwidth]{figures/sound_refletion.png}
     \end{columns}
 
+    \pause
     \begin{tikzpicture}[overlay, remember picture]
         \node[anchor=base] (a) at (pic cs:topA) {\vphantom{h}}; % push the mark to the top of the line (ie including ascenders)
         \node[anchor=base] (b) at (pic cs:botA) {\vphantom{g}}; % push the mark to the bottom of the line (ie including descenders)
@@ -225,6 +235,7 @@
             (b.south -| {pic cs:rightA});
     \end{tikzpicture}
 
+    \pause
     \begin{mydefblock}{Acoustic Echoes: early specular reflection}
 
         \vspace{-2mm}
@@ -232,10 +243,10 @@
             \begin{column}{0.58\textwidth}
                 \begin{itemize}
                     \item reflection ``standing out''
-                    \item Copy of a sound but after
+                    \item Copy of a sound but later
                     \begin{itemize}
                         \item same content
-                        \item delayed $\Leftrightarrow$ distance
+                        \item delay $\Leftrightarrow$ distance
                     \end{itemize}
                 \end{itemize}
             \end{column}
@@ -246,6 +257,11 @@
 
         \end{columns}
     \end{mydefblock}
+
+    \pause
+    \begin{center}
+        \faExclamation~\textbf{idea:} leverage this
+    \end{center}
 \end{frame}
 
 \begin{frame}[t]{\alert{Echo-aware} signal processing for audio scene analysis}
@@ -262,16 +278,13 @@
 \begin{frame}{\alert{Echo-aware} signal processing for audio scene analysis}
 
 
-    \begin{columns}[onlytextwidth]
-        \column{0.90\textwidth}
+    \begin{block}{}
         In audio signal processing, sound propagation is typically
         \begin{itemize}
-            \item \alert{ignored} $\implies$ simple processing but reverberation = noise
+            \item \alert{ignored} $\implies$ simple processing but reverberation is noise
             \item \alert{fully modeled} and estimated $\implies$ very challenging
         \end{itemize}
-
-        \column{0.05\textwidth}
-    \end{columns}
+    \end{block}
 
     \begin{mydefblock}{Echo-aware methods}
         \begin{itemize}
@@ -299,63 +312,70 @@
         \begin{columns}[onlytextwidth]
             \begin{column}[T]{0.3\linewidth}
                 \centering
+                \visible<2->{
                 \alert{Audio Scene Analysis}
                 \\\downarrow
                 \\context and problems
+                }
             \end{column}\hfill
             \begin{column}[T]{0.3\linewidth}
                 \centering
+                \visible<3->{
                 \alert{Signal Processing}
                 \\\downarrow
                 \\models and frameworks
+                }
             \end{column}\hfill
             \begin{column}[T]{0.3\linewidth}
                 \centering
+                \visible<4->{
                 \alert{Echo-aware}
                 \\\downarrow
                 \\better processing
+                }
             \end{column}\hfill
         \end{columns}
     \end{block}
 
-    \vfill
+    \visible<5->{
     \begin{block}{Thesis contribution:}
 
         \vspace*{2mm}
         \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.48\textwidth}
+
+            \begin{column}{0.48\textwidth}
             \centering
             \alert{1. How to estimate them?}
+            \visible<6->{
             \begin{itemize}
-                \only<1>{\item Learning-based method}
-                \only<2>{\item Learning-based method \alert{\textbf{1a}}}
-                \only<1>{\item Analytical method}
-                \only<2>{\item Analytical method \alert{\textbf{2a}}}
-            % {\small no parameter tuning
-            % \\no full sound modeling}
-            \end{itemize}
+                \item Learning-based method
+                \item Analytical method
+            \end{itemize}}
         \end{column}
         \begin{column}{0.48\textwidth}
             \centering
             \alert{2. How to use them?}
+            \visible<7->{
             \begin{itemize}
-                \only<1>{\item Source Localization}
-                \only<2>{\item Source Localization \alert{\textbf{2a}}}
-                \only<1>{\item Source Separation}
-                \only<2>{\item \textcolor{alert!60}{Source Separation}\addendum{\small not today}}
-                \only<1>{\item Speech Enhancement}
-                \only<2>{\item Speech Enhancement \alert{\textbf{3b}}}
-                \only<1>{\item Room Geometry Estimation}
-                \only<2>{\item \textcolor{alert!60}{Room Geometry Estimation}\addendum{\small not today}}
-            \end{itemize}
+                \item Source Localization
+                \item Speech Enhancement
+                \item \textcolor{gray!80}{Source Separation}\addendum{\small in the \faBook}
+                \item \textcolor{gray!80}{Room Geometry Estimation}\addendum{\small in the \faBook}
+            \end{itemize}}
         \end{column}
     \end{columns}
-
-    \alert{3. Where to find them?}
-        \begin{itemize}
-            \only<1>{\item \dechorate}
-            \only<2>{\item \dechorate \alert{\textbf{3a}}}
-            \\Echo-aware database for both estimation and application
-        \end{itemize}
     \end{block}
+
+    \vspace{2mm}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        \alert{3. Where to find them?}
+        \visible<8->{
+            \begin{itemize}
+                \item Echo-aware database
+            \end{itemize}}
+    \end{columns}
+
+    }
 \end{frame}
