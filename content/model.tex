@@ -30,9 +30,9 @@
 
     \visible<3->{
     \begin{block}{}
-        In the Short Time Fourier Transform:
+        In the Short Time Fourier Transform (STFT) domain:
         \begin{equation*}
-            X_i[f,t] = H_i[f] S[f,t] + N_i[f,t]
+            X_i[f,t] = \tikzmarknode{H}{H}_i[f] S[f,t] + N_i[f,t]
         \end{equation*}
         where $X[f,t], H[f,t], S[f,t], N[f,t] \in \bbC$
     \end{block}}
@@ -46,6 +46,7 @@
     \visible<1->{\draw[->] (n.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{noise term}};}
     \visible<1->{\draw[->] (A.south) to[out=-90, in=180] ++ (+8mm,-8mm) node[right] {{\faExclamationTriangle~continuous-time convolution}};}
     \visible<2->{\draw[->] (h.south) to[out=-90, in=90] (RIR.north);}
+    \visible<1->{\draw[->] (H.south) to[out=-90, in=180] ++ (+8mm,-4mm) node[right] {{\alert{Room Transfer Function (RTF)}}};}
     \end{tikzpicture}
 
 \end{frame}
@@ -84,7 +85,7 @@
 \subsection{Current Challenges}
 
 \begin{frame}{Problem Statement}
-    Echoes can be modeled as sum of Dirac's delta function:
+    Echoes can be modeled as sum of Dirac's delta functions:
 
     \begin{equation*}
         \contRIR_i(t) =
@@ -106,8 +107,8 @@
 
     \pause
 
-    \begin{mydefblock}{Goals: Acoustic Echo Retrieval (AER)}
-        Estimated $\set{\tauir, \textcolor{gray}{\ampir_i}}_{i,r}$
+    \begin{mydefblock}{Goal: Acoustic Echo Retrieval (AER)}
+        Estimate $\set{\tauir, \textcolor{gray}{\ampir_i}}_{i,r}$
         from the microphone signals $\set{x_i}_i$
     \end{mydefblock}
     % \addendum{\scriptsize {Estimation of only $\tauir$ is known as TOAs estimation}}
@@ -116,11 +117,11 @@
     \begin{block}{Challenges:}
         \begin{itemize}
             \item<4-> RIRs depend on the scene geometry (room, source and mic position)
-            \item<5-> Big under-modelling error (late reverberation and noise)
+            \item<5-> Big under-modelling error (late reverberation and external noise)
             \item<6-> In reality: $\ampir\delta(t) \to (\ampir\contConv\delta)(t)$ due to
             \begin{itemize}
-                \item due to air attenuation, wall absorption, ...
-                \item due to sampling process
+                \item frequency-dependent air attenuation, wall absorption, ...
+                \item sampling process
             \end{itemize}
         \end{itemize}
     \end{block}

@@ -14,10 +14,11 @@
     \begin{textblock*}{30mm}(95mm,35mm)
         \centering
         \small
+        \visible<4->{
         \textcolor{myred}{%
             Image Source Model
             \\$\Leftrightarrow$
-            \\Image Microphone Model}
+            \\Image Microphone Model}}
     \end{textblock*}
 
     \pause[5]
@@ -29,26 +30,28 @@
 
             \vspace{-2mm}
             \begin{itemize}
-                \item \only<-5>{Sound Source Separation}\only<6->{\alert{Sound Source Separation}}
+                \item \only<-7>{Sound Source Separation}\only<8>{\alert{Sound Source Separation}}\only<9->{\textcolor{gray}{Sound Source Separation}}
                 \\{\footnotesize\cite{leglaive2016multichannel}}
-                \item \only<-5>{Speech Enhancement}\only<6->{\alert{Speech Enhancement}}
+                \item \only<-7>{Speech Enhancement}\only<8->{\alert{Speech Enhancement}}
                 \\{\footnotesize\cite{flanagan1993spatially,dokmanic2015raking,kowalczyk2019raking}}
             \end{itemize}
         \end{block}
         \column{.32\textwidth}
+        \pause[6]
         \begin{block}{\textbf{Where?}}
             \small
             Echoes $\gets$ image
 
             \vspace{-2mm}
             \begin{itemize}
-                \item \only<-5>{Sound Source Localization}\only<6->{\alert{Sound Source Localization}}
+                \item \only<-7>{Sound Source Localization}\only<8->{\alert{Sound Source Localization}}
                 \\{\footnotesize\cite{ribeiro2010turning,jensen2019method}}
-                \item \only<-5>{Room Geometry Estimation}\only<6->{\alert{Room Geometry Estimation}}
+                \item \only<-7>{Room Geometry Estimation}\only<8>{\alert{Room Geometry Estimation}}\only<9->{\textcolor{gray}{Room Geometry Estimation}}
                 \\{\footnotesize\cite{antonacci2012inference,crocco2017uncalibrated}}
             \end{itemize}
         \end{block}
         \column{.32\textwidth}
+        \pause[7]
         \begin{block}{\textbf{How?}}
             \small
             Echoes $\in$ sound propagation
@@ -63,9 +66,10 @@
         \end{block}
     \end{columns}
 
+    \pause[5]
     \vspace{-3mm}
     \begin{center}
-        \textcolor{gray}{\small (In-depth literature review in the manuscript.)}
+        \textcolor{gray}{\small (In-depth literature review in \faBook.)}
     \end{center}
 \end{frame}
 
@@ -78,8 +82,8 @@
         \begin{block}{SSL with 2 microphones}
             \begin{itemize}
                 \item Only one angle of arrival (\alert{AOA})\iconAOA
-                \item can be approximated from \alert{TDOA} using e.g. \GCCPHAT\footnotemark[1]
-                \\\textcolor{gray}{\small (known limitation, but good in practice)}
+                \item Can be approximated from \alert{TDOA} using e.g. \GCCPHAT\footnotemark[1]
+                \\\addendum{known limitation, but good in practice}\footnotemark[2]
             \end{itemize}
         \end{block}
         \column{0.38\textwidth}
@@ -93,17 +97,18 @@
             \begin{itemize}
                 \item Two Direction of Arrival (DoA):
                 \\azimuth (\faArrowsAltH) and elevation (\faArrowsAltV)
-                \item[1.] AOA at each pair can be ``fused'' together
+                \item AOA at each pair can be ``fused'' together
                 \\\addendum{e.g., angular spectra in SRP-PHAT\footnotemark[2]}
-                \\\addendum{known limitation, but good in practice}
+                \\\addendum{known limitation, but good in practice}\footnotemark[3]
             \end{itemize}
         \end{block}
         \column{0.38\textwidth}
         \includegraphics[width=\textwidth]{figures/2d_ssl.png}
     \end{columns}
 
-    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
     \footnotetext[1]{\tiny~\cite{knapp1976generalized}}
+    \footnotetext[2]{\tiny~\cite{dibiase2001robust}}
+    \footnotetext[3]{\tiny~\cite{lebarbenchon2018evaluation}}
 
 \end{frame}
 
@@ -119,7 +124,7 @@
                 \begin{itemize}
                     \small
                     \item<1-> One source
-                    \item<1-> Two microphones
+                    \item<1-> Two microphones (10 cm spacing)
                     \begin{itemize}
                         \item<1->[$\rightarrow$] passive scenario
                         \item<1->[$\rightarrow$] generalizable to any array geometry
@@ -190,6 +195,7 @@
     \end{columns}
 
 
+    \pause
     \begin{mycontriblock}
         \textbf{Proposed Approach:}
         \begin{enumerate}
@@ -202,6 +208,7 @@
         \end{enumerate}
     \end{mycontriblock}
 
+    \pause
     \vspace{1mm}
     \begin{mysotablock}
         \textbf{Baseline:} \GCCPHAT~on true microphones\footnotemark[2]
@@ -226,7 +233,7 @@
     \end{mysotablock}
 
     \textbf{Data:} 200 synthetic stereophonic recordings for close-surface scenario
-    \\\textbf{Metric:} accuracy in \% ($<$\ang{10},    $<$\ang{20}) \addendum{\footnotesize \faReply~also error in the manuscript}
+    \\\textbf{Metric:} accuracy in \% ($<$\ang{10},    $<$\ang{20}) \addendum{\footnotesize \faReply~also MSE in the \faBook}
 
     \pause[1]
     \vspace{2mm}
@@ -277,9 +284,9 @@
 
     \textbf{Observation}
         \begin{itemize}
-            \item<1->[\cmark] \pro{comparable to baseline when white noise source in noiseless case}
-            \item<4->[\xmark] \con{not generalize to noisy and speech data}
-            \item<5->[\cmark] \pro{Takled ``impossible'' localization}
+            \item<1->[\cmark] \pro{Comparable to baseline when white noise source in noiseless case}
+            \item<4->[\xmark] \con{Does not generalize to noisy and speech data}
+            \item<5->[\cmark] \pro{Takle ``impossible'' localization}
             \item<6->[\iconAlert] Performance depending on echo estimator (work in progress)
         \end{itemize}
 

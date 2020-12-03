@@ -3,7 +3,7 @@
 \begin{frame}[t]{Acoustic Echo Retrieval \hfill\faBook}
     \begin{columns}[T,onlytextwidth]
         \column{0.55\textwidth}
-            Estimating early (strong) reflections for microphones recordings, i.e.,
+            Estimating early (strong) reflections from microphones recordings, i.e.,
             \begin{equation*}
                 \{\contMic_i\}_i \longrightarrow \{ \tauir, \textcolor{gray}{\ampir} \}_{i,r}
             \end{equation*}
@@ -56,7 +56,7 @@
 
     \pause
     \begin{center}
-        \textcolor{myred}{\textbf{Our case:} signal source and passive microphone array}
+        \textcolor{myred}{\textbf{Our case:} one source and passive microphone array}
     \end{center}
 
 \end{frame}
@@ -322,7 +322,7 @@
             $\sim$ \textbf{Lasso}, but $\mathcal{F}h_i (f)$ is a continuous function $\kto$ \textbf{BLasso}~\cite{azais2015spike}
 
             \textcolor{mygreen}{\cmark{No huge matrix} \quad
-            \cmark \, \parbox{8.5em}{Solutions is \\ a train of Dirac} \quad
+            \cmark \, \parbox{8.5em}{Solutions are\\trains of Dirac} \quad
             \cmark \, \parbox{8em}{No peak picking} \quad
             \cmark \, \parbox{9em}{Perfect in noiseless\\\& synthetic case}
             }
@@ -382,20 +382,23 @@
 
     \textbf{Metric:} \alert{Precision} = how many estimated echoes are correct (within 2 samples)
 
+    \pause[2]
     \begin{center}
         \includegraphics[width=0.8\linewidth]{figures/p_k-7_thr-2_bns_crocco_blaster-peak_withRechoes.pdf}
         \\\addendum{$\text{RT}_{60} = 400$ ms and SNR = 20 dB.}
     \end{center}
 
+    \pause[3]
     \begin{center}
-        \textcolor{myred}{\xmark \: \parbox{8em}{Sensitive\\kto \# echoes}}
+        \textcolor{myred}{\xmark \: \parbox{8em}{Sensitive\\to \# echoes}}
         \quad\textcolor{myred}{\xmark \: \parbox{8em}{Sensitive\\source signal}}
         \quad\textcolor{mygreen}{\cmark \: \parbox{8em}{Good for\\2 echoes}}
     \end{center}
-    \visible<2>{
-        \begin{textblock*}{20mm}(80mm,85mm)
-            \footnotesize\cite{scheibler2018separake,di2019mirage}
-        \end{textblock*}
+
+    \only<4>{
+    \begin{textblock*}{20mm}(80mm,85mm)
+        \pro{\footnotesize\cite{scheibler2018separake,di2019mirage}}
+    \end{textblock*}
     }
 
 
@@ -405,6 +408,7 @@
 
     \textbf{Metric:} \alert{RMSE} on matched echoes = error on the correct guess
 
+    \pause[2]
     \begin{center}
         \begin{overpic}[width=0.6\textwidth]{figures/e_k-7_thr-2_bns_crocco_blaster.pdf}
             \put (102, 48){\includegraphics[width=5em]{figures/legend.pdf}}
@@ -412,6 +416,7 @@
         \\\addendum{Fs = 16 kHz}
     \end{center}
 
+    \pause[3]
     \begin{center}
         \textcolor{mygreen}{\cmark{Lower RMSE}} \qquad
         \textcolor{mygreen}{\cmark \, \parbox{8.5em}{Robustness\\
@@ -423,8 +428,9 @@
 
 \subsection{\lantern}
 
-\begin{frame}{Learning-based approach \hfill\iconDNN}
+\begin{frame}{\alert{Learning-based approach} \hfill\iconDNN}
 
+    \pause
     % \textbf{Recall}: AER $\Leftrightarrow$ $\{\contMic_i\}_i \overset{?}{\longrightarrow} \{ \tauir, \textcolor{black!20}{\ampir} \}_{i,r}$
     \begin{mycontriblock}
         \textbf{Idea:}
@@ -435,6 +441,7 @@
         \end{enumerate}
     \end{mycontriblock}
 
+    \pause
     \begin{block}{Motivations:}
         \begin{itemize}
             \item $x_i \kto \tauir$ is difficult, while $\tauir \kto x_i$ ``is not''
@@ -442,6 +449,7 @@
                 $\text{mic/src/room geometry}
                 \; \longrightarrow \;
                 \set{\tauir,\ampir}, \; \contRIR_i, \quad \contMic_i$
+            \pause
             \item Acoustic simulator are ``simple'', versatile and fast
             \\$\kto$ allow to create large dataset
             % \item This approach is successful in \textit{Sound Source Localization}
@@ -463,20 +471,24 @@
         \]
         $\approx$ the relative transfer function $\kto$ remove source dependency
     \end{block}
+    \pause
 
+    \visible<2->{
     \begin{block}{Outputs:}
-        Inter and intra Time \alert{Difference} of Arrivals (TDOAs)
+        Inter and intra Time \alert{Differences} of Arrivals (TDOAs)
         \\{\footnotesize \textbf{HP:} close-surface scenario: first $\Leftrightarrow$ strongest echo}
     \end{block}
 
-    \begin{textblock*}{50mm}(80mm,40mm)
-        \includegraphics<1>[width=\textwidth]{figures/rirs1.pdf}%
-        \includegraphics<2>[width=\textwidth]{figures/rirs2.pdf}%
-        \includegraphics<3>[width=\textwidth]{figures/rirs3.pdf}%
-        \includegraphics<4>[width=\textwidth]{figures/rirs4.pdf}%
-    \end{textblock*}
 
-    \begin{block}{Loss Function}
+    \begin{textblock*}{50mm}(80mm,40mm)
+        \includegraphics<2>[width=\textwidth]{figures/rirs1.pdf}%
+        \includegraphics<3>[width=\textwidth]{figures/rirs2.pdf}%
+        \includegraphics<4>[width=\textwidth]{figures/rirs3.pdf}%
+        \includegraphics<5->[width=\textwidth]{figures/rirs4.pdf}%
+    \end{textblock*}}
+
+    \pause[6]
+    \begin{block}{Loss Functions}
 
         \vspace{-2mm}
         \begin{enumerate}
@@ -486,8 +498,9 @@
         \end{enumerate}
     \end{block}
 
+    \pause[7]
     \begin{block}{}
-        \textbf{Architecture:} MLP, CNN ~{\footnotesize\cite{chakrabarty2017broadband,nguyen2018autonomous}}
+        \textbf{Architectures:} MLP, CNN ~{\footnotesize\cite{chakrabarty2017broadband,nguyen2018autonomous}}
     \end{block}
 
 
@@ -614,12 +627,13 @@
 
     % \end{columns}
 
+    \visible<1->{
     \begin{center}
         \includegraphics<1>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_exp1.pdf}%
         \includegraphics<2>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_exp2.pdf}%
         \includegraphics<3>[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_exp3.pdf}%
         \includegraphics<4->[trim={0 30 0 0},clip,height=0.33\textwidth]{figures/lantern_exp4.pdf}%
-    \end{center}
+    \end{center}}
 
     \vspace{-3mm}
     \visible<2->{\textbf{Observation:}
@@ -635,12 +649,13 @@
 
     \begin{textblock*}{25mm}(100mm,80mm)
         \small
+        \visible<5->{
         \begin{myfutureblock}
             \begin{itemize}
                 \item[\faCogs] More echoes
                 \item[\faCogs] Real data
             \end{itemize}
-        \end{myfutureblock}
+        \end{myfutureblock}}
     \end{textblock*}
 
 \end{frame}

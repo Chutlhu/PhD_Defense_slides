@@ -196,12 +196,12 @@
             $\xrightarrow{\textit{helps}}$ \tikzmarknode{again}{...}
     \end{center}
 
-    \pause
-    \begin{tikzpicture}[overlay,remember picture,
-        nodes={inner sep=1pt, align=center, font=\footnotesize},
-        gray!70,>=stealth] %
-    \draw[->] (again.south) to[out=-90, in=-90] (how.south);
-    \end{tikzpicture}
+    % \pause
+    % \begin{tikzpicture}[overlay,remember picture,
+    %     nodes={inner sep=1pt, align=center, font=\footnotesize},
+    %     gray!70,>=stealth] %
+    % \draw[->] (again.south) to[out=-90, in=-90] (how.south);
+    % \end{tikzpicture}
 
 \end{frame}
 
@@ -217,7 +217,7 @@
                 \\\hspace{1em} specularly and diffusely\hspace{1em}\tikzmark{rightA}
                 \item[$+$] it is absorbed,
                 \item[$+$] it is transmitted,
-                \item[$+$] it is diffracted, ect.\tikzmark{botA}
+                \item[$+$] it is diffracted, etc.\tikzmark{botA}
             \end{itemize}
         \end{block}
 
@@ -242,11 +242,11 @@
         \begin{columns}[onlytextwidth]
             \begin{column}{0.58\textwidth}
                 \begin{itemize}
-                    \item reflection ``standing out''
+                    \item Reflections ``standing out'' w.r.t. reverberation
                     \item Copy of a sound but later
                     \begin{itemize}
                         \item same content
-                        \item delay $\Leftrightarrow$ distance
+                        \item delay $\Leftrightarrow$ travelled distance
                     \end{itemize}
                 \end{itemize}
             \end{column}
@@ -286,6 +286,7 @@
         \end{itemize}
     \end{block}
 
+    \pause
     \begin{mydefblock}{Echo-aware methods}
         \begin{itemize}
             \item explicitly account for some acoustic reflections to boost the performance
@@ -313,9 +314,10 @@
             \begin{column}[T]{0.3\linewidth}
                 \centering
                 \visible<2->{
-                \alert{Audio Scene Analysis}
+                    \alert{Echo-aware}
                 \\\downarrow
-                \\context and problems
+                \\better processing
+
                 }
             \end{column}\hfill
             \begin{column}[T]{0.3\linewidth}
@@ -329,9 +331,9 @@
             \begin{column}[T]{0.3\linewidth}
                 \centering
                 \visible<4->{
-                \alert{Echo-aware}
+                \alert{for Audio Scene Analysis}
                 \\\downarrow
-                \\better processing
+                \\context and problems
                 }
             \end{column}\hfill
         \end{columns}
@@ -376,6 +378,5 @@
                 \item Echo-aware database
             \end{itemize}}
     \end{columns}
-
     }
 \end{frame}
