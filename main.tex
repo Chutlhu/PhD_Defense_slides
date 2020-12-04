@@ -42,6 +42,7 @@
 \usetikzlibrary{arrows.meta}
 
 \usepackage{pgfplots}
+\usepackage{pdfpages}
 \usepackage{multicol}
 \usepackage{kmath}
 \usepackage[absolute,overlay]{textpos} % provide textblock \begin{textblock}{WIDTH}(XCOORDINATE,YCOORDINATE)
@@ -205,6 +206,13 @@
         \bibliography{references}
         \bibliographystyle{apalike}
 
-      \end{frame}
+    \end{frame}
+
+    {
+    \setbeamercolor{background canvas}{bg=}
+    \includepdf{separake.pdf}
+    \includepdf{blaster.pdf}
+    \includepdf{predefence.pdf}
+    }
 
 \end{document}
